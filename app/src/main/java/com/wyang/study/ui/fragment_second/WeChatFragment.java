@@ -5,6 +5,7 @@ import com.wyang.study.ui.base.BaseFragment;
 
 /**
  * Created by weiyang on 2019/6/21.
+ * 仿微信朋友圈
  */
 public class WeChatFragment extends BaseFragment {
     @Override

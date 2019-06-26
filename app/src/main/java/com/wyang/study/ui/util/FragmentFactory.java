@@ -6,8 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.wyang.study.R;
-import com.wyang.study.ui.fragment_main.OfficialFragment;
-import com.wyang.study.ui.fragment_main.UnofficialFragment;
+import com.wyang.study.ui.fragment_main.MainFragment;
 
 /**
  * Created by weiyang on 2019/6/18.
@@ -38,7 +37,8 @@ public class FragmentFactory {
             currentFragment = fragment;
             transaction.show(fragment);
         } else {
-            transaction.add(R.id.fl_container, createFragment(pos), getTag(pos));
+            currentFragment = createFragment(pos);
+            transaction.add(R.id.fl_container, currentFragment, getTag(pos));
         }
         transaction.commitAllowingStateLoss();
     }
@@ -48,20 +48,7 @@ public class FragmentFactory {
     }
 
     private Fragment createFragment(int pos) {
-        switch (pos) {
-            case 0:
-                currentFragment = new OfficialFragment();
-                break;
-            case 1:
-                currentFragment = new UnofficialFragment();
-                break;
-            case 2:
-                //currentFragment = new RxJava1Fragment();
-                break;
-            default:
-                break;
-        }
-        return currentFragment;
+        return MainFragment.newInstance(pos);
     }
 
 }

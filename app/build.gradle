@@ -40,6 +40,9 @@ dependencies {
     //noinspection GradleDependency
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    //RecyclerView
+    //RecyclerView适配器封装
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
+
+    //图片加载Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
 }

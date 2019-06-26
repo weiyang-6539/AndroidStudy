@@ -85,11 +85,13 @@ public class DragSortAdapter extends BaseSectionQuickAdapter<SectionItem, BaseVi
         helper.itemView.setOnLongClickListener(v -> {
             //仅在我的频道下响应长按事件
             if (channel.isMine()) {
+
+                if (channel.isActivated())
+                    itemTouchHelper.startDrag(helper);
+
                 //编辑状态下,可编辑响应拖拽
                 if (!isEdit)
                     enableEdit();
-                if (channel.isActivated())
-                    itemTouchHelper.startDrag(helper);
             }
             return true;
         });
@@ -117,7 +119,7 @@ public class DragSortAdapter extends BaseSectionQuickAdapter<SectionItem, BaseVi
         mData.add(maxActivatedPos + 1, item);
 
         notifyItemChanged(position);
-        notifyItemChanged(maxActivatedPos+1);
+        notifyItemChanged(maxActivatedPos + 1);
         notifyItemMoved(position, maxActivatedPos + 1);
 
         maxActivatedPos++;
@@ -133,9 +135,12 @@ public class DragSortAdapter extends BaseSectionQuickAdapter<SectionItem, BaseVi
         mData.add(maxActivatedPos + 1, item);
 
         notifyItemChanged(position);
-        notifyItemChanged(maxActivatedPos+1);
+        notifyItemChanged(maxActivatedPos + 1);
         notifyItemMoved(position, maxActivatedPos + 1);
 
         maxActivatedPos--;
+        if (currentPos > maxActivatedPos) {
+            currentPos = maxActivatedPos;
+        }
     }
 }
