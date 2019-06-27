@@ -49,10 +49,11 @@ public class NineGridLayoutFragment extends BaseFragment {
             }
         });
 
+        //mNineGridLayout.setImageUrls(DataProvider.getImageUrls(count), imageLoader);
     }
 
 
-    private int count;
+    private int count = 9;
 
     @OnClick(R.id.tv_add)
     public void onClickAdd() {

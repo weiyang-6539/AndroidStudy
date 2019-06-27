@@ -1,10 +1,23 @@
 package com.wyang.study.ui.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.wyang.study.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +28,9 @@ import java.util.List;
  */
 public class NineGridLayout extends ViewGroup {
     private Context mContext;
-    private int mWidth;
+    private int childCount;//子View数量
+    private int childSize;//子View尺寸大小
+    private int mode;//留白像素值
 
     private int rows, columns;//行数,列数
     private int mSpacing = 5;//图片间隙
@@ -55,11 +70,14 @@ public class NineGridLayout extends ViewGroup {
         mUrls.addAll(urls);
         removeAllViews();
 
-        if (!mUrls.isEmpty()) {
+        if (mUrls.isEmpty()) {
+            setVisibility(GONE);
+        } else {
             setVisibility(VISIBLE);
             initRowAndColumn();
 
-            for (int i = 0; i < mUrls.size(); i++) {
+            childCount = Math.min(9, mUrls.size());
+            for (int i = 0; i < childCount; i++) {
                 //考虑到拓展ImageView,这里通过接口的形式创建ImageView
                 View child = imageLoader.createImageView(mContext, mUrls.size(), i);
                 addView(child, generateDefaultLayoutParams());
@@ -88,26 +106,49 @@ public class NineGridLayout extends ViewGroup {
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        mWidth = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.e("NineGridLayout", "调用onMeasure()");
 
-        if (!mUrls.isEmpty()) {//有图片才向布局中添加子View
-            int childCount = mUrls.size();
-            int childWidth = (mWidth - 2 * mSpacing) / 3;
-            if (columns == 1) {
-                childWidth = (int) (childWidth * 2.2f);
-            }
+        int mWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int width = mWidth - getPaddingLeft() - getPaddingRight();
+        //计算子View的最小宽度
+        childSize = (width - 2 * mSpacing) / 3;
+        mode = (width - 2 * mSpacing) % 3;
+
+        //仅一个子View时,放大其尺寸
+        if (columns == 1) {
+            childSize = (int) (childSize * 2.2f);
+        }
+
+        //根据子View确定控件的高度
+        int mHeight = childSize * rows + mSpacing * (rows - 1) + getPaddingTop() + getPaddingBottom() + mode;
+
+        for (int i = 0; i < getChildCount(); i++) {
+            measureChildren(widthMeasureSpec, heightMeasureSpec);
+        }
+
+        setMeasuredDimension(mWidth, mHeight);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.e("NineGridLayout", "调用onLayout()");
+        //有图片才向布局中添加子View
+        if (!mUrls.isEmpty()) {
             for (int i = 0; i < childCount; i++) {
                 int[] position = findPosition(i);
-                int left = (childWidth + mSpacing) * position[1];
-                int top = (childWidth + mSpacing) * position[0];
-                int right = left + childWidth;//当padding值为0时,可能纯在留白
-                int bottom = top + childWidth;
+                int left = (childSize + mSpacing) * position[1] + getPaddingLeft();
+                int top = (childSize + mSpacing) * position[0] + getPaddingTop();
+                int right = left + childSize;
+                int bottom = top + childSize;
 
-                left += getPaddingLeft();
-                top += getPaddingTop();
-                right += getPaddingRight();
-                bottom += getPaddingBottom();
+                //处理留白问题
+                if (position[0] + 1 == rows) {
+                    bottom += mode;
+                }
+                if (position[1] + 1 == columns) {
+                    right += mode;
+                }
 
                 ImageView child = (ImageView) getChildAt(i);
                 if (childCount == 1) {
@@ -119,12 +160,14 @@ public class NineGridLayout extends ViewGroup {
                 child.layout(left, top, right, bottom);
                 //布局后加载图片
                 imageLoader.displayImage(mContext, child, mUrls.get(i));
-            }
 
-            //根据子view数量确定高度
-            LayoutParams params = getLayoutParams();
-            params.height = childWidth * rows + mSpacing * (rows - 1) + getPaddingTop() + getPaddingBottom();
-            setLayoutParams(params);
+                if (i == childCount - 1 && mUrls.size() > 9) {
+                    View view = getMoreView();
+                    view.layout(left, top, right, bottom);
+                    if (view.getParent() == null)
+                        addView(view);
+                }
+            }
         }
     }
 
@@ -145,6 +188,38 @@ public class NineGridLayout extends ViewGroup {
     public void setSpacing(int mSpacing) {
         this.mSpacing = mSpacing;
         requestLayout();
+    }
+
+    private FrameLayout moreView;
+
+    @SuppressLint("SetTextI18n")
+    private View getMoreView() {
+        if (moreView == null) {
+            moreView = new FrameLayout(mContext);
+            moreView.setBackgroundColor(Color.BLACK);
+            moreView.getBackground().setAlpha(128);
+
+            TextView textView = new TextView(mContext);
+            textView.setTextColor(Color.WHITE);
+            textView.setTextSize(15);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.CENTER;
+            textView.setLayoutParams(params);
+
+            moreView.addView(textView);
+        }
+
+        TextView textView = (TextView) moreView.getChildAt(0);
+        textView.setText("+" + (mUrls.size() - 9));
+
+        return moreView;
+    }
+
+    private int getFontHeight(float fontSize) {
+        Paint paint = new Paint();
+        paint.setTextSize(fontSize);
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return (int) Math.ceil(fm.descent - fm.ascent);
     }
 
     public interface ImageLoaderInterface {
