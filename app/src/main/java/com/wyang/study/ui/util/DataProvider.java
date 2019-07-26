@@ -1,6 +1,7 @@
 package com.wyang.study.ui.util;
 
 import com.wyang.study.bean.Channel;
+import com.wyang.study.bean.Discover;
 import com.wyang.study.bean.SectionItem;
 import com.wyang.study.bean.Simple;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
@@ -123,6 +124,20 @@ public class DataProvider {
         list.add(new SectionItem(new Channel("养生", true, false)));
         list.add(new SectionItem(new Channel("星座", true, false)));
 
+        return list;
+    }
+
+    public static List<Discover> getDiscoverData() {
+        List<Discover> list = new ArrayList<>();
+        list.add(new Discover("", "", "", getImageUrls(1)));
+        list.add(new Discover("", "", "", getImageUrls(2)));
+        list.add(new Discover("", "", "", getImageUrls(3)));
+        list.add(new Discover("", "", "", getImageUrls(4)));
+        list.add(new Discover("", "", "", getImageUrls(5)));
+        list.add(new Discover("", "", "", getImageUrls(6)));
+        list.add(new Discover("", "", "", getImageUrls(7)));
+        list.add(new Discover("", "", "", getImageUrls(8)));
+        list.add(new Discover("", "", "", getImageUrls(7)));
         return list;
     }
 }

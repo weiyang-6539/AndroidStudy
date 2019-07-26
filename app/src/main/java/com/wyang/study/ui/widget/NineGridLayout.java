@@ -4,20 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.wyang.study.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +70,8 @@ public class NineGridLayout extends ViewGroup {
             setVisibility(VISIBLE);
             initRowAndColumn();
 
-            childCount = Math.min(9, mUrls.size());
+            //确定添加到布局中的子View个数
+            childCount = Math.min(rows * columns, mUrls.size());
             for (int i = 0; i < childCount; i++) {
                 //考虑到拓展ImageView,这里通过接口的形式创建ImageView
                 View child = imageLoader.createImageView(mContext, mUrls.size(), i);
