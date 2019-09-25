@@ -78,11 +78,10 @@ public class IdeaFragment extends BaseFragment {
                 int next = mTabLayout.getSelectedTabPosition() + 1;
                 selectPos.put(next, -1);
                 data.put(next, results);
-                for (int i = 0; i < selectPos.size(); i++) {
-                    if (i > next) {
-                        selectPos.removeAt(i);
-                        data.remove(i);
-                    }
+
+                while (next + 1 < selectPos.size()) {
+                    selectPos.removeAt(selectPos.size() - 1);
+                    data.remove(data.size() - 1);
                 }
             }
 
