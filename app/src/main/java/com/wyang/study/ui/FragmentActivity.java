@@ -9,6 +9,7 @@ import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseActivity;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
+import com.wyang.study.ui.fragment_second.IdeaFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
 import com.wyang.study.ui.util.DataProvider;
@@ -35,17 +36,7 @@ public class FragmentActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        Fragment fragment = null;
-        Class<?> aClass = DataProvider.getFragmentClass(className);
-        if (aClass == DragSortFragment.class) {
-            fragment = new DragSortFragment();
-        } else if (aClass == WeChatFragment.class) {
-            fragment = new WeChatFragment();
-        } else if (aClass == ContactsFragment.class) {
-            fragment = new ContactsFragment();
-        } else if (aClass == NineGridLayoutFragment.class) {
-            fragment = new NineGridLayoutFragment();
-        }
+        Fragment fragment = DataProvider.createFragmentByName(className);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

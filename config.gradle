@@ -1,0 +1,27 @@
+ext {
+
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 14,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    version = [
+            support    : "28.0.0",
+            glide      : "4.8.0",
+            butterknife: "9.0.0",
+    ]
+
+    dependencies = [
+            //support
+            "design"         : "com.android.support:design:${version["support"]}",
+            "support-v4"     : "com.android.support:support-v4:${version["support"]}",
+            "appcompat-v7"   : "com.android.support:appcompat-v7:${version["support"]}",
+            "cardview-v7"    : "com.android.support:cardview-v7:${version["support"]}",
+            "annotations"    : "com.android.support:support-annotations:${version["support"]}",
+            "recyclerview-v7": "com.android.support:recyclerview-v7:${version["support"]}",
+    ]
+}

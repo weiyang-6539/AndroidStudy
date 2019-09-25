@@ -61,7 +61,6 @@ public class MainFragment extends BaseFragment {
             } else {
                 Toast.makeText(getContext(), "请设置对应Fragment!", Toast.LENGTH_LONG).show();
             }
-
         });
 
         Bundle arguments = getArguments();
@@ -77,6 +76,10 @@ public class MainFragment extends BaseFragment {
                     break;
                 case 2:
                     list = DataProvider.getUnofficialData();
+                    break;
+                case 3:
+                    list = DataProvider.getIdeaData();
+                    break;
                 default:
                     break;
             }

@@ -1,12 +1,16 @@
 package com.wyang.study.ui.util;
 
+import android.support.v4.app.Fragment;
+
 import com.wyang.study.bean.Channel;
 import com.wyang.study.bean.Discover;
 import com.wyang.study.bean.SectionItem;
 import com.wyang.study.bean.Simple;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
+import com.wyang.study.ui.fragment_second.IdeaFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
+import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
 
 import java.util.ArrayList;
@@ -17,31 +21,46 @@ import java.util.List;
  * Created by weiyang on 2019/6/19.
  */
 public class DataProvider {
-    private final static HashMap classMap = new HashMap() {{
+    private final static HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>() {{
         //put(MainFragment.class.getSimpleName(), MainFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
         put(NineGridLayoutFragment.class.getSimpleName(), NineGridLayoutFragment.class);
+        put(IdeaFragment.class.getSimpleName(), IdeaFragment.class);
     }};
-    private final static HashMap titleMap = new HashMap() {{
+    private final static HashMap<String, String> titleMap = new HashMap<String, String>() {{
         put(DragSortFragment.class.getSimpleName(), "RecyclerView之仿今日头条拖拽排序");
         put(WeChatFragment.class.getSimpleName(), "RecyclerView之微信发送朋友圈图片九宫格");
         put(ContactsFragment.class.getSimpleName(), "RecyclerView之微信通讯录");
         put(NineGridLayoutFragment.class.getSimpleName(), "图片九宫格显示控件");
     }};
 
-    public static Class<?> getFragmentClass(String className) {
-        return (Class<?>) classMap.get(className);
+    public static Fragment createFragmentByName(String className) {
+        Class<?> aClass = classMap.get(className);
+
+        if (aClass == DragSortFragment.class) {
+            return new DragSortFragment();
+        } else if (aClass == WeChatFragment.class) {
+            return new WeChatFragment();
+        } else if (aClass == ContactsFragment.class) {
+            return new ContactsFragment();
+        } else if (aClass == NineGridLayoutFragment.class) {
+            return new NineGridLayoutFragment();
+        } else if (aClass == IdeaFragment.class) {
+            return new IdeaFragment();
+        }
+        return new NullFragment();
     }
 
     public static String getTitle(String className) {
-        return (String) titleMap.get(className);
+        return titleMap.get(className);
     }
 
     public static List<Simple> getOfficialData() {
         List<Simple> list = new ArrayList<>();
         list.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));
+        list.add(new Simple("FlexBoxLayout", "高级LinearLayout", ""));
         return list;
     }
 
@@ -56,6 +75,12 @@ public class DataProvider {
         list.add(new Simple("RecyclerView用法一", "实现今日头条拖拽排序", DragSortFragment.class.getSimpleName()));
         list.add(new Simple("RecyclerView用法二", "仿微信发送图片朋友圈九宫格效果", WeChatFragment.class.getSimpleName()));
         list.add(new Simple("RecyclerView用法三", "仿微信通讯录效果", ContactsFragment.class.getSimpleName()));
+        return list;
+    }
+
+    public static List<Simple> getIdeaData() {
+        List<Simple> list = new ArrayList<>();
+        list.add(new Simple("树结构代码设计及遍历", "应用数据结构复杂且需要多次查询遍历场景", IdeaFragment.class.getSimpleName()));
         return list;
     }
 

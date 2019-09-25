@@ -51,6 +51,9 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_2:
                     mFactory.selectItem(2);
                     break;
+                case R.id.navigation_3:
+                    mFactory.selectItem(3);
+                    break;
             }
             return false;
         });

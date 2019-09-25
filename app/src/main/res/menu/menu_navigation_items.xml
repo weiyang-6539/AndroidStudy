@@ -15,4 +15,9 @@
         android:checkable="false"
         android:enabled="true"
         android:title="App中常见界面效果" />
+    <item
+        android:id="@+id/navigation_3"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="编程思想及算法" />
 </menu>

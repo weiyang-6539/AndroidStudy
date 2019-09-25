@@ -5,10 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wyang.study.R;
 import com.wyang.study.adapter.DragSortAdapter;
 import com.wyang.study.bean.Channel;
