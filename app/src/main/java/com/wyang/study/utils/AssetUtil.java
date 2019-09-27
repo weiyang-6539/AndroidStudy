@@ -55,6 +55,7 @@ public class AssetUtil {
             pNode = new TreeNode(parent);
             pNode.setAttribute("code", pObj.getString("code"));
             pNode.setAttribute("name", pObj.getString("name"));
+            pNode.setAttribute("level", 1);
         }
 
         String cJson = readAsset(context, "cities.json");
@@ -70,6 +71,7 @@ public class AssetUtil {
             cNode = new TreeNode(parent);
             cNode.setAttribute("code", cObj.getString("code"));
             cNode.setAttribute("name", cObj.getString("name"));
+            cNode.setAttribute("level", 2);
         }
 
         String aJson = readAsset(context, "area.json");
@@ -85,6 +87,7 @@ public class AssetUtil {
             aNode = new TreeNode(parent);
             aNode.setAttribute("code", aObj.getString("code"));
             aNode.setAttribute("name", aObj.getString("name"));
+            aNode.setAttribute("level", 3);
 
             treeHelper.putAreaNode(aNode);
         }
@@ -102,6 +105,7 @@ public class AssetUtil {
             sNode = new TreeNode(parent);
             sNode.setAttribute("code", sObj.get("code").getAsString());
             sNode.setAttribute("name", sObj.get("name").getAsString());
+            sNode.setAttribute("level", 4);
         }
         return treeHelper;
     }

@@ -56,7 +56,7 @@ public class MainFragment extends BaseFragment {
 
             if (!TextUtils.isEmpty(simple.getClassName())) {
                 Bundle bundle = new Bundle();
-                bundle.putString("className", simple.getClassName());
+                bundle.putSerializable("simple", simple);
                 ActivityUtils.startActivity(getContext(), FragmentActivity.class, bundle);
             } else {
                 Toast.makeText(getContext(), "请设置对应Fragment!", Toast.LENGTH_LONG).show();

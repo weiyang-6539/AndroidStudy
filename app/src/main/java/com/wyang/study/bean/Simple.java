@@ -1,9 +1,11 @@
 package com.wyang.study.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by weiyang on 2019/6/19.
  */
-public class Simple {
+public class Simple implements Serializable {
     private String title;
     private String description;
     private String className;

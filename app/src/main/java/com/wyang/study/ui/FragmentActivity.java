@@ -6,12 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 
 import com.wyang.study.R;
+import com.wyang.study.bean.Simple;
 import com.wyang.study.ui.base.BaseActivity;
-import com.wyang.study.ui.fragment_second.ContactsFragment;
-import com.wyang.study.ui.fragment_second.DragSortFragment;
-import com.wyang.study.ui.fragment_second.IdeaFragment;
-import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
-import com.wyang.study.ui.fragment_second.WeChatFragment;
 import com.wyang.study.ui.util.DataProvider;
 
 import butterknife.BindView;
@@ -22,7 +18,8 @@ import butterknife.BindView;
 public class FragmentActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolBar;
-    private String className;
+
+    private Simple simple;
 
     @Override
     public int getLayoutId() {
@@ -31,18 +28,19 @@ public class FragmentActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        className = getIntent().getStringExtra("className");
+        simple = (Simple) getIntent().getSerializableExtra("simple");
     }
 
     @Override
     protected void initView() {
-        Fragment fragment = DataProvider.createFragmentByName(className);
+
+        Fragment fragment = DataProvider.createFragmentByName(simple.getClassName());
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.fl_container, fragment);
         transaction.commitAllowingStateLoss();
 
-        initToolBar(mToolBar, DataProvider.getTitle(className), true);
+        initToolBar(mToolBar, simple.getTitle(), true);
     }
 }

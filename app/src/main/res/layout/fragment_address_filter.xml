@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_filter1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="#999"
+        android:gravity="center"
+        android:minHeight="45dp"
+        android:text="湖南省所有子孩子"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <TextView
+        android:id="@+id/tv_filter2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="#999"
+        android:gravity="center"
+        android:minHeight="45dp"
+        android:text="带长沙字样"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <TextView
+        android:id="@+id/tv_filter3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginTop="10dp"
+        android:background="#999"
+        android:gravity="center"
+        android:minHeight="45dp"
+        android:text="九龙村同名(我的村)"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_filter1"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <FrameLayout
+        android:id="@+id/fl_result"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_filter3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:text="Filter result"
+            android:textColor="#131420" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#eee "
+        app:layout_constraintTop_toBottomOf="@id/fl_result" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+</android.support.constraint.ConstraintLayout>

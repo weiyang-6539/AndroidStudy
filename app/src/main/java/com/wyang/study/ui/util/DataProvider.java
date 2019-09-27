@@ -6,9 +6,10 @@ import com.wyang.study.bean.Channel;
 import com.wyang.study.bean.Discover;
 import com.wyang.study.bean.SectionItem;
 import com.wyang.study.bean.Simple;
+import com.wyang.study.ui.fragment_second.AddressFilterFragment;
+import com.wyang.study.ui.fragment_second.AddressLinkageFragment;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
-import com.wyang.study.ui.fragment_second.IdeaFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
@@ -27,13 +28,8 @@ public class DataProvider {
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
         put(NineGridLayoutFragment.class.getSimpleName(), NineGridLayoutFragment.class);
-        put(IdeaFragment.class.getSimpleName(), IdeaFragment.class);
-    }};
-    private final static HashMap<String, String> titleMap = new HashMap<String, String>() {{
-        put(DragSortFragment.class.getSimpleName(), "RecyclerView之仿今日头条拖拽排序");
-        put(WeChatFragment.class.getSimpleName(), "RecyclerView之微信发送朋友圈图片九宫格");
-        put(ContactsFragment.class.getSimpleName(), "RecyclerView之微信通讯录");
-        put(NineGridLayoutFragment.class.getSimpleName(), "图片九宫格显示控件");
+        put(AddressLinkageFragment.class.getSimpleName(), AddressLinkageFragment.class);
+        put(AddressFilterFragment.class.getSimpleName(), AddressFilterFragment.class);
     }};
 
     public static Fragment createFragmentByName(String className) {
@@ -47,14 +43,12 @@ public class DataProvider {
             return new ContactsFragment();
         } else if (aClass == NineGridLayoutFragment.class) {
             return new NineGridLayoutFragment();
-        } else if (aClass == IdeaFragment.class) {
-            return new IdeaFragment();
+        } else if (aClass == AddressLinkageFragment.class) {
+            return new AddressLinkageFragment();
+        } else if (aClass == AddressFilterFragment.class) {
+            return new AddressFilterFragment();
         }
         return new NullFragment();
-    }
-
-    public static String getTitle(String className) {
-        return titleMap.get(className);
     }
 
     public static List<Simple> getOfficialData() {
@@ -80,7 +74,8 @@ public class DataProvider {
 
     public static List<Simple> getIdeaData() {
         List<Simple> list = new ArrayList<>();
-        list.add(new Simple("树结构代码设计及遍历", "应用数据结构复杂且需要多次查询遍历场景", IdeaFragment.class.getSimpleName()));
+        list.add(new Simple("树结构之省市区镇四级联动", "利用TreeNode及NodeSeeker实现的四级联动", AddressLinkageFragment.class.getSimpleName()));
+        list.add(new Simple("树结构之筛选遍历", "利用TreeNode及NodeSeeker实现复杂筛选条件,代码简洁的遍历", AddressFilterFragment.class.getSimpleName()));
         return list;
     }
 

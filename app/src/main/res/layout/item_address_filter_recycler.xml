@@ -4,27 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="15dp"
-    android:paddingTop="8dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="8dp">
+    android:padding="12dp">
 
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textColor="#222"
+        android:textColor="#131420"
         android:textSize="17sp"
-        tools:text="这是一个标题" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="湖南省" />
 
     <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_code"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#999"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:text="这是描述内容" />
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="43" />
 </android.support.constraint.ConstraintLayout>

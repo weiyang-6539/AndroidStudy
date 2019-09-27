@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by weiyang on 2019-09-22.
  */
-public class IdeaFragment extends BaseFragment {
+public class AddressLinkageFragment extends BaseFragment {
     @BindView(R.id.mTabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.mRecyclerView)
@@ -42,7 +42,7 @@ public class IdeaFragment extends BaseFragment {
     @Override
 
     protected int getLayoutId() {
-        return R.layout.fragment_idea;
+        return R.layout.fragment_address_linkage;
     }
 
     @Override
