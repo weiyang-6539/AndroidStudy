@@ -4,20 +4,25 @@
         android:id="@+id/navigation_0"
         android:checkable="false"
         android:enabled="true"
-        android:title="官方控件使用" />
+        android:title="@string/menu1" />
     <item
         android:id="@+id/navigation_1"
         android:checkable="false"
         android:enabled="true"
-        android:title="自定义控件实例" />
+        android:title="@string/menu2" />
     <item
         android:id="@+id/navigation_2"
         android:checkable="false"
         android:enabled="true"
-        android:title="App中常见界面效果" />
+        android:title="@string/menu3" />
     <item
         android:id="@+id/navigation_3"
         android:checkable="false"
         android:enabled="true"
-        android:title="编程思想及算法" />
+        android:title="@string/menu4" />
+    <item
+        android:id="@+id/navigation_4"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="@string/menu5" />
 </menu>

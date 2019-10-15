@@ -2,6 +2,7 @@ package com.wyang.study.ui.fragment_main;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -47,7 +48,7 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
         mAdapter = new SimpleAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView);
@@ -69,15 +70,18 @@ public class MainFragment extends BaseFragment {
             List<Simple> list = null;
             switch (type) {
                 case 0:
-                    list = DataProvider.getOfficialData();
+                    list = DataProvider.getGithubData();
                     break;
                 case 1:
-                    list = DataProvider.getWidgetData();
+                    list = DataProvider.getOfficialData();
                     break;
                 case 2:
-                    list = DataProvider.getUnofficialData();
+                    list = DataProvider.getWidgetData();
                     break;
                 case 3:
+                    list = DataProvider.getUnofficialData();
+                    break;
+                case 4:
                     list = DataProvider.getIdeaData();
                     break;
                 default:

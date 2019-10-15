@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Demo</string>
+
+    <string name="shape_title1">ShapeButton效果1</string>
+    <string name="shape_title2">ShapeButton效果2</string>
+    <string name="shape_title3">ShapeButton效果3</string>
+    <string name="shape_title4">ShapeButton效果4</string>
+
+    <string name="shape_tab_1">充值中心</string>
+    <string name="shape_tab_2">信用卡还款</string>
+    <string name="shape_tab_3">城市服务</string>
+    <string name="shape_tab_4">我的快递</string>
+    <string name="shape_tab_5">医疗健康</string>
+    <string name="shape_tab_6">记账本</string>
+    <string name="shape_tab_7">发票管家</string>
+    <string name="shape_tab_8">车主服务</string>
+    <string name="shape_tab_9">境外上网</string>
+    <string name="shape_tab_10">交通出行</string>
+    <string name="shape_tab_11">体育服务</string>
+    <string name="shape_tab_12">安全备忘</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_search">搜索</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_shop">购物</string>
+    <string name="tab_mine">我的</string>
+</resources>

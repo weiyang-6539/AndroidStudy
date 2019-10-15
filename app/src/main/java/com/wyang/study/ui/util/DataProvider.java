@@ -12,6 +12,7 @@ import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
+import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 public class DataProvider {
     private final static HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>() {{
         //put(MainFragment.class.getSimpleName(), MainFragment.class);
+        put(ViewAnimFragment.class.getSimpleName(), ViewAnimFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
@@ -35,7 +37,9 @@ public class DataProvider {
     public static Fragment createFragmentByName(String className) {
         Class<?> aClass = classMap.get(className);
 
-        if (aClass == DragSortFragment.class) {
+        if (aClass == ViewAnimFragment.class) {
+            return new ViewAnimFragment();
+        } else if (aClass == DragSortFragment.class) {
             return new DragSortFragment();
         } else if (aClass == WeChatFragment.class) {
             return new WeChatFragment();
@@ -49,6 +53,12 @@ public class DataProvider {
             return new AddressFilterFragment();
         }
         return new NullFragment();
+    }
+
+    public static List<Simple> getGithubData() {
+        List<Simple> list = new ArrayList<>();
+        list.add(new Simple("Boom瞎卡拉卡", "动画展现-动画粉碎", ViewAnimFragment.class.getSimpleName()));
+        return list;
     }
 
     public static List<Simple> getOfficialData() {

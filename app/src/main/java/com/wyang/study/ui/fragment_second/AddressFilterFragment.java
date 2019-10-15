@@ -4,21 +4,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.wyang.common.utils.node.NodeSeeker;
 import com.wyang.common.utils.node.TreeNode;
 import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
 import com.wyang.study.ui.util.TreeHelper;
 import com.wyang.study.utils.AssetUtil;
 
-import java.io.FileFilter;
 import java.util.List;
 
 import butterknife.BindView;

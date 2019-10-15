@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.wyang.study.R;
 import com.wyang.study.bean.Simple;
@@ -41,6 +44,13 @@ public class FragmentActivity extends BaseActivity {
         transaction.add(R.id.fl_container, fragment);
         transaction.commitAllowingStateLoss();
 
-        initToolBar(mToolBar, simple.getTitle(), true);
+        initToolBar(mToolBar, simple.getTitle(), true, true);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_right, menu);
+        return true;
     }
 }

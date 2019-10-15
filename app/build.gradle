@@ -42,6 +42,10 @@ dependencies {
     //RecyclerView适配器封装
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
 
+    //svg动画效果及粉碎效果（任何View）
+    api rootProject.ext.dependencies["anim-svg"]
+    api rootProject.ext.dependencies["anim-boom"]
+
     //图片加载Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 

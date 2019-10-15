@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/shape_horizontal_line"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            android:text="@string/shape_title2"
+            android:textColor="@color/colorText"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_vertical_line"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="4">
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_1"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_01"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_2"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_02"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_03"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_3"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_03"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_04"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_4"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_04"
+            app:sTopIconSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_vertical_line"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="4">
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_05"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_5"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_05"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_06"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_6"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_06"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_07"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_7"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_07"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_08"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_8"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_08"
+            app:sTopIconSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_vertical_line"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="4">
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_09"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_9"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_09"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_10"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_10"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_11"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_11"
+            app:sTopIconSize="30dp" />
+
+        <com.wyang.common.widget.extend.ShapeButton
+            android:id="@+id/sb_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/shape_tab_12"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            app:sSelector="standard"
+            app:sTopIcon="@drawable/ic_12"
+            app:sTopIconSize="30dp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
