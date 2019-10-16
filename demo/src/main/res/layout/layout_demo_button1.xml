@@ -68,7 +68,7 @@
             android:textColor="@color/colorBtnDefault"
             app:sCornersRadius="4dp"
             app:sElevation="4dp"
-            app:sSelector="standard"
+            app:sSelector="ripple"
             app:sSelectorDefaultColor="@android:color/white"
             app:sSelectorDisableColor="@color/colorBtnDisable"
             app:sSelectorPressedColor="@color/colorBtnPressed"
@@ -85,7 +85,7 @@
             android:textColor="@android:color/white"
             app:sCornersRadius="4dp"
             app:sElevation="4dp"
-            app:sSelector="standard"
+            app:sSelector="ripple"
             app:sSelectorDefaultColor="@color/colorBtnDefault"
             app:sSelectorDisableColor="@color/colorBtnDisable"
             app:sSelectorPressedColor="@color/colorBtnPressed" />
@@ -141,7 +141,9 @@
             android:textColor="@android:color/white"
             app:sCornersBottomLeftRadius="40dp"
             app:sCornersTopLeftRadius="40dp"
-            app:sSolidColor="#F19D39" />
+            app:sSelector="ripple"
+            app:sSelectorDefaultColor="#F19D39"
+            app:sSelectorPressedColor="#88F19D39" />
 
         <com.wyang.common.widget.extend.ShapeButton
             android:layout_width="0dp"
@@ -152,12 +154,14 @@
             android:textColor="@android:color/white"
             app:sCornersBottomRightRadius="40dp"
             app:sCornersTopRightRadius="40dp"
-            app:sSolidColor="#EE762F" />
+            app:sSelector="ripple"
+            app:sSelectorDefaultColor="#EE762F"
+            app:sSelectorPressedColor="#88EE762F" />
     </LinearLayout>
 
     <com.wyang.common.widget.extend.ShapeButton
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:minHeight="40dp"
         android:text="ADD TO CART"

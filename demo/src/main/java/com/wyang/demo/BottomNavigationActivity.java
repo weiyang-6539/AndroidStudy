@@ -53,13 +53,13 @@ public class BottomNavigationActivity extends AppCompatActivity {
                         .setInactiveIconResource(R.drawable.ic_discover_normal)
                         .setActiveColorResource(R.color.colorRed)
                         .setBadgeItem(discoverBadge))
-                .addItem(new BottomNavigationItem(R.drawable.ic_shop_selected, "购物")
+                /*.addItem(new BottomNavigationItem(R.drawable.ic_shop_selected, "购物")
                         .setInactiveIconResource(R.drawable.ic_shop_normal)
                         .setActiveColorResource(R.color.colorRed)
                         .setBadgeItem(shopBadge))
                 .addItem(new BottomNavigationItem(R.drawable.ic_unlogin_selected, "未登录")
                         .setInactiveIconResource(R.drawable.ic_unlogin_normal)
-                        .setActiveColorResource(R.color.colorRed))
+                        .setActiveColorResource(R.color.colorRed))*/
                 .setFirstSelectedPosition(0)
                 .initialise();
 

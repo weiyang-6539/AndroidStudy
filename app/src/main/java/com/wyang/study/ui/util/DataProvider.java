@@ -12,6 +12,7 @@ import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
+import com.wyang.study.ui.fragment_second.StickyDecorationFragment;
 import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
 
@@ -29,6 +30,7 @@ public class DataProvider {
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
+        put(StickyDecorationFragment.class.getSimpleName(), StickyDecorationFragment.class);
         put(NineGridLayoutFragment.class.getSimpleName(), NineGridLayoutFragment.class);
         put(AddressLinkageFragment.class.getSimpleName(), AddressLinkageFragment.class);
         put(AddressFilterFragment.class.getSimpleName(), AddressFilterFragment.class);
@@ -45,6 +47,8 @@ public class DataProvider {
             return new WeChatFragment();
         } else if (aClass == ContactsFragment.class) {
             return new ContactsFragment();
+        } else if (aClass == StickyDecorationFragment.class) {
+            return new StickyDecorationFragment();
         } else if (aClass == NineGridLayoutFragment.class) {
             return new NineGridLayoutFragment();
         } else if (aClass == AddressLinkageFragment.class) {
@@ -79,6 +83,7 @@ public class DataProvider {
         list.add(new Simple("RecyclerView用法一", "实现今日头条拖拽排序", DragSortFragment.class.getSimpleName()));
         list.add(new Simple("RecyclerView用法二", "仿微信发送图片朋友圈九宫格效果", WeChatFragment.class.getSimpleName()));
         list.add(new Simple("RecyclerView用法三", "仿微信通讯录效果", ContactsFragment.class.getSimpleName()));
+        list.add(new Simple("RecyclerView用法四", "悬浮分组展示", StickyDecorationFragment.class.getSimpleName()));
         return list;
     }
 

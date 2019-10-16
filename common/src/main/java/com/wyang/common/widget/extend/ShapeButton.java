@@ -221,27 +221,21 @@ public class ShapeButton extends AppCompatTextView {
         };
         ColorStateList colorStateList = new ColorStateList(stateList, stateColorList);
 
+        float tlR = cornersRadius != 0 ? cornersRadius : cornersTopLeftRadius;
+        float trR = cornersRadius != 0 ? cornersRadius : cornersTopRightRadius;
+        float brR = cornersRadius != 0 ? cornersRadius : cornersBottomRightRadius;
+        float blR = cornersRadius != 0 ? cornersRadius : cornersBottomLeftRadius;
         float[] outRadius = new float[]{
-                cornersRadius,
-                cornersRadius,
-                cornersRadius,
-                cornersRadius,
-                cornersRadius,
-                cornersRadius,
-                cornersRadius,
-                cornersRadius
+                tlR, tlR,
+                trR, trR,
+                brR, brR,
+                blR, blR
         };
+
         RoundRectShape roundRectShape = new RoundRectShape(outRadius, null, null);
 
-        ShapeDrawable maskDrawable = new ShapeDrawable();
-        maskDrawable.setShape(roundRectShape);
-        maskDrawable.getPaint().setColor(selectorPressedColor);
-        maskDrawable.getPaint().setStyle(Paint.Style.FILL);
-
-        ShapeDrawable contentDrawable = new ShapeDrawable();
-        contentDrawable.setShape(roundRectShape);
-        contentDrawable.getPaint().setColor(selectorDefaultColor);
-        contentDrawable.getPaint().setStyle(Paint.Style.FILL);
+        GradientDrawable maskDrawable = getDrawable(android.R.attr.state_pressed);
+        GradientDrawable contentDrawable = getDrawable(android.R.attr.state_enabled);
 
         //contentDrawable实际是默认初始化时展示的；maskDrawable 控制了rippleDrawable的范围
         return new RippleDrawable(colorStateList, contentDrawable, maskDrawable);
@@ -286,10 +280,5 @@ public class ShapeButton extends AppCompatTextView {
     public int dp2px(float dp) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
