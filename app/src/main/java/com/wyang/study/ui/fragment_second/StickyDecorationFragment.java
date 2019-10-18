@@ -66,7 +66,7 @@ public class StickyDecorationFragment extends BaseFragment {
                 .init(listener)
                 .setDivideHeight(0)
                 .setDivideColor(0xffe2e2e2)
-                .setGroupHeight(dp2px(40))
+                .setGroupHeight(dp2px(40))//分组的高度
                 .setGroupBackground(0x00000000)
                 //重置span（注意：使用GridLayoutManager时必须调用）
                 //.resetSpan(mRecyclerView, (GridLayoutManager) manager)
@@ -208,7 +208,7 @@ public class StickyDecorationFragment extends BaseFragment {
                 int position = parent.getChildLayoutPosition(childAt);
                 int left = parent.getPaddingLeft();
                 int right = parent.getWidth() - parent.getPaddingRight();
-                int top = childAt.getTop() - dp2px(40);
+                int top = childAt.getTop() - dp2px(40);//减去分组的高度
                 if (position == 0 || position == mAdapter.getData().size() - 1) {
                     if (position == 0) {
                         top -= dp2px(20);

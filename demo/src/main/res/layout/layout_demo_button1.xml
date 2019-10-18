@@ -53,6 +53,17 @@
             tools:ignore="RtlHardcoded" />
     </FrameLayout>
 
+    <com.wyang.common.widget.extend.ShapeButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:minHeight="40dp"
+        android:text="测试Ripple"
+        android:textColor="#fff"
+        app:sCornersRadius="5dp"
+        app:sSelector="ripple"
+        app:sSelectorDefaultColor="@color/colorBtnDefault" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="50dp"
+            android:tag="button"
             android:text="店铺"
             android:textColor="#999"
             android:textSize="13sp"
@@ -169,6 +181,7 @@
         app:sBottomIcon="@drawable/ic_shop_add"
         app:sBottomIconSize="20dp"
         app:sCornersRadius="5dp"
+        app:sGravity="left"
         app:sLeftIcon="@drawable/ic_shop_add"
         app:sLeftIconSize="20dp"
         app:sRightIcon="@drawable/ic_shop_add"

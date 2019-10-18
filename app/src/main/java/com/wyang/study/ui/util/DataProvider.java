@@ -10,11 +10,13 @@ import com.wyang.study.ui.fragment_second.AddressFilterFragment;
 import com.wyang.study.ui.fragment_second.AddressLinkageFragment;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
+import com.wyang.study.ui.fragment_second.GameEventFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.StickyDecorationFragment;
 import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
+import com.wyang.study.ui.widget.GameEventView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,7 @@ public class DataProvider {
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
         put(StickyDecorationFragment.class.getSimpleName(), StickyDecorationFragment.class);
         put(NineGridLayoutFragment.class.getSimpleName(), NineGridLayoutFragment.class);
+        put(GameEventFragment.class.getSimpleName(), GameEventFragment.class);
         put(AddressLinkageFragment.class.getSimpleName(), AddressLinkageFragment.class);
         put(AddressFilterFragment.class.getSimpleName(), AddressFilterFragment.class);
     }};
@@ -51,6 +54,8 @@ public class DataProvider {
             return new StickyDecorationFragment();
         } else if (aClass == NineGridLayoutFragment.class) {
             return new NineGridLayoutFragment();
+        } else if (aClass == GameEventFragment.class) {
+            return new GameEventFragment();
         } else if (aClass == AddressLinkageFragment.class) {
             return new AddressLinkageFragment();
         } else if (aClass == AddressFilterFragment.class) {
@@ -75,6 +80,7 @@ public class DataProvider {
     public static List<Simple> getWidgetData() {
         List<Simple> list = new ArrayList<>();
         list.add(new Simple("图片九宫格", "仿微信图片九宫格效果", NineGridLayoutFragment.class.getSimpleName()));
+        list.add(new Simple("赛事查看控件", "给覃司机写的一个控件", GameEventFragment.class.getSimpleName()));
         return list;
     }
 

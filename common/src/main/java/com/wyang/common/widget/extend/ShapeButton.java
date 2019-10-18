@@ -212,7 +212,7 @@ public class ShapeButton extends AppCompatTextView {
                 new int[]{}
         };
 
-        int normalColor = Color.parseColor("#aaaaaa");
+        int normalColor = Color.parseColor("#303F9F");
         int[] stateColorList = new int[]{
                 selectorPressedColor,
                 selectorPressedColor,
@@ -220,19 +220,6 @@ public class ShapeButton extends AppCompatTextView {
                 normalColor
         };
         ColorStateList colorStateList = new ColorStateList(stateList, stateColorList);
-
-        float tlR = cornersRadius != 0 ? cornersRadius : cornersTopLeftRadius;
-        float trR = cornersRadius != 0 ? cornersRadius : cornersTopRightRadius;
-        float brR = cornersRadius != 0 ? cornersRadius : cornersBottomRightRadius;
-        float blR = cornersRadius != 0 ? cornersRadius : cornersBottomLeftRadius;
-        float[] outRadius = new float[]{
-                tlR, tlR,
-                trR, trR,
-                brR, brR,
-                blR, blR
-        };
-
-        RoundRectShape roundRectShape = new RoundRectShape(outRadius, null, null);
 
         GradientDrawable maskDrawable = getDrawable(android.R.attr.state_pressed);
         GradientDrawable contentDrawable = getDrawable(android.R.attr.state_enabled);

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">#f00</item>
+    </style>
+
+    <attr name="selector" format="reference" />
 </resources>

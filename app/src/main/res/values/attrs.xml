@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GameEventView">
+        <attr name="gSpace" format="dimension" />
+        <attr name="gMargin" format="dimension" />
+        <attr name="gMarginRow" format="dimension" />
+        <attr name="gStrokeWidth" format="dimension" />
+        <attr name="gStrokeColor" format="color" />
+        <attr name="gStrokeMargin" format="dimension" />
+        <attr name="gMultiple" format="float" />
+        <attr name="gPadding" format="dimension" />
+    </declare-styleable>
+</resources>
