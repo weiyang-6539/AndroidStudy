@@ -1,7 +1,7 @@
 package com.wyang.study.ui.util;
 
-import com.wyang.common.utils.node.NodeSeeker;
-import com.wyang.common.utils.node.TreeNode;
+import com.wyang.study.utils.NodeSeeker;
+import com.wyang.study.utils.TreeNode;
 
 import java.util.HashMap;
 import java.util.Map;

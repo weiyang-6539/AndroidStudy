@@ -432,7 +432,6 @@ public class GameEventView extends ScrollAndScaleView {
         canvas.drawLine(x, y, x + child.getMeasuredWidth(), y, mPaint);
     }
 
-
     public void setLowestCount(int count, GameEventAdapter adapter) {
         if (!check2Index(count))
             throw new IllegalArgumentException("数量为2的指数方，请检查");

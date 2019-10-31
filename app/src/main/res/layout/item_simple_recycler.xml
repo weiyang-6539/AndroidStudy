@@ -6,9 +6,6 @@
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="2dp"
-    app:cardElevation="@dimen/dp_4"
-    app:cardPreventCornerOverlap="false"
-    app:cardUseCompatPadding="true"
     tools:targetApi="lollipop">
 
     <LinearLayout

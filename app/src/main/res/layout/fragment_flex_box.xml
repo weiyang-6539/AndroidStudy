@@ -10,19 +10,118 @@
         android:orientation="vertical">
 
         <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flex0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:flexDirection="row">
+            app:alignItems="center"
+            app:dividerDrawable="@drawable/shape_flex_divider"
+            app:flexWrap="wrap"
+            app:justifyContent="space_between"
+            app:showDivider="beginning|middle|end">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="文本1" />
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="全部 102万+" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="文本2" />
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="全部 102万+" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="center"
+            app:dividerDrawable="@drawable/shape_flex_divider"
+            app:flexWrap="wrap"
+            app:showDivider="beginning|middle|end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="全部 102万+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="最新"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="好评 81万+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="中评 5900+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="差评 4200+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="有图 5.3万+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="追加评价 4200+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="视频晒单 1600+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="小巧可爱 1698+"
+                app:layout_flexGrow="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_corners_radius3"
+                android:padding="10dp"
+                android:text="十分大气 565+"
+                app:layout_flexGrow="1" />
         </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
 </ScrollView>

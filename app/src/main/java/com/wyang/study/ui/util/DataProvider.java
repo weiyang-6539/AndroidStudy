@@ -9,14 +9,15 @@ import com.wyang.study.bean.Simple;
 import com.wyang.study.ui.fragment_second.AddressFilterFragment;
 import com.wyang.study.ui.fragment_second.AddressLinkageFragment;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
+import com.wyang.study.ui.fragment_second.CustomViewFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
+import com.wyang.study.ui.fragment_second.FlexBoxLayoutFragment;
 import com.wyang.study.ui.fragment_second.GameEventFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.StickyDecorationFragment;
 import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
-import com.wyang.study.ui.widget.GameEventView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +30,12 @@ public class DataProvider {
     private final static HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>() {{
         //put(MainFragment.class.getSimpleName(), MainFragment.class);
         put(ViewAnimFragment.class.getSimpleName(), ViewAnimFragment.class);
+        put(FlexBoxLayoutFragment.class.getSimpleName(), FlexBoxLayoutFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
         put(StickyDecorationFragment.class.getSimpleName(), StickyDecorationFragment.class);
+        put(CustomViewFragment.class.getSimpleName(), CustomViewFragment.class);
         put(NineGridLayoutFragment.class.getSimpleName(), NineGridLayoutFragment.class);
         put(GameEventFragment.class.getSimpleName(), GameEventFragment.class);
         put(AddressLinkageFragment.class.getSimpleName(), AddressLinkageFragment.class);
@@ -44,6 +47,8 @@ public class DataProvider {
 
         if (aClass == ViewAnimFragment.class) {
             return new ViewAnimFragment();
+        } else if (aClass == FlexBoxLayoutFragment.class) {
+            return new FlexBoxLayoutFragment();
         } else if (aClass == DragSortFragment.class) {
             return new DragSortFragment();
         } else if (aClass == WeChatFragment.class) {
@@ -52,6 +57,8 @@ public class DataProvider {
             return new ContactsFragment();
         } else if (aClass == StickyDecorationFragment.class) {
             return new StickyDecorationFragment();
+        } else if (aClass == CustomViewFragment.class) {
+            return new CustomViewFragment();
         } else if (aClass == NineGridLayoutFragment.class) {
             return new NineGridLayoutFragment();
         } else if (aClass == GameEventFragment.class) {
@@ -73,12 +80,13 @@ public class DataProvider {
     public static List<Simple> getOfficialData() {
         List<Simple> list = new ArrayList<>();
         list.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));
-        list.add(new Simple("FlexBoxLayout", "高级LinearLayout", ""));
+        list.add(new Simple("FlexBoxLayout", "高级LinearLayout", FlexBoxLayoutFragment.class.getSimpleName()));
         return list;
     }
 
     public static List<Simple> getWidgetData() {
         List<Simple> list = new ArrayList<>();
+        list.add(new Simple("自定义控件练习", "五星红旗", CustomViewFragment.class.getSimpleName()));
         list.add(new Simple("图片九宫格", "仿微信图片九宫格效果", NineGridLayoutFragment.class.getSimpleName()));
         list.add(new Simple("赛事查看控件", "给覃司机写的一个控件", GameEventFragment.class.getSimpleName()));
         return list;

@@ -15,6 +15,7 @@ import com.wyang.study.ui.FragmentActivity;
 import com.wyang.study.ui.base.BaseFragment;
 import com.wyang.study.ui.util.ActivityUtils;
 import com.wyang.study.ui.util.DataProvider;
+import com.wyang.study.ui.widget.GridSpacingItemDecoration;
 
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 20, true));
 
         mAdapter = new SimpleAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView);

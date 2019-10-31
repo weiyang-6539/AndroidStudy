@@ -9,11 +9,11 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.wyang.common.utils.node.TreeNode;
 import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
 import com.wyang.study.ui.util.TreeHelper;
 import com.wyang.study.utils.AssetUtil;
+import com.wyang.study.utils.TreeNode;
 
 import java.util.List;
 
@@ -114,6 +114,22 @@ public class AddressFilterFragment extends BaseFragment {
 
         List<TreeNode> results = mTreeHelper.streetsSeeker()
                 .attribute("name", "新开镇")
+                .results();
+
+        mAdapter.setNewData(results);
+    }
+
+    @OnClick(R.id.tv_filter4)
+    public void onClickFilter4() {
+        if (!init())
+            return;
+
+        List<TreeNode> results = mTreeHelper.rootSeeker()
+                .descendants()
+                .matchPredicate(treeNode -> {
+                    String code = treeNode.getAttribute("code");
+                    return !TextUtils.isEmpty(code) && code.startsWith("370982");
+                })
                 .results();
 
         mAdapter.setNewData(results);
