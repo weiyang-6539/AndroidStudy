@@ -13,6 +13,7 @@ import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
 import com.wyang.study.ui.util.TreeHelper;
 import com.wyang.study.utils.AssetUtil;
+import com.wyang.study.utils.NodeSeeker;
 import com.wyang.study.utils.TreeNode;
 
 import java.util.List;
@@ -112,8 +113,15 @@ public class AddressFilterFragment extends BaseFragment {
         if (!init())
             return;
 
-        List<TreeNode> results = mTreeHelper.streetsSeeker()
-                .attribute("name", "新开镇")
+        List<TreeNode> results = mTreeHelper.rootSeeker()
+                .descendants()
+                .matchPredicate(treeNode -> {
+                    String name = treeNode.getAttribute("name");
+                    Integer level = treeNode.getAttribute("level");
+                    if (name == null || level == null)
+                        return false;
+                    return name.contains("阳") && (level == 2 || level == 3);
+                })
                 .results();
 
         mAdapter.setNewData(results);

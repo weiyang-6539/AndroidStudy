@@ -43,13 +43,12 @@
         android:background="#999"
         android:gravity="center"
         android:minHeight="45dp"
-        android:text="新开镇同名(我的镇)"
+        android:text="带阳的位置"
         android:textColor="@android:color/white"
         android:textSize="17sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_filter1"
         app:layout_constraintWidth_percent="0.48" />
-
 
     <TextView
         android:id="@+id/tv_filter4"
