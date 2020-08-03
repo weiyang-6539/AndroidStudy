@@ -2,11 +2,17 @@ package com.wyang.study.ui.fragment_second;
 
 import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
+import com.wyang.study.ui.widget.ChineseFlag;
+
+import butterknife.BindView;
 
 /**
  * Created by weiyang on 2019-10-31.
  */
 public class CustomViewFragment extends BaseFragment {
+    @BindView(R.id.cf)
+    ChineseFlag cf;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_custom_view;
@@ -14,6 +20,6 @@ public class CustomViewFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        cf.setDrawLine(false);
     }
 }

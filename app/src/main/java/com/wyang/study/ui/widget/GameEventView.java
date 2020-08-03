@@ -190,15 +190,10 @@ abstract class ScrollAndScaleView extends ViewGroup implements
             case MotionEvent.ACTION_DOWN:
                 touch = true;
                 break;
-            case MotionEvent.ACTION_MOVE:
-                break;
             case MotionEvent.ACTION_POINTER_UP:
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                touch = false;
-                invalidate();
-                break;
             case MotionEvent.ACTION_CANCEL:
                 touch = false;
                 invalidate();

@@ -13,7 +13,6 @@ import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
 import com.wyang.study.ui.util.TreeHelper;
 import com.wyang.study.utils.AssetUtil;
-import com.wyang.study.utils.NodeSeeker;
 import com.wyang.study.utils.TreeNode;
 
 import java.util.List;
@@ -136,7 +135,7 @@ public class AddressFilterFragment extends BaseFragment {
                 .descendants()
                 .matchPredicate(treeNode -> {
                     String code = treeNode.getAttribute("code");
-                    return !TextUtils.isEmpty(code) && code.startsWith("370982");
+                    return !TextUtils.isEmpty(code) && code.startsWith("1");
                 })
                 .results();
 

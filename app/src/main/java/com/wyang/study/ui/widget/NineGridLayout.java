@@ -197,7 +197,7 @@ public class NineGridLayout extends ViewGroup {
             TextView textView = new TextView(mContext);
             textView.setTextColor(Color.WHITE);
             textView.setTextSize(15);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
             textView.setLayoutParams(params);
 

@@ -59,7 +59,7 @@
         android:background="#999"
         android:gravity="center"
         android:minHeight="45dp"
-        android:text="370982"
+        android:text="2020"
         android:textColor="@android:color/white"
         android:textSize="17sp"
         app:layout_constraintRight_toRightOf="parent"

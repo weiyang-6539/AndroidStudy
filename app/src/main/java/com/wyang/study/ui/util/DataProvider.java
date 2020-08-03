@@ -194,7 +194,9 @@ public class DataProvider {
         list.add(new Discover("", "", "", getImageUrls(6)));
         list.add(new Discover("", "", "", getImageUrls(7)));
         list.add(new Discover("", "", "", getImageUrls(8)));
-        list.add(new Discover("", "", "", getImageUrls(7)));
+        list.add(new Discover("", "", "", getImageUrls(9)));
+        list.add(new Discover("", "", "", getImageUrls(10)));
+        list.add(new Discover("", "", "", getImageUrls(11)));
         return list;
     }
 
@@ -202,6 +204,7 @@ public class DataProvider {
         List<AlbumBase> list = new ArrayList<>();
         //2020-01-03
         list.add(new AlbumBase("2020-01-03"));
+        list.add(new Album("2020-01-03", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591782075661&di=eb26eeb40a21fea9753ba837494b25ab&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D1287527925%2C3407796655%26fm%3D214%26gp%3D0.jpg"));
         list.add(new Album("2020-01-03", "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2738234332,2025993528&fm=26&gp=0.jpg"));
         list.add(new Album("2020-01-03", "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2824970053,2177995476&fm=26&gp=0.jpg"));
         list.add(new Album("2020-01-03", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560162277510&di=f3baf93e28ada9d1fe5fe57329972788&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201310%2F16%2F224046ups8zp1jg31uz82g.jpg"));

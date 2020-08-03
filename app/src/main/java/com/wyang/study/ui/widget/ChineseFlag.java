@@ -141,6 +141,11 @@ public class ChineseFlag extends View {
         return path;
     }
 
+    public void setDrawLine(boolean drawLine) {
+        isDrawLine = drawLine;
+
+        invalidate();
+    }
 
     /**
      * 计算余弦值
