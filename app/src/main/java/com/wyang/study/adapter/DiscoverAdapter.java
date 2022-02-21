@@ -26,7 +26,7 @@ public class DiscoverAdapter extends BaseQuickAdapter<Discover, BaseViewHolder> 
         mNineGridLayout.setImageUrls(item.getUrls(), imageLoader);
     }
 
-    private NineGridLayout.ImageLoaderInterface imageLoader = new NineGridLayout.ImageLoaderInterface() {
+    private final NineGridLayout.ImageLoaderInterface imageLoader = new NineGridLayout.ImageLoaderInterface() {
         @Override
         public ImageView createImageView(Context context, int count, int pos) {
             ImageView imageView = new ImageView(context);
