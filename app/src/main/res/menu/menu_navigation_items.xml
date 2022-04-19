@@ -25,4 +25,9 @@
         android:checkable="false"
         android:enabled="true"
         android:title="@string/menu5" />
+    <item
+        android:id="@+id/navigation_5"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="@string/menu6" />
 </menu>

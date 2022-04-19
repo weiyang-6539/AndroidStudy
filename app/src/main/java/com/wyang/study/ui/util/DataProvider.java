@@ -2,7 +2,6 @@ package com.wyang.study.ui.util;
 
 import android.support.v4.app.Fragment;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.wyang.study.bean.Album;
 import com.wyang.study.bean.AlbumBase;
 import com.wyang.study.bean.Channel;
@@ -11,14 +10,18 @@ import com.wyang.study.bean.SectionItem;
 import com.wyang.study.bean.Simple;
 import com.wyang.study.ui.fragment_second.AddressFilterFragment;
 import com.wyang.study.ui.fragment_second.AddressLinkageFragment;
+import com.wyang.study.ui.fragment_second.AidlFragment;
 import com.wyang.study.ui.fragment_second.AlbumFragment;
 import com.wyang.study.ui.fragment_second.ContactsFragment;
 import com.wyang.study.ui.fragment_second.CustomViewFragment;
 import com.wyang.study.ui.fragment_second.DragSortFragment;
 import com.wyang.study.ui.fragment_second.FlexBoxLayoutFragment;
 import com.wyang.study.ui.fragment_second.GameEventFragment;
+import com.wyang.study.ui.fragment_second.HandlerThreadFragment;
+import com.wyang.study.ui.fragment_second.IntentServiceFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
+import com.wyang.study.ui.fragment_second.OkHttpFragment;
 import com.wyang.study.ui.fragment_second.StickyDecorationFragment;
 import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
@@ -33,6 +36,10 @@ import java.util.List;
 public class DataProvider {
     private final static HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>() {{
         //put(MainFragment.class.getSimpleName(), MainFragment.class);
+        put(HandlerThreadFragment.class.getSimpleName(), HandlerThreadFragment.class);
+        put(IntentServiceFragment.class.getSimpleName(), IntentServiceFragment.class);
+        put(AidlFragment.class.getSimpleName(), AidlFragment.class);
+        put(OkHttpFragment.class.getSimpleName(), OkHttpFragment.class);
         put(ViewAnimFragment.class.getSimpleName(), ViewAnimFragment.class);
         put(FlexBoxLayoutFragment.class.getSimpleName(), FlexBoxLayoutFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
@@ -50,70 +57,45 @@ public class DataProvider {
     public static Fragment createFragmentByName(String className) {
         Class<?> aClass = classMap.get(className);
 
-        if (aClass == ViewAnimFragment.class) {
-            return new ViewAnimFragment();
-        } else if (aClass == FlexBoxLayoutFragment.class) {
-            return new FlexBoxLayoutFragment();
-        } else if (aClass == DragSortFragment.class) {
-            return new DragSortFragment();
-        } else if (aClass == WeChatFragment.class) {
-            return new WeChatFragment();
-        } else if (aClass == ContactsFragment.class) {
-            return new ContactsFragment();
-        } else if (aClass == StickyDecorationFragment.class) {
-            return new StickyDecorationFragment();
-        } else if (aClass == AlbumFragment.class) {
-            return new AlbumFragment();
-        } else if (aClass == CustomViewFragment.class) {
-            return new CustomViewFragment();
-        } else if (aClass == NineGridLayoutFragment.class) {
-            return new NineGridLayoutFragment();
-        } else if (aClass == GameEventFragment.class) {
-            return new GameEventFragment();
-        } else if (aClass == AddressLinkageFragment.class) {
-            return new AddressLinkageFragment();
-        } else if (aClass == AddressFilterFragment.class) {
-            return new AddressFilterFragment();
+        try {
+            if (aClass != null)
+                return (Fragment) aClass.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
+
         return new NullFragment();
     }
 
-    public static List<Simple> getGithubData() {
-        List<Simple> list = new ArrayList<>();
-        list.add(new Simple("Boom瞎卡拉卡", "动画展现-动画粉碎", ViewAnimFragment.class.getSimpleName()));
-        return list;
-    }
-
-    public static List<Simple> getOfficialData() {
-        List<Simple> list = new ArrayList<>();
-        list.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));
-        list.add(new Simple("FlexBoxLayout", "高级LinearLayout", FlexBoxLayoutFragment.class.getSimpleName()));
-        return list;
-    }
-
-    public static List<Simple> getWidgetData() {
-        List<Simple> list = new ArrayList<>();
-        list.add(new Simple("自定义控件练习", "五星红旗", CustomViewFragment.class.getSimpleName()));
-        list.add(new Simple("图片九宫格", "仿微信图片九宫格效果", NineGridLayoutFragment.class.getSimpleName()));
-        list.add(new Simple("赛事查看控件", "给覃司机写的一个控件", GameEventFragment.class.getSimpleName()));
-        return list;
-    }
-
-    public static List<Simple> getUnofficialData() {
-        List<Simple> list = new ArrayList<>();
-        list.add(new Simple("RecyclerView用法一", "实现今日头条拖拽排序", DragSortFragment.class.getSimpleName()));
-        list.add(new Simple("RecyclerView用法二", "仿微信发送图片朋友圈九宫格效果", WeChatFragment.class.getSimpleName()));
-        list.add(new Simple("RecyclerView用法三", "仿微信通讯录效果", ContactsFragment.class.getSimpleName()));
-        list.add(new Simple("RecyclerView用法四", "悬浮分组展示", StickyDecorationFragment.class.getSimpleName()));
-        list.add(new Simple("RecyclerView用法五", "仿小米云相册", AlbumFragment.class.getSimpleName()));
-        return list;
-    }
-
-    public static List<Simple> getIdeaData() {
-        List<Simple> list = new ArrayList<>();
-        list.add(new Simple("树结构之省市区镇四级联动", "利用TreeNode及NodeSeeker实现的四级联动", AddressLinkageFragment.class.getSimpleName()));
-        list.add(new Simple("树结构之筛选遍历", "利用TreeNode及NodeSeeker实现复杂筛选条件,代码简洁的遍历", AddressFilterFragment.class.getSimpleName()));
-        return list;
+    public static List<Simple> getMainPageData(int page) {
+        List<Simple> data = new ArrayList<>();
+        if (page == 0) {
+            data.add(new Simple("HandlerThread", "HandlerThread的用法", HandlerThreadFragment.class.getSimpleName()));
+            data.add(new Simple("IntentService", "IntentService的用法", IntentServiceFragment.class.getSimpleName()));
+            data.add(new Simple("AIDL用法", "AIDL用法", AidlFragment.class.getSimpleName()));
+        } else if (page == 1) {
+            data.add(new Simple("OkHttp的学习", "okhttp", OkHttpFragment.class.getSimpleName()));
+            data.add(new Simple("Boom瞎卡拉卡", "动画展现-动画粉碎", ViewAnimFragment.class.getSimpleName()));
+        } else if (page == 2) {
+            data.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));
+            data.add(new Simple("FlexBoxLayout", "高级LinearLayout", FlexBoxLayoutFragment.class.getSimpleName()));
+        } else if (page == 3) {
+            data.add(new Simple("自定义控件练习", "五星红旗", CustomViewFragment.class.getSimpleName()));
+            data.add(new Simple("图片九宫格", "仿微信图片九宫格效果", NineGridLayoutFragment.class.getSimpleName()));
+            data.add(new Simple("赛事查看控件", "给覃司机写的一个控件", GameEventFragment.class.getSimpleName()));
+        } else if (page == 4) {
+            data.add(new Simple("RecyclerView用法一", "实现今日头条拖拽排序", DragSortFragment.class.getSimpleName()));
+            data.add(new Simple("RecyclerView用法二", "仿微信发送图片朋友圈九宫格效果", WeChatFragment.class.getSimpleName()));
+            data.add(new Simple("RecyclerView用法三", "仿微信通讯录效果", ContactsFragment.class.getSimpleName()));
+            data.add(new Simple("RecyclerView用法四", "悬浮分组展示", StickyDecorationFragment.class.getSimpleName()));
+            data.add(new Simple("RecyclerView用法五", "仿小米云相册", AlbumFragment.class.getSimpleName()));
+        } else if (page == 5) {
+            data.add(new Simple("树结构之省市区镇四级联动", "利用TreeNode及NodeSeeker实现的四级联动", AddressLinkageFragment.class.getSimpleName()));
+            data.add(new Simple("树结构之筛选遍历", "利用TreeNode及NodeSeeker实现复杂筛选条件,代码简洁的遍历", AddressFilterFragment.class.getSimpleName()));
+        }
+        return data;
     }
 
     public static List<String> getImageUrls(int count) {

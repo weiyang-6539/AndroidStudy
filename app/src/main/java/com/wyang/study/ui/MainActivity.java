@@ -6,8 +6,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 
-import com.wyang.study.ui.base.BaseActivity;
 import com.wyang.study.R;
+import com.wyang.study.ui.base.BaseActivity;
 import com.wyang.study.ui.util.FragmentFactory;
 
 import butterknife.BindView;
@@ -56,6 +56,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.navigation_4:
                     mFactory.selectItem(4);
+                    break;
+                case R.id.navigation_5:
+                    mFactory.selectItem(5);
                     break;
             }
             return false;

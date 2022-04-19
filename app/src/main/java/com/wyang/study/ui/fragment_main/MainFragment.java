@@ -3,7 +3,6 @@ package com.wyang.study.ui.fragment_main;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -34,10 +33,10 @@ public class MainFragment extends BaseFragment {
     private MainFragment() {
     }
 
-    public static MainFragment newInstance(int type) {
+    public static MainFragment newInstance(int page) {
         MainFragment mainFragment = new MainFragment();
         Bundle args = new Bundle();
-        args.putInt("type", type);
+        args.putInt("page", page);
         mainFragment.setArguments(args);
         return mainFragment;
     }
@@ -68,28 +67,8 @@ public class MainFragment extends BaseFragment {
 
         Bundle arguments = getArguments();
         if (arguments != null) {
-            int type = arguments.getInt("type");
-            List<Simple> list = null;
-            switch (type) {
-                case 0:
-                    list = DataProvider.getGithubData();
-                    break;
-                case 1:
-                    list = DataProvider.getOfficialData();
-                    break;
-                case 2:
-                    list = DataProvider.getWidgetData();
-                    break;
-                case 3:
-                    list = DataProvider.getUnofficialData();
-                    break;
-                case 4:
-                    list = DataProvider.getIdeaData();
-                    break;
-                default:
-                    break;
-            }
-            mAdapter.setNewData(list);
+            int type = arguments.getInt("page");
+            mAdapter.setNewData(DataProvider.getMainPageData(type));
         }
     }
 }

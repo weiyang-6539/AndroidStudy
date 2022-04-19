@@ -41,7 +41,9 @@ public class GlideImageLoader {
                 .centerCrop();
 
         // 图片加载库采用Glide框架
-        Glide.with(context).load(imgUrl).apply(options)
+        Glide.with(context)
+                .load(imgUrl)
+                .apply(options)
                 .into(view);
     }
 

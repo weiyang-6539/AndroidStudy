@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -169,5 +170,20 @@ public class ChineseFlag extends View {
 
     float atan(float y, float x) {
         return (float) (Math.atan2(y, x) * 180 / Math.PI);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void setOnTouchListener(OnTouchListener l) {
+        super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        super.setOnClickListener(l);
     }
 }

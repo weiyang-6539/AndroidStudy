@@ -143,7 +143,7 @@ public class NodeSeeker {
     private NodeFilter currentFilter;
     private NodeFilter firstFilter;
 
-    private class NodeFilter {
+    private static class NodeFilter {
         Visitor nextVisitor;
         Filter filter;
     }
