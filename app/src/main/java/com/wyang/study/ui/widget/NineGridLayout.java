@@ -30,7 +30,7 @@ public class NineGridLayout extends ViewGroup {
     private int mSpacing = 5;//图片间隙
 
     private ImageLoaderInterface imageLoader;
-    private List<String> mUrls = new ArrayList<>();
+    private final List<String> mUrls = new ArrayList<>();
 
     public NineGridLayout(Context context) {
         this(context, null);

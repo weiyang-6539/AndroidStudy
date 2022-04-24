@@ -36,7 +36,6 @@ public class FragmentActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         Fragment fragment = DataProvider.createFragmentByName(simple.getClassName());
 
         FragmentManager manager = getSupportFragmentManager();

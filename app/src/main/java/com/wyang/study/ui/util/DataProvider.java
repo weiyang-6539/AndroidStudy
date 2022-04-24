@@ -22,6 +22,7 @@ import com.wyang.study.ui.fragment_second.IntentServiceFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.OkHttpFragment;
+import com.wyang.study.ui.fragment_second.RetrofitFragment;
 import com.wyang.study.ui.fragment_second.StickyDecorationFragment;
 import com.wyang.study.ui.fragment_second.ViewAnimFragment;
 import com.wyang.study.ui.fragment_second.WeChatFragment;
@@ -40,6 +41,7 @@ public class DataProvider {
         put(IntentServiceFragment.class.getSimpleName(), IntentServiceFragment.class);
         put(AidlFragment.class.getSimpleName(), AidlFragment.class);
         put(OkHttpFragment.class.getSimpleName(), OkHttpFragment.class);
+        put(RetrofitFragment.class.getSimpleName(), RetrofitFragment.class);
         put(ViewAnimFragment.class.getSimpleName(), ViewAnimFragment.class);
         put(FlexBoxLayoutFragment.class.getSimpleName(), FlexBoxLayoutFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
@@ -77,6 +79,7 @@ public class DataProvider {
             data.add(new Simple("AIDL用法", "AIDL用法", AidlFragment.class.getSimpleName()));
         } else if (page == 1) {
             data.add(new Simple("OkHttp的学习", "okhttp", OkHttpFragment.class.getSimpleName()));
+            data.add(new Simple("Retrofit的学习", "retrofit", RetrofitFragment.class.getSimpleName()));
             data.add(new Simple("Boom瞎卡拉卡", "动画展现-动画粉碎", ViewAnimFragment.class.getSimpleName()));
         } else if (page == 2) {
             data.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));

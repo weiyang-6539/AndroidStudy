@@ -10,9 +10,9 @@ import android.view.View;
  * 网格布局管理器分割线
  */
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-    private int spanCount;
-    private int spacing;
-    private boolean includeEdge;//为true时，设置左右边距与item间距相等
+    private final int spanCount;
+    private final int spacing;
+    private final boolean includeEdge;//为true时，设置左右边距与item间距相等
 
     public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
         this.spanCount = spanCount;

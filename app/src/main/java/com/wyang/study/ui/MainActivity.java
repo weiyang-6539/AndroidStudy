@@ -10,6 +10,9 @@ import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseActivity;
 import com.wyang.study.ui.util.FragmentFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
@@ -41,29 +44,21 @@ public class MainActivity extends BaseActivity {
     protected void initListener() {
         mNavigationView.setNavigationItemSelectedListener(item -> {
             mDrawerLayout.closeDrawer(Gravity.START);
-            switch (item.getItemId()) {
-                case R.id.navigation_0:
-                    mFactory.selectItem(0);
-                    break;
-                case R.id.navigation_1:
-                    mFactory.selectItem(1);
-                    break;
-                case R.id.navigation_2:
-                    mFactory.selectItem(2);
-                    break;
-                case R.id.navigation_3:
-                    mFactory.selectItem(3);
-                    break;
-                case R.id.navigation_4:
-                    mFactory.selectItem(4);
-                    break;
-                case R.id.navigation_5:
-                    mFactory.selectItem(5);
-                    break;
-            }
+            Integer integer = idMap.get(item.getItemId());
+            if (integer != null)
+                mFactory.selectItem(integer);
             return false;
         });
 
         mFactory.selectItem(0);
     }
+
+    private static final Map<Integer, Integer> idMap = new HashMap<Integer, Integer>() {{
+        put(R.id.navigation_0, 0);
+        put(R.id.navigation_1, 1);
+        put(R.id.navigation_2, 2);
+        put(R.id.navigation_3, 3);
+        put(R.id.navigation_4, 4);
+        put(R.id.navigation_5, 5);
+    }};
 }

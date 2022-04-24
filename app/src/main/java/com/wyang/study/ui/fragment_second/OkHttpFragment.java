@@ -27,12 +27,7 @@ public class OkHttpFragment extends BaseFragment {
         tv_text = mRootView.findViewById(R.id.tv_text);
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) {
-                        return null;
-                    }
-                })
+                .addNetworkInterceptor(null)
                 .build();
 
         Request request = new Request.Builder()
