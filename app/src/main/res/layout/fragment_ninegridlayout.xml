@@ -53,10 +53,11 @@
 
     <com.wyang.study.ui.widget.NineGridLayout
         android:id="@+id/mNineGridLayout"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv" />
 
     <View

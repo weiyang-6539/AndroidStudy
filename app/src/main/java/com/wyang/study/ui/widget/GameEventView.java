@@ -321,7 +321,7 @@ public class GameEventView extends ScrollAndScaleView {
     private float multiple = 3.0f;//第一 第二列间距与平均间距的倍数
     private int mPadding = 50;
 
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public GameEventView(Context context) {
         this(context, null);

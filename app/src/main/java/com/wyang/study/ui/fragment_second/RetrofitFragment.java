@@ -2,6 +2,9 @@ package com.wyang.study.ui.fragment_second;
 
 import android.os.Looper;
 import android.os.MessageQueue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.wyang.study.R;
 import com.wyang.study.ui.base.BaseFragment;
@@ -11,6 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public class RetrofitFragment extends BaseFragment {
@@ -27,6 +31,9 @@ public class RetrofitFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        View button = LayoutInflater.from(getContext()).inflate(R.layout.layout_button, null, false);
+
+        ((ViewGroup) mRootView).addView(button);
         retrofit.create(ApiService.class)
                 .getBaidu()
                 .enqueue(new Callback<Object>() {
@@ -44,11 +51,6 @@ public class RetrofitFragment extends BaseFragment {
                         System.out.println(t);
                     }
                 });
-
-        Looper.myQueue().addIdleHandler(() -> {
-            System.out.println("空闲~~~~~~~~~~");
-            return true;
-        });
     }
 
     public interface ApiService {

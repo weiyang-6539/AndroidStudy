@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,7 +26,6 @@ public class OkHttpFragment extends BaseFragment {
         tv_text = mRootView.findViewById(R.id.tv_text);
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .addNetworkInterceptor(null)
                 .build();
 
         Request request = new Request.Builder()

@@ -10,8 +10,10 @@ import butterknife.BindView;
  * Created by weiyang on 2019-10-31.
  */
 public class CustomViewFragment extends BaseFragment {
-    @BindView(R.id.cf)
-    ChineseFlag cf;
+    @BindView(R.id.cf1)
+    ChineseFlag cf1;
+    @BindView(R.id.cf2)
+    ChineseFlag cf2;
 
     @Override
     protected int getLayoutId() {
@@ -20,6 +22,7 @@ public class CustomViewFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        cf.setDrawLine(false);
+        cf1.setDrawLine(false);
+        cf2.setDrawLine(true);
     }
 }

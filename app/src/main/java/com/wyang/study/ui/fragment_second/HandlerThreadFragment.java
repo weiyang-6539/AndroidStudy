@@ -10,9 +10,6 @@ public class HandlerThreadFragment extends BaseFragment {
 
     private DownloadTask mDownLoadTask;
 
-    private String path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk";
-    private String filename = "wechat.apk";
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_handler_thread;
@@ -21,7 +18,10 @@ public class HandlerThreadFragment extends BaseFragment {
     @Override
     protected void initView() {
         mDownLoadTask = new DownloadTask("download");
-        //mDownLoadTask.startDownloadTask(path, new File(getContext().getFilesDir(), filename));
+        String path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk";
+        String filename = "wechat.apk";
+        if (getContext() != null)
+            mDownLoadTask.startDownloadTask(path, new File(getContext().getFilesDir(), filename));
     }
 
     @Override

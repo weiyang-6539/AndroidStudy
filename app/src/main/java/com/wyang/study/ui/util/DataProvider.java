@@ -20,6 +20,7 @@ import com.wyang.study.ui.fragment_second.GameEventFragment;
 import com.wyang.study.ui.fragment_second.HandlerThreadFragment;
 import com.wyang.study.ui.fragment_second.IntentServiceFragment;
 import com.wyang.study.ui.fragment_second.NineGridLayoutFragment;
+import com.wyang.study.ui.fragment_second.NotificationFragment;
 import com.wyang.study.ui.fragment_second.NullFragment;
 import com.wyang.study.ui.fragment_second.OkHttpFragment;
 import com.wyang.study.ui.fragment_second.RetrofitFragment;
@@ -44,6 +45,7 @@ public class DataProvider {
         put(RetrofitFragment.class.getSimpleName(), RetrofitFragment.class);
         put(ViewAnimFragment.class.getSimpleName(), ViewAnimFragment.class);
         put(FlexBoxLayoutFragment.class.getSimpleName(), FlexBoxLayoutFragment.class);
+        put(NotificationFragment.class.getSimpleName(), NotificationFragment.class);
         put(DragSortFragment.class.getSimpleName(), DragSortFragment.class);
         put(WeChatFragment.class.getSimpleName(), WeChatFragment.class);
         put(ContactsFragment.class.getSimpleName(), ContactsFragment.class);
@@ -84,6 +86,7 @@ public class DataProvider {
         } else if (page == 2) {
             data.add(new Simple("ViewSwitcher", "暂时不知道用法及效果", ""));
             data.add(new Simple("FlexBoxLayout", "高级LinearLayout", FlexBoxLayoutFragment.class.getSimpleName()));
+            data.add(new Simple("Notification", "通知栏的使用", NotificationFragment.class.getSimpleName()));
         } else if (page == 3) {
             data.add(new Simple("自定义控件练习", "五星红旗", CustomViewFragment.class.getSimpleName()));
             data.add(new Simple("图片九宫格", "仿微信图片九宫格效果", NineGridLayoutFragment.class.getSimpleName()));

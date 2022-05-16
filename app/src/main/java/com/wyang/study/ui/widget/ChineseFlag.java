@@ -5,17 +5,21 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.wyang.study.utils.LogUtils;
+
 /**
  * Created by weiyang on 2019-09-26.
  */
 public class ChineseFlag extends View {
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Paint starPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final String TAG = getClass().getSimpleName();
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint starPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private boolean isDrawLine = true;
 
     public ChineseFlag(Context context) {
@@ -37,13 +41,25 @@ public class ChineseFlag extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        if (widthSpecMode == MeasureSpec.EXACTLY && heightSpecMode == MeasureSpec.AT_MOST) {
+            heightSpecSize = (int) (widthSpecSize * 2f / 3);
+        } else if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.EXACTLY) {
+            widthSpecSize = (int) (heightSpecSize * 3f / 2);
+        } else if (widthSpecMode == MeasureSpec.EXACTLY && heightSpecMode == MeasureSpec.EXACTLY) {
+            heightSpecSize = (int) (widthSpecSize * 2f / 3);
+        }
+
+        setMeasuredDimension(widthSpecSize, heightSpecSize);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.drawColor(Color.RED);
 
         //绘制主五角星

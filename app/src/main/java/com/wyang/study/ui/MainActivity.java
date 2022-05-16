@@ -1,5 +1,7 @@
 package com.wyang.study.ui;
 
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -7,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 
 import com.wyang.study.R;
+import com.wyang.study.global.App;
 import com.wyang.study.ui.base.BaseActivity;
 import com.wyang.study.ui.util.FragmentFactory;
 
@@ -38,6 +41,8 @@ public class MainActivity extends BaseActivity {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 mToolBar, 0, 0);
         drawerToggle.syncState();
+        App.getRefWatcher(getApplicationContext())
+                .watch(mFactory);
     }
 
     @Override

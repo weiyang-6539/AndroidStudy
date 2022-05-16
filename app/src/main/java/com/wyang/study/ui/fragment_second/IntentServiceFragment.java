@@ -1,5 +1,6 @@
 package com.wyang.study.ui.fragment_second;
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.wyang.study.R;
@@ -20,15 +21,17 @@ public class IntentServiceFragment extends BaseFragment {
     }
 
     private void startDownload() {
-        Intent intent = new Intent(getActivity(), DownLoadIntentService.class);
+        Context context = getContext().getApplicationContext();
+        Intent intent = new Intent(context, DownLoadIntentService.class);
         intent.putExtra("path", path);
-        getActivity().startService(intent);
+        context.startService(intent);
     }
 
     private void stopDownload() {
-        Intent intent = new Intent(getActivity(), DownLoadIntentService.class);
+        Context context = getContext().getApplicationContext();
+        Intent intent = new Intent(context, DownLoadIntentService.class);
         intent.putExtra("path", path);
-        getActivity().stopService(intent);
+        context.stopService(intent);
     }
 
 

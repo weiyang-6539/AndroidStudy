@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -118,9 +119,7 @@ public class NineGridLayout extends ViewGroup {
         //根据子View确定控件的高度
         int mHeight = childSize * rows + mSpacing * (rows - 1) + getPaddingTop() + getPaddingBottom() + mode;
 
-        for (int i = 0; i < getChildCount(); i++) {
-            measureChildren(widthMeasureSpec, heightMeasureSpec);
-        }
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
 
         setMeasuredDimension(mWidth, mHeight);
     }
@@ -146,12 +145,7 @@ public class NineGridLayout extends ViewGroup {
                 }
 
                 ImageView child = (ImageView) getChildAt(i);
-                if (childCount == 1) {
-                    //只有一张图片
-                    child.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                } else {
-                    child.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                }
+                child.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 child.layout(left, top, right, bottom);
                 //布局后加载图片
                 imageLoader.displayImage(mContext, child, mUrls.get(i));
@@ -221,5 +215,20 @@ public class NineGridLayout extends ViewGroup {
         ImageView createImageView(Context context, int count, int pos);
 
         void displayImage(Context context, ImageView imageView, String url);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
     }
 }
