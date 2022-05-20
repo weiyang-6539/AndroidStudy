@@ -2,12 +2,10 @@ package com.wyang.study.global;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
-import com.squareup.leakcanary.GcTrigger;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.wyang.study.ui.util.DataProvider;
 
 public class App extends Application {
     private RefWatcher refWatcher;

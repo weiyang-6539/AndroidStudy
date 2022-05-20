@@ -18,8 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.base.BaseActivity" />
-        <activity android:name=".ui.FragmentActivity" />
+        <activity android:name=".ui.ContainerActivity" />
 
         <service
             android:name=".global.InitIntentService"

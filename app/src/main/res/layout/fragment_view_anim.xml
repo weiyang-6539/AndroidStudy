@@ -26,7 +26,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -44,7 +44,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -75,7 +75,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -93,7 +93,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -124,7 +124,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -142,7 +142,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -173,7 +173,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -191,7 +191,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -222,7 +222,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -240,7 +240,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -271,7 +271,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -289,7 +289,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -320,7 +320,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -338,7 +338,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -369,7 +369,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -387,7 +387,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -418,7 +418,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -436,7 +436,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -467,7 +467,7 @@
                 android:text="显示"
                 android:textColor="@android:color/white" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -485,7 +485,7 @@
                 app:animatedSvgTraceTime="2000"
                 app:animatedSvgTraceTimePerGlyph="1000" />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />

@@ -36,7 +36,7 @@
         android:text="调用RemoteService中remotePrint方法"
         android:textAllCaps="false" />
 
-    <android.support.v7.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

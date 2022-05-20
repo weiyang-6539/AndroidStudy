@@ -4,5 +4,5 @@
     android:layout_height="match_parent"
     android:background="#ccc">
 
-    <include layout="@layout/layout_recycler" />
+    <include layout="@layout/widget_recycler" />
 </FrameLayout>
