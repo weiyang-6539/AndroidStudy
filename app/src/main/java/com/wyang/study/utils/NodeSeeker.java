@@ -159,7 +159,7 @@ public class NodeSeeker {
     /**
      * 强制终止异常
      */
-    private class BreakException extends RuntimeException {
+    private static class BreakException extends RuntimeException {
 
     }
 }

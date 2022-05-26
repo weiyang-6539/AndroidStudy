@@ -5,13 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Looper;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.wyang.study.utils.LogUtils;
+import androidx.annotation.Nullable;
 
 /**
  * Created by weiyang on 2019-09-26.
@@ -199,5 +197,10 @@ public class ChineseFlag extends View {
     @Override
     public void setOnClickListener(@Nullable OnClickListener l) {
         super.setOnClickListener(l);
+    }
+
+    @Override
+    public void setOnKeyListener(OnKeyListener l) {
+        super.setOnKeyListener(l);
     }
 }

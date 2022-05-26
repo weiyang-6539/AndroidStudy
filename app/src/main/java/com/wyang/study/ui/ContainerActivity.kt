@@ -21,7 +21,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>() {
 
         mBinding?.root?.let { toolbarBinding = LayoutToolbarBinding.bind(it) }
 
-        val fragment = DataProvider.createFragmentByName(simple!!.className)
+        val fragment = DataProvider.createFragmentByName(simple?.className)
 
         val transaction = supportFragmentManager.beginTransaction()
         if (fragment != null) {
@@ -29,7 +29,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>() {
         }
         transaction.commitAllowingStateLoss()
 
-        toolbarBinding?.toolbar?.let { initToolBar(it, simple!!.title, true) }
+        toolbarBinding?.toolbar?.let { initToolBar(it, simple?.title, true) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

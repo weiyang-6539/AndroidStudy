@@ -9,6 +9,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     protected open var mBinding: T? = null
+    protected val mTag = this.javaClass.simpleName;
 
     override fun onDestroy() {
         super.onDestroy()
@@ -24,7 +25,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         initialize()
     }
 
-    abstract fun getViewBinding(): T?
+    abstract fun getViewBinding(): T
 
     open fun initialize() {
 

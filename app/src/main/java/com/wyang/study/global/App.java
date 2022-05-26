@@ -16,6 +16,11 @@ public class App extends Application {
     }
 
     @Override
+    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+        super.registerActivityLifecycleCallbacks(callback);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         //InitIntentService.start(this);
@@ -30,4 +35,5 @@ public class App extends Application {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
 }

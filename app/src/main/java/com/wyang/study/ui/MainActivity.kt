@@ -2,6 +2,7 @@ package com.wyang.study.ui
 
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.MotionEvent
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.wyang.study.R
 import com.wyang.study.databinding.ActivityMainBinding
@@ -14,7 +15,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var mFactory: FragmentFactory? = null
 
-    override fun getViewBinding(): ActivityMainBinding? {
+    override fun getViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
@@ -51,5 +52,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             put(R.id.navigation_4, 4)
             put(R.id.navigation_5, 5)
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        Thread.dumpStack()
+        return super.dispatchTouchEvent(ev)
     }
 }
