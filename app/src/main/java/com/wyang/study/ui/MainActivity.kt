@@ -9,6 +9,7 @@ import com.wyang.study.databinding.ActivityMainBinding
 import com.wyang.study.databinding.LayoutToolbarBinding
 import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.FragmentFactory
+import java.util.concurrent.ExecutorService
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     var toolbarBinding: LayoutToolbarBinding? = null
@@ -41,6 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         mFactory?.selectItem(0)
+
     }
 
     private val idMap: Map<Int, Int> = object : HashMap<Int, Int>() {

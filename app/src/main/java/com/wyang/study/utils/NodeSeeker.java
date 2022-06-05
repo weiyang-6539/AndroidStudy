@@ -68,11 +68,11 @@ public class NodeSeeker {
     }
 
     public NodeSeeker attribute(String key, String value) {
-        return matchPredicate(treeNode -> TextUtils.equals((String) treeNode.attributes.get(key), value));
+        return matchPredicate(treeNode -> TextUtils.equals(treeNode.getAttribute(key), value));
     }
 
     public NodeSeeker attribute(String key, int value) {
-        return matchPredicate(treeNode -> (int) treeNode.attributes.get(key) == value);
+        return matchPredicate(treeNode -> (int) treeNode.getAttribute(key) == value);
     }
 
     public NodeSeeker descendants() {
@@ -95,7 +95,7 @@ public class NodeSeeker {
         });
     }
 
-    public NodeSeeker leafs() {
+    public NodeSeeker leaf() {
         return descendants().matchPredicate(treeNode -> treeNode.size() == 0);
     }
 
@@ -141,7 +141,7 @@ public class NodeSeeker {
     }
 
     private NodeFilter currentFilter;
-    private NodeFilter firstFilter;
+    private final NodeFilter firstFilter;
 
     private static class NodeFilter {
         Visitor nextVisitor;

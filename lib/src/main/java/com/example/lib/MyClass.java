@@ -1,23 +1,38 @@
 package com.example.lib;
 
-import java.math.BigDecimal;
 public class MyClass {
-    static int num = 20;
-    static String s1 = "1";
-    static String s2 = "1";
+
+    private static String[] sArr = {"I", "V", "X", "L", "C", "D", "M"};
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 1000; i++) {
-            String rst = fun0(s1, s2);
-            print((i + 1) + " - " + rst);
+        int num = 10;
 
-            s1 = s2;
-            s2 = rst;
-        }
+        String s = f("", num, 0);
+        print(s);
     }
 
-    private static String fun0(String s1, String s2) {
-        return new BigDecimal(s1).add(new BigDecimal(s2)).toPlainString();
+    public static String f(String str, int num, int i) {
+        int n = num % 10;
+        if (n == 4) {
+            str = sArr[i] + sArr[i + 1] + str;
+        } else if (n == 9) {
+            str = sArr[i] + sArr[i + 2] + str;
+        } else {
+            print("n = " + n);
+            for (int j = 0; j < n % 5; j++) {
+                str = sArr[i] + str;
+            }
+            if (n >= 5) {
+                str = sArr[i + 1] + str;
+            }
+        }
+
+        if (num >= 10) {
+            num /= 10;
+            print("num = " + num);
+            return f(str, num, i + 2);
+        }
+        return str;
     }
 
     private static long fun(int m, int n) {

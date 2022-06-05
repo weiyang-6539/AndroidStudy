@@ -13,12 +13,7 @@ public class TaskDispatcher {
 
     public TaskDispatcher() {
         this.executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
-                new SynchronousQueue<>(), Executors.defaultThreadFactory(), new RejectedExecutionHandler() {
-            @Override
-            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-
-            }
-        });
+                new SynchronousQueue<>(), Executors.defaultThreadFactory());
     }
 
     public TaskDispatcher addTask(Runnable runnable) {
