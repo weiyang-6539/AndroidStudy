@@ -23,7 +23,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //InitIntentService.start(this);
+        InitIntentService.start(this);
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
@@ -35,5 +35,4 @@ public class App extends Application {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-
 }

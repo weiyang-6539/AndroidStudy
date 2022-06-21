@@ -1,22 +1,19 @@
 package com.example.aidl;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.media.MediaMuxer;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.net.URI;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -19,6 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ContainerActivity" />
+        <activity android:name=".ui.activity.AActivity" />
+        <activity
+            android:name=".ui.activity.BActivity"
+            android:taskAffinity="com.wyang.study.ui.activity.task"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.CActivity" />
 
         <service
             android:name=".global.InitIntentService"
@@ -27,6 +33,12 @@
         <service
             android:name=".ui.DownLoadIntentService"
             android:exported="false" />
+
+        <provider
+            android:name=".ui.TestContentProvider"
+            android:authorities="com.wyang.study.provider"
+            android:multiprocess="true"
+            android:process=":cooooddddd" />
     </application>
 
 </manifest>

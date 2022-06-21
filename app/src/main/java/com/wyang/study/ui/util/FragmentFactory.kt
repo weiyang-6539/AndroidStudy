@@ -37,11 +37,11 @@ class FragmentFactory(mActivity: FragmentActivity?) {
         transaction?.commitAllowingStateLoss()
     }
 
-    private fun getTag(pos: Int): String? {
+    private fun getTag(pos: Int): String {
         return "fg_tag_$pos"
     }
 
-    private fun createFragment(pos: Int): Fragment? {
+    private fun createFragment(pos: Int): Fragment {
         return MainFragment.newInstance(pos)
     }
 }

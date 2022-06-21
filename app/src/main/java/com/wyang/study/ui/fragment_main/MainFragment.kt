@@ -37,13 +37,7 @@ class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
     override fun initialize() {
         mBinding?.root?.let { mRecyclerViewBinding = WidgetRecyclerBinding.bind(it) }
         mRecyclerViewBinding?.mRecyclerView?.layoutManager = GridLayoutManager(context, 2)
-        mRecyclerViewBinding?.mRecyclerView?.addItemDecoration(
-            GridSpacingItemDecoration(
-                2,
-                20,
-                true
-            )
-        )
+        mRecyclerViewBinding?.mRecyclerView?.addItemDecoration(GridSpacingItemDecoration(2, 20, true))
 
         mAdapter.bindToRecyclerView(mRecyclerViewBinding?.mRecyclerView)
         mAdapter.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
@@ -52,21 +46,26 @@ class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
                 val bundle = Bundle()
                 bundle.putSerializable("simple", simple)
                 context?.let {
-                    ActivityUtils.startActivity(
-                        it,
-                        ContainerActivity::class.java,
-                        bundle
-                    )
+                    ActivityUtils.startActivity(it, ContainerActivity::class.java, bundle)
                 }
             } else {
                 Toast.makeText(context, "请设置对应Fragment!", Toast.LENGTH_LONG).show()
             }
         }
 
-        val arguments = arguments
         if (arguments != null) {
-            val type = arguments.getInt("page")
-            mAdapter.setNewData(DataProvider.getMainPageData(type))
+            val type = requireArguments().getInt("page")
+            mAdapter.setNewData(type.let { DataProvider.getMainPageData(it) })
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        if (!hidden) {
+            val type = requireArguments().getInt("page")
+
+            log("$type:hidden:$hidden:重新加载loadData")
         }
     }
 }

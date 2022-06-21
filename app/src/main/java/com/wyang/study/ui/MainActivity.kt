@@ -1,15 +1,14 @@
 package com.wyang.study.ui
 
+import android.content.Intent
 import android.view.Gravity
 import android.view.MenuItem
-import android.view.MotionEvent
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.wyang.study.R
 import com.wyang.study.databinding.ActivityMainBinding
 import com.wyang.study.databinding.LayoutToolbarBinding
 import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.FragmentFactory
-import java.util.concurrent.ExecutorService
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     var toolbarBinding: LayoutToolbarBinding? = null
@@ -20,8 +19,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+    }
+
     override fun initialize() {
         mFactory = FragmentFactory(this)
+        mBinding?.drawerLayout?.animate().let {  }
 
         mBinding?.root?.let { toolbarBinding = LayoutToolbarBinding.bind(it) }
 
@@ -42,7 +46,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         mFactory?.selectItem(0)
-
     }
 
     private val idMap: Map<Int, Int> = object : HashMap<Int, Int>() {
@@ -54,10 +57,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             put(R.id.navigation_4, 4)
             put(R.id.navigation_5, 5)
         }
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        Thread.dumpStack()
-        return super.dispatchTouchEvent(ev)
     }
 }

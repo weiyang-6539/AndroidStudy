@@ -63,7 +63,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
     }
 
 
-    fun onClickFilter1() {
+    private fun onClickFilter1() {
         if (!init()) return
         val results = mTreeHelper!!.provincesSeeker()
             .attribute("code", "43")
@@ -72,7 +72,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         mAdapter.setNewData(results)
     }
 
-    fun onClickFilter2() {
+    private fun onClickFilter2() {
         if (!init()) return
         val results = mTreeHelper!!.rootSeeker()
             .descendants()
@@ -84,7 +84,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         mAdapter.setNewData(results)
     }
 
-    fun onClickFilter3() {
+    private fun onClickFilter3() {
         if (!init()) return
         val results = mTreeHelper!!.rootSeeker()
             .descendants()
@@ -98,7 +98,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         mAdapter.setNewData(results)
     }
 
-    fun onClickFilter4() {
+    private fun onClickFilter4() {
         if (!init()) return
         val results = mTreeHelper!!.rootSeeker()
             .descendants()

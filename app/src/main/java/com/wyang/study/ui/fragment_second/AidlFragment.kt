@@ -33,7 +33,7 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
         mBinding?.btnCall?.setOnClickListener { callRemotePrint() }
     }
 
-    fun start() {
+    private fun start() {
         val intent = Intent()
         //设置意图对象要匹配的action
         intent.action = "com.example.aidl"
@@ -43,7 +43,7 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
         requireActivity().startService(intent)
     }
 
-    fun stop() {
+    private fun stop() {
         val intent = Intent()
         intent.action = "com.example.aidl"
         intent.setPackage(aidl_pkg)
@@ -51,7 +51,7 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
     }
 
     //绑定服务
-    fun bind() {
+    private fun bind() {
         val intent = Intent()
         intent.action = "com.example.aidl"
         intent.setPackage(aidl_pkg)
@@ -62,7 +62,7 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
         requireActivity().bindService(intent, conn!!, Context.BIND_AUTO_CREATE)
     }
 
-    fun unbind() {
+    private fun unbind() {
         if (conn != null) {
             requireActivity().unbindService(conn!!)
             conn = null
@@ -70,7 +70,7 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
     }
 
     //调用服务的方法
-    fun callRemotePrint() {
+    private fun callRemotePrint() {
         Log.d(mTag, "callRemotePrint........................")
         if (ri != null) {
             try {

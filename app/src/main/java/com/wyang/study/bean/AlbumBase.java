@@ -9,7 +9,7 @@ public class AlbumBase implements MultiItemEntity {
     public static final int ALBUM = 0;
     public static final int DATE = 1;
 
-    private String date;
+    private final String date;
 
     public AlbumBase(String date) {
         this.date = date;

@@ -149,11 +149,10 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
                     outRect.top = dp2px(0f)
                 }
             }
-            if (position == mAdapter?.data?.size?.minus(1) ?: 0) {
+            if (position == (mAdapter?.data?.size?.minus(1) ?: 0))
                 outRect.bottom = dp2px(20f)
-            } else {
+            else
                 outRect.bottom = 0
-            }
         }
 
         override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
@@ -165,7 +164,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
                 val left = parent.paddingLeft
                 val right = parent.width - parent.paddingRight
                 var top: Int = childAt.top - dp2px(40f) //减去分组的高度
-                if (position == 0 || position == mAdapter?.data?.size?.minus(1) ?: 0) {
+                if (position == 0 || position == (mAdapter?.data?.size?.minus(1) ?: 0)) {
                     if (position == 0) {
                         top -= dp2px(20f)
                         topCorner.setBounds(left, top + dp2px(10f), right, top + dp2px(20f))
