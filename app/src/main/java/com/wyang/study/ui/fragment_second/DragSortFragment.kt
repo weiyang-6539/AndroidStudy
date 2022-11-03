@@ -16,7 +16,9 @@ import com.wyang.study.ui.helper.ItemDragHelperCallback
 import com.wyang.study.ui.util.DataProvider
 
 class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
-    private var mRecyclerBinding:WidgetRecyclerBinding? = null;
+    private val mRecyclerBinding by lazy {
+        WidgetRecyclerBinding.bind(mBinding.root)
+    }
     private var mAdapter: DragSortAdapter? = null
 
     override fun getViewBinding(): FragmentDragSortBinding {
@@ -24,11 +26,7 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.root?.let { mRecyclerBinding = WidgetRecyclerBinding.bind(it) }
-
-        mRecyclerBinding?.mRecyclerView?.layoutManager = GridLayoutManager(context, 4)
-
-        //使用ItemTouchHelper
+        mRecyclerBinding.mRecyclerView.layoutManager = GridLayoutManager(context, 4)
 
         //使用ItemTouchHelper
         val callback = ItemDragHelperCallback(context)
@@ -50,14 +48,12 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
         })
         val helper = ItemTouchHelper(callback) //实现item的拖拽和滑动
 
-        helper.attachToRecyclerView(mRecyclerBinding?.mRecyclerView) //通过attachToRecyclerView方法绑定RecyclerView
-
+        helper.attachToRecyclerView(mRecyclerBinding.mRecyclerView) //通过attachToRecyclerView方法绑定RecyclerView
 
         mAdapter = DragSortAdapter(helper)
-        mAdapter?.bindToRecyclerView(mRecyclerBinding?.mRecyclerView)
+        mAdapter?.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
         mAdapter?.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
-            val channel: Channel = mAdapter?.data?.get(position)?.t
-                ?: return@setOnItemClickListener
+            val channel: Channel = mAdapter?.data?.get(position)?.t ?: return@setOnItemClickListener
             if (mAdapter?.isEdit() == true) {
                 if (channel.isMine) {
                     if (channel.isActivated) {
@@ -71,7 +67,7 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
             } else {
                 if (channel.isMine) {
                     mAdapter?.setCurrentPos(position)
-                    mRecyclerBinding?.mRecyclerView?.let {
+                    mRecyclerBinding.mRecyclerView.let {
                         Snackbar.make(it, "选中频道-" + channel.name, Snackbar.LENGTH_LONG)
                             .show()
                     }
@@ -92,7 +88,7 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
         var maxActivatedPos = 0 //最大可拖拽的position
 
         val dragSortData = DataProvider.getDragSortData()
-        dragSortData?.indices?.forEach { i ->
+        dragSortData.indices.forEach { i ->
             val channel = dragSortData[i].t
             if (channel != null && channel.isMine && channel.isActivated) {
                 if (minActivatedPos == 0) minActivatedPos = i

@@ -30,8 +30,7 @@ public class GSONUtils {
      * 转成bean
      */
     public static <T> T json2Bean(String string, Class<T> cls) {
-        T t = new Gson().fromJson(string, cls);
-        return t;
+        return new Gson().fromJson(string, cls);
     }
 
     /**

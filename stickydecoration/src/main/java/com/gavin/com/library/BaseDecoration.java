@@ -28,8 +28,6 @@ import java.util.Map;
  * Created log  BaseDecoration
  */
 public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
-    // TODO: 2018/4/13 加载更新后闪动
-
     /**
      * group背景色，默认透明
      */
@@ -59,7 +57,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
     /**
      * 缓存分组第一个item的position
      */
-    private SparseIntArray firstInGroupCash = new SparseIntArray(100);
+    private final SparseIntArray firstInGroupCash = new SparseIntArray(100);
 
     protected OnGroupClickListener mOnGroupClickListener;
 
@@ -89,6 +87,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
 
     /**
      * 获取真实的position
+     *
      * @param position
      * @return
      */
@@ -159,7 +158,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
      * 是否在RecyclerView处于第一个（header部分不算）
      *
      * @param realPosition 总的position
-     * @param index    RecyclerView中的Index
+     * @param index        RecyclerView中的Index
      * @return
      */
     protected boolean isFirstInRecyclerView(int realPosition, int index) {
@@ -168,12 +167,10 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
 
     /**
      * 是否为Header
-     *
      */
     protected boolean isHeader(int realPosition) {
         return realPosition < 0;
     }
-
 
     /**
      * 判断是不是新组的第一行（GridLayoutManager使用）
@@ -187,11 +184,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
             return true;
         } else {
             int posFirstInGroup = getFirstInGroupWithCash(realPosition);
-            if (realPosition - posFirstInGroup < spanCount) {
-                return true;
-            } else {
-                return false;
-            }
+            return realPosition - posFirstInGroup < spanCount;
         }
     }
 
@@ -307,7 +300,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
      * 判断自己是否为group的最后一行
      *
      * @param recyclerView recyclerView
-     * @param realPosition     realPosition
+     * @param realPosition realPosition
      * @return
      */
     protected boolean isLastLineInGroup(RecyclerView recyclerView, int realPosition) {
@@ -337,17 +330,14 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDrawOver(c, parent, state);
+    public void onDrawOver(@NonNull Canvas canvas,
+                           @NonNull RecyclerView parent,
+                           @NonNull RecyclerView.State state) {
+        super.onDrawOver(canvas, parent, state);
         //点击事件处理
         if (gestureDetector == null) {
             gestureDetector = new GestureDetector(parent.getContext(), gestureListener);
-            parent.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return gestureDetector.onTouchEvent(event);
-                }
-            });
+            parent.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
         }
         stickyHeaderPosArray.clear();
     }
@@ -369,7 +359,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
      */
     protected HashMap<Integer, ClickInfo> stickyHeaderPosArray = new HashMap<>();
     private GestureDetector gestureDetector;
-    private GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener() {
+    private final GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
             return false;
@@ -407,7 +397,6 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
      */
     private boolean onTouchEvent(MotionEvent e) {
         for (Map.Entry<Integer, ClickInfo> entry : stickyHeaderPosArray.entrySet()) {
-
             ClickInfo value = stickyHeaderPosArray.get(entry.getKey());
             float y = e.getY();
             float x = e.getX();
@@ -432,7 +421,6 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
                         //点击范围不在带有id的子view中，则表示整个groupView被点击
                         onGroupClick(entry.getKey(), value.mGroupId);
                     }
-
                 }
                 return true;
             }
@@ -471,11 +459,4 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
             }
         }
     }
-
-    protected void log(String content) {
-        if (false) {
-            Log.i("StickDecoration", content);
-        }
-    }
-
 }

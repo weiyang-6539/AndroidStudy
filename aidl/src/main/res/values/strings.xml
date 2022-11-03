@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AIDL-Demo</string>
+    <array name="tabs">
+        <item>ssds</item>
+        <item>ssdsdasd</item>
+        <item>ssdsdasd232</item>
+    </array>
 </resources>

@@ -20,10 +20,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.core.view.ViewCompat;
+
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.View;
@@ -115,7 +117,6 @@ public class FlexboxLayout extends ViewGroup {
      */
     @AlignItems
     private int mAlignItems = AlignItems.STRETCH;
-
 
     @IntDef({AlignContent.FLEX_START, AlignContent.FLEX_END, AlignContent.CENTER,
             AlignContent.SPACE_BETWEEN, AlignContent.SPACE_AROUND, AlignContent.STRETCH})
@@ -2098,8 +2099,7 @@ public class FlexboxLayout extends ViewGroup {
                     } else {
                         verticalDividerLeft = flexLine.mRight;
                     }
-                    drawVerticalDivider(canvas, verticalDividerLeft, paddingTop,
-                            verticalDividerLength);
+                    drawVerticalDivider(canvas, verticalDividerLeft, paddingTop, verticalDividerLength);
                 }
             }
         }
@@ -2700,7 +2700,7 @@ public class FlexboxLayout extends ViewGroup {
 
         /**
          * The largest value of the individual child's baseline (obtained by View#getBaseline()
-         * if the {@link FlexboxLayout#mAlignItems} value is not {@link FlexboxLayout#BASELINE}
+         * if the {@link FlexboxLayout#mAlignItems} value is not
          * or the flex direction is vertical, this value is not used.
          * If the alignment direction is from the bottom to top,
          * (e.g. flexWrap == FLEX_WRAP_WRAP_REVERSE and flexDirection == FLEX_DIRECTION_ROW)

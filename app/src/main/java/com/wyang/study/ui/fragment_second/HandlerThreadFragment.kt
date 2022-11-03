@@ -17,10 +17,7 @@ class HandlerThreadFragment : BaseFragment<FragmentHandlerThreadBinding>() {
         val path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk"
         val filename = "wechat.apk"
         if (context != null)
-            mDownLoadTask!!.startDownloadTask(
-                path,
-                File(requireContext().filesDir, filename)
-            )
+            mDownLoadTask!!.startDownloadTask(path, File(requireContext().filesDir, filename))
     }
 
     override fun onDestroy() {

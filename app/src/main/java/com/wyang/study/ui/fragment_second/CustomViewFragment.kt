@@ -9,7 +9,7 @@ class CustomViewFragment : BaseFragment<FragmentCustomViewBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.cf1?.setDrawLine(false)
-        mBinding?.cf2?.setDrawLine(true)
+        mBinding.cf1.setDrawLine(false)
+        mBinding.cf2.setDrawLine(true)
     }
 }

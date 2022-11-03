@@ -10,11 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.net.URI;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_adil;
@@ -41,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.AIDL_ACTION);
         registerReceiver(receiver, filter);
+
+        String[] stringArray = getResources().getStringArray(R.array.tabs);
     }
 
     @Override

@@ -36,7 +36,6 @@ public class CacheUtil<T> implements CacheInterface<T> {
 
     /**
      * 是否使用用缓存
-     *
      * @param b
      */
     public void isCacheable(boolean b) {

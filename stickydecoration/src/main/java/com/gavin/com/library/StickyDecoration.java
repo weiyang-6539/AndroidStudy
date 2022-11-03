@@ -7,6 +7,7 @@ import android.text.TextPaint;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,16 +20,15 @@ import com.gavin.com.library.listener.OnGroupClickListener;
  * 文字悬浮
  * 利用分割线实现悬浮功能
  */
-
 public class StickyDecoration extends BaseDecoration {
     @ColorInt
     private int mGroupTextColor = Color.WHITE;//字体颜色，默认黑色
     private int mSideMargin = 10;   //边距 左边距
     private int mTextSize = 50;     //字体大小
-    private GroupListener mGroupListener;
+    private final GroupListener mGroupListener;
 
-    private TextPaint mTextPaint;
-    private Paint mGroutPaint;
+    private final TextPaint mTextPaint;
+    private final Paint mGroutPaint;
 
     private StickyDecoration(GroupListener groupListener) {
         super();
@@ -45,8 +45,10 @@ public class StickyDecoration extends BaseDecoration {
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDrawOver(c, parent, state);
+    public void onDrawOver(@NonNull Canvas canvas,
+                           @NonNull RecyclerView parent,
+                           @NonNull RecyclerView.State state) {
+        super.onDrawOver(canvas, parent, state);
         final int itemCount = state.getItemCount();
         final int childCount = parent.getChildCount();
         final int left = parent.getPaddingLeft();
@@ -66,13 +68,13 @@ public class StickyDecoration extends BaseDecoration {
                         bottom = viewBottom;
                     }
                 }
-                drawDecoration(c, realPosition, left, right, bottom);
+                drawDecoration(canvas, realPosition, left, right, bottom);
                 if (mOnGroupClickListener != null) {
                     stickyHeaderPosArray.put(realPosition, new ClickInfo(bottom));
                 }
             } else {
                 //绘制分割线
-                drawDivide(c, parent, childView, realPosition, left, right);
+                drawDivide(canvas, parent, childView, realPosition, left, right);
             }
         }
     }
@@ -104,7 +106,6 @@ public class StickyDecoration extends BaseDecoration {
         c.drawText(curGroupName, left + mSideMargin, baseLine, mTextPaint);
     }
 
-
     /**
      * 获取组名
      *
@@ -120,9 +121,8 @@ public class StickyDecoration extends BaseDecoration {
         }
     }
 
-
     public static class Builder {
-        private StickyDecoration mDecoration;
+        private final StickyDecoration mDecoration;
 
         private Builder(GroupListener groupListener) {
             mDecoration = new StickyDecoration(groupListener);
@@ -238,6 +238,7 @@ public class StickyDecoration extends BaseDecoration {
         /**
          * 设置头部数量
          * 用于顶部Header不需要设置悬浮的情况（仅LinearLayoutManager）
+         *
          * @param headerCount
          * @return
          */
@@ -250,6 +251,7 @@ public class StickyDecoration extends BaseDecoration {
 
         /**
          * 设置是否需要悬浮
+         *
          * @param sticky
          * @return
          */

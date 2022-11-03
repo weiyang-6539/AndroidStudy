@@ -2,6 +2,7 @@ package com.wyang.study.ui;
 
 import android.app.IntentService;
 import android.content.Intent;
+
 import androidx.annotation.Nullable;
 
 import java.io.File;
@@ -9,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class DownLoadIntentService extends IntentService {
 
@@ -58,7 +61,29 @@ public class DownLoadIntentService extends IntentService {
             }
         }
 
+        executor = Executors.newSingleThreadExecutor();
+        executor.execute(runnable);
+        executor.shutdown();
     }
+
+    private ExecutorService executor;
+    private final Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Runtime.getRuntime().exec("cat /sys/class/gpio/gpio68/value");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Thread.sleep(60);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            executor.execute(this);
+        }
+    };
 
     @Override
     public void onDestroy() {

@@ -18,7 +18,9 @@ import com.wyang.study.databinding.WidgetRecyclerBinding
 import com.wyang.study.ui.base.BaseFragment
 
 class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>() {
-    private var mRecyclerBinding: WidgetRecyclerBinding? = null
+    private val mRecyclerBinding by lazy {
+        WidgetRecyclerBinding.bind(mBinding.root)
+    }
     private var mAdapter: StickyAdapter? = null
 
     override fun getViewBinding(): FragmentStickyDecorationBinding {
@@ -26,8 +28,6 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
     }
 
     override fun initialize() {
-        mBinding?.root?.let { mRecyclerBinding = WidgetRecyclerBinding.bind(it) }
-
         val listener: PowerGroupListener = object : PowerGroupListener {
             override fun getGroupName(position: Int): String? {
                 val item: String? = mAdapter?.data?.get(position)
@@ -55,11 +55,11 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
             //.resetSpan(mRecyclerView, (GridLayoutManager) manager)
             .build()
 
-        mRecyclerBinding?.mRecyclerView?.addItemDecoration(ItemDecoration())
-        mRecyclerBinding?.mRecyclerView?.addItemDecoration(decoration)
+        mRecyclerBinding.mRecyclerView.addItemDecoration(ItemDecoration())
+        mRecyclerBinding.mRecyclerView.addItemDecoration(decoration)
 
         mAdapter = StickyAdapter()
-        mAdapter?.bindToRecyclerView(mRecyclerBinding?.mRecyclerView)
+        mAdapter?.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
 
         val list: MutableList<String> = ArrayList()
         list.add("分组1-AAAAA")
@@ -85,7 +85,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
         mAdapter?.setNewData(list as List<String?>?)
     }
 
-    fun measureWidthAndHeight(view: View) {
+    private fun measureWidthAndHeight(view: View) {
         val w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         val h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         view.measure(w, h)

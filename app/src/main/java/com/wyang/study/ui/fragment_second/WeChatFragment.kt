@@ -7,7 +7,9 @@ import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.util.DataProvider
 
 class WeChatFragment : BaseFragment<FragmentWechatBinding>() {
-    private var mRecyclerBinding: WidgetRecyclerBinding? = null
+    private val mRecyclerBinding by lazy {
+        WidgetRecyclerBinding.bind(mBinding.root)
+    }
     private val mAdapter: DiscoverAdapter = DiscoverAdapter()
 
     override fun getViewBinding(): FragmentWechatBinding {
@@ -15,9 +17,7 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.root?.let { mRecyclerBinding = WidgetRecyclerBinding.bind(it) }
-
-        mAdapter.bindToRecyclerView(mRecyclerBinding?.mRecyclerView)
+        mAdapter.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
         mAdapter.setNewData(DataProvider.getDiscoverData())
     }
 

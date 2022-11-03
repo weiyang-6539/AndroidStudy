@@ -15,7 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.POST
 
 class RetrofitFragment : BaseFragment<FragmentExampleBinding>() {
-
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://hsll6.jiaodaoren.com/")
         .addConverterFactory(GsonConverterFactory.create())

@@ -1,7 +1,6 @@
 package com.wyang.study.ui
 
 import android.content.Intent
-import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.wyang.study.R
@@ -11,9 +10,11 @@ import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.FragmentFactory
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    var toolbarBinding: LayoutToolbarBinding? = null
+    private val toolbarBinding by lazy {
+        LayoutToolbarBinding.bind(mBinding.root)
+    }
 
-    private var mFactory: FragmentFactory? = null
+    private val mFactory = FragmentFactory(this)
 
     override fun getViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
@@ -24,38 +25,32 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initialize() {
-        mFactory = FragmentFactory(this)
-        mBinding?.drawerLayout?.animate().let {  }
+        mBinding.drawerLayout.animate().let { }
 
-        mBinding?.root?.let { toolbarBinding = LayoutToolbarBinding.bind(it) }
-
-        toolbarBinding?.toolbar?.let { initToolBar(it, "Android Study", true) }
+        initToolBar(toolbarBinding.toolbar, "Android Study", true)
         val drawerToggle = ActionBarDrawerToggle(
-            this, mBinding?.drawerLayout,
-            toolbarBinding?.toolbar, 0, 0
+            this, mBinding.drawerLayout,
+            toolbarBinding.toolbar, 0, 0
         )
         drawerToggle.syncState()
 
-        mBinding?.navigationView?.setNavigationItemSelectedListener { item: MenuItem ->
-            with(mBinding?.drawerLayout) { this?.closeDrawer(Gravity.LEFT) }
-            val integer: Int? = idMap[item.itemId]
+        mBinding.navigationView.setNavigationItemSelectedListener { item: MenuItem ->
+            mBinding.drawerLayout.closeDrawer(mBinding.navigationView)
+            val integer = idMap[item.itemId]
             if (integer != null)
-                mFactory!!.selectItem(integer)
-
+                mFactory.selectItem(integer)
             false
         }
 
-        mFactory?.selectItem(0)
+        mFactory.selectItem(0)
     }
 
-    private val idMap: Map<Int, Int> = object : HashMap<Int, Int>() {
-        init {
-            put(R.id.navigation_0, 0)
-            put(R.id.navigation_1, 1)
-            put(R.id.navigation_2, 2)
-            put(R.id.navigation_3, 3)
-            put(R.id.navigation_4, 4)
-            put(R.id.navigation_5, 5)
-        }
-    }
+    private val idMap = mutableMapOf(
+        R.id.navigation_0 to 0,
+        R.id.navigation_1 to 1,
+        R.id.navigation_2 to 2,
+        R.id.navigation_3 to 3,
+        R.id.navigation_4 to 4,
+        R.id.navigation_5 to 5,
+    )
 }

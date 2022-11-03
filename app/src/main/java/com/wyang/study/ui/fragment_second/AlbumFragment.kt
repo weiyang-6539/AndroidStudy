@@ -2,6 +2,8 @@ package com.wyang.study.ui.fragment_second
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.media.AudioManager
+import android.media.AudioRecord
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
@@ -24,18 +26,19 @@ import com.wyang.study.ui.util.GlideImageLoader
 
 class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
 
-    private var mAdapter: AlbumAdapter? = null
+    private val mAdapter = AlbumAdapter()
 
     /**
      * 三个关键值
      */
-    private var mHeight //RecyclerView的高
-            = 0
+    //RecyclerView的高
+    private var mHeight = 0
 
-    private var scrollY //纵向滑动距离
-            = 0f
-    private var maxScrollY //纵向最大滑动距离
-            = 0f
+    //纵向滑动距离
+    private var scrollY = 0f
+
+    //纵向最大滑动距离
+    private var maxScrollY = 0f
 
     private var maxDateOffsetY = 0f
 
@@ -50,8 +53,8 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
                 val layoutManager = recyclerView.layoutManager
                 if (layoutManager is GridLayoutManager) {
                     val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                    val base: AlbumBase? = mAdapter?.data?.get(firstVisibleItemPosition)
-                    mBinding?.tvDate?.text = base?.date
+                    val base: AlbumBase? = mAdapter.data.get(firstVisibleItemPosition)
+                    mBinding.tvDate.text = base?.date
                 }
             }
         }
@@ -62,45 +65,42 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initialize() {
-        mBinding?.clDateParent?.setOnTouchListener { _: View?, event: MotionEvent ->
+        mBinding.clDateParent.setOnTouchListener { _: View?, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> downY = event.y
                 MotionEvent.ACTION_MOVE -> {
-                    val dy =
-                        ((event.y - downY) / maxDateOffsetY * maxScrollY).toInt()
-                    mBinding?.clDateParent?.post { smoothScrollBy(dy) }
+                    val dy = ((event.y - downY) / maxDateOffsetY * maxScrollY).toInt()
+                    mBinding.clDateParent.post { smoothScrollBy(dy) }
                 }
-                else -> {}
+                else -> {
+                }
             }
             true
         }
 
-        mBinding?.mRecyclerView?.addOnScrollListener(onScrollListener)
-        mBinding?.mRecyclerView?.viewTreeObserver?.addOnGlobalLayoutListener(object :
+        mBinding.mRecyclerView.addOnScrollListener(onScrollListener)
+        mBinding.mRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(object :
             OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                mHeight = mBinding?.mRecyclerView?.height!!
+                mHeight = mBinding.mRecyclerView.height
 
                 //计算RecyclerView 纵向最大滑动距离, 在适配器设置数据之后
                 calculateMaxScrollY(mHeight, 4)
-                mBinding?.mRecyclerView?.scrollTo(0, 400)
-                mBinding?.mRecyclerView?.viewTreeObserver?.removeGlobalOnLayoutListener(this)
+                mBinding.mRecyclerView.scrollTo(0, 400)
+                mBinding.mRecyclerView.viewTreeObserver.removeGlobalOnLayoutListener(this)
             }
         })
 
-        mAdapter = AlbumAdapter()
-        mAdapter?.bindToRecyclerView(mBinding?.mRecyclerView)
-        mAdapter?.setSpanSizeLookup { _: GridLayoutManager?, position: Int ->
-            val item = mAdapter?.getItem(position)
-            if (item is Album) {
-                return@setSpanSizeLookup 1
-            } else return@setSpanSizeLookup 4
+        mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
+        mAdapter.setSpanSizeLookup { _: GridLayoutManager?, position: Int ->
+            val item = mAdapter.getItem(position)
+            if (item is Album) 1 else 4
         }
-        mAdapter?.setNewData(DataProvider.getAlbumList())
+        mAdapter.setNewData(DataProvider.getAlbumList())
 
-        mBinding?.tvDate?.text = "01月03日"
+        mBinding.tvDate.text = "01月03日"
 
-        mBinding?.tvDate?.parent?.requestDisallowInterceptTouchEvent(true)
+        mBinding.tvDate.parent.requestDisallowInterceptTouchEvent(true)
     }
 
     private fun calculateMaxScrollY(height: Int, spanCount: Int) {
@@ -108,7 +108,7 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
 
         //计算每行图片所占高度，即单个图片的宽 （屏幕宽 - RecyclerView左右padding）/ spanCount
         val mItemHeight = (getScreenWidth(context) - dp2px(7f) * 2f) / 4
-        val data = mAdapter!!.data
+        val data = mAdapter.data
         var count = 0 //同一个日期组计数
         for (i in data.indices) {
             val base = data[i]
@@ -135,19 +135,19 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         maxScrollY -= height.toFloat()
 
         //滑块最大拖动的位置
-        maxDateOffsetY = (height - mBinding?.clDateParent?.height!!).toFloat()
+        maxDateOffsetY = (height - mBinding.clDateParent.height).toFloat()
     }
 
     private var downY = 0f
 
     private fun smoothScrollBy(dy: Int) {
-        mBinding?.mRecyclerView?.smoothScrollBy(0, dy)
+        mBinding.mRecyclerView.smoothScrollBy(0, dy)
     }
 
     private fun setClDateParentBias(bias: Float) {
-        val params = mBinding?.clDateParent?.layoutParams as ConstraintLayout.LayoutParams
+        val params = mBinding.clDateParent.layoutParams as ConstraintLayout.LayoutParams
         params.verticalBias = bias
-        mBinding?.clDateParent?.layoutParams = params
+        mBinding.clDateParent.layoutParams = params
     }
 
     fun dp2px(dp: Float): Int {

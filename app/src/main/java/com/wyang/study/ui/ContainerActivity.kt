@@ -9,27 +9,25 @@ import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.DataProvider
 
 class ContainerActivity : BaseActivity<ActivityContainerBinding>() {
-    var toolbarBinding: LayoutToolbarBinding? = null
-    private var simple: Simple? = null
+    private val toolbarBinding by lazy {
+        LayoutToolbarBinding.bind(mBinding.root)
+    }
+    private val simple by lazy {
+        intent.getSerializableExtra("simple") as Simple
+    }
 
     override fun getViewBinding(): ActivityContainerBinding {
         return ActivityContainerBinding.inflate(layoutInflater)
     }
 
     override fun initialize() {
-        simple = intent.getSerializableExtra("simple") as Simple
-
-        mBinding?.root?.let { toolbarBinding = LayoutToolbarBinding.bind(it) }
-
-        val fragment = DataProvider.createFragmentByName(simple?.className)
+        val fragment = DataProvider.createFragmentByName(simple.className)
 
         val transaction = supportFragmentManager.beginTransaction()
-        if (fragment != null) {
-            transaction.add(R.id.fl_container, fragment)
-        }
+        transaction.add(R.id.fl_container, fragment)
         transaction.commitAllowingStateLoss()
 
-        toolbarBinding?.toolbar?.let { initToolBar(it, simple?.title, true) }
+        initToolBar(toolbarBinding.toolbar, simple.title, true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

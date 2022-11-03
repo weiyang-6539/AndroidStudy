@@ -12,7 +12,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class BaseFragment<T : ViewBinding> : RxFragment() {
     protected open val mTag: String = javaClass.simpleName
-    protected open var mBinding: T? = null
+    protected open val mBinding by lazy {
+        getViewBinding()
+    }
     private val isInitialize: AtomicBoolean = AtomicBoolean(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,13 +67,13 @@ abstract class BaseFragment<T : ViewBinding> : RxFragment() {
         log("onDestroyView")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mBinding == null) {
-            mBinding = getViewBinding()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         log("onCreateView")
-
-        return mBinding!!.root
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,7 +91,7 @@ abstract class BaseFragment<T : ViewBinding> : RxFragment() {
     }
 
     private fun safeInit() {
-        if (mBinding != null && !isHidden) {
+        if (!isHidden) {
             if (isInitialize.compareAndSet(false, true))
                 initialize()
         }

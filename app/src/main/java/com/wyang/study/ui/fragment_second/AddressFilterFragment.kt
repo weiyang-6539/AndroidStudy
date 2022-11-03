@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.*
 
 class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
     private var mTreeHelper: TreeHelper? = null
@@ -28,11 +29,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
 
     override fun initialize() {
         Observable.just("1")
-            .map {
-                AssetUtil.buildAddressTree(
-                    context
-                )
-            }
+            .map { AssetUtil.buildAddressTree(context) }
             .compose(bindUntilEvent(FragmentEvent.DESTROY))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -61,7 +58,6 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         mBinding!!.tvFilter3.setOnClickListener { onClickFilter3() }
         mBinding!!.tvFilter4.setOnClickListener { onClickFilter4() }
     }
-
 
     private fun onClickFilter1() {
         if (!init()) return

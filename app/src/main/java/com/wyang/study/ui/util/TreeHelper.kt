@@ -4,20 +4,19 @@ import com.wyang.study.utils.NodeSeeker
 import com.wyang.study.utils.TreeNode
 
 class TreeHelper {
-    private var rootNode: TreeNode? = null
-    private var areaMap: HashMap<String, TreeNode>? = null
-
-    init {
-        rootNode = TreeNode(null)
-        areaMap = HashMap()
+    private val rootNode by lazy {
+        TreeNode(null)
+    }
+    private val areaMap by lazy {
+        HashMap<String, TreeNode>()
     }
 
     fun putAreaNode(node: TreeNode) {
-        areaMap?.set(node.getAttribute("code"), node)
+        areaMap[node.getAttribute("code")] = node
     }
 
     fun getAreaNode(code: String?): TreeNode? {
-        return areaMap?.get(code)
+        return areaMap[code]
     }
 
     fun rootSeeker(): NodeSeeker {

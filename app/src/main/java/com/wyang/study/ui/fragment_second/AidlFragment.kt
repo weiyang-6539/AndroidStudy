@@ -26,11 +26,11 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.btnStart?.setOnClickListener { start() }
-        mBinding?.btnStop?.setOnClickListener { stop() }
-        mBinding?.btnBind?.setOnClickListener { bind() }
-        mBinding?.btnUnbind?.setOnClickListener { unbind() }
-        mBinding?.btnCall?.setOnClickListener { callRemotePrint() }
+        mBinding.btnStart.setOnClickListener { start() }
+        mBinding.btnStop.setOnClickListener { stop() }
+        mBinding.btnBind.setOnClickListener { bind() }
+        mBinding.btnUnbind.setOnClickListener { unbind() }
+        mBinding.btnCall.setOnClickListener { callRemotePrint() }
     }
 
     private fun start() {

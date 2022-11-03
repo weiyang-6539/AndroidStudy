@@ -33,7 +33,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
     }
 
     override fun initialize() {
-        mBinding!!.mTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+        mBinding.mTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
                 mAdapter.setNewData(data[position])
@@ -43,17 +43,16 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-        mBinding!!.mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mBinding.mRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        mAdapter.bindToRecyclerView(mBinding!!.mRecyclerView)
+        mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
         mAdapter.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
             //记录每页选中的position
             setSelectPosition(position)
             val node = mAdapter.data[position]
-            val results =
-                NodeSeeker.newInstance(node).children().results()
+            val results = NodeSeeker.newInstance(node).children().results()
             if (results.isNotEmpty()) {
-                val next: Int = (mBinding?.mTabLayout?.selectedTabPosition ?: 0) + 1
+                val next: Int = mBinding.mTabLayout.selectedTabPosition + 1
                 selectPos.put(next, -1)
                 data.put(next, results)
                 while (next + 1 < selectPos.size()) {
@@ -65,11 +64,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
         }
 
         Observable.just("1")
-            .map {
-                AssetUtil.buildAddressTree(
-                    context
-                )
-            }
+            .map { AssetUtil.buildAddressTree(context) }
             .compose(bindUntilEvent(FragmentEvent.DESTROY))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -93,38 +88,36 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
     }
 
     private fun getSelectPosition(): Int {
-        return selectPos[mBinding?.mTabLayout?.selectedTabPosition!!, -1]
+        return selectPos[mBinding.mTabLayout.selectedTabPosition, -1]
     }
 
     private fun setSelectPosition(position: Int) {
-        mBinding?.mTabLayout?.selectedTabPosition?.let { selectPos.put(it, position) }
+        mBinding.mTabLayout.selectedTabPosition.let { selectPos.put(it, position) }
     }
 
     private fun setData() {
-        val tabCount: Int? = mBinding?.mTabLayout?.tabCount
+        val tabCount = mBinding.mTabLayout.tabCount
         if (tabCount == 0) {
             selectPos.put(0, -1)
             data.put(0, mTreeHelper!!.rootSeeker().children().results())
             mAdapter.setNewData(data[0])
         }
-        mBinding?.mTabLayout?.removeAllTabs()
+        mBinding.mTabLayout.removeAllTabs()
         for (i in 0 until selectPos.size()) {
             val key = selectPos.keyAt(i)
             val position = selectPos.valueAt(i)
             if (position == -1) {
-                mBinding?.mTabLayout?.newTab()?.setText("请选择")
-                    ?.let { mBinding?.mTabLayout?.addTab(it) }
+                mBinding.mTabLayout.newTab().setText("请选择")
+                    .let { mBinding.mTabLayout.addTab(it) }
             } else {
                 val list = data[key]
-                mBinding?.mTabLayout?.newTab()?.setText(list[position].getAttribute<String>("name"))
-                    ?.let {
-                        mBinding?.mTabLayout?.addTab(
-                            it
-                        )
+                mBinding.mTabLayout.newTab().setText(list[position].getAttribute<String>("name"))
+                    .let {
+                        mBinding.mTabLayout.addTab(it)
                     }
             }
         }
-        val tab: TabLayout.Tab? = mBinding?.mTabLayout?.getTabAt(selectPos.size() - 1)
+        val tab: TabLayout.Tab? = mBinding.mTabLayout.getTabAt(selectPos.size() - 1)
         tab?.select()
     }
 
@@ -133,10 +126,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
             override fun convert(helper: BaseViewHolder, item: TreeNode) {
                 helper.setText(R.id.tv_name, item.getAttribute<String>("name"))
                 when {
-                    getSelectPosition() == -1 -> helper.setVisible(
-                        R.id.iv_icon,
-                        false
-                    )
+                    getSelectPosition() == -1 -> helper.setVisible(R.id.iv_icon, false)
                     getSelectPosition() == helper.adapterPosition -> helper.setVisible(
                         R.id.iv_icon,
                         true

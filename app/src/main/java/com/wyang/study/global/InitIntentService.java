@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.Nullable;
 
-import com.tencent.mmkv.MMKV;
 import com.wyang.study.utils.LogUtils;
 
 public class InitIntentService extends IntentService {
@@ -24,8 +23,6 @@ public class InitIntentService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         //第三方库的初始化等一系列初始化操作
-        MMKV.initialize(this);
-
     }
 
     @Override

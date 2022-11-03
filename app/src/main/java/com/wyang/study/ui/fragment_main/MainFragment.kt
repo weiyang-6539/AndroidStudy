@@ -16,8 +16,8 @@ import com.wyang.study.ui.util.DataProvider
 import com.wyang.study.ui.widget.GridSpacingItemDecoration
 
 class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
-    private var mRecyclerViewBinding: WidgetRecyclerBinding? = null
-    private var mAdapter: SimpleAdapter = SimpleAdapter()
+    private val mRecyclerViewBinding by lazy { WidgetRecyclerBinding.bind(mBinding.root) }
+    private val mAdapter: SimpleAdapter = SimpleAdapter()
 
     companion object {
         fun newInstance(page: Int): MainFragment {
@@ -35,11 +35,12 @@ class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.root?.let { mRecyclerViewBinding = WidgetRecyclerBinding.bind(it) }
-        mRecyclerViewBinding?.mRecyclerView?.layoutManager = GridLayoutManager(context, 2)
-        mRecyclerViewBinding?.mRecyclerView?.addItemDecoration(GridSpacingItemDecoration(2, 20, true))
+        mRecyclerViewBinding.mRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        mRecyclerViewBinding.mRecyclerView.addItemDecoration(
+            GridSpacingItemDecoration(2, 20, true)
+        )
 
-        mAdapter.bindToRecyclerView(mRecyclerViewBinding?.mRecyclerView)
+        mAdapter.bindToRecyclerView(mRecyclerViewBinding.mRecyclerView)
         mAdapter.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
             val simple = mAdapter.data[position]
             if (!TextUtils.isEmpty(simple.className)) {
@@ -55,7 +56,7 @@ class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
 
         if (arguments != null) {
             val type = requireArguments().getInt("page")
-            mAdapter.setNewData(type.let { DataProvider.getMainPageData(it) })
+            mAdapter.setNewData(DataProvider.getMainPageData(type))
         }
     }
 

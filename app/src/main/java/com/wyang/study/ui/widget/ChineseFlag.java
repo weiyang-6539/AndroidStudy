@@ -123,7 +123,6 @@ public class ChineseFlag extends View {
             canvas.drawLine(getMin() * 5, getMin() * 5, getMin() * 12, getMin() * 7, mPaint);
             canvas.drawLine(getMin() * 5, getMin() * 5, getMin() * 10, getMin() * 9, mPaint);
         }
-
     }
 
     private float getMin() {
@@ -144,7 +143,6 @@ public class ChineseFlag extends View {
 
     private Path getCompletePath(float outR, float inR) {
         Path path = new Path();
-
         path.moveTo(outR * cos(360f / 5 * 0), outR * sin(360f / 5 * 0));
         for (int i = 0; i < 5; i++) {
             path.lineTo(inR * cos(360f / 5 * i + 36), inR * sin(360f / 5 * i + 36));

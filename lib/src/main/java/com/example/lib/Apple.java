@@ -10,7 +10,7 @@ public class Apple implements Fruit {
 
     @Override
     public float getWeight() {
-        return 1.f;
+        return 1f;
     }
 
     public void addThis(List<? super Apple> list) {

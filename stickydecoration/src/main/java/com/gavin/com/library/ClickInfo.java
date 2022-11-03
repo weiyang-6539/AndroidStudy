@@ -31,7 +31,6 @@ public class ClickInfo {
     }
 
     public static class DetailInfo {
-
         public int id;
         public int left;
         public int right;
@@ -46,5 +45,4 @@ public class ClickInfo {
             this.bottom = bottom;
         }
     }
-
 }

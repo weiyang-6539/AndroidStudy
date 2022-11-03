@@ -11,7 +11,7 @@ class TestLaunchModeFragment : BaseFragment<FragmentTestLaunchModeBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.btnTest?.setOnClickListener {
+        mBinding.btnTest.setOnClickListener {
             ActivityUtils.startActivity(requireContext(), AActivity::class.java)
         }
     }

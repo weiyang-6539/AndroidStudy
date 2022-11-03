@@ -13,8 +13,8 @@ class AlgorithmFragment : BaseFragment<FragmentAlgorithmBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.btnRc4?.setOnClickListener { onClickTest() }
-        mBinding?.btnPrintAlgorithm?.setOnClickListener { printAlgorithm() }
+        mBinding.btnRc4.setOnClickListener { onClickTest() }
+        mBinding.btnPrintAlgorithm.setOnClickListener { printAlgorithm() }
     }
 
     fun onClickTest() {

@@ -8,7 +8,7 @@ public class MyClass {
 
     public static void main(String[] args) {
         //new SortDemo().execute();
-        System.out.println(fun("ylqpejqbalahwr", "yrkzavgdmdgtqpg"));
+        //System.out.println(fun("ylqpejqbalahwr", "yrkzavgdmdgtqpg"));
     }
 
     private static int fun(String text1, String text2) {

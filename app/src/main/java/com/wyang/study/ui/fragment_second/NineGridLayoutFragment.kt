@@ -17,32 +17,32 @@ class NineGridLayoutFragment: BaseFragment<FragmentNinegridlayoutBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.mSeekBar?.max = 100
-        mBinding?.mSeekBar?.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+        mBinding.mSeekBar.max = 100
+        mBinding.mSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                mBinding?.mNineGridLayout?.setSpacing(progress)
+                mBinding.mNineGridLayout.setSpacing(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
-        mBinding?.tvAdd?.setOnClickListener { onClickAdd() }
-        mBinding?.tvSub?.setOnClickListener { onClickSub() }
+        mBinding.tvAdd.setOnClickListener { onClickAdd() }
+        mBinding.tvSub.setOnClickListener { onClickSub() }
     }
 
 
     private var count = 9
 
-    fun onClickAdd() {
+    private fun onClickAdd() {
         count++
-        mBinding?.mNineGridLayout?.setImageUrls(DataProvider.getImageUrls(count), imageLoader)
+        mBinding.mNineGridLayout.setImageUrls(DataProvider.getImageUrls(count), imageLoader)
     }
 
-    fun onClickSub() {
+    private fun onClickSub() {
         if (count == 0) return
         count--
-        mBinding?.mNineGridLayout?.setImageUrls(DataProvider.getImageUrls(count), imageLoader)
+        mBinding.mNineGridLayout.setImageUrls(DataProvider.getImageUrls(count), imageLoader)
     }
 
     private val imageLoader: ImageLoaderInterface = object : ImageLoaderInterface {

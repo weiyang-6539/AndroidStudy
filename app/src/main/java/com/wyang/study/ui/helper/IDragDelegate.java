@@ -5,5 +5,4 @@ package com.wyang.study.ui.helper;
  */
 public interface IDragDelegate {
     void onItemMove(int fromPos, int toPos);
-
 }

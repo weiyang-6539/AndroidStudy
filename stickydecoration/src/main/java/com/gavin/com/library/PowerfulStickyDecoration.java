@@ -24,22 +24,21 @@ import java.util.List;
  * View悬浮
  * 利用分割线实现悬浮
  */
-
 public class PowerfulStickyDecoration extends BaseDecoration {
 
-    private Paint mGroutPaint;
+    private final Paint mGroutPaint;
 
     /**
      * 缓存图片
      */
-    private CacheUtil<Bitmap> mBitmapCache = new CacheUtil<>();
+    private final CacheUtil<Bitmap> mBitmapCache = new CacheUtil<>();
 
     /**
      * 缓存View
      */
-    private CacheUtil<View> mHeadViewCache = new CacheUtil<>();
+    private final CacheUtil<View> mHeadViewCache = new CacheUtil<>();
 
-    private PowerGroupListener mGroupListener;
+    private final PowerGroupListener mGroupListener;
 
     private PowerfulStickyDecoration(PowerGroupListener groupListener) {
         super();
@@ -50,8 +49,8 @@ public class PowerfulStickyDecoration extends BaseDecoration {
 
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDrawOver(c, parent, state);
+    public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+        super.onDrawOver(canvas, parent, state);
         //绘制
         int itemCount = state.getItemCount();
         int childCount = parent.getChildCount();
@@ -72,10 +71,10 @@ public class PowerfulStickyDecoration extends BaseDecoration {
                         bottom = viewBottom;
                     }
                 }
-                drawDecoration(c, realPosition, left, right, bottom);
+                drawDecoration(canvas, realPosition, left, right, bottom);
             } else {
                 //绘制分割线
-                drawDivide(c, parent, childView, realPosition, left, right);
+                drawDivide(canvas, parent, childView, realPosition, left, right);
             }
         }
     }
@@ -132,7 +131,7 @@ public class PowerfulStickyDecoration extends BaseDecoration {
         groupView.measure(
                 View.MeasureSpec.makeMeasureSpec(right, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(mGroupHeight, View.MeasureSpec.EXACTLY));
-        groupView.layout(left, 0 - mGroupHeight, right, 0);
+        groupView.layout(left, -mGroupHeight, right, 0);
     }
 
     /**
@@ -245,7 +244,6 @@ public class PowerfulStickyDecoration extends BaseDecoration {
             mDecoration.mGroupHeight = groutHeight;
             return this;
         }
-
 
         /**
          * 设置Group背景

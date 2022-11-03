@@ -1,6 +1,5 @@
 package com.wyang.study.ui.base
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -8,28 +7,20 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
-    protected open var mBinding: T? = null
-    protected val mTag = this.javaClass.simpleName;
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding = null
-    }
+    protected val mBinding by lazy { getViewBinding() }
+    protected val mTag = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = getViewBinding()
-        setContentView(mBinding?.root)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        setContentView(mBinding.root)
 
         initialize()
     }
 
     abstract fun getViewBinding(): T
 
-    open fun initialize() {
+    open fun initialize() {}
 
-    }
     open fun initToolBar(toolbar: Toolbar, name: String?, showHomeAsUp: Boolean) {
         toolbar.title = name
         setSupportActionBar(toolbar)
