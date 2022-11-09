@@ -102,8 +102,8 @@ abstract class BaseFragment<T : ViewBinding> : RxFragment() {
     }
 
     protected fun log(method: String) {
-        if (method.contains("on"))
-            return
+        /*if (method.contains("on"))
+            return*/
         LogUtils.e(mTag, method)
     }
 }

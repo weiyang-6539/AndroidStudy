@@ -130,8 +130,7 @@ public class NodeSeeker {
                 treeNode[0] = node;
                 throw new BreakException();
             });
-        } catch (BreakException ignored) {
-        }
+        } catch (BreakException ignored) { }
         return treeNode[0];
     }
 

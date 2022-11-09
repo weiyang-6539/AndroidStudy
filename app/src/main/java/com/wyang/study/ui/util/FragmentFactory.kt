@@ -14,10 +14,8 @@ class FragmentFactory(private val mActivity: FragmentActivity) {
         if (currentPos == pos) return
         val manager = mActivity.supportFragmentManager
         val transaction = manager.beginTransaction()
-        if (currentFragment != null) {
-            //隐藏当前正在显示的fragment
-            transaction.hide(currentFragment!!)
-        }
+        //隐藏当前正在显示的fragment
+        currentFragment?.let { transaction.hide(it) }
         currentPos = pos
         val fragment = manager.findFragmentByTag(getTag(pos))
         //通过findFragmentByTag判断是否已存在目标fragment，若存在直接show，否则去add

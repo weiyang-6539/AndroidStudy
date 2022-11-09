@@ -15,6 +15,4 @@ open class OpenGLESFragment : BaseFragment<FragmentOpenGlEsBinding>() {
     override fun initialize() {
         // H264/avc的编码器
     }
-
-
 }

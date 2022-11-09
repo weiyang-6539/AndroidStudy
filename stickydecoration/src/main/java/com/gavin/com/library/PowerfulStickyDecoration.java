@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,9 +48,8 @@ public class PowerfulStickyDecoration extends BaseDecoration {
         mGroutPaint = new Paint();
     }
 
-
     @Override
-    public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(@NonNull Canvas canvas, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDrawOver(canvas, parent, state);
         //绘制
         int itemCount = state.getItemCount();
@@ -82,11 +82,11 @@ public class PowerfulStickyDecoration extends BaseDecoration {
     /**
      * 绘制悬浮框
      *
-     * @param c        Canvas
+     * @param c            Canvas
      * @param realPosition realPosition
-     * @param left     left
-     * @param right    right
-     * @param bottom   bottom
+     * @param left         left
+     * @param right        right
+     * @param bottom       bottom
      */
     private void drawDecoration(Canvas c, int realPosition, int left, int right, int bottom) {
         c.drawRect(left, bottom - mGroupHeight, right, bottom, mGroutPaint);
@@ -209,7 +209,7 @@ public class PowerfulStickyDecoration extends BaseDecoration {
      * 使用场景：网络图片加载后调用
      *
      * @param recyclerView recyclerView
-     * @param realPosition     realPosition
+     * @param realPosition realPosition
      */
     public void notifyRedraw(RecyclerView recyclerView, View viewGroup, int realPosition) {
         viewGroup.setDrawingCacheEnabled(false);
@@ -329,6 +329,7 @@ public class PowerfulStickyDecoration extends BaseDecoration {
 
         /**
          * 设置是否需要悬浮
+         *
          * @param sticky
          * @return
          */

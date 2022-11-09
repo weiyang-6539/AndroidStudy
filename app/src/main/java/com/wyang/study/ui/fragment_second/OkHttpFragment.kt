@@ -25,7 +25,7 @@ class OkHttpFragment : BaseFragment<FragmentExampleBinding>() {
             override fun onResponse(call: Call, response: Response) {
                 requireActivity().runOnUiThread {
                     try {
-                        mBinding?.tvText?.text = response.body.string()
+                        mBinding.tvText.text = response.body.string()
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }

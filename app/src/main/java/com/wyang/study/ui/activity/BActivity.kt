@@ -10,8 +10,8 @@ class BActivity : BaseActivity<ActivityExampleBinding>() {
     }
 
     override fun initialize() {
-        mBinding?.tvContent?.text = "Activity_BBBBB"
-        mBinding?.tvContent?.setOnClickListener {
+        mBinding.tvContent.text = "Activity_BBBBB"
+        mBinding.tvContent.setOnClickListener {
             ActivityUtils.startActivity(this, CActivity::class.java)
         }
     }

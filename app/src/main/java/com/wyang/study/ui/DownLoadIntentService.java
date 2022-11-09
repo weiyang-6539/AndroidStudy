@@ -34,7 +34,7 @@ public class DownLoadIntentService extends IntentService {
                 fos = new FileOutputStream(file);
 
                 byte[] buffer = new byte[2048];
-                int len = 0;
+                int len;
                 int length = 0;
                 while ((len = is.read(buffer)) > 0) {
                     fos.write(buffer);

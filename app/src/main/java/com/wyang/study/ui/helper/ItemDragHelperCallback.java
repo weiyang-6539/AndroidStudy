@@ -2,6 +2,8 @@ package com.wyang.study.ui.helper;
 
 import android.content.Context;
 import android.graphics.Canvas;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -84,8 +86,7 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
                 dragListener.dragState(false);
             }
             dragListener.deleteState(false);
-        }
-*/
+        }*/
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 
@@ -143,7 +144,7 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
     private boolean isTouch;
 
     @Override
-    public long getAnimationDuration(RecyclerView recyclerView, int animationType, float animateDx, float animateDy) {
+    public long getAnimationDuration(@NonNull RecyclerView recyclerView, int animationType, float animateDx, float animateDy) {
         isTouch = true;
         return super.getAnimationDuration(recyclerView, animationType, animateDx, animateDy);
     }

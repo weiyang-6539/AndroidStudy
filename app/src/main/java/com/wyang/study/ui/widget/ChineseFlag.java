@@ -31,7 +31,7 @@ public class ChineseFlag extends View {
     public ChineseFlag(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mPaint.setStrokeWidth(0.3f);
+        mPaint.setStrokeWidth(.3f);
         mPaint.setStyle(Paint.Style.STROKE);
 
         starPaint.setColor(0xffffff00);
@@ -130,11 +130,11 @@ public class ChineseFlag extends View {
     }
 
     private float getMainOutRadius() {
-        return 1.f * getHeight() * 3 / 20;
+        return 1f * getHeight() * 3 / 20;
     }
 
     private float getSecondOutRadius() {
-        return 1.f * getHeight() / 20;
+        return 1f * getHeight() / 20;
     }
 
     float calcInnerRadius(float outRadius) {

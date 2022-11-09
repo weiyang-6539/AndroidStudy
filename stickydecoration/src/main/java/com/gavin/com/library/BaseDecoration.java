@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -96,7 +95,10 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect,
+                               @NonNull View view,
+                               @NonNull RecyclerView parent,
+                               @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
         int realPosition = getRealPosition(position);
@@ -141,12 +143,7 @@ public abstract class BaseDecoration extends RecyclerView.ItemDecoration {
             //等于header数量，为第一个
             return true;
         }
-        String preGroupId;
-        if (realPosition <= 0) {
-            preGroupId = null;
-        } else {
-            preGroupId = getGroupName(realPosition - 1);
-        }
+        String preGroupId = getGroupName(realPosition - 1);
         String curGroupId = getGroupName(realPosition);
         if (curGroupId == null) {
             return false;

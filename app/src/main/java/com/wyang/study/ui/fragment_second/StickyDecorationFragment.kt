@@ -21,47 +21,39 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
     private val mRecyclerBinding by lazy {
         WidgetRecyclerBinding.bind(mBinding.root)
     }
-    private var mAdapter: StickyAdapter? = null
+    private val mAdapter = StickyAdapter()
 
     override fun getViewBinding(): FragmentStickyDecorationBinding {
         return FragmentStickyDecorationBinding.inflate(layoutInflater)
     }
 
     override fun initialize() {
-        val listener: PowerGroupListener = object : PowerGroupListener {
-            override fun getGroupName(position: Int): String? {
-                val item: String? = mAdapter?.data?.get(position)
-                return item?.substring(0, 3)
-            }
-
-            override fun getGroupView(position: Int): View {
-                //获取自定定义的组View
-                val view: View = layoutInflater.inflate(R.layout.sticky_header, null, false)
-                val tv_type = view.findViewById<TextView>(R.id.tv_type)
-                tv_type.text = getGroupName(position)
-                return view
-            }
-        }
-
-        val v: View = layoutInflater.inflate(R.layout.sticky_header, null, false)
-        measureWidthAndHeight(v)
-
         val decoration = PowerfulStickyDecoration.Builder
-            .init(listener)
-            .setDivideHeight(0)
-            .setDivideColor(-0x1d1d1e)
+            .init(object : PowerGroupListener {
+                override fun getGroupName(position: Int): String? {
+                    val item = mAdapter.data[position]
+                    return item?.substring(0, 3)
+                }
+
+                override fun getGroupView(position: Int): View {
+                    //获取自定定义的组View
+                    val view: View = layoutInflater.inflate(R.layout.sticky_header, null, false)
+                    val tvType = view.findViewById<TextView>(R.id.tv_type)
+                    tvType.text = getGroupName(position)
+                    return view
+                }
+            })
             .setGroupHeight(dp2px(40f)) //分组的高度
-            .setGroupBackground(0x00000000) //重置span（注意：使用GridLayoutManager时必须调用）
+            .setGroupBackground(Color.TRANSPARENT) //重置span（注意：使用GridLayoutManager时必须调用）
             //.resetSpan(mRecyclerView, (GridLayoutManager) manager)
             .build()
 
         mRecyclerBinding.mRecyclerView.addItemDecoration(ItemDecoration())
         mRecyclerBinding.mRecyclerView.addItemDecoration(decoration)
 
-        mAdapter = StickyAdapter()
-        mAdapter?.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
+        mAdapter.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
 
-        val list: MutableList<String> = ArrayList()
+        val list = mutableListOf<String>()
         list.add("分组1-AAAAA")
         list.add("分组1-BBBBB")
         list.add("分组1-CCCCC")
@@ -82,7 +74,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
         list.add("分组5-FFFFF")
         list.add("分组5-FFFFF")
         list.add("分组5-GGGGG")
-        mAdapter?.setNewData(list as List<String?>?)
+        mAdapter.setNewData(list as List<String>)
     }
 
     private fun measureWidthAndHeight(view: View) {
@@ -96,8 +88,8 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
      */
     private fun isFirst(pos: Int): Boolean {
         if (pos == 0) return true
-        val c: String? = mAdapter?.data?.get(pos)
-        val p: String? = mAdapter?.data?.get(pos - 1)
+        val c: String? = mAdapter.data.get(pos)
+        val p: String? = mAdapter.data.get(pos - 1)
         return !TextUtils.equals(c?.substring(0, 3), p?.substring(0, 3))
     }
 
@@ -105,16 +97,10 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
      * 判断是不是分组最后一个
      */
     private fun isFooter(pos: Int): Boolean {
-        val size: Int? = mAdapter?.data?.size
-        if (size != null) {
-            if (pos == size - 1) return true
-        }
-        val c: String? = mAdapter?.data?.get(pos)
-        val n: String? = mAdapter?.data?.get(pos + 1)
-        if (c != null) {
-            return !TextUtils.equals(c.substring(0, 3), n?.substring(0, 3))
-        }
-        return false
+        if (pos == mAdapter.data.size - 1) return true
+        val c = mAdapter.data[pos]
+        val n = mAdapter.data[pos + 1]
+        return !TextUtils.equals(c?.substring(0, 3), n?.substring(0, 3))
     }
 
     class StickyAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_sticky_recycler) {
@@ -149,7 +135,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
                     outRect.top = dp2px(0f)
                 }
             }
-            if (position == (mAdapter?.data?.size?.minus(1) ?: 0))
+            if (position == mAdapter.data.size.minus(1))
                 outRect.bottom = dp2px(20f)
             else
                 outRect.bottom = 0
@@ -164,7 +150,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
                 val left = parent.paddingLeft
                 val right = parent.width - parent.paddingRight
                 var top: Int = childAt.top - dp2px(40f) //减去分组的高度
-                if (position == 0 || position == (mAdapter?.data?.size?.minus(1) ?: 0)) {
+                if (position == 0 || position == mAdapter.data.size.minus(1)) {
                     if (position == 0) {
                         top -= dp2px(20f)
                         topCorner.setBounds(left, top + dp2px(10f), right, top + dp2px(20f))
@@ -192,7 +178,8 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
             topCorner.shape = GradientDrawable.RECTANGLE
             topCorner.cornerRadii = floatArrayOf(
                 radius.toFloat(), radius.toFloat(),
-                radius.toFloat(), radius.toFloat(), 0f, 0f, 0f, 0f
+                radius.toFloat(), radius.toFloat(),
+                0f, 0f, 0f, 0f
             )
             topCorner.setColor(Color.WHITE)
             bottomCorner = GradientDrawable()
@@ -200,8 +187,7 @@ class StickyDecorationFragment : BaseFragment<FragmentStickyDecorationBinding>()
             bottomCorner.cornerRadii = floatArrayOf(
                 0f, 0f, 0f, 0f,
                 radius.toFloat(), radius.toFloat(),
-                radius.toFloat(), radius
-                    .toFloat()
+                radius.toFloat(), radius.toFloat()
             )
             bottomCorner.setColor(Color.WHITE)
         }

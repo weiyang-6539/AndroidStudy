@@ -42,8 +42,8 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
                     Log.e("Idea", "数据解析完成")
                     mTreeHelper = treeHelper
                     //数据初始化完才init
-                    mBinding!!.mRecyclerView.layoutManager = LinearLayoutManager(context)
-                    mAdapter.bindToRecyclerView(mBinding!!.mRecyclerView)
+                    mBinding.mRecyclerView.layoutManager = LinearLayoutManager(context)
+                    mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
                 }
 
                 override fun onError(e: Throwable) {
@@ -53,10 +53,10 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
                 override fun onComplete() {}
             })
 
-        mBinding!!.tvFilter1.setOnClickListener { onClickFilter1() }
-        mBinding!!.tvFilter2.setOnClickListener { onClickFilter2() }
-        mBinding!!.tvFilter3.setOnClickListener { onClickFilter3() }
-        mBinding!!.tvFilter4.setOnClickListener { onClickFilter4() }
+        mBinding.tvFilter1.setOnClickListener { onClickFilter1() }
+        mBinding.tvFilter2.setOnClickListener { onClickFilter2() }
+        mBinding.tvFilter3.setOnClickListener { onClickFilter3() }
+        mBinding.tvFilter4.setOnClickListener { onClickFilter4() }
     }
 
     private fun onClickFilter1() {

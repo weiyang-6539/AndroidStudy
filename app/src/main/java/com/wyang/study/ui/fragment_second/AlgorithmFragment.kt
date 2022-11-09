@@ -17,7 +17,7 @@ class AlgorithmFragment : BaseFragment<FragmentAlgorithmBinding>() {
         mBinding.btnPrintAlgorithm.setOnClickListener { printAlgorithm() }
     }
 
-    fun onClickTest() {
+    private fun onClickTest() {
         var key = RC4Util.getKey()
         LogUtils.e("key:", key)
         key = "naPrrmz_OjTg_ZJH"
@@ -35,7 +35,7 @@ class AlgorithmFragment : BaseFragment<FragmentAlgorithmBinding>() {
     }
 
 
-    fun printAlgorithm() {
+    private fun printAlgorithm() {
         val providers = Security.getProviders()
         for (provider in providers) {
             Log.i("CRYPTO", "provider: " + provider.name)

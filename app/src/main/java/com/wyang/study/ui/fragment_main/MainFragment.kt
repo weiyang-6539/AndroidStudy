@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.w6539android.baselib.widget.decoration.SpacingDecoration
 import com.wyang.study.adapter.SimpleAdapter
 import com.wyang.study.databinding.FragmentMainBinding
 import com.wyang.study.databinding.WidgetRecyclerBinding
@@ -13,7 +14,6 @@ import com.wyang.study.ui.ContainerActivity
 import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.util.ActivityUtils
 import com.wyang.study.ui.util.DataProvider
-import com.wyang.study.ui.widget.GridSpacingItemDecoration
 
 class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
     private val mRecyclerViewBinding by lazy { WidgetRecyclerBinding.bind(mBinding.root) }
@@ -37,7 +37,7 @@ class MainFragment private constructor() : BaseFragment<FragmentMainBinding>() {
     override fun initialize() {
         mRecyclerViewBinding.mRecyclerView.layoutManager = GridLayoutManager(context, 2)
         mRecyclerViewBinding.mRecyclerView.addItemDecoration(
-            GridSpacingItemDecoration(2, 20, true)
+            SpacingDecoration.newDecoration()
         )
 
         mAdapter.bindToRecyclerView(mRecyclerViewBinding.mRecyclerView)
