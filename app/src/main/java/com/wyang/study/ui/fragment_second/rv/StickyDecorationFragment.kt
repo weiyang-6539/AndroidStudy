@@ -1,4 +1,4 @@
-package com.wyang.study.ui.fragment_second
+package com.wyang.study.ui.fragment_second.rv
 
 import android.graphics.Canvas
 import android.graphics.Color

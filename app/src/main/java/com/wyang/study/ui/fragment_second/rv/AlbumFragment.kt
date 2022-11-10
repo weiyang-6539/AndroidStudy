@@ -1,9 +1,7 @@
-package com.wyang.study.ui.fragment_second
+package com.wyang.study.ui.fragment_second.rv
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.AudioManager
-import android.media.AudioRecord
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
@@ -42,22 +40,21 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
 
     private var maxDateOffsetY = 0f
 
-    private val onScrollListener: RecyclerView.OnScrollListener =
-        object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (maxScrollY == 0f) return
-                scrollY += dy.toFloat()
-                val percent = scrollY * 1f / maxScrollY
-                setClDateParentBias(percent)
-                Log.e(mTag, "scroll监听回调")
-                val layoutManager = recyclerView.layoutManager
-                if (layoutManager is GridLayoutManager) {
-                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                    val base: AlbumBase? = mAdapter.data.get(firstVisibleItemPosition)
-                    mBinding.tvDate.text = base?.date
-                }
+    private val onScrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            if (maxScrollY == 0f) return
+            scrollY += dy.toFloat()
+            val percent = scrollY * 1f / maxScrollY
+            setClDateParentBias(percent)
+            Log.e(mTag, "scroll监听回调")
+            val layoutManager = recyclerView.layoutManager
+            if (layoutManager is GridLayoutManager) {
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                val base: AlbumBase? = mAdapter.data[firstVisibleItemPosition]
+                mBinding.tvDate.text = base?.date
             }
         }
+    }
 
     override fun getViewBinding(): FragmentAlbumBinding {
         return FragmentAlbumBinding.inflate(layoutInflater)
@@ -79,17 +76,17 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         }
 
         mBinding.mRecyclerView.addOnScrollListener(onScrollListener)
-        mBinding.mRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(object :
-            OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                mHeight = mBinding.mRecyclerView.height
+        mBinding.mRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
+            object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    mHeight = mBinding.mRecyclerView.height
 
-                //计算RecyclerView 纵向最大滑动距离, 在适配器设置数据之后
-                calculateMaxScrollY(mHeight, 4)
-                mBinding.mRecyclerView.scrollTo(0, 400)
-                mBinding.mRecyclerView.viewTreeObserver.removeGlobalOnLayoutListener(this)
-            }
-        })
+                    //计算RecyclerView 纵向最大滑动距离, 在适配器设置数据之后
+                    calculateMaxScrollY(mHeight, 4)
+                    mBinding.mRecyclerView.scrollTo(0, 400)
+                    mBinding.mRecyclerView.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                }
+            })
 
         mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
         mAdapter.setSpanSizeLookup { _: GridLayoutManager?, position: Int ->
@@ -150,12 +147,12 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         mBinding.clDateParent.layoutParams = params
     }
 
-    fun dp2px(dp: Float): Int {
+    private fun dp2px(dp: Float): Int {
         val scale = resources.displayMetrics.density
-        return (dp * scale + 0.5f).toInt()
+        return (dp * scale + .5f).toInt()
     }
 
-    fun getScreenWidth(context: Context?): Int {
+    private fun getScreenWidth(context: Context?): Int {
         val wm = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val outMetrics = DisplayMetrics()
         wm.defaultDisplay.getMetrics(outMetrics)

@@ -1,11 +1,10 @@
-package com.wyang.study.ui.fragment_second
+package com.wyang.study.ui.fragment_second.rv
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.w6539android.baselib.widget.decoration.SpacingDecoration
 import com.wyang.study.R
-import com.wyang.study.databinding.FragmentDecoration03Binding
-import com.wyang.study.databinding.FragmentDecoration04Binding
+import com.wyang.study.databinding.FragmentDecoration05Binding
 import com.wyang.study.ui.base.BaseFragment
 
 /**
@@ -13,9 +12,9 @@ import com.wyang.study.ui.base.BaseFragment
  * @since 2022/11/8 11:33
  * @desc
  */
-class Decoration04Fragment : BaseFragment<FragmentDecoration04Binding>() {
-    override fun getViewBinding(): FragmentDecoration04Binding {
-        return FragmentDecoration04Binding.inflate(layoutInflater)
+class Decoration05Fragment : BaseFragment<FragmentDecoration05Binding>() {
+    override fun getViewBinding(): FragmentDecoration05Binding {
+        return FragmentDecoration05Binding.inflate(layoutInflater)
     }
 
     override fun initialize() {
@@ -45,9 +44,13 @@ class Decoration04Fragment : BaseFragment<FragmentDecoration04Binding>() {
     }
 
     private val mAdapter =
-        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_decoration04_recycler) {
+        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_decoration05_recycler) {
             override fun convert(helper: BaseViewHolder, item: String) {
                 helper.setText(R.id.tv_name, item)
+
+                val layoutParams = helper.itemView.layoutParams
+                layoutParams.height = if (helper.layoutPosition % 2 == 0) 200 else 320
+                helper.itemView.layoutParams = layoutParams
             }
         }
 }

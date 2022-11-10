@@ -1,4 +1,4 @@
-package com.wyang.study.ui.fragment_second
+package com.wyang.study.ui.fragment_second.rv
 
 import com.wyang.study.databinding.FragmentContactsBinding
 import com.wyang.study.ui.base.BaseFragment

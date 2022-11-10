@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /**
  * Created by weiyang on 2017/11/27.
@@ -76,23 +75,23 @@ public class NodeSeeker {
         return matchPredicate(treeNode -> (int) treeNode.getAttribute(key) == value);
     }
 
-    public NodeSeeker descendants() {
-        return doFilter((node, visitor) -> {
-            Visitor[] temp = {null};
-            temp[0] = (tt) -> {
-                visitor.visitNode(tt);
-                for (TreeNode ttChild : tt.getChildren())
-                    temp[0].visitNode(ttChild);
-            };
-            temp[0].visitNode(node);
-        });
-    }
-
     public NodeSeeker matchPredicate(Predicate predicate) {
         return doFilter((treeNode, visitor) -> {
             if (predicate == null || predicate.match(treeNode)) {
                 visitor.visitNode(treeNode);
             }
+        });
+    }
+
+    public NodeSeeker descendants() {
+        return doFilter((node, visitor) -> {
+            Visitor[] temp = {null};
+            temp[0] = tt -> {
+                visitor.visitNode(tt);
+                for (TreeNode ttChild : tt.getChildren())
+                    temp[0].visitNode(ttChild);
+            };
+            temp[0].visitNode(node);
         });
     }
 
@@ -126,11 +125,12 @@ public class NodeSeeker {
     public TreeNode firstResult() {
         final TreeNode[] treeNode = {null};
         try {
-            execute((node) -> {
+            execute(node -> {
                 treeNode[0] = node;
                 throw new BreakException();
             });
-        } catch (BreakException ignored) { }
+        } catch (BreakException ignored) {
+        }
         return treeNode[0];
     }
 
@@ -160,6 +160,5 @@ public class NodeSeeker {
      * 强制终止异常
      */
     private static class BreakException extends RuntimeException {
-
     }
 }

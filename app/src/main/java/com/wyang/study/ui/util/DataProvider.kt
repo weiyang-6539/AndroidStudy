@@ -3,6 +3,7 @@ package com.wyang.study.ui.util
 import androidx.fragment.app.Fragment
 import com.wyang.study.bean.*
 import com.wyang.study.ui.fragment_second.*
+import com.wyang.study.ui.fragment_second.rv.*
 
 class DataProvider {
     companion object {
