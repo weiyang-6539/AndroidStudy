@@ -10,11 +10,12 @@ import android.widget.LinearLayout
  * @since 2022/10/27 14:41
  * @desc 带凸起底部导航栏
  */
-class BottomBar(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(
-    context,
-    attrs,
-    defStyleAttr
-) {
+class BottomBar(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+    LinearLayout(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
 

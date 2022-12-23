@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 常见列表左边or右边，距离屏幕间隔。 -->
+    <dimen name="listSpaceSize">14dp</dimen>
+</resources>

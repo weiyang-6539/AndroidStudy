@@ -11,8 +11,8 @@ import com.wyang.study.utils.LogUtils;
 
 /**
  * @author Yang
- * @desc
  * @since 2022/8/24 8:48
+ * @desc
  */
 public class TestView extends AppCompatTextView {
     private final int[] iconIds = new int[]{0, 0, 0, 0};

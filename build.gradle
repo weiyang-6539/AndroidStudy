@@ -1,8 +1,8 @@
     // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
-    ext.hilt_version = '2.37'
+    ext.kotlin_version = '1.6.21'
+    ext.hilt_version = '2.28-alpha'
 
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
@@ -45,10 +45,10 @@ task clean(type: Delete) {
 }
 ext {
     android = [
-            compileSdkVersion: 29,
-            buildToolsVersion: "29.0.2",
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.3",
             minSdkVersion    : 16,
-            targetSdkVersion : 29,
+            targetSdkVersion : 30,
             versionCode      : 1,
             versionName      : "1.0.0"
     ]

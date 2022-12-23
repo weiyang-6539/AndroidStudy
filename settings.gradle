@@ -1,5 +1,5 @@
 include ':app'
-include ':lib'
 include ':aidl'
-include ':stickyDecoration'
 include ':base-lib'
+include ':base-jetpack'
+include ':demo-jetpack'

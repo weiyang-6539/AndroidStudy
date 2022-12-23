@@ -10,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class DownLoadIntentService extends IntentService {
 
@@ -39,7 +37,7 @@ public class DownLoadIntentService extends IntentService {
                 while ((len = is.read(buffer)) > 0) {
                     fos.write(buffer);
                     length += len;
-                    //System.out.println("线程" + (Thread.currentThread().getId() + 1) + "下载长度length = " + length);
+                    System.out.println("线程" + (Thread.currentThread().getId() + 1) + "下载长度length = " + length);
                 }
             } catch (Exception ex) {
                 System.out.println("线程" + (Thread.currentThread().getId() + 1) + "下载出错" + ex);
@@ -60,30 +58,7 @@ public class DownLoadIntentService extends IntentService {
                 }
             }
         }
-
-        executor = Executors.newSingleThreadExecutor();
-        executor.execute(runnable);
-        executor.shutdown();
     }
-
-    private ExecutorService executor;
-    private final Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                Runtime.getRuntime().exec("cat /sys/class/gpio/gpio68/value");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                Thread.sleep(60);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            executor.execute(this);
-        }
-    };
 
     @Override
     public void onDestroy() {

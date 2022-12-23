@@ -5,10 +5,8 @@ package com.wyang.study
  * @since 2022/11/9 16:41
  * @desc
  */
-class TreeNode(
-    val parent: TreeNode?,
-    val children: MutableList<TreeNode> = mutableListOf()
-) : HashMap<String, Any>() {
+class TreeNode(val parent: TreeNode?) : HashMap<String, Any>() {
+    val children = mutableListOf<TreeNode>()
 
     init {
         parent?.addChild(this)
@@ -24,5 +22,9 @@ class TreeNode(
 
     fun childCount(): Int {
         return children.size
+    }
+
+    fun <T> getAttr(key: String): T {
+        return get(key) as T
     }
 }

@@ -14,7 +14,7 @@ import android.util.Log;
  * Created by weiyang on 2018/8/10.
  */
 public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
-    private Context context;
+    private final Context context;
 
     public ItemDragHelperCallback(Context context) {
         this.context = context;

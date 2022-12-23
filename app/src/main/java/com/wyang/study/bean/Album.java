@@ -17,6 +17,6 @@ public class Album extends AlbumBase {
 
     @Override
     public int getItemType() {
-        return ALBUM;
+        return 0;
     }
 }

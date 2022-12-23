@@ -2,8 +2,8 @@ package com.wyang.study.ui.util
 
 import androidx.fragment.app.Fragment
 import com.wyang.study.bean.*
-import com.wyang.study.ui.fragment_second.*
-import com.wyang.study.ui.fragment_second.rv.*
+import com.wyang.study.ui.fragment.*
+import com.wyang.study.ui.fragment.rv.*
 
 class DataProvider {
     companion object {
@@ -15,7 +15,6 @@ class DataProvider {
             RetrofitFragment::class.java.simpleName to RetrofitFragment::class.java,
             AlgorithmFragment::class.java.simpleName to AlgorithmFragment::class.java,
             NotificationFragment::class.java.simpleName to NotificationFragment::class.java,
-            TestLaunchModeFragment::class.java.simpleName to TestLaunchModeFragment::class.java,
             CustomViewFragment::class.java.simpleName to CustomViewFragment::class.java,
             NineGridLayoutFragment::class.java.simpleName to NineGridLayoutFragment::class.java,
             WeiBoFragment::class.java.simpleName to WeiBoFragment::class.java,
@@ -23,23 +22,17 @@ class DataProvider {
             DragSortFragment::class.java.simpleName to DragSortFragment::class.java,
             WeChatFragment::class.java.simpleName to WeChatFragment::class.java,
             ContactsFragment::class.java.simpleName to ContactsFragment::class.java,
-            StickyDecorationFragment::class.java.simpleName to StickyDecorationFragment::class.java,
             AlbumFragment::class.java.simpleName to AlbumFragment::class.java,
-            Decoration01Fragment::class.java.simpleName to Decoration01Fragment::class.java,
-            Decoration02Fragment::class.java.simpleName to Decoration02Fragment::class.java,
-            Decoration03Fragment::class.java.simpleName to Decoration03Fragment::class.java,
-            Decoration04Fragment::class.java.simpleName to Decoration04Fragment::class.java,
-            Decoration05Fragment::class.java.simpleName to Decoration05Fragment::class.java,
-            Decoration06Fragment::class.java.simpleName to Decoration06Fragment::class.java,
+            DecorationFragment::class.java.simpleName to DecorationFragment::class.java,
             AddressLinkageFragment::class.java.simpleName to AddressLinkageFragment::class.java,
             AddressFilterFragment::class.java.simpleName to AddressFilterFragment::class.java,
         )
 
-        fun createFragmentByName(className: String?): Fragment {
+        fun createFragmentByName(className: String): Fragment {
             return classMap[className]?.newInstance() ?: NullFragment()
         }
 
-        fun getMainPageData(page: Int): List<Simple> {
+        fun getMainPageData(page: Int): MutableList<Simple> {
             return when (page) {
                 0 -> mutableListOf(
                     Simple(
@@ -85,11 +78,6 @@ class DataProvider {
                         "Notification",
                         "通知栏的使用",
                         NotificationFragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "Activity LaunchMode",
-                        "",
-                        TestLaunchModeFragment::class.java.simpleName
                     )
                 )
                 3 -> mutableListOf(
@@ -131,11 +119,6 @@ class DataProvider {
                         ContactsFragment::class.java.simpleName
                     ),
                     Simple(
-                        "RecyclerView用法四",
-                        "悬浮分组展示",
-                        StickyDecorationFragment::class.java.simpleName
-                    ),
-                    Simple(
                         "RecyclerView用法五",
                         "仿小米云相册",
                         AlbumFragment::class.java.simpleName
@@ -143,32 +126,7 @@ class DataProvider {
                     Simple(
                         "RecyclerView分割线一",
                         "垂直线性",
-                        Decoration01Fragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "RecyclerView分割线二",
-                        "水平线性",
-                        Decoration02Fragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "RecyclerView分割线三",
-                        "Grid垂直",
-                        Decoration03Fragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "RecyclerView分割线四",
-                        "Grid水平",
-                        Decoration04Fragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "RecyclerView分割线五",
-                        "瀑布流垂直",
-                        Decoration05Fragment::class.java.simpleName
-                    ),
-                    Simple(
-                        "RecyclerView分割线六",
-                        "瀑布流水平",
-                        Decoration06Fragment::class.java.simpleName
+                        DecorationFragment::class.java.simpleName
                     )
                 )
                 5 -> mutableListOf(

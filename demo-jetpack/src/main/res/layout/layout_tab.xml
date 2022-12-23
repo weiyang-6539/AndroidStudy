@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center_vertical">
+
+    <com.w6539.demo_jetpack.ui.widget.Indicator
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/icon_nav_indicator" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:textSize="17sp"
+        tools:text="文本" />
+</LinearLayout>

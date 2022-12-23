@@ -9,5 +9,5 @@ import java.lang.Exception
  */
 open class ApiException(
     val code: Int,
-    private val msg: String
+    msg: String
 ) : Exception(msg)

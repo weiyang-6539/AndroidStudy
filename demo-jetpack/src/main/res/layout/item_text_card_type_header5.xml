@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:paddingHorizontal="@dimen/listSpaceSize">
+
+    <com.w6539.demo_jetpack.ui.widget.TypefaceTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:typeface="fzdb1Typeface"
+        tools:text="五分钟新知" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_arrow5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_into_gray_24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintLeft_toRightOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

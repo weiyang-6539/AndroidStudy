@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.wyang.study.declare.TreeNode;
 import com.wyang.study.ui.util.TreeHelper;
 
 import org.json.JSONArray;
@@ -21,7 +22,7 @@ import java.io.InputStreamReader;
  * Created by weiyang on 2019-09-22.
  */
 public class AssetUtil {
-    public static String readAsset(Context context, String filename) {
+    private static String readAsset(Context context, String filename) {
         StringBuilder sb = new StringBuilder();
         try {
             InputStream is = context.getAssets().open(filename);

@@ -20,13 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.ContainerActivity" />
-        <activity android:name=".ui.activity.AActivity" />
-        <activity
-            android:name=".ui.activity.BActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.wyang.study.ui.activity.task" />
-        <activity android:name=".ui.activity.CActivity" />
 
         <service
             android:name=".global.InitIntentService"

@@ -6,12 +6,10 @@ package com.wyang.study
  * @desc
  */
 class NodeSeeker(node: TreeNode) {
-
     companion object {
         fun newInstance(node: TreeNode): NodeSeeker {
             return NodeSeeker(node)
         }
-
     }
 
     private var currentFilter = NodeFilter()
@@ -46,17 +44,17 @@ class NodeSeeker(node: TreeNode) {
     fun descendants(): NodeSeeker {
         return doFilter { node, function ->
             val temp = arrayListOf<((node: TreeNode) -> Unit)>()
-            val visitor: ((node: TreeNode) -> Unit) = {
-                function(node)
+            val visitor: ((node: TreeNode) -> Unit) = { tt ->
+                function(tt)
                 node.children.forEach {
                     temp[0](it)
                 }
             }
-            temp.add { visitor }
+            temp.add { visitor.invoke(node) }
         }
     }
 
-    fun doFilter(filter: ((node: TreeNode, (node: TreeNode) -> Unit) -> Unit)): NodeSeeker {
+    private fun doFilter(filter: (node: TreeNode, (node: TreeNode) -> Unit) -> Unit): NodeSeeker {
         val nodeFilter = NodeFilter()
         nodeFilter.filter = filter
         currentFilter.visitor = {
@@ -66,7 +64,7 @@ class NodeSeeker(node: TreeNode) {
         return this
     }
 
-    fun execute(visitor: (node: TreeNode) -> Unit) {
+    private fun execute(visitor: (node: TreeNode) -> Unit) {
         currentFilter.visitor = visitor
         firstFilter.visitor(null!!)
     }
@@ -79,6 +77,14 @@ class NodeSeeker(node: TreeNode) {
         return nodes[0]!!
     }
 
+    fun firstResult(): TreeNode {
+        val nodes = mutableListOf<TreeNode>()
+        execute {
+            nodes[0] = it
+        }
+        return nodes[0]
+    }
+
     fun results(): MutableList<TreeNode> {
         val list = mutableListOf<TreeNode>()
         execute { list.add(it) }
@@ -86,7 +92,7 @@ class NodeSeeker(node: TreeNode) {
     }
 
     class NodeFilter {
-        lateinit var visitor: ((node: TreeNode) -> Unit)
-        lateinit var filter: ((node: TreeNode, (node: TreeNode) -> Unit) -> Unit)
+        lateinit var visitor: (node: TreeNode) -> Unit
+        lateinit var filter: (node: TreeNode, (node: TreeNode) -> Unit) -> Unit
     }
 }

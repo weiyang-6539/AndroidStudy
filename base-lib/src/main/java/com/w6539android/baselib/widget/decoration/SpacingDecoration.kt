@@ -73,7 +73,7 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
     ) {
         // RecyclerView可能添加header, 需要用适配器实现DecorationDelegate
         parent.adapter.let {
-            if (it is DecorationDelegate) {
+            if (it is SpacingDelegate) {
                 headerCount = it.getHeaderCount()
                 dataCount = it.getDataCount()
             } else {
@@ -82,12 +82,12 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
             }
         }
 
-        val layoutManager = parent.layoutManager
         val childPos = parent.getChildAdapterPosition(view)
 
         //根据适配器设置item间距
-        layoutManager?.let {
+        parent.layoutManager?.let {
             when (it) {
+                //GridLayoutManager是LinearLayoutManager的子类
                 is GridLayoutManager -> {
                     setGridOffset(it.orientation, outRect, childPos, it.spanCount)
                 }

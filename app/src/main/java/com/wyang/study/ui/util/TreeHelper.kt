@@ -1,7 +1,7 @@
 package com.wyang.study.ui.util
 
-import com.wyang.study.utils.NodeSeeker
-import com.wyang.study.utils.TreeNode
+import com.wyang.study.declare.NodeSeeker
+import com.wyang.study.declare.TreeNode
 
 class TreeHelper {
     private val rootNode by lazy {

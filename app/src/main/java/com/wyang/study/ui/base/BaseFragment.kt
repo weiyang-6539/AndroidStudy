@@ -12,10 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class BaseFragment<T : ViewBinding> : RxFragment() {
     protected open val mTag: String = javaClass.simpleName
-    protected open val mBinding by lazy {
-        getViewBinding()
-    }
-    private val isInitialize: AtomicBoolean = AtomicBoolean(false)
+    protected open val mBinding by lazy { getViewBinding() }
+    private val isInitialize = AtomicBoolean(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
