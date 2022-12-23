@@ -1,6 +1,8 @@
 package com.w6539.demo_jetpack.net
 
 import com.w6539.base_jetpack.net.RetrofitClient
+import okhttp3.Interceptor
+import java.util.*
 
 /**
  * @author Yang
@@ -8,6 +10,7 @@ import com.w6539.base_jetpack.net.RetrofitClient
  * @desc
  */
 object ApiClient : RetrofitClient() {
+
     @JvmStatic
     val apiService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         getService(ApiService::class.java, BASE_URL)
@@ -22,4 +25,9 @@ object ApiClient : RetrofitClient() {
      * 首页-日报列表
      */
     const val DAILY_URL = "http://baobab.kaiyanapp.com/api/v5/index/tab/feed"
+
+    @JvmStatic
+    val testService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        getService(TestService::class.java, "http://39.108.53.223:61556/")
+    }
 }

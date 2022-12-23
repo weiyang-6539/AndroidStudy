@@ -1,5 +1,6 @@
 package com.w6539.demo_jetpack.ui.daily
 
+import android.util.Log
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import com.w6539.demo_jetpack.databinding.FragmentRecommendBinding
 import com.w6539.demo_jetpack.mvvm.vm.DailyViewModel
@@ -17,10 +18,7 @@ class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>()
     }
 
     override fun initialize() {
-        with(mBinding) {
-        }
-
-
+        Log.e(mTag, mViewModel.javaClass.simpleName)
         mViewModel.queryDaily()
     }
 

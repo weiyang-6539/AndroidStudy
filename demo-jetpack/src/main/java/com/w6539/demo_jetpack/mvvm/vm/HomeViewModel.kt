@@ -9,6 +9,7 @@ import com.w6539.base_jetpack.base.vm.BaseViewModel
 import com.w6539.demo_jetpack.bean.HomePageRecommend
 import com.w6539.demo_jetpack.mvvm.HomeRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 /**
  * @author Yang
@@ -18,23 +19,18 @@ import kotlinx.coroutines.flow.Flow
 class HomeViewModel @ViewModelInject constructor(
     private val mRepository: HomeRepository
 ) : BaseViewModel() {
-    val recommendResult = MutableLiveData<PagingData<HomePageRecommend.Item>>()
 
-    fun queryRecommend() {
+    private fun getPagingData(): Flow<PagingData<HomePageRecommend.Item>> {
+        return mRepository.queryRecommendData().cachedIn(viewModelScope)
+    }
+
+    fun a(adapter: suspend (pagingData: PagingData<HomePageRecommend.Item>) -> Unit) {
         launchOnUI {
-            mRepository.queryRecommendData().cachedIn(viewModelScope).collect {
-                recommendResult.postValue(it)
+            getPagingData().collect {
+                adapter.invoke(it)
             }
         }
     }
 
-    fun getPagingData(): Flow<PagingData<HomePageRecommend.Item>> {
-        return mRepository.queryRecommendData().cachedIn(viewModelScope)
-    }
 
-    fun query(){
-        launchOnUI {
-            mRepository.query()
-        }
-    }
 }
