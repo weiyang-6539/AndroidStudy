@@ -1,9 +1,12 @@
 package com.w6539.demo_jetpack.ui.daily
 
 import android.util.Log
+import androidx.paging.LoadState
+import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import com.w6539.demo_jetpack.databinding.FragmentRecommendBinding
 import com.w6539.demo_jetpack.mvvm.vm.DailyViewModel
+import com.w6539.demo_jetpack.ui.FooterAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -13,15 +16,76 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>() {
+    private val mAdapter = DailyAdapter()
+
     override fun getViewBinding(): FragmentRecommendBinding {
         return FragmentRecommendBinding.inflate(layoutInflater)
     }
 
     override fun initialize() {
-        Log.e(mTag, mViewModel.javaClass.simpleName)
-        mViewModel.queryDaily()
+        mBinding.mRecyclerView.setHasFixedSize(true)
+        mBinding.mRecyclerView.adapter =
+            mAdapter.withLoadStateFooter(FooterAdapter(mAdapter::retry))
+        mBinding.mRefreshLayout.setOnRefreshListener {
+            mAdapter.refresh()
+        }
+
+        mViewModel.inject { mAdapter.submitData(it) }
     }
 
     override fun startObserver() {
+        mAdapter.addLoadStateListener {
+            when (it.refresh) {
+                is LoadState.NotLoading -> {
+                    onStateSuccess("")
+                    if (it.source.append.endOfPaginationReached) {
+                        mBinding.mRefreshLayout.setEnableLoadMore(true)
+                        mBinding.mRefreshLayout.finishLoadMoreWithNoMoreData()
+                    } else {
+                        mBinding.mRefreshLayout.setEnableLoadMore(false)
+                    }
+                }
+                is LoadState.Loading -> {
+                    if (mBinding.mRefreshLayout.state != RefreshState.Refreshing) {
+                        onStateLoading()
+                    }
+                }
+                is LoadState.Error -> {
+                    val state = it.refresh as LoadState.Error
+                    onStateFailed("报错")
+                }
+            }
+        }
+
+        mAdapter.addLoadStateListener {
+            when (it.append) {
+                is LoadState.NotLoading -> {
+                    if (it.source.append.endOfPaginationReached) {
+                        mBinding.mRefreshLayout.setEnableLoadMore(true)
+                        mBinding.mRefreshLayout.finishLoadMoreWithNoMoreData()
+                    } else {
+                        mBinding.mRefreshLayout.setEnableLoadMore(false)
+                    }
+                }
+                is LoadState.Loading -> {
+
+                }
+                is LoadState.Error -> {
+                    val state = it.append as LoadState.Error
+
+                }
+            }
+        }
+    }
+
+
+    override fun onStateSuccess(message: String) {
+        super.onStateSuccess(message)
+        mBinding.mRefreshLayout.finishRefresh()
+    }
+
+    override fun onStateFailed(message: String) {
+        super.onStateFailed(message)
+        mBinding.mRefreshLayout.finishRefresh()
     }
 }

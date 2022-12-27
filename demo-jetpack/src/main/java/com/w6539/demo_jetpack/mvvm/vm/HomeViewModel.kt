@@ -24,7 +24,7 @@ class HomeViewModel @ViewModelInject constructor(
         return mRepository.queryRecommendData().cachedIn(viewModelScope)
     }
 
-    fun a(adapter: suspend (pagingData: PagingData<HomePageRecommend.Item>) -> Unit) {
+    fun inject(adapter: suspend (pagingData: PagingData<HomePageRecommend.Item>) -> Unit) {
         launchOnUI {
             getPagingData().collect {
                 adapter.invoke(it)

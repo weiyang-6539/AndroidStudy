@@ -1,10 +1,10 @@
-package com.w6539.demo_jetpack.ui.home
+package com.w6539.demo_jetpack.ui.daily
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.w6539.demo_jetpack.bean.HomePageRecommend
+import com.w6539.demo_jetpack.bean.Daily
 import com.w6539.demo_jetpack.ext.conversionVideoDuration
 import com.w6539.demo_jetpack.ext.gone
 import com.w6539.demo_jetpack.ext.load
@@ -16,29 +16,22 @@ import com.w6539.demo_jetpack.ui.holder.TextCardViewHeader5ViewHolder
 
 /**
  * @author Yang
- * @since 2022/12/20 13:23
+ * @since 2022/12/27 14:26
  * @desc
  */
-class RecommendAdapter : PagingDataAdapter<HomePageRecommend.Item, RecyclerView.ViewHolder>(
-    object : DiffUtil.ItemCallback<HomePageRecommend.Item>() {
-        override fun areItemsTheSame(
-            oldItem: HomePageRecommend.Item,
-            newItem: HomePageRecommend.Item
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: HomePageRecommend.Item,
-            newItem: HomePageRecommend.Item
-        ): Boolean {
-            return oldItem == newItem
-        }
+class DailyAdapter : PagingDataAdapter<Daily.Item, RecyclerView.ViewHolder>(object :
+    DiffUtil.ItemCallback<Daily.Item>() {
+    override fun areItemsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
+        return oldItem.id == newItem.id
     }
-) {
 
-    override fun getItemViewType(position: Int): Int =
-        ItemViewType.getItemViewType(getItem(position)!!.getTypeStr())
+    override fun areContentsTheSame(oldItem: Daily.Item, newItem: Daily.Item): Boolean {
+        return oldItem == newItem
+    }
+}) {
+    override fun getItemViewType(position: Int): Int {
+        return ItemViewType.getItemViewType(getItem(position)!!.getTypeStr())
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)!!
@@ -48,7 +41,7 @@ class RecommendAdapter : PagingDataAdapter<HomePageRecommend.Item, RecyclerView.
             }
             is FollowCardViewHolder -> {
                 holder.ivVideo.load(item.data.content.data.cover.feed, 4f)
-                holder.ivAvatar.load(item.data.header.icon)
+                holder.ivAvatar.load(item.data.header.icon!!)
                 holder.tvVideoDuration.text =
                     item.data.content.data.duration.conversionVideoDuration()
                 holder.tvDescription.text = item.data.header.description

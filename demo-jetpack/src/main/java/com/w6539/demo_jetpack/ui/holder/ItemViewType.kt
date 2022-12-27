@@ -22,11 +22,11 @@ object ItemViewType {
 
     const val TEXT_CARD_HEADER6 = 6
 
-    const val TEXT_CARD_HEADER7 =
-        7    //type:textCard -> dataType:TextCardWithRightAndLeftTitle,type:header7
+    //type:textCard -> dataType:TextCardWithRightAndLeftTitle,type:header7
+    const val TEXT_CARD_HEADER7 = 7
 
-    const val TEXT_CARD_HEADER8 =
-        8    //type:textCard -> dataType:TextCardWithRightAndLeftTitle,type:header8
+    //type:textCard -> dataType:TextCardWithRightAndLeftTitle,type:header8
+    const val TEXT_CARD_HEADER8 = 8
 
     const val TEXT_CARD_FOOTER1 = 9
 

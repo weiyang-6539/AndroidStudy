@@ -1,6 +1,5 @@
 package com.w6539.demo_jetpack.ui.home
 
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment
@@ -8,7 +7,6 @@ import com.w6539.demo_jetpack.databinding.FragmentRecommendBinding
 import com.w6539.demo_jetpack.mvvm.vm.HomeViewModel
 import com.w6539.demo_jetpack.ui.FooterAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 /**
  * @author Yang
@@ -32,7 +30,7 @@ class RecommendFragment : BaseVMFragment<HomeViewModel, FragmentRecommendBinding
         }
         addLoadStateListener()
 
-        mViewModel.a {
+        mViewModel.inject {
             mAdapter.submitData(it)
         }
     }
@@ -84,4 +82,13 @@ class RecommendFragment : BaseVMFragment<HomeViewModel, FragmentRecommendBinding
         }
     }
 
+    override fun onStateSuccess(message: String) {
+        super.onStateSuccess(message)
+        mBinding.mRefreshLayout.finishRefresh()
+    }
+
+    override fun onStateFailed(message: String) {
+        super.onStateFailed(message)
+        mBinding.mRefreshLayout.finishRefresh()
+    }
 }

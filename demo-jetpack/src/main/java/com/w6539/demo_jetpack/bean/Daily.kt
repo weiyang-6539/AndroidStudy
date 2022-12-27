@@ -14,7 +14,16 @@ data class Daily(
         val tag: Any?,
         val id: Int = 0,
         val adIndex: Int
-    )
+    ) {
+        fun getTypeStr(): String {
+            return when (type) {
+                "textCard" -> data.type
+                "banner" -> type
+                "banner3" -> type
+                else -> data.dataType
+            }
+        }
+    }
 
     data class Data(
         val actionUrl: String?,
