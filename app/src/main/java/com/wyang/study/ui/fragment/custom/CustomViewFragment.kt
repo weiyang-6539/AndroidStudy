@@ -1,4 +1,4 @@
-package com.wyang.study.ui.fragment
+package com.wyang.study.ui.fragment.custom
 
 import com.wyang.study.databinding.FragmentCustomViewBinding
 import com.wyang.study.ui.base.BaseFragment

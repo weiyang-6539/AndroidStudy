@@ -94,7 +94,7 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
      * 滑动删除Item的操作 这里我们暂时永不着
      */
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
     }
 

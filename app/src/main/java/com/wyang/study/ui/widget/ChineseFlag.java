@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 /**
  * Created by weiyang on 2019-09-26.
+ * 自定义控件-canvas绘制五星红旗
  */
 public class ChineseFlag extends View {
     private final String TAG = getClass().getSimpleName();

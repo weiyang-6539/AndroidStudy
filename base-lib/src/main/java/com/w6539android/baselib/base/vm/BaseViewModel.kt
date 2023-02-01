@@ -30,22 +30,22 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun switchLoading() {
-        mLoadStateLiveData.postValue(LoadState(LoadState.LOADING))
+        getLoadState().postValue(LoadState(LoadState.LOADING))
     }
 
     fun switchSuccess() {
-        mLoadStateLiveData.postValue(LoadState(LoadState.SUCCESS))
+        getLoadState().postValue(LoadState(LoadState.SUCCESS))
     }
 
     fun switchFailed() {
-        mLoadStateLiveData.postValue(LoadState(LoadState.FAILED))
+        getLoadState().postValue(LoadState(LoadState.FAILED))
     }
 
     fun switchEmpty() {
-        mLoadStateLiveData.postValue(LoadState(LoadState.EMPTY))
+        getLoadState().postValue(LoadState(LoadState.EMPTY))
     }
 
     fun switchNoNetWork() {
-        mLoadStateLiveData.postValue(LoadState(LoadState.NO_NETWORK))
+        getLoadState().postValue(LoadState(LoadState.NO_NETWORK))
     }
 }

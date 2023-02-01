@@ -87,8 +87,9 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
             .matchPredicate { treeNode: TreeNode ->
                 val name = treeNode.getAttribute<String>("name")
                 val level = treeNode.getAttribute<Int>("level")
-                if (name == null || level == null) return@matchPredicate false
-                name.contains("阳") && (level == 2 || level == 3)
+                if (name == null || level == null)
+                    return@matchPredicate false
+                return@matchPredicate name.contains("阳") && (level == 2 || level == 3)
             }
             .results()
         mAdapter.setNewData(results)
@@ -100,7 +101,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
             .descendants()
             .matchPredicate { treeNode: TreeNode ->
                 val code = treeNode.getAttribute<String>("code")
-                !TextUtils.isEmpty(code) && code.startsWith("1")
+                return@matchPredicate!TextUtils.isEmpty(code) && code.startsWith("1")
             }
             .results()
         mAdapter.setNewData(results)

@@ -1,7 +1,6 @@
 package com.w6539.demo_jetpack.mvvm.vm
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -9,7 +8,6 @@ import com.w6539.base_jetpack.base.vm.BaseViewModel
 import com.w6539.demo_jetpack.bean.HomePageRecommend
 import com.w6539.demo_jetpack.mvvm.HomeRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 /**
  * @author Yang

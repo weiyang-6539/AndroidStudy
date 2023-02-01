@@ -1,4 +1,4 @@
-package com.wyang.study.ui.fragment
+package com.wyang.study.ui.fragment.custom
 
 import android.content.Context
 import android.widget.ImageView

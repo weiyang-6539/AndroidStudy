@@ -3,6 +3,8 @@ package com.wyang.study.ui.util
 import androidx.fragment.app.Fragment
 import com.wyang.study.bean.*
 import com.wyang.study.ui.fragment.*
+import com.wyang.study.ui.fragment.custom.*
+import com.wyang.study.ui.fragment.official.StringFragment
 import com.wyang.study.ui.fragment.rv.*
 
 class DataProvider {
@@ -11,6 +13,7 @@ class DataProvider {
             HandlerThreadFragment::class.java.simpleName to HandlerThreadFragment::class.java,
             IntentServiceFragment::class.java.simpleName to IntentServiceFragment::class.java,
             AidlFragment::class.java.simpleName to AidlFragment::class.java,
+            StringFragment::class.java.simpleName to StringFragment::class.java,
             OkHttpFragment::class.java.simpleName to OkHttpFragment::class.java,
             RetrofitFragment::class.java.simpleName to RetrofitFragment::class.java,
             AlgorithmFragment::class.java.simpleName to AlgorithmFragment::class.java,
@@ -19,6 +22,7 @@ class DataProvider {
             NineGridLayoutFragment::class.java.simpleName to NineGridLayoutFragment::class.java,
             WeiBoFragment::class.java.simpleName to WeiBoFragment::class.java,
             BottomBarFragment::class.java.simpleName to BottomBarFragment::class.java,
+            PrivacyFragment::class.java.simpleName to PrivacyFragment::class.java,
             DragSortFragment::class.java.simpleName to DragSortFragment::class.java,
             WeChatFragment::class.java.simpleName to WeChatFragment::class.java,
             ContactsFragment::class.java.simpleName to ContactsFragment::class.java,
@@ -49,6 +53,11 @@ class DataProvider {
                         "AIDL用法",
                         "AIDL用法",
                         AidlFragment::class.java.simpleName
+                    ),
+                    Simple(
+                        "SpannableStringBuilder",
+                        "api 详解",
+                        StringFragment::class.java.simpleName
                     )
                 )
                 1 -> mutableListOf(
@@ -100,6 +109,11 @@ class DataProvider {
                         "带凸起布局",
                         "仿咸鱼",
                         BottomBarFragment::class.java.simpleName
+                    ),
+                    Simple(
+                        "隐私协议自定义控件的实现",
+                        "",
+                        PrivacyFragment::class.java.simpleName
                     )
                 )
                 4 -> mutableListOf(

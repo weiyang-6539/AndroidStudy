@@ -1,8 +1,20 @@
 package com.w6539.demo_jetpack.bean
 
-data class Discovery(val itemList: List<Item>, val count: Int, val total: Int, val nextPageUrl: String?, val adExist: Boolean) : Model() {
+data class Discovery(
+    val itemList: List<Item>,
+    val count: Int,
+    val total: Int,
+    val nextPageUrl: String?,
+    val adExist: Boolean
+) : Model() {
 
-    data class Item(val `data`: Data, val type: String, val tag: Any?, val id: Int = 0, val adIndex: Int)
+    data class Item(
+        val `data`: Data,
+        val type: String,
+        val tag: Any?,
+        val id: Int = 0,
+        val adIndex: Int
+    )
 
     data class Data(
         val actionUrl: String?,
@@ -94,7 +106,13 @@ data class Discovery(val itemList: List<Item>, val count: Int, val total: Int, v
         val description: String
     )
 
-    data class ItemX(val adIndex: Int, val `data`: DataX, val id: Int, val tag: Any, val type: String)
+    data class ItemX(
+        val adIndex: Int,
+        val `data`: DataX,
+        val id: Int,
+        val tag: Any,
+        val type: String
+    )
 
     data class DataX(
         val actionUrl: String,

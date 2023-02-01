@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.example.avatardemo.widget.MixtureAvatarView
+        android:id="@+id/mMixtureAvatarView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_shape_01"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#e1e1e1"
+            android:gravity="center"
+            android:onClick="onClickShape"
+            android:text="圆" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_shape_02"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#e1e1e1"
+            android:gravity="center"
+            android:onClick="onClickShape"
+            android:text="方" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_shape_03"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#e1e1e1"
+            android:gravity="center"
+            android:onClick="onClickShape"
+            android:text="三角" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_00"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#C9D6D9"
+            android:onClick="onClickBgRes" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_01"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#C9D6D9"
+            android:onClick="onClickBgRes"
+            android:src="@drawable/_01" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_02"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#C9D6D9"
+            android:onClick="onClickBgRes"
+            android:src="@drawable/_01" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/v_01"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="#F4F8F0"
+            android:onClick="onClickBgColor" />
+
+        <View
+            android:id="@+id/v_02"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="#F2EDE3"
+            android:onClick="onClickBgColor" />
+
+        <View
+            android:id="@+id/v_03"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="#C9D6D9"
+            android:onClick="onClickBgColor" />
+
+        <View
+            android:id="@+id/v_04"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="#9BACB2"
+            android:onClick="onClickBgColor" />
+
+        <View
+            android:id="@+id/v_05"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="#9AC2BE"
+            android:onClick="onClickBgColor" />
+    </LinearLayout>
+</LinearLayout>

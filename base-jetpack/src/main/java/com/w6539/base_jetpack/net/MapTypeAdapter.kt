@@ -18,7 +18,7 @@ class MapTypeAdapter : TypeAdapter<Any>() {
     override fun read(reader: JsonReader): Any? {
         when (reader.peek()) {
             JsonToken.BEGIN_ARRAY -> {
-                val list: MutableList<Any> = ArrayList()
+                val list = ArrayList<Any>()
                 reader.beginArray()
                 while (reader.hasNext()) {
                     read(reader)?.let { list.add(it) }

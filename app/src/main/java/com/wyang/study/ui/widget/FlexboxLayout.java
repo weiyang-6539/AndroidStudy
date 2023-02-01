@@ -1951,16 +1951,14 @@ public class FlexboxLayout extends ViewGroup {
                 if (mFlexWrap == FlexWrap.REVERSE) {
                     isRtl = !isRtl;
                 }
-                fromBottomToTop = false;
-                drawDividersVertical(canvas, isRtl, fromBottomToTop);
+                drawDividersVertical(canvas, isRtl, false);
                 break;
             case FlexDirection.COLUMN_REVERSE:
                 isRtl = layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL;
                 if (mFlexWrap == FlexWrap.REVERSE) {
                     isRtl = !isRtl;
                 }
-                fromBottomToTop = true;
-                drawDividersVertical(canvas, isRtl, fromBottomToTop);
+                drawDividersVertical(canvas, isRtl, true);
                 break;
         }
     }

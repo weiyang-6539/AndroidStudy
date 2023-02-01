@@ -4,7 +4,6 @@ import android.util.Log
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.w6539android.baselib.ext.json2List
-import com.w6539android.baselib.widget.decoration.StickyDecoration
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
 import com.wyang.study.ext.chineseChar2EN

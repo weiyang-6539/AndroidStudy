@@ -78,7 +78,7 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         mBinding.mRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    mHeight = mBinding.mRecyclerView.height
+                    mHeight = mBinding.mRecyclerView.height 
 
                     //计算RecyclerView 纵向最大滑动距离, 在适配器设置数据之后
                     calculateMaxScrollY(mHeight, 4)
