@@ -13,6 +13,8 @@ import android.widget.FrameLayout;
 import com.example.avatardemo.widget.AvatarView;
 import com.example.avatardemo.widget.MixtureAvatarView;
 
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
 
     private MixtureAvatarView mMixtureAvatarView;

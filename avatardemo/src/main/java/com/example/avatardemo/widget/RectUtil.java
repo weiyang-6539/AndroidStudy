@@ -27,7 +27,9 @@ public class RectUtil {
         rectF.bottom /= scale;
     }
 
-    public static void rotateRect(RectF rectF, float centerX, float centerY,
+    public static void rotateRect(RectF rectF,
+                                  float centerX,
+                                  float centerY,
                                   float rotateAngle) {
         float x = rectF.centerX();
         float y = rectF.centerY();

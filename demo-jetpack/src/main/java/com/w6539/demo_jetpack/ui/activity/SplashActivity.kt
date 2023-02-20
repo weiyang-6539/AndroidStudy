@@ -9,6 +9,7 @@ import com.w6539.demo_jetpack.databinding.ActivitySplashBinding
 import com.w6539.demo_jetpack.ext.navigate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executors
 
 /**
  * @author Yang
@@ -38,7 +39,7 @@ class SplashActivity : BaseVBActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    override fun initialize() {
+    override fun initialize() {Executors.newSingleThreadExecutor()
         mBinding.ivBg.startAnimation(scaleAnimation)
         mBinding.ivLogo.startAnimation(alphaAnimation)
         lifecycleScope.launch {

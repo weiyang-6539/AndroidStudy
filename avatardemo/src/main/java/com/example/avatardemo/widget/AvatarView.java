@@ -107,6 +107,7 @@ public class AvatarView extends View {
 
         mPathPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
         mPathPaint.setStyle(Paint.Style.FILL);
+
     }
 
     public void setBitmap(Bitmap bitmap) {
