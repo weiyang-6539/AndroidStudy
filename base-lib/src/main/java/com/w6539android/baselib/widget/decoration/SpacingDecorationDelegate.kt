@@ -5,7 +5,7 @@ package com.w6539android.baselib.widget.decoration
  * @since 2022/11/7 16:43
  * @desc
  */
-interface SpacingDelegate {
+interface SpacingDecorationDelegate {
     fun getHeaderCount(): Int
     fun getDataCount(): Int
 }

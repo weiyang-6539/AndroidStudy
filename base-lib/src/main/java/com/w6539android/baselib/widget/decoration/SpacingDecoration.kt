@@ -73,7 +73,7 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
     ) {
         // RecyclerView可能添加header, 需要用适配器实现DecorationDelegate
         parent.adapter.let {
-            if (it is SpacingDelegate) {
+            if (it is SpacingDecorationDelegate) {
                 headerCount = it.getHeaderCount()
                 dataCount = it.getDataCount()
             } else {

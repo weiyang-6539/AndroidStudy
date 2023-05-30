@@ -5,6 +5,6 @@ package com.w6539android.baselib.widget.decoration
  * @since 2022/12/12 16:55
  * @desc
  */
-interface StickyDelegate : SpacingDelegate {
+interface StickyDelegate : SpacingDecorationDelegate {
     fun getGroupName(position: Int): String
 }

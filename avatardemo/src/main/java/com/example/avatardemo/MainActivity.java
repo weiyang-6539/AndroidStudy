@@ -37,12 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mMixtureAvatarView.getIvBackground().setImageResource(R.drawable._01);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_test);
-        mMixtureAvatarView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mMixtureAvatarView.getIvAvatar().setBitmap(bitmap);
-            }
-        }, 50);
+        mMixtureAvatarView.postDelayed(() -> mMixtureAvatarView.getIvAvatar().setBitmap(bitmap), 50);
     }
 
     public void onClickShape(View view) {
