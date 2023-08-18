@@ -1,6 +1,5 @@
 package com.w6539.demo_jetpack.ui.daily
 
-import android.util.Log
 import androidx.paging.LoadState
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment

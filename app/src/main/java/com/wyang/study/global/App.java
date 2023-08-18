@@ -29,7 +29,6 @@ public class App extends Application {
             return;
         }
         refWatcher = LeakCanary.install(this);
-
     }
 
     @Override

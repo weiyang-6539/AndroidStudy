@@ -1,12 +1,13 @@
-package com.w6539.base_jetpack
+package com.w6539android.base.global
 
 import android.app.Activity
 import android.content.Context
+import java.lang.Exception
 import java.util.*
 
 /**
  * @author Yang
- * @since 2022/12/5 9:28
+ * @since 2022/6/30 9:46
  * @desc Activity管理类
  */
 open class ActivityManager private constructor() {
@@ -110,6 +111,9 @@ open class ActivityManager private constructor() {
      * 退出应用程序
      */
     open fun exit(context: Context) {
-        kotlin.runCatching { finishAllActivity() }
+        try {
+            finishAllActivity()
+        } catch (ignored: Exception) {
+        }
     }
 }

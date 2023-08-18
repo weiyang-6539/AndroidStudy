@@ -22,9 +22,7 @@ class MainFragment : BaseVBFragment<FragmentMainBinding>() {
     private var currentPos = -1
     private var currentFragment: Fragment? = null
 
-    override fun getViewBinding(): FragmentMainBinding {
-        return FragmentMainBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentMainBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.navView.itemIconTintList = null

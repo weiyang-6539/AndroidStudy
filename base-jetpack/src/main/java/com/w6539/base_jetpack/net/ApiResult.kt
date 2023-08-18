@@ -15,7 +15,7 @@ sealed class ApiResult<out T : Any> {
         return this
     }
 
-    fun checkFailed(failed: (Exception) -> Unit): ApiResult<T> {
+    fun checkFailed(failed:(Exception) -> Unit): ApiResult<T> {
         if (this is Failed)
             failed(exception)
         return this

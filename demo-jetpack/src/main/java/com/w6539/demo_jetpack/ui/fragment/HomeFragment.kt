@@ -40,11 +40,12 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
     }
 
     override fun initialize() {
-        mBinding.mViewPager.adapter = PagerFragmentAdapter(this).apply {
-            fragments.add(RecommendFragment())
-            fragments.add(SquareFragment())
-            fragments.add(DailyFragment())
-        }
+        mBinding.mViewPager.adapter = PagerFragmentAdapter(this)
+            .apply {
+                fragments.add(RecommendFragment())
+                fragments.add(SquareFragment())
+                fragments.add(DailyFragment())
+            }
         mBinding.mTabLayout.bind(
             mBinding.mViewPager, mutableListOf(
                 getString(R.string.tab_recommend),

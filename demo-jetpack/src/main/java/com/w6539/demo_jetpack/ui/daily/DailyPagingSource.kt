@@ -18,8 +18,8 @@ class DailyPagingSource : PagingSource<String, Daily.Item>() {
             val response = ApiClient.apiService.queryHomeDaily(page)
             val itemList = response.itemList
             val prevKey = null
-            val nextKey =
-                if (itemList.isNotEmpty() && !response.nextPageUrl.isNullOrEmpty()) response.nextPageUrl else null
+            val nextKey = if (itemList.isNotEmpty() && !response.nextPageUrl.isNullOrEmpty())
+                response.nextPageUrl else null
             LoadResult.Page(itemList, prevKey, nextKey)
         } catch (e: Exception) {
             LoadResult.Error(e)

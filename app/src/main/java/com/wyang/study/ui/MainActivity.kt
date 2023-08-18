@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.w6539android.baselib.widget.decoration.SpacingDecoration
+import com.w6539android.base.widget.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.adapter.SimpleAdapter
 import com.wyang.study.bean.Simple

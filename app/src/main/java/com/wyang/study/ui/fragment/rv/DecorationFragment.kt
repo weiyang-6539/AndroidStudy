@@ -2,7 +2,7 @@ package com.wyang.study.ui.fragment.rv
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.w6539android.baselib.widget.decoration.SpacingDecoration
+import com.w6539android.base.widget.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
 import com.wyang.study.ui.base.BaseFragment
