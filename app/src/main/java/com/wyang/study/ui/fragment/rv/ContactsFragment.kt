@@ -1,33 +1,30 @@
 package com.wyang.study.ui.fragment.rv
 
 import android.util.Log
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.w6539android.base.base.fragment.BaseFragment
 import com.w6539android.base.ext.json2List
+import com.w6539android.base.ui.bravh.BaseListAdapter
+import com.w6539android.base.ui.bravh.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
 import com.wyang.study.ext.chineseChar2EN
 import com.wyang.study.ext.openAsset
-import com.wyang.study.ui.base.BaseFragment
 
 /**
  * 仿微信通讯录, 首字母获取使用 pinyin4j jar
  */
 class ContactsFragment : BaseFragment<LayoutRecyclerBinding>() {
 
-    override fun getViewBinding(): LayoutRecyclerBinding {
-        return LayoutRecyclerBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = LayoutRecyclerBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        mBinding.mRecyclerView.adapter =
-            object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_contacts_recycler) {
-                override fun convert(helper: BaseViewHolder, item: String) {
-                    helper.setText(R.id.tv_nickname, item)
+        mBinding.mRecyclerView.adapter = object : BaseListAdapter<String>(R.layout.item_contacts_recycler) {
+                override fun convert(holder: BaseViewHolder, item: String) {
+                    holder.setText(R.id.tv_nickname, item)
                 }
             }.apply {
                 setNewData(
-                    context?.openAsset("contacts.json")?.json2List<String>()
+                    context?.openAsset("contacts.json")?.json2List<String>()!!.toList()
                 )
             }
 

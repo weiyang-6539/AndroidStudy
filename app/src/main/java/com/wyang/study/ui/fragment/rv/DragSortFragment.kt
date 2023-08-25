@@ -1,17 +1,13 @@
 package com.wyang.study.ui.fragment.rv
 
-import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.material.snackbar.Snackbar
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.R
 import com.wyang.study.adapter.DragSortAdapter
-import com.wyang.study.bean.Channel
 import com.wyang.study.databinding.FragmentDragSortBinding
 import com.wyang.study.databinding.WidgetRecyclerBinding
-import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.helper.ItemDragHelperCallback
 import com.wyang.study.ui.util.DataProvider
 
@@ -19,11 +15,9 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
     private val mRecyclerBinding by lazy {
         WidgetRecyclerBinding.bind(mBinding.root)
     }
-    private var mAdapter: DragSortAdapter? = null
+    private lateinit var mAdapter: DragSortAdapter
 
-    override fun getViewBinding(): FragmentDragSortBinding {
-        return FragmentDragSortBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentDragSortBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mRecyclerBinding.mRecyclerView.layoutManager = GridLayoutManager(context, 4)
@@ -51,36 +45,35 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
         helper.attachToRecyclerView(mRecyclerBinding.mRecyclerView) //通过attachToRecyclerView方法绑定RecyclerView
 
         mAdapter = DragSortAdapter(helper)
-        mAdapter?.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
-        mAdapter?.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
-            val channel: Channel = mAdapter?.data?.get(position)?.t ?: return@setOnItemClickListener
-            if (mAdapter?.isEdit() == true) {
+        mRecyclerBinding.mRecyclerView.adapter = mAdapter
+        mAdapter.setItemClickListener { _, _, position ->
+            val channel = mAdapter.getItemData(position)?.channel ?: return@setItemClickListener
+            if (mAdapter.isEdit()) {
                 if (channel.isMine) {
                     if (channel.isActivated) {
                         channel.isMine = false
-                        mAdapter?.removeMine(position)
+                        mAdapter.removeMine(position)
                     }
                 } else {
                     channel.isMine = true
-                    mAdapter?.addMine(position)
+                    mAdapter.addMine(position)
                 }
             } else {
                 if (channel.isMine) {
-                    mAdapter?.setCurrentPos(position)
+                    mAdapter.setCurrentPos(position)
                     mRecyclerBinding.mRecyclerView.let {
                         Snackbar.make(it, "选中频道-" + channel.name, Snackbar.LENGTH_LONG)
                             .show()
                     }
                 } else {
                     channel.isMine = true
-                    mAdapter?.addMine(position)
+                    mAdapter.addMine(position)
                 }
             }
         }
-        mAdapter?.setOnItemChildClickListener { _: BaseQuickAdapter<*, *>?, view: View, _: Int ->
-            if (view.id == R.id.tv_edit) {
-                mAdapter?.enableEdit()
-            }
+
+        mAdapter.addItemChildClickListener(R.id.tv_edit) { _, _, _ ->
+            mAdapter.enableEdit()
         }
 
         var minActivatedPos = 0 //最小可拖拽的position
@@ -89,16 +82,14 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
 
         val dragSortData = DataProvider.getDragSortData()
         dragSortData.indices.forEach { i ->
-            val channel = dragSortData[i].t
+            val channel = dragSortData[i].channel
             if (channel != null && channel.isMine && channel.isActivated) {
                 if (minActivatedPos == 0) minActivatedPos = i
                 maxActivatedPos = i
             }
         }
-        mAdapter?.setNewData(dragSortData)
-        mAdapter?.setMinActivatedPos(minActivatedPos)
-        mAdapter?.setMaxActivatedPos(maxActivatedPos)
-
-        Log.e(mTag, "最小编辑pos:$minActivatedPos,最大编辑pos:$maxActivatedPos")
+        mAdapter.setNewData(dragSortData)
+        mAdapter.setMinActivatedPos(minActivatedPos)
+        mAdapter.setMaxActivatedPos(maxActivatedPos)
     }
 }

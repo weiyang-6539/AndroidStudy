@@ -33,7 +33,7 @@ class DataProvider {
         )
 
         fun createFragmentByName(className: String): Fragment {
-            return classMap[className]?.newInstance() ?: NullFragment()
+            return classMap[className]?.newInstance() as? Fragment ?: NullFragment()
         }
 
         fun getMainPageData(page: Int): MutableList<Simple> {
@@ -176,68 +176,65 @@ class DataProvider {
             return data
         }
 
-        fun getDragSortData(): List<SectionItem> {
-            return mutableListOf(
-                SectionItem(true, "我的频道"),
-                SectionItem(Channel("关注", false, true)),
-                SectionItem(Channel("推荐", false, true)),
-                SectionItem(Channel("热点", true, true)),
-                SectionItem(Channel("长沙", true, true)),
-                SectionItem(Channel("视频", true, true)),
-                SectionItem(Channel("音频", true, true)),
-                SectionItem(Channel("直播", true, true)),
-                SectionItem(Channel("精选", true, true)),
-                SectionItem(Channel("小说", true, true)),
-                SectionItem(Channel("动漫", true, true)),
-                SectionItem(Channel("科技", true, true)),
-                SectionItem(Channel("军事", true, true)),
-                SectionItem(Channel("国际", true, true)),
-                SectionItem(Channel("时尚", true, true)),
-                SectionItem(Channel("电影", true, true)),
-                SectionItem(Channel("情感", true, true)),
-                SectionItem(Channel("家居", true, true)),
-                SectionItem(Channel("三农", true, true)),
-                SectionItem(Channel("历史", true, true)),
-                SectionItem(Channel("搞笑", true, true)),
-                SectionItem(Channel("美食", true, true)),
-                SectionItem(Channel("历史", true, true)),
-                SectionItem(Channel("娱乐", true, true)),
-                SectionItem(true, "频道推荐"),
-                SectionItem(Channel("新时代", true, false)),
-                SectionItem(Channel("NBA", true, false)),
-                SectionItem(Channel("动物", true, false)),
-                SectionItem(Channel("音乐", true, false)),
-                SectionItem(Channel("生活", true, false)),
-                SectionItem(Channel("影视", true, false)),
-                SectionItem(Channel("党媒推荐", true, false)),
-                SectionItem(Channel("冬奥", true, false)),
-                SectionItem(Channel("历史", true, false)),
-                SectionItem(Channel("彩票", true, false)),
-                SectionItem(Channel("收藏", true, false)),
-                SectionItem(Channel("家居", true, false)),
-                SectionItem(Channel("孕产", true, false)),
-                SectionItem(Channel("钓鱼", true, false)),
-                SectionItem(Channel("育儿", true, false)),
-                SectionItem(Channel("养生", true, false)),
-                SectionItem(Channel("星座", true, false))
-            )
-        }
+        fun getDragSortData() = mutableListOf(
+            SectionItem(true, "我的频道"),
+            SectionItem(Channel("关注", false, true)),
+            SectionItem(Channel("推荐", false, true)),
+            SectionItem(Channel("热点", true, true)),
+            SectionItem(Channel("长沙", true, true)),
+            SectionItem(Channel("视频", true, true)),
+            SectionItem(Channel("音频", true, true)),
+            SectionItem(Channel("直播", true, true)),
+            SectionItem(Channel("精选", true, true)),
+            SectionItem(Channel("小说", true, true)),
+            SectionItem(Channel("动漫", true, true)),
+            SectionItem(Channel("科技", true, true)),
+            SectionItem(Channel("军事", true, true)),
+            SectionItem(Channel("国际", true, true)),
+            SectionItem(Channel("时尚", true, true)),
+            SectionItem(Channel("电影", true, true)),
+            SectionItem(Channel("情感", true, true)),
+            SectionItem(Channel("家居", true, true)),
+            SectionItem(Channel("三农", true, true)),
+            SectionItem(Channel("历史", true, true)),
+            SectionItem(Channel("搞笑", true, true)),
+            SectionItem(Channel("美食", true, true)),
+            SectionItem(Channel("历史", true, true)),
+            SectionItem(Channel("娱乐", true, true)),
+            SectionItem(false, "频道推荐"),
+            SectionItem(Channel("新时代", true, false)),
+            SectionItem(Channel("NBA", true, false)),
+            SectionItem(Channel("动物", true, false)),
+            SectionItem(Channel("音乐", true, false)),
+            SectionItem(Channel("生活", true, false)),
+            SectionItem(Channel("影视", true, false)),
+            SectionItem(Channel("党媒推荐", true, false)),
+            SectionItem(Channel("冬奥", true, false)),
+            SectionItem(Channel("历史", true, false)),
+            SectionItem(Channel("彩票", true, false)),
+            SectionItem(Channel("收藏", true, false)),
+            SectionItem(Channel("家居", true, false)),
+            SectionItem(Channel("孕产", true, false)),
+            SectionItem(Channel("钓鱼", true, false)),
+            SectionItem(Channel("育儿", true, false)),
+            SectionItem(Channel("养生", true, false)),
+            SectionItem(Channel("星座", true, false))
+        )
 
-        fun getDiscoverData(): List<Discover> {
-            return mutableListOf(
-                Discover("", "", "", getImageUrls(1)),
-                Discover("", "", "", getImageUrls(2)),
-                Discover("", "", "", getImageUrls(3)),
-                Discover("", "", "", getImageUrls(4)),
-                Discover("", "", "", getImageUrls(5)),
-                Discover("", "", "", getImageUrls(6)),
-                Discover("", "", "", getImageUrls(7)),
-                Discover("", "", "", getImageUrls(8)),
-                Discover("", "", "", getImageUrls(9)),
-                Discover("", "", "", getImageUrls(10)),
-                Discover("", "", "", getImageUrls(11))
-            )
-        }
+
+        fun getDiscoverData() = mutableListOf(
+            Discover("", "", "", getImageUrls(1)),
+            Discover("", "", "", getImageUrls(2)),
+            Discover("", "", "", getImageUrls(3)),
+            Discover("", "", "", getImageUrls(4)),
+            Discover("", "", "", getImageUrls(5)),
+            Discover("", "", "", getImageUrls(6)),
+            Discover("", "", "", getImageUrls(7)),
+            Discover("", "", "", getImageUrls(8)),
+            Discover("", "", "", getImageUrls(9)),
+            Discover("", "", "", getImageUrls(10)),
+            Discover("", "", "", getImageUrls(11))
+        )
 
         fun getAlbumList(): List<AlbumBase> {
             return mutableListOf(

@@ -3,11 +3,9 @@ package com.wyang.study.ui
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.w6539android.base.widget.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.adapter.SimpleAdapter
@@ -30,9 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         return list
     }
 
-    override fun getViewBinding(): ActivityMainBinding {
-        return ActivityMainBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.apply {
@@ -58,9 +54,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
                 false
             }
-            mAdapter.bindToRecyclerView(mRecyclerView)
-            mAdapter.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
-                val simple = mAdapter.data[position]
+            mRecyclerView.adapter = mAdapter
+            mAdapter.setItemClickListener { _, _, position ->
+                val simple = mAdapter.getItemData(position)!!
                 if (!TextUtils.isEmpty(simple.className)) {
                     val bundle = Bundle()
                     bundle.putSerializable("simple", simple)
@@ -73,8 +69,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     Toast.makeText(this@MainActivity, "请设置对应Fragment!", Toast.LENGTH_LONG).show()
                 }
             }
-
             mAdapter.setNewData(getData(0))
         }
+
+        val bytes = byteArrayOf()
     }
 }

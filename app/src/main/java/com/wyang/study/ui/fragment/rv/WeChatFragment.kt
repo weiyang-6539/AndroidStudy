@@ -1,9 +1,9 @@
 package com.wyang.study.ui.fragment.rv
 
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.adapter.DiscoverAdapter
 import com.wyang.study.databinding.FragmentWechatBinding
 import com.wyang.study.databinding.WidgetRecyclerBinding
-import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.util.DataProvider
 
 class WeChatFragment : BaseFragment<FragmentWechatBinding>() {
@@ -12,13 +12,11 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding>() {
     }
     private val mAdapter = DiscoverAdapter()
 
-    override fun getViewBinding(): FragmentWechatBinding {
-        return FragmentWechatBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentWechatBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        mAdapter.bindToRecyclerView(mRecyclerBinding.mRecyclerView)
-        mAdapter.setNewData(DataProvider.getDiscoverData())
+        mRecyclerBinding.mRecyclerView.adapter = mAdapter
+        mAdapter.submitList(DataProvider.getDiscoverData())
     }
 
 }

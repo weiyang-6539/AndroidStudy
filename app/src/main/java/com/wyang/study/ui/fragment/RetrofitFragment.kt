@@ -1,8 +1,8 @@
 package com.wyang.study.ui.fragment
 
 import android.os.Looper
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentExampleBinding
-import com.wyang.study.ui.base.BaseFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,9 +16,7 @@ class RetrofitFragment : BaseFragment<FragmentExampleBinding>() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    override fun getViewBinding(): FragmentExampleBinding {
-        return FragmentExampleBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentExampleBinding.inflate(layoutInflater)
 
     override fun initialize() {
         retrofit.create(ApiService::class.java)

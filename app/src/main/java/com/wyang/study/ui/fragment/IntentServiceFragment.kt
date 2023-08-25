@@ -1,16 +1,14 @@
 package com.wyang.study.ui.fragment
 
 import android.content.Intent
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentIntentServiceBinding
 import com.wyang.study.ui.DownLoadIntentService
-import com.wyang.study.ui.base.BaseFragment
 
 class IntentServiceFragment : BaseFragment<FragmentIntentServiceBinding>() {
     private val path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk"
 
-    override fun getViewBinding(): FragmentIntentServiceBinding {
-        return FragmentIntentServiceBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentIntentServiceBinding.inflate(layoutInflater)
 
     override fun initialize() {
         startDownload()

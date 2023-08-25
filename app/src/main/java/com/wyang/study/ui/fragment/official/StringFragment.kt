@@ -9,8 +9,8 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentStringBinding
-import com.wyang.study.ui.base.BaseFragment
 
 /*
  * @author Yang
@@ -29,9 +29,7 @@ class StringFragment : BaseFragment<FragmentStringBinding>() {
     private val s8 = "交易规则"
     private val s9 = "。"
 
-    override fun getViewBinding(): FragmentStringBinding {
-        return FragmentStringBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentStringBinding.inflate(layoutInflater)
 
     override fun initialize() {
         ssb.append(s1)

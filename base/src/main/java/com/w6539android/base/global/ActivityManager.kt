@@ -111,9 +111,8 @@ open class ActivityManager private constructor() {
      * 退出应用程序
      */
     open fun exit(context: Context) {
-        try {
+        kotlin.runCatching {
             finishAllActivity()
-        } catch (ignored: Exception) {
         }
     }
 }

@@ -8,5 +8,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="IntentService使用"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="16sp" />
 </FrameLayout>

@@ -2,14 +2,12 @@ package com.wyang.study.ui.fragment
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentOpenGlEsBinding
-import com.wyang.study.ui.base.BaseFragment
 
 open class OpenGLESFragment : BaseFragment<FragmentOpenGlEsBinding>() {
 
-    override fun getViewBinding(): FragmentOpenGlEsBinding {
-        return FragmentOpenGlEsBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentOpenGlEsBinding.inflate(layoutInflater)
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initialize() {

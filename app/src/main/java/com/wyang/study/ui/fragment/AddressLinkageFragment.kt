@@ -1,36 +1,25 @@
 package com.wyang.study.ui.fragment
 
-import android.util.Log
 import android.util.SparseArray
 import android.util.SparseIntArray
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.trello.rxlifecycle4.android.FragmentEvent
+import com.w6539android.base.base.fragment.BaseFragment
+import com.w6539android.base.ui.bravh.BaseListAdapter
+import com.w6539android.base.ui.bravh.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.FragmentAddressLinkageBinding
-import com.wyang.study.ui.base.BaseFragment
-import com.wyang.study.ui.util.TreeHelper
-import com.wyang.study.utils.AssetUtil
 import com.wyang.study.declare.NodeSeeker
 import com.wyang.study.declare.TreeNode
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.wyang.study.ui.util.TreeHelper
 
 class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
     private var mTreeHelper: TreeHelper? = null
     private val data = SparseArray<List<TreeNode>>()
     private val selectPos = SparseIntArray()
 
-    override fun getViewBinding(): FragmentAddressLinkageBinding {
-        return FragmentAddressLinkageBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentAddressLinkageBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.mTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
@@ -44,12 +33,11 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
         })
 
         mBinding.mRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
-        mAdapter.setOnItemClickListener { _: BaseQuickAdapter<*, *>?, _: View?, position: Int ->
+        mBinding.mRecyclerView.adapter = mAdapter
+        /*mAdapter.addItemChildClickListener { adapter, view, position ->
             //记录每页选中的position
             setSelectPosition(position)
-            val node = mAdapter.data[position]
+            val node = mAdapter.getItemData(position)!!
             val results = NodeSeeker.newInstance(node).children().results()
             if (results.isNotEmpty()) {
                 val next: Int = mBinding.mTabLayout.selectedTabPosition + 1
@@ -61,9 +49,9 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
                 }
             }
             setData()
-        }
+        }*/
 
-        Observable.just("1")
+     /*   Observable.just("1")
             .map { AssetUtil.buildAddressTree(context) }
             .compose(bindUntilEvent(FragmentEvent.DESTROY))
             .subscribeOn(Schedulers.io())
@@ -84,7 +72,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
                 }
 
                 override fun onComplete() {}
-            })
+            })*/
     }
 
     private fun getSelectPosition(): Int {
@@ -121,17 +109,17 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
         tab?.select()
     }
 
-    private val mAdapter: BaseQuickAdapter<TreeNode, BaseViewHolder> =
-        object : BaseQuickAdapter<TreeNode, BaseViewHolder>(R.layout.item_address_recycler) {
-            override fun convert(helper: BaseViewHolder, item: TreeNode) {
-                helper.setText(R.id.tv_name, item.getAttribute<String>("name"))
+    private val mAdapter: BaseListAdapter<TreeNode> = object : BaseListAdapter<TreeNode>(
+        R.layout.item_address_recycler) {
+            override fun convert(holder: BaseViewHolder, item: TreeNode) {
+                holder.setText(R.id.tv_name, item.getAttribute<String>("name"))
                 when {
-                    getSelectPosition() == -1 -> helper.setVisible(R.id.iv_icon, false)
-                    getSelectPosition() == helper.adapterPosition -> helper.setVisible(
+                    getSelectPosition() == -1 -> holder.setVisible(R.id.iv_icon, false)
+                    getSelectPosition() == holder.adapterPosition -> holder.setVisible(
                         R.id.iv_icon,
                         true
                     )
-                    else -> helper.setVisible(R.id.iv_icon, false)
+                    else -> holder.setVisible(R.id.iv_icon, false)
                 }
             }
         }

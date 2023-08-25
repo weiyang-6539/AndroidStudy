@@ -33,6 +33,7 @@ class RecommendFragment : BaseVMFragment<HomeViewModel, FragmentRecommendBinding
         mViewModel.inject {
             mAdapter.submitData(it)
         }
+        mAdapter.snapshot()
     }
 
     override fun startObserver() {}

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
+
 import android.util.Log;
 
 /**
@@ -47,20 +48,23 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
      * onMove()是在拖动到新位置时候的回调方法，我们在这里做数组集合的交换操作，在这里我们把它暴露出去，交给Adapter自己处理；
      */
     @Override
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+    public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         if (viewHolder.getItemViewType() != target.getItemViewType()) {
             return false;
         }
         //instanceof 这个对象是否是这个特定类或者是它的子类的一个实例。
         if (recyclerView.getAdapter() instanceof IDragDelegate) {
             IDragDelegate listener = (IDragDelegate) recyclerView.getAdapter();
-            listener.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            listener.onItemMove(viewHolder.getBindingAdapterPosition(), target.getBindingAdapterPosition());
         }
         return true;
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(@NonNull Canvas c,
+                            @NonNull RecyclerView recyclerView,
+                            @NonNull RecyclerView.ViewHolder viewHolder,
+                            float dX, float dY, int actionState, boolean isCurrentlyActive) {
         if (dragListener == null) {
             return;
         }

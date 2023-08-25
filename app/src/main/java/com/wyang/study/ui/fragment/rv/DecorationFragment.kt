@@ -1,11 +1,11 @@
 package com.wyang.study.ui.fragment.rv
 
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.w6539android.base.base.fragment.BaseFragment
+import com.w6539android.base.ui.bravh.BaseListAdapter
+import com.w6539android.base.ui.bravh.BaseViewHolder
 import com.w6539android.base.widget.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
-import com.wyang.study.ui.base.BaseFragment
 
 /**
  * @author Yang
@@ -37,10 +37,11 @@ class DecorationFragment : BaseFragment<LayoutRecyclerBinding>() {
         )
     }
 
-    private val mAdapter =
-        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_decoration_recycler) {
-            override fun convert(helper: BaseViewHolder, item: String) {
-                helper.setText(R.id.tv_name, item)
-            }
+    private val mAdapter = object : BaseListAdapter<String>(
+        R.layout.item_decoration_recycler
+    ) {
+        override fun convert(holder: BaseViewHolder, item: String) {
+            holder.setText(R.id.tv_name, item)
         }
+    }
 }

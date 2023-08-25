@@ -1,15 +1,12 @@
 package com.wyang.study.ui.fragment
 
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentExampleBinding
-import com.wyang.study.ui.base.BaseFragment
 import okhttp3.*
 import java.io.IOException
 
 class OkHttpFragment : BaseFragment<FragmentExampleBinding>() {
-    override fun getViewBinding(): FragmentExampleBinding {
-        return FragmentExampleBinding.inflate(layoutInflater)
-    }
-
+    override fun getViewBinding() = FragmentExampleBinding.inflate(layoutInflater)
     override fun initialize() {
         val client: OkHttpClient = OkHttpClient.Builder()
             .build()

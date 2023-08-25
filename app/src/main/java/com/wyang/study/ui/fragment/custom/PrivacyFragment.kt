@@ -1,7 +1,7 @@
 package com.wyang.study.ui.fragment.custom
 
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentPrivacyBinding
-import com.wyang.study.ui.base.BaseFragment
 
 /**
  * @author Yang
@@ -9,10 +9,7 @@ import com.wyang.study.ui.base.BaseFragment
  * @desc 隐私政策自定义控件的实现
  */
 class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>() {
-    override fun getViewBinding(): FragmentPrivacyBinding {
-        return FragmentPrivacyBinding.inflate(layoutInflater)
-    }
-
+    override fun getViewBinding() = FragmentPrivacyBinding.inflate(layoutInflater)
     override fun initialize() {
     }
 }

@@ -9,8 +9,8 @@ import android.os.RemoteException
 import android.util.Log
 import android.widget.Toast
 import com.example.aidl.RemoteInterface
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentAidlBinding
-import com.wyang.study.ui.base.BaseFragment
 
 class AidlFragment : BaseFragment<FragmentAidlBinding>() {
     private val aidl_pkg = "com.example.aidl"

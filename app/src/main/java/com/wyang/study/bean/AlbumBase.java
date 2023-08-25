@@ -1,6 +1,6 @@
 package com.wyang.study.bean;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.w6539android.base.ui.bravh.entity.MultiItemEntity;
 
 /**
  * Created by fxb on 2020-01-03.

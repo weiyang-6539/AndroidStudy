@@ -1,16 +1,14 @@
 package com.wyang.study.ui.fragment
 
 import android.util.Log
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentAlgorithmBinding
 import com.wyang.study.encrypt.RC4Util
-import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.utils.LogUtils
 import java.security.Security
 
 class AlgorithmFragment : BaseFragment<FragmentAlgorithmBinding>() {
-    override fun getViewBinding(): FragmentAlgorithmBinding {
-        return FragmentAlgorithmBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentAlgorithmBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.btnRc4.setOnClickListener { onClickTest() }

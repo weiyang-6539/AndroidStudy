@@ -1,7 +1,7 @@
 package com.wyang.study.ui.fragment
 
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentNullBinding
-import com.wyang.study.ui.base.BaseFragment
 
 class NullFragment: BaseFragment<FragmentNullBinding>() {
 

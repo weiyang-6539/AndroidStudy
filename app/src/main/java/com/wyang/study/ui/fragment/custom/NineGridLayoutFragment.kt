@@ -4,17 +4,15 @@ import android.content.Context
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.R
 import com.wyang.study.databinding.FragmentNinegridlayoutBinding
-import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.util.DataProvider
 import com.wyang.study.ui.util.GlideImageLoader
 import com.wyang.study.ui.widget.NineGridLayout.ImageLoaderInterface
 
-class NineGridLayoutFragment: BaseFragment<FragmentNinegridlayoutBinding>() {
-    override fun getViewBinding(): FragmentNinegridlayoutBinding {
-        return FragmentNinegridlayoutBinding.inflate(layoutInflater)
-    }
+class NineGridLayoutFragment : BaseFragment<FragmentNinegridlayoutBinding>() {
+    override fun getViewBinding() = FragmentNinegridlayoutBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.mSeekBar.max = 100

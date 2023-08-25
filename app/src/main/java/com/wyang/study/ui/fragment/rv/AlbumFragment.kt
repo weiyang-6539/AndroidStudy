@@ -11,13 +11,13 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.w6539android.base.base.fragment.BaseFragment
+import com.w6539android.base.ui.bravh.BaseViewHolder
+import com.w6539android.base.ui.bravh.extend.BaseMultiItemAdapter
 import com.wyang.study.R
 import com.wyang.study.bean.Album
 import com.wyang.study.bean.AlbumBase
 import com.wyang.study.databinding.FragmentAlbumBinding
-import com.wyang.study.ui.base.BaseFragment
 import com.wyang.study.ui.util.DataProvider
 import com.wyang.study.ui.util.GlideImageLoader
 
@@ -49,15 +49,13 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
             val layoutManager = recyclerView.layoutManager
             if (layoutManager is GridLayoutManager) {
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                val base: AlbumBase? = mAdapter.data[firstVisibleItemPosition]
+                val base: AlbumBase? = mAdapter.getItemData(firstVisibleItemPosition)!!
                 mBinding.tvDate.text = base?.date
             }
         }
     }
 
-    override fun getViewBinding(): FragmentAlbumBinding {
-        return FragmentAlbumBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentAlbumBinding.inflate(layoutInflater)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initialize() {
@@ -78,7 +76,7 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         mBinding.mRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    mHeight = mBinding.mRecyclerView.height 
+                    mHeight = mBinding.mRecyclerView.height
 
                     //计算RecyclerView 纵向最大滑动距离, 在适配器设置数据之后
                     calculateMaxScrollY(mHeight, 4)
@@ -87,11 +85,11 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
                 }
             })
 
-        mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
-        mAdapter.setSpanSizeLookup { _: GridLayoutManager?, position: Int ->
-            val item = mAdapter.getItem(position)
-            if (item is Album) 1 else 4
-        }
+        mBinding.mRecyclerView.adapter = mAdapter
+//        mAdapter.setSpanSizeLookup { _: GridLayoutManager?, position: Int ->
+//            val item = mAdapter.getItem(position)
+//            if (item is Album) 1 else 4
+//        }
         mAdapter.setNewData(DataProvider.getAlbumList())
 
         mBinding.tvDate.text = "01月03日"
@@ -105,7 +103,8 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
 
         //计算每行图片所占高度，即单个图片的宽 （屏幕宽 - RecyclerView左右padding）/ spanCount
         val mItemHeight = (getScreenWidth(context) - dp2px(7f) * 2f) / 4
-        val data = mAdapter.data
+//        val data = mAdapter.data
+        val data = mutableListOf<AlbumBase>()
         var count = 0 //同一个日期组计数
         for (i in data.indices) {
             val base = data[i]
@@ -159,25 +158,25 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         return outMetrics.widthPixels
     }
 
-    class AlbumAdapter : BaseMultiItemQuickAdapter<AlbumBase, BaseViewHolder>(null) {
-        override fun convert(helper: BaseViewHolder, item: AlbumBase) {
-            val ivAlbum = helper.getView<ImageView>(R.id.iv_album)
+    inner class AlbumAdapter : BaseMultiItemAdapter<AlbumBase>() {
+        override fun convert(holder: BaseViewHolder, item: AlbumBase) {
             if (item is Album) {
+                val ivAlbum = holder.getView<ImageView>(R.id.iv_album)
                 GlideImageLoader.load(
-                    mContext,
+                    requireContext(),
                     ivAlbum,
                     item.url,
                     R.drawable.ic_album_default,
                     R.drawable.ic_album_default
                 )
             } else {
-                helper.setText(R.id.tv_date, item.date)
+                holder.setText(R.id.tv_date, item.date)
             }
         }
 
         init {
-            addItemType(AlbumBase.ALBUM, R.layout.item_album_recycler)
             addItemType(AlbumBase.DATE, R.layout.item_album_date)
+            addItemType(AlbumBase.ALBUM, R.layout.item_album_recycler)
         }
     }
 }

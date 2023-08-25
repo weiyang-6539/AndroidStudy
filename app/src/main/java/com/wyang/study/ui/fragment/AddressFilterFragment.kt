@@ -1,57 +1,46 @@
 package com.wyang.study.ui.fragment
 
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
-import com.trello.rxlifecycle4.android.FragmentEvent
+import com.w6539android.base.base.fragment.BaseFragment
+import com.w6539android.base.ui.bravh.BaseListAdapter
+import com.w6539android.base.ui.bravh.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.FragmentAddressFilterBinding
-import com.wyang.study.ui.base.BaseFragment
-import com.wyang.study.ui.util.TreeHelper
-import com.wyang.study.utils.AssetUtil
 import com.wyang.study.declare.TreeNode
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.wyang.study.ui.util.TreeHelper
 import java.util.*
 
 class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
     private var mTreeHelper: TreeHelper? = null
 
-    override fun getViewBinding(): FragmentAddressFilterBinding {
-        return FragmentAddressFilterBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = FragmentAddressFilterBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        Observable.just("1")
-            .map { AssetUtil.buildAddressTree(context) }
-            .compose(bindUntilEvent(FragmentEvent.DESTROY))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<TreeHelper> {
-                override fun onSubscribe(d: Disposable) {
-                    Log.e("Idea", "数据解析中..")
-                }
-
-                override fun onNext(treeHelper: TreeHelper) {
-                    Log.e("Idea", "数据解析完成")
-                    mTreeHelper = treeHelper
-                    //数据初始化完才init
-                    mBinding.mRecyclerView.layoutManager = LinearLayoutManager(context)
-                    mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
-                }
-
-                override fun onError(e: Throwable) {
-                    Log.e("Idea", "数据解析失败,$e")
-                }
-
-                override fun onComplete() {}
-            })
+//        Observable.just("1")
+//            .map { AssetUtil.buildAddressTree(context) }
+//            .compose(bindUntilEvent(FragmentEvent.DESTROY))
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(object : Observer<TreeHelper> {
+//                override fun onSubscribe(d: Disposable) {
+//                    Log.e("Idea", "数据解析中..")
+//                }
+//
+//                override fun onNext(treeHelper: TreeHelper) {
+//                    Log.e("Idea", "数据解析完成")
+//                    mTreeHelper = treeHelper
+//                    //数据初始化完才init
+//                    mBinding.mRecyclerView.layoutManager = LinearLayoutManager(context)
+//                    mAdapter.bindToRecyclerView(mBinding.mRecyclerView)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//                    Log.e("Idea", "数据解析失败,$e")
+//                }
+//
+//                override fun onComplete() {}
+//            })
 
         mBinding.tvFilter1.setOnClickListener { onClickFilter1() }
         mBinding.tvFilter2.setOnClickListener { onClickFilter2() }
@@ -101,7 +90,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
             .descendants()
             .matchPredicate { treeNode: TreeNode ->
                 val code = treeNode.getAttribute<String>("code")
-                return@matchPredicate!TextUtils.isEmpty(code) && code.startsWith("1")
+                return@matchPredicate !TextUtils.isEmpty(code) && code.startsWith("1")
             }
             .results()
         mAdapter.setNewData(results)
@@ -115,11 +104,12 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         return true
     }
 
-    private val mAdapter: BaseQuickAdapter<TreeNode, BaseViewHolder> =
-        object : BaseQuickAdapter<TreeNode, BaseViewHolder>(R.layout.item_address_filter_recycler) {
-            override fun convert(helper: BaseViewHolder, item: TreeNode) {
-                helper.setText(R.id.tv_name, item.getAttribute<String>("name"))
-                helper.setText(R.id.tv_code, item.getAttribute<String>("code"))
-            }
+    private val mAdapter: BaseListAdapter<TreeNode> = object : BaseListAdapter<TreeNode>(
+        R.layout.item_address_filter_recycler
+    ) {
+        override fun convert(holder: BaseViewHolder, item: TreeNode) {
+            holder.setText(R.id.tv_name, item.getAttribute<String>("name"))
+            holder.setText(R.id.tv_code, item.getAttribute<String>("code"))
         }
+    }
 }
