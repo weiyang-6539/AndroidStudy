@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.ui.bravh.extend.BaseMultiItemAdapter
+import com.w6539android.base.ui.bravh.BaseMultiItemAdapter
 import com.wyang.study.R
 import com.wyang.study.bean.SectionItem
 import com.wyang.study.ui.helper.IDragDelegate
@@ -29,7 +29,6 @@ class DragSortAdapter(
 
     fun isEdit() = isEdit
 
-    @SuppressLint("NotifyDataSetChanged")
     fun enableEdit() {
         isEdit = !isEdit
         notifyDataSetChanged()
@@ -98,7 +97,7 @@ class DragSortAdapter(
 
     override fun onItemMove(fromPos: Int, toPos: Int) {
         if (toPos < minActivatedPos || toPos > maxActivatedPos) return
-        move(fromPos, toPos)
+        swap(fromPos, toPos)
     }
 
     /**

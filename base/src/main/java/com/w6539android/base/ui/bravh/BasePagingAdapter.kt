@@ -2,7 +2,6 @@ package com.w6539android.base.ui.bravh
 
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.w6539android.base.ui.bravh.helper.AdapterImpl
 
 /**
  * @author Yang

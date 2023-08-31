@@ -5,48 +5,35 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
 import com.w6539android.base.ui.bravh.helper.AdapterImpl
 import com.w6539android.base.ui.bravh.helper.IAdapter
-import java.util.concurrent.Executor
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import kotlin.math.abs
+import kotlin.math.min
 
 /**
  * @author Yang
- * @since 2023/8/21 10:32
- * @desc 单条目列表
+ * @since 2023/8/30 16:05
+ * @desc 适用于不频繁刷新列表
  */
-abstract class BaseListAdapter<T>(
-    @LayoutRes private val layoutId: Int,
-    callback: DiffUtil.ItemCallback<T> = object : DiffUtil.ItemCallback<T>() {
-        override fun areItemsTheSame(oldItem: T, newItem: T) = false
-        override fun areContentsTheSame(oldItem: T, newItem: T) = false
-    },
-    executor: Executor = BaseListAdapter.executor
-) : ListAdapter<T, BaseViewHolder>(
-    AsyncDifferConfig.Builder(callback)
-        .setBackgroundThreadExecutor(executor)
-        .build()
-), IBaseAdapter<T>, IAdapter<T> {
-    private companion object {
-        val executor: ExecutorService = Executors.newFixedThreadPool(5)
-    }
-
+abstract class BaseQuickAdapter<T>(
+    @LayoutRes private val layoutId: Int = 0,
+) : RecyclerView.Adapter<BaseViewHolder>(), IBaseAdapter<T>, IAdapter<T> {
     private val mAdapterImpl = AdapterImpl<T>()
 
     init {
-        mAdapterImpl.setNewData(currentList)
+        mAdapterImpl.setNewData(emptyList())
     }
 
-    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         createBaseViewHolder(parent, viewType).also {
             mAdapterImpl.setClickListener(this, it, viewType)
         }
 
-    final override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        convert(holder, getItem(position))
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        convert(holder, get(position))
     }
 
     final override fun onBindViewHolder(
@@ -55,18 +42,18 @@ abstract class BaseListAdapter<T>(
         payloads: MutableList<Any>
     ) {
         if (payloads.isEmpty()) {
-            convert(holder, getItem(position))
+            convert(holder, get(position)!!)
         } else {
-            convert(holder, getItem(position), payloads[0])
+            convert(holder, get(position)!!, payloads[0])
         }
     }
+
+    override fun getItemCount() = mAdapterImpl.items.size
 
     override fun createBaseViewHolder(parent: ViewGroup, viewType: Int) =
         BaseViewHolder(layoutId, parent)
 
-    override fun convert(holder: BaseViewHolder, item: T, payload: Any) {
-
-    }
+    override fun convert(holder: BaseViewHolder, item: T, payload: Any) {}
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -76,7 +63,7 @@ abstract class BaseListAdapter<T>(
 
             manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
-                    return getItem(position).let {
+                    return get(position).let {
                         if (it is SpanSizeEntity)
                             it.getSpanSize()
                         else
@@ -132,26 +119,28 @@ abstract class BaseListAdapter<T>(
 
     final override fun setNewData(list: List<T>) {
         mAdapterImpl.setNewData(list)
-        submitList(list)
+        notifyDataSetChanged()
     }
 
     final override fun set(@IntRange(from = 0) position: Int, data: T) {
         mAdapterImpl.set(position, data)
+        notifyItemChanged(position)
     }
 
     final override fun add(data: T) {
         mAdapterImpl.add(data)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemInserted(mAdapterImpl.items.size - 1)
     }
 
     final override fun add(@IntRange(from = 0) position: Int, data: T) {
         mAdapterImpl.add(position, data)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemInserted(position)
     }
 
     final override fun addAll(newCollection: Collection<T>) {
+        val oldSize = mAdapterImpl.items.size
         mAdapterImpl.addAll(newCollection)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemRangeInserted(oldSize, newCollection.size)
     }
 
     final override fun addAll(
@@ -159,17 +148,17 @@ abstract class BaseListAdapter<T>(
         newCollection: Collection<T>
     ) {
         mAdapterImpl.addAll(position, newCollection)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemRangeChanged(position, newCollection.size)
     }
 
     final override fun removeAt(@IntRange(from = 0) position: Int) {
         mAdapterImpl.removeAt(position)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemRemoved(position)
     }
 
     final override fun remove(data: T) {
         mAdapterImpl.remove(data)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemRemoved(mAdapterImpl.items.size - 1)
     }
 
     final override fun swap(
@@ -177,12 +166,12 @@ abstract class BaseListAdapter<T>(
         @IntRange(from = 0) toPosition: Int
     ) {
         mAdapterImpl.swap(fromPosition, toPosition)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemMoved(fromPosition, toPosition)
     }
 
     final override fun move(fromPosition: Int, toPosition: Int) {
         mAdapterImpl.move(fromPosition, toPosition)
-        submitList(mAdapterImpl.items.toMutableList())
+        notifyItemRangeChanged(min(fromPosition, toPosition), abs(fromPosition - toPosition + 1))
     }
 
     final override fun get(position: Int) =

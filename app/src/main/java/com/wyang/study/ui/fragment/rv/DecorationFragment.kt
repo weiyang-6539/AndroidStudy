@@ -13,9 +13,7 @@ import com.wyang.study.databinding.LayoutRecyclerBinding
  * @desc
  */
 class DecorationFragment : BaseFragment<LayoutRecyclerBinding>() {
-    override fun getViewBinding(): LayoutRecyclerBinding {
-        return LayoutRecyclerBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = LayoutRecyclerBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.mRecyclerView.addItemDecoration(SpacingDecoration.newDecoration())

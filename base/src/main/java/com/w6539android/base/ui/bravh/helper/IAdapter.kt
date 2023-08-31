@@ -1,8 +1,6 @@
 package com.w6539android.base.ui.bravh.helper
 
 import androidx.annotation.IdRes
-import androidx.recyclerview.widget.RecyclerView
-import com.w6539android.base.ui.bravh.BaseViewHolder
 import com.w6539android.base.ui.bravh.OnClickListener
 import com.w6539android.base.ui.bravh.OnLongClickListener
 
@@ -11,7 +9,7 @@ import com.w6539android.base.ui.bravh.OnLongClickListener
  * @since 2023/8/22 17:28
  * @desc
  */
-interface IAdapter<T, Adapter : RecyclerView.Adapter<BaseViewHolder>> {
+interface IAdapter<T> {
 
     fun setNewData(list: List<T>)
     fun set(position: Int, data: T)
@@ -23,14 +21,11 @@ interface IAdapter<T, Adapter : RecyclerView.Adapter<BaseViewHolder>> {
     fun remove(data: T)
     fun swap(fromPosition: Int, toPosition: Int)
     fun move(fromPosition: Int, toPosition: Int)
-
-    fun getItemData(position: Int): T?
+    fun get(position: Int): T
 
     /** event */
-    fun setItemClickListener(listener: OnClickListener<Adapter>)
-    fun setItemLongClickListener(listener: OnLongClickListener<Adapter>)
-    fun addItemChildClickListener(@IdRes id: Int,listener: OnClickListener<Adapter>)
-    fun addItemChildLongClickListener(@IdRes id: Int,listener: OnLongClickListener<Adapter>)
-
-    fun setClickListener(adapter: Adapter, holder: BaseViewHolder, viewType: Int)
+    fun setItemClickListener(listener: OnClickListener<IAdapter<T>>)
+    fun setItemLongClickListener(listener: OnLongClickListener<IAdapter<T>>)
+    fun addItemChildClickListener(@IdRes id: Int,listener: OnClickListener<IAdapter<T>>)
+    fun addItemChildLongClickListener(@IdRes id: Int,listener: OnLongClickListener<IAdapter<T>>)
 }

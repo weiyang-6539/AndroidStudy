@@ -47,7 +47,7 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
         mAdapter = DragSortAdapter(helper)
         mRecyclerBinding.mRecyclerView.adapter = mAdapter
         mAdapter.setItemClickListener { _, _, position ->
-            val channel = mAdapter.getItemData(position)?.channel ?: return@setItemClickListener
+            val channel = mAdapter.get(position)?.channel ?: return@setItemClickListener
             if (mAdapter.isEdit()) {
                 if (channel.isMine) {
                     if (channel.isActivated) {

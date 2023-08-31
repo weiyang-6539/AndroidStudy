@@ -9,7 +9,7 @@ import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
  * @desc
  */
 class SectionItem(
-    private val isMine: Boolean = false,
+    val isMine: Boolean = false,
     val title: String = ""
 ) : MultiItemEntity, SpanSizeEntity {
 

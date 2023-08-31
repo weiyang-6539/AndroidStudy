@@ -56,7 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             mRecyclerView.adapter = mAdapter
             mAdapter.setItemClickListener { _, _, position ->
-                val simple = mAdapter.getItemData(position)!!
+                val simple = mAdapter.get(position)
                 if (!TextUtils.isEmpty(simple.className)) {
                     val bundle = Bundle()
                     bundle.putSerializable("simple", simple)
@@ -71,7 +71,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             mAdapter.setNewData(getData(0))
         }
-
-        val bytes = byteArrayOf()
     }
 }

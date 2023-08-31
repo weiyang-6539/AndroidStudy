@@ -9,11 +9,12 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.w6539android.base.base.fragment.BaseFragment
 import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.ui.bravh.extend.BaseMultiItemAdapter
+import com.w6539android.base.ui.bravh.BaseMultiItemAdapter
 import com.wyang.study.R
 import com.wyang.study.bean.Album
 import com.wyang.study.bean.AlbumBase
@@ -43,14 +44,15 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             if (maxScrollY == 0f) return
             scrollY += dy.toFloat()
+            println("scrollY:${scrollY} maxScrollY:${maxScrollY} ")
             val percent = scrollY * 1f / maxScrollY
             setClDateParentBias(percent)
 
             val layoutManager = recyclerView.layoutManager
             if (layoutManager is GridLayoutManager) {
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                val base: AlbumBase? = mAdapter.getItemData(firstVisibleItemPosition)!!
-                mBinding.tvDate.text = base?.date
+                val base: AlbumBase = mAdapter.get(firstVisibleItemPosition)
+                mBinding.tvDate.text = base.date
             }
         }
     }

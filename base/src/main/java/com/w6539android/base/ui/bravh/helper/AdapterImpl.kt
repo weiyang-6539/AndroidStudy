@@ -16,34 +16,38 @@ import kotlin.collections.ArrayList
  * @since 2023/8/23 10:33
  * @desc
  */
-class AdapterImpl<T, Adapter : RecyclerView.Adapter<BaseViewHolder>> : IAdapter<T, Adapter> {
-    private var itemClickListener: OnClickListener<Adapter>? = null
-    private var itemLongClickListener: OnLongClickListener<Adapter>? = null
-    private var itemChildClickListeners = SparseArray<OnClickListener<Adapter>>(3)
-    private var itemChildLongClickListeners = SparseArray<OnLongClickListener<Adapter>>(3)
+internal class AdapterImpl<T> : IAdapter<T> {
+    private var itemClickListener: OnClickListener<IAdapter<T>>? = null
+    private var itemLongClickListener: OnLongClickListener<IAdapter<T>>? = null
+    private val itemChildClickListeners by lazy {
+        SparseArray<OnClickListener<IAdapter<T>>>(3)
+    }
+    private val itemChildLongClickListeners by lazy {
+        SparseArray<OnLongClickListener<IAdapter<T>>>(3)
+    }
 
-    override fun setItemClickListener(listener: OnClickListener<Adapter>) {
+    override fun setItemClickListener(listener: OnClickListener<IAdapter<T>>) {
         itemClickListener = listener
     }
 
-    override fun setItemLongClickListener(listener: OnLongClickListener<Adapter>) {
+    override fun setItemLongClickListener(listener: OnLongClickListener<IAdapter<T>>) {
         itemLongClickListener = listener
     }
 
     override fun addItemChildClickListener(
-        @IdRes id: Int, listener: OnClickListener<Adapter>
+        @IdRes id: Int, listener: OnClickListener<IAdapter<T>>
     ) {
         itemChildClickListeners.put(id, listener)
     }
 
     override fun addItemChildLongClickListener(
         @IdRes id: Int,
-        listener: OnLongClickListener<Adapter>
+        listener: OnLongClickListener<IAdapter<T>>
     ) {
         itemChildLongClickListeners.put(id, listener)
     }
 
-    override fun setClickListener(adapter: Adapter, holder: BaseViewHolder, viewType: Int) {
+     fun setClickListener(adapter: IAdapter<T>, holder: BaseViewHolder, viewType: Int) {
         holder.apply {
             itemClickListener?.let {
                 itemView.setOnClickListener {
@@ -151,12 +155,8 @@ class AdapterImpl<T, Adapter : RecyclerView.Adapter<BaseViewHolder>> : IAdapter<
     }
 
     override fun move(fromPosition: Int, toPosition: Int) {
-        if (fromPosition < toPosition) {
-            move(toPosition, fromPosition)
-        } else {
-            mutableItems.add(toPosition, mutableItems.removeAt(fromPosition))
-        }
+        mutableItems.add(toPosition, mutableItems.removeAt(fromPosition))
     }
 
-    override fun getItemData(position: Int) = mutableItems.getOrNull(position)
+    override fun get(position: Int) = mutableItems[position]
 }
