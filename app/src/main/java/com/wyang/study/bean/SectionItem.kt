@@ -1,7 +1,6 @@
 package com.wyang.study.bean
 
-import com.w6539android.base.ui.bravh.entity.MultiItemEntity
-import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
+import com.w6539android.base.ui.recycler.entity.MultiItemEntity
 
 /**
  * @author Yang
@@ -11,7 +10,7 @@ import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
 class SectionItem(
     val isMine: Boolean = false,
     val title: String = ""
-) : MultiItemEntity, SpanSizeEntity {
+) : MultiItemEntity {
 
     companion object {
         const val TYPE_HEADER_MINE = 1
@@ -25,6 +24,6 @@ class SectionItem(
         this.channel = channel
     }
 
-    override fun getItemType() = if (isMine) TYPE_HEADER_MINE else if (channel!=null)TYPE_ITEM else TYPE_HEADER_OTHER
-    override fun getSpanSize() = if (channel == null) 4 else 1
+    override fun getItemType() =
+        if (isMine) TYPE_HEADER_MINE else if (channel != null) TYPE_ITEM else TYPE_HEADER_OTHER
 }

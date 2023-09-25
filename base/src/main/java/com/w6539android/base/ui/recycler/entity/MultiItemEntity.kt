@@ -1,4 +1,4 @@
-package com.w6539android.base.ui.bravh.entity
+package com.w6539android.base.ui.recycler.entity
 
 /**
  * @author Yang
@@ -6,5 +6,5 @@ package com.w6539android.base.ui.bravh.entity
  * @desc
  */
 interface MultiItemEntity {
-    fun getItemType(): Int
+    fun getItemType(): Int = 0
 }

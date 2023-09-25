@@ -1,53 +1,53 @@
-package com.w6539android.base.ui.bravh.helper
+package com.w6539android.base.ui.recycler.helper
 
 import android.util.SparseArray
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.core.util.keyIterator
 import androidx.recyclerview.widget.RecyclerView
-import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.ui.bravh.OnClickListener
-import com.w6539android.base.ui.bravh.OnLongClickListener
+import com.w6539android.base.ui.recycler.BaseViewHolder
+import com.w6539android.base.ui.recycler.OnClickListener
+import com.w6539android.base.ui.recycler.OnLongClickListener
+import com.w6539android.base.ui.recycler.interfaces.IBaseAdapter
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author Yang
  * @since 2023/8/23 10:33
  * @desc
  */
-internal class AdapterImpl<T> : IAdapter<T> {
-    private var itemClickListener: OnClickListener<IAdapter<T>>? = null
-    private var itemLongClickListener: OnLongClickListener<IAdapter<T>>? = null
+internal class AdapterImpl<T> : IBaseAdapter<T> {
+    private var itemClickListener: OnClickListener<IBaseAdapter<T>>? = null
+    private var itemLongClickListener: OnLongClickListener<IBaseAdapter<T>>? = null
     private val itemChildClickListeners by lazy {
-        SparseArray<OnClickListener<IAdapter<T>>>(3)
+        SparseArray<OnClickListener<IBaseAdapter<T>>>(3)
     }
     private val itemChildLongClickListeners by lazy {
-        SparseArray<OnLongClickListener<IAdapter<T>>>(3)
+        SparseArray<OnLongClickListener<IBaseAdapter<T>>>(3)
     }
 
-    override fun setItemClickListener(listener: OnClickListener<IAdapter<T>>) {
+    override fun setItemClickListener(listener: OnClickListener<IBaseAdapter<T>>) {
         itemClickListener = listener
     }
 
-    override fun setItemLongClickListener(listener: OnLongClickListener<IAdapter<T>>) {
+    override fun setItemLongClickListener(listener: OnLongClickListener<IBaseAdapter<T>>) {
         itemLongClickListener = listener
     }
 
     override fun addItemChildClickListener(
-        @IdRes id: Int, listener: OnClickListener<IAdapter<T>>
+        @IdRes id: Int, listener: OnClickListener<IBaseAdapter<T>>
     ) {
         itemChildClickListeners.put(id, listener)
     }
 
     override fun addItemChildLongClickListener(
         @IdRes id: Int,
-        listener: OnLongClickListener<IAdapter<T>>
+        listener: OnLongClickListener<IBaseAdapter<T>>
     ) {
         itemChildLongClickListeners.put(id, listener)
     }
 
-     fun setClickListener(adapter: IAdapter<T>, holder: BaseViewHolder, viewType: Int) {
+    fun setClickListener(adapter: IBaseAdapter<T>, holder: BaseViewHolder) {
         holder.apply {
             itemClickListener?.let {
                 itemView.setOnClickListener {

@@ -1,4 +1,4 @@
-package com.w6539android.base.ui.bravh
+package com.w6539android.base.ui.recycler
 
 import android.view.View
 

@@ -1,38 +1,46 @@
-package com.w6539android.base.ui.bravh
+package com.w6539android.base.ui.recycler
 
+import android.annotation.SuppressLint
+import android.util.SparseIntArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
-import com.w6539android.base.ui.bravh.helper.AdapterImpl
-import com.w6539android.base.ui.bravh.helper.IAdapter
+import com.w6539android.base.ui.recycler.entity.MultiItemEntity
+import com.w6539android.base.ui.recycler.helper.AdapterImpl
+import com.w6539android.base.ui.recycler.interfaces.IBaseAdapter
+import com.w6539android.base.ui.recycler.interfaces.IViewHolder
 import kotlin.math.abs
 import kotlin.math.min
 
 /**
  * @author Yang
  * @since 2023/8/30 16:05
- * @desc 适用于不频繁刷新列表
+ * @desc 适用于不频繁刷新列表, layoutId非零为单条目, layoutIds size > 1 为多条目
  */
-abstract class BaseQuickAdapter<T>(
+abstract class BaseAdapter<T>(
     @LayoutRes private val layoutId: Int = 0,
-) : RecyclerView.Adapter<BaseViewHolder>(), IBaseAdapter<T>, IAdapter<T> {
+) : RecyclerView.Adapter<BaseViewHolder>(), IBaseAdapter<T>, IViewHolder<T> {
     private val mAdapterImpl = AdapterImpl<T>()
+    private val layoutIds = SparseIntArray()
 
     init {
         mAdapterImpl.setNewData(emptyList())
+        addItemType(0, layoutId)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        createBaseViewHolder(parent, viewType).also {
-            mAdapterImpl.setClickListener(this, it, viewType)
+    protected fun addItemType(type: Int, @LayoutRes layoutResId: Int) {
+        layoutIds.put(type, layoutResId)
+    }
+
+    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        BaseViewHolder(layoutIds.get(viewType), parent).also {
+            mAdapterImpl.setClickListener(this, it)
         }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    final override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         convert(holder, get(position))
     }
 
@@ -50,34 +58,20 @@ abstract class BaseQuickAdapter<T>(
 
     override fun getItemCount() = mAdapterImpl.items.size
 
-    override fun createBaseViewHolder(parent: ViewGroup, viewType: Int) =
-        BaseViewHolder(layoutId, parent)
+    override fun getItemViewType(position: Int): Int {
+        val t = get(position)
+        if (t is MultiItemEntity) {
+            return t.getItemType()
+        }
+        return super.getItemViewType(position)
+    }
 
     override fun convert(holder: BaseViewHolder, item: T, payload: Any) {}
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        val manager = recyclerView.layoutManager
-        if (manager is GridLayoutManager) {
-            val spanSizeLookup = manager.spanSizeLookup
-
-            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return get(position).let {
-                        if (it is SpanSizeEntity)
-                            it.getSpanSize()
-                        else
-                            spanSizeLookup.getSpanSize(position)
-                    }
-                }
-            }
-        }
-    }
 
     /*点击事件及数据操作*/
     final override fun setItemClickListener(
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Unit
@@ -87,7 +81,7 @@ abstract class BaseQuickAdapter<T>(
 
     final override fun setItemLongClickListener(
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Boolean
@@ -98,7 +92,7 @@ abstract class BaseQuickAdapter<T>(
     final override fun addItemChildClickListener(
         @IdRes id: Int,
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Unit
@@ -109,7 +103,7 @@ abstract class BaseQuickAdapter<T>(
     final override fun addItemChildLongClickListener(
         @IdRes id: Int,
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Boolean
@@ -117,6 +111,7 @@ abstract class BaseQuickAdapter<T>(
         mAdapterImpl.addItemChildLongClickListener(id, listener)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     final override fun setNewData(list: List<T>) {
         mAdapterImpl.setNewData(list)
         notifyDataSetChanged()
@@ -171,9 +166,8 @@ abstract class BaseQuickAdapter<T>(
 
     final override fun move(fromPosition: Int, toPosition: Int) {
         mAdapterImpl.move(fromPosition, toPosition)
-        notifyItemRangeChanged(min(fromPosition, toPosition), abs(fromPosition - toPosition + 1))
+        notifyItemRangeChanged(min(fromPosition, toPosition), abs(fromPosition - toPosition) + 1)
     }
 
-    final override fun get(position: Int) =
-        mAdapterImpl.get(position)
+    final override fun get(position: Int) = mAdapterImpl.get(position)
 }

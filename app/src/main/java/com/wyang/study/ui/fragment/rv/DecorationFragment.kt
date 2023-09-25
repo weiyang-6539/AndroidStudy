@@ -1,9 +1,9 @@
 package com.wyang.study.ui.fragment.rv
 
 import com.w6539android.base.base.fragment.BaseFragment
-import com.w6539android.base.ui.bravh.BaseListAdapter
-import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.widget.decoration.SpacingDecoration
+import com.w6539android.base.ui.recycler.BaseDifferAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
+import com.w6539android.base.ui.recycler.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
 
@@ -35,7 +35,7 @@ class DecorationFragment : BaseFragment<LayoutRecyclerBinding>() {
         )
     }
 
-    private val mAdapter = object : BaseListAdapter<String>(
+    private val mAdapter = object : BaseDifferAdapter<String>(
         R.layout.item_decoration_recycler
     ) {
         override fun convert(holder: BaseViewHolder, item: String) {

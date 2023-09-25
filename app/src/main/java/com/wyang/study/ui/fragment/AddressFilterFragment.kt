@@ -3,8 +3,8 @@ package com.wyang.study.ui.fragment
 import android.text.TextUtils
 import android.widget.Toast
 import com.w6539android.base.base.fragment.BaseFragment
-import com.w6539android.base.ui.bravh.BaseListAdapter
-import com.w6539android.base.ui.bravh.BaseViewHolder
+import com.w6539android.base.ui.recycler.BaseDifferAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.FragmentAddressFilterBinding
 import com.wyang.study.declare.TreeNode
@@ -104,7 +104,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         return true
     }
 
-    private val mAdapter: BaseListAdapter<TreeNode> = object : BaseListAdapter<TreeNode>(
+    private val mAdapter: BaseDifferAdapter<TreeNode> = object : BaseDifferAdapter<TreeNode>(
         R.layout.item_address_filter_recycler
     ) {
         override fun convert(holder: BaseViewHolder, item: TreeNode) {

@@ -1,17 +1,18 @@
 package com.wyang.study.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.ui.bravh.BaseMultiItemAdapter
+import com.w6539android.base.ui.recycler.BaseAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.bean.SectionItem
 import com.wyang.study.ui.helper.IDragDelegate
 
 class DragSortAdapter(
     itemTouchHelper: ItemTouchHelper
-) : BaseMultiItemAdapter<SectionItem>(), IDragDelegate {
+) : BaseAdapter<SectionItem>(), IDragDelegate {
     private var itemTouchHelper: ItemTouchHelper? = null
     private var minActivatedPos = 0
     private var maxActivatedPos = 0
@@ -25,6 +26,12 @@ class DragSortAdapter(
         addItemType(SectionItem.TYPE_HEADER_MINE, R.layout.item_drag_header_mine_recycler)
         addItemType(SectionItem.TYPE_HEADER_OTHER, R.layout.item_drag_header_other_recycler)
         addItemType(SectionItem.TYPE_ITEM, R.layout.item_drag_channel_recycler)
+    }
+
+    override fun isFullSpanItem(position: Int): Boolean {
+        val item = get(position)
+        Log.e("DragSort", "type = " + item.getItemType())
+        return item.getItemType() == SectionItem.TYPE_HEADER_MINE || item.getItemType() == SectionItem.TYPE_HEADER_OTHER
     }
 
     fun isEdit() = isEdit
@@ -55,10 +62,12 @@ class DragSortAdapter(
                     .setText(R.id.tv_edit, if (isEdit) "完成" else "编辑")
                     .setText(R.id.tv_prompt, if (isEdit) "拖拽可以排序" else "点击进入频道")
             }
+
             SectionItem.TYPE_HEADER_OTHER -> {
                 holder.setText(R.id.tv_title, item.title)
                     .setText(R.id.tv_prompt, "点击添加频道")
             }
+
             else -> {
                 item.channel?.apply {
                     if (isMine) {

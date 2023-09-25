@@ -1,4 +1,4 @@
-package com.w6539android.base.ui.bravh
+package com.w6539android.base.ui.recycler
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.*
-import com.w6539android.base.ui.bravh.entity.SpanSizeEntity
-import com.w6539android.base.ui.bravh.helper.AdapterImpl
-import com.w6539android.base.ui.bravh.helper.IAdapter
+import com.w6539android.base.ui.recycler.helper.AdapterImpl
+import com.w6539android.base.ui.recycler.interfaces.IBaseAdapter
+import com.w6539android.base.ui.recycler.interfaces.IViewHolder
 import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -18,18 +18,18 @@ import java.util.concurrent.Executors
  * @since 2023/8/21 10:32
  * @desc 单条目列表
  */
-abstract class BaseListAdapter<T>(
+abstract class BaseDifferAdapter<T>(
     @LayoutRes private val layoutId: Int,
     callback: DiffUtil.ItemCallback<T> = object : DiffUtil.ItemCallback<T>() {
-        override fun areItemsTheSame(oldItem: T, newItem: T) = false
-        override fun areContentsTheSame(oldItem: T, newItem: T) = false
+        override fun areItemsTheSame(oldItem: T & Any, newItem: T & Any) = false
+        override fun areContentsTheSame(oldItem: T & Any, newItem: T & Any) = false
     },
-    executor: Executor = BaseListAdapter.executor
+    executor: Executor = BaseDifferAdapter.executor
 ) : ListAdapter<T, BaseViewHolder>(
     AsyncDifferConfig.Builder(callback)
         .setBackgroundThreadExecutor(executor)
         .build()
-), IBaseAdapter<T>, IAdapter<T> {
+), IBaseAdapter<T>, IViewHolder<T> {
     private companion object {
         val executor: ExecutorService = Executors.newFixedThreadPool(5)
     }
@@ -41,8 +41,8 @@ abstract class BaseListAdapter<T>(
     }
 
     final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        createBaseViewHolder(parent, viewType).also {
-            mAdapterImpl.setClickListener(this, it, viewType)
+        BaseViewHolder(layoutId, parent).also {
+            mAdapterImpl.setClickListener(this, it)
         }
 
     final override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -61,36 +61,14 @@ abstract class BaseListAdapter<T>(
         }
     }
 
-    override fun createBaseViewHolder(parent: ViewGroup, viewType: Int) =
-        BaseViewHolder(layoutId, parent)
-
     override fun convert(holder: BaseViewHolder, item: T, payload: Any) {
 
-    }
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        val manager = recyclerView.layoutManager
-        if (manager is GridLayoutManager) {
-            val spanSizeLookup = manager.spanSizeLookup
-
-            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return getItem(position).let {
-                        if (it is SpanSizeEntity)
-                            it.getSpanSize()
-                        else
-                            spanSizeLookup.getSpanSize(position)
-                    }
-                }
-            }
-        }
     }
 
     /*点击事件及数据操作*/
     final override fun setItemClickListener(
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Unit
@@ -100,7 +78,7 @@ abstract class BaseListAdapter<T>(
 
     final override fun setItemLongClickListener(
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Boolean
@@ -111,7 +89,7 @@ abstract class BaseListAdapter<T>(
     final override fun addItemChildClickListener(
         @IdRes id: Int,
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Unit
@@ -122,7 +100,7 @@ abstract class BaseListAdapter<T>(
     final override fun addItemChildLongClickListener(
         @IdRes id: Int,
         listener: (
-            adapter: IAdapter<T>,
+            adapter: IBaseAdapter<T>,
             view: View,
             position: Int
         ) -> Boolean

@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.w6539android.base.base.fragment.BaseFragment
-import com.w6539android.base.ui.bravh.BaseListAdapter
-import com.w6539android.base.ui.bravh.BaseViewHolder
+import com.w6539android.base.ui.recycler.BaseDifferAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.FragmentAddressLinkageBinding
-import com.wyang.study.declare.NodeSeeker
 import com.wyang.study.declare.TreeNode
 import com.wyang.study.ui.util.TreeHelper
 
@@ -109,7 +108,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
         tab?.select()
     }
 
-    private val mAdapter: BaseListAdapter<TreeNode> = object : BaseListAdapter<TreeNode>(
+    private val mAdapter: BaseDifferAdapter<TreeNode> = object : BaseDifferAdapter<TreeNode>(
         R.layout.item_address_recycler) {
             override fun convert(holder: BaseViewHolder, item: TreeNode) {
                 holder.setText(R.id.tv_name, item.getAttribute<String>("name"))

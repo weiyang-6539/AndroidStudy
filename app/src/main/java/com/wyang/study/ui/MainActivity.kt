@@ -1,18 +1,17 @@
 package com.wyang.study.ui
 
+import android.app.Activity
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.w6539android.base.widget.decoration.SpacingDecoration
+import com.w6539android.base.ext.openActivity
+import com.w6539android.base.ui.recycler.decoration.SpacingDecoration
 import com.wyang.study.R
 import com.wyang.study.adapter.SimpleAdapter
 import com.wyang.study.bean.Simple
 import com.wyang.study.databinding.ActivityMainBinding
 import com.wyang.study.ui.base.BaseActivity
-import com.wyang.study.ui.util.ActivityUtils
 import com.wyang.study.ui.util.DataProvider
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -57,16 +56,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             mRecyclerView.adapter = mAdapter
             mAdapter.setItemClickListener { _, _, position ->
                 val simple = mAdapter.get(position)
-                if (!TextUtils.isEmpty(simple.className)) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("simple", simple)
-                    ActivityUtils.startActivity(
-                        this@MainActivity,
-                        ContainerActivity::class.java,
-                        bundle
-                    )
+                if (simple.isActivity) {
+                    simple.clazz?.let {
+                        openActivity(it as Class<out Activity>)
+                    }
                 } else {
-                    Toast.makeText(this@MainActivity, "请设置对应Fragment!", Toast.LENGTH_LONG).show()
+                    Bundle().apply {
+                        putSerializable("simple", simple)
+                        openActivity(ContainerActivity::class.java, this)
+                    }
                 }
             }
             mAdapter.setNewData(getData(0))

@@ -10,5 +10,6 @@ import java.io.Serializable
 data class Simple(
     val title: String,
     val description: String,
-    val className: String,
+    val clazz: Class<*>? = null,
+    val isActivity: Boolean = false,
 ) : Serializable

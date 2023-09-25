@@ -9,8 +9,8 @@
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_simple_recycler" />
+        android:orientation="vertical"
+        tools:itemCount="30"
+        app:layoutManager="com.w6539android.base.ui.recycler.layoutmanager.ExGridLayoutManager"
+        app:spanCount="4" />
 </FrameLayout>

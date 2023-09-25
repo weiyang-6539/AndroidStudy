@@ -2,15 +2,15 @@ package com.wyang.study.adapter
 
 import android.content.Context
 import android.widget.ImageView
-import com.w6539android.base.ui.bravh.BaseListAdapter
-import com.w6539android.base.ui.bravh.BaseViewHolder
+import com.w6539android.base.ui.recycler.BaseDifferAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.bean.Discover
 import com.wyang.study.ui.util.GlideImageLoader
 import com.wyang.study.ui.widget.NineGridLayout
 import com.wyang.study.ui.widget.NineGridLayout.ImageLoaderInterface
 
-class DiscoverAdapter : BaseListAdapter<Discover>(
+class DiscoverAdapter : BaseDifferAdapter<Discover>(
     R.layout.item_wechat_discovery
 ) {
 

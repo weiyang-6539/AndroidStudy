@@ -3,8 +3,8 @@ package com.wyang.study.ui.fragment.rv
 import android.util.Log
 import com.w6539android.base.base.fragment.BaseFragment
 import com.w6539android.base.ext.json2List
-import com.w6539android.base.ui.bravh.BaseListAdapter
-import com.w6539android.base.ui.bravh.BaseViewHolder
+import com.w6539android.base.ui.recycler.BaseDifferAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.databinding.LayoutRecyclerBinding
 import com.wyang.study.ext.chineseChar2EN
@@ -18,7 +18,7 @@ class ContactsFragment : BaseFragment<LayoutRecyclerBinding>() {
     override fun getViewBinding() = LayoutRecyclerBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        mBinding.mRecyclerView.adapter = object : BaseListAdapter<String>(R.layout.item_contacts_recycler) {
+        mBinding.mRecyclerView.adapter = object : BaseDifferAdapter<String>(R.layout.item_contacts_recycler) {
                 override fun convert(holder: BaseViewHolder, item: String) {
                     holder.setText(R.id.tv_nickname, item)
                 }

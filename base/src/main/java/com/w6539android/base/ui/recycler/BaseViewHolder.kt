@@ -1,4 +1,4 @@
-package com.w6539android.base.ui.bravh
+package com.w6539android.base.ui.recycler
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -26,7 +26,7 @@ open class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     /**
      * Views indexed with their IDs
      */
-    private val views: SparseArray<View> = SparseArray()
+    private val views = SparseArray<View>()
 
     open fun <T : View> getView(@IdRes viewId: Int): T {
         val view = getViewOrNull<T>(viewId)

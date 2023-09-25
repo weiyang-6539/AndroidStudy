@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.ContainerActivity" />
+        <activity android:name=".ui.ContainerActivity" android:exported="false"/>
+        <activity android:name=".ui.activity.RvActivity" android:exported="false"/>
 
         <service
             android:name=".global.InitIntentService"

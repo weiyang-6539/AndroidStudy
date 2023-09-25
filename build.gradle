@@ -1,8 +1,8 @@
-    // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
-    ext.hilt_version = '2.28-alpha'
+    ext.kotlin_version = '1.9.0'
+    ext.hilt_version = '2.40.1'
 
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
@@ -16,7 +16,7 @@ buildscript {
     }
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         //noinspection GradleDependency
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //Hilt插件
@@ -40,15 +40,15 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 ext {
     android = [
-            compileSdkVersion: 30,
-            buildToolsVersion: "30.0.3",
+            compileSdkVersion: 33,
+            buildToolsVersion: "33.0.1",
             minSdkVersion    : 21,
-            targetSdkVersion : 30,
+            targetSdkVersion : 33,
             versionCode      : 1,
             versionName      : "1.0.0"
     ]

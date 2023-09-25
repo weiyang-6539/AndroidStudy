@@ -1,9 +1,10 @@
 package com.wyang.study.ui.fragment.rv
 
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.w6539android.base.base.fragment.BaseFragment
+import com.w6539android.base.ui.recycler.decoration.SpacingDecoration
+import com.w6539android.base.ui.recycler.layoutmanager.ExGridLayoutManager
 import com.wyang.study.R
 import com.wyang.study.adapter.DragSortAdapter
 import com.wyang.study.databinding.FragmentDragSortBinding
@@ -20,7 +21,12 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
     override fun getViewBinding() = FragmentDragSortBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        mRecyclerBinding.mRecyclerView.layoutManager = GridLayoutManager(context, 4)
+        mRecyclerBinding.mRecyclerView.layoutManager = ExGridLayoutManager(context, 4)
+        mRecyclerBinding.mRecyclerView.addItemDecoration(
+            SpacingDecoration.newDecoration()
+                .setPadding(10, 10, 10, 10)
+                .setSpacing(0)
+        )
 
         //使用ItemTouchHelper
         val callback = ItemDragHelperCallback(context)
@@ -47,7 +53,7 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
         mAdapter = DragSortAdapter(helper)
         mRecyclerBinding.mRecyclerView.adapter = mAdapter
         mAdapter.setItemClickListener { _, _, position ->
-            val channel = mAdapter.get(position)?.channel ?: return@setItemClickListener
+            val channel = mAdapter.get(position).channel ?: return@setItemClickListener
             if (mAdapter.isEdit()) {
                 if (channel.isMine) {
                     if (channel.isActivated) {

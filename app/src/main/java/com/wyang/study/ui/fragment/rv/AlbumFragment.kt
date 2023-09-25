@@ -9,12 +9,11 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.w6539android.base.base.fragment.BaseFragment
-import com.w6539android.base.ui.bravh.BaseViewHolder
-import com.w6539android.base.ui.bravh.BaseMultiItemAdapter
+import com.w6539android.base.ui.recycler.BaseAdapter
+import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
 import com.wyang.study.bean.Album
 import com.wyang.study.bean.AlbumBase
@@ -160,7 +159,7 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         return outMetrics.widthPixels
     }
 
-    inner class AlbumAdapter : BaseMultiItemAdapter<AlbumBase>() {
+    inner class AlbumAdapter : BaseAdapter<AlbumBase>() {
         override fun convert(holder: BaseViewHolder, item: AlbumBase) {
             if (item is Album) {
                 val ivAlbum = holder.getView<ImageView>(R.id.iv_album)
