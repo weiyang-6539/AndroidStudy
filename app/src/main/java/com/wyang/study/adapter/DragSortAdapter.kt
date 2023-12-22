@@ -1,7 +1,6 @@
 package com.wyang.study.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.w6539android.base.ui.recycler.BaseAdapter
@@ -28,10 +27,11 @@ class DragSortAdapter(
         addItemType(SectionItem.TYPE_ITEM, R.layout.item_drag_channel_recycler)
     }
 
-    override fun isFullSpanItem(position: Int): Boolean {
+    override fun getItemSpanCount(position: Int):Int {
         val item = get(position)
-        Log.e("DragSort", "type = " + item.getItemType())
-        return item.getItemType() == SectionItem.TYPE_HEADER_MINE || item.getItemType() == SectionItem.TYPE_HEADER_OTHER
+        if (item.getItemType() == SectionItem.TYPE_HEADER_MINE || item.getItemType() == SectionItem.TYPE_HEADER_OTHER)
+            return 100
+        return 1
     }
 
     fun isEdit() = isEdit

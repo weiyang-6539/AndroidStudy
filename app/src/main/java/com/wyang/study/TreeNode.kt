@@ -23,8 +23,4 @@ class TreeNode(val parent: TreeNode?) : HashMap<String, Any>() {
     fun childCount(): Int {
         return children.size
     }
-
-    fun <T> getAttr(key: String): T {
-        return get(key) as T
-    }
 }

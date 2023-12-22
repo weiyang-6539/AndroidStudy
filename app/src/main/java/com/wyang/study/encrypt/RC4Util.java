@@ -97,7 +97,7 @@ public class RC4Util {
             cypherBytes[jump] = tmp;
 
             try {
-                result.append(new String(new char[]{(char) (encrypt.charAt(x) ^ cypherBytes[t])}));
+                result.append((char) (encrypt.charAt(x) ^ cypherBytes[t]));
             } catch (Exception e) {
                 e.printStackTrace();
             }

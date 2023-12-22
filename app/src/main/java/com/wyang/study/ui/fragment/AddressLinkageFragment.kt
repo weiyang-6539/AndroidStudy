@@ -9,8 +9,8 @@ import com.w6539android.base.base.fragment.BaseFragment
 import com.w6539android.base.ui.recycler.BaseDifferAdapter
 import com.w6539android.base.ui.recycler.BaseViewHolder
 import com.wyang.study.R
+import com.wyang.study.TreeNode
 import com.wyang.study.databinding.FragmentAddressLinkageBinding
-import com.wyang.study.declare.TreeNode
 import com.wyang.study.ui.util.TreeHelper
 
 class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
@@ -86,7 +86,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
         val tabCount = mBinding.mTabLayout.tabCount
         if (tabCount == 0) {
             selectPos.put(0, -1)
-            data.put(0, mTreeHelper!!.rootSeeker().children().results())
+            data.put(0, mTreeHelper!!.rootSeeker().children().results().toList())
             mAdapter.setNewData(data[0])
         }
         mBinding.mTabLayout.removeAllTabs()
@@ -98,7 +98,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
                     .let { mBinding.mTabLayout.addTab(it) }
             } else {
                 val list = data[key]
-                mBinding.mTabLayout.newTab().setText(list[position].getAttribute<String>("name"))
+                mBinding.mTabLayout.newTab().setText(list[position]["name"] as String)
                     .let {
                         mBinding.mTabLayout.addTab(it)
                     }
@@ -111,7 +111,7 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
     private val mAdapter: BaseDifferAdapter<TreeNode> = object : BaseDifferAdapter<TreeNode>(
         R.layout.item_address_recycler) {
             override fun convert(holder: BaseViewHolder, item: TreeNode) {
-                holder.setText(R.id.tv_name, item.getAttribute<String>("name"))
+                holder.setText(R.id.tv_name, item["name"] as String)
                 when {
                     getSelectPosition() == -1 -> holder.setVisible(R.id.iv_icon, false)
                     getSelectPosition() == holder.adapterPosition -> holder.setVisible(

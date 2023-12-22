@@ -16,7 +16,7 @@ buildscript {
     }
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.4'
         //noinspection GradleDependency
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //Hilt插件
@@ -37,6 +37,7 @@ allprojects {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
+
     }
 }
 
@@ -45,10 +46,10 @@ tasks.register('clean', Delete) {
 }
 ext {
     android = [
-            compileSdkVersion: 33,
+            compileSdkVersion: 34,
             buildToolsVersion: "33.0.1",
             minSdkVersion    : 21,
-            targetSdkVersion : 33,
+            targetSdkVersion : 34,
             versionCode      : 1,
             versionName      : "1.0.0"
     ]

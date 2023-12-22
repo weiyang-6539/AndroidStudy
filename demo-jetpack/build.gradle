@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -40,6 +41,7 @@ android {
                 "-Xjvm-default=all",
         ]
     }
+    namespace 'com.w6539.demo_jetpack'
 }
 
 dependencies {
@@ -49,6 +51,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     //noinspection GradleDependency
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.core:core-ktx:1.9.0'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     //noinspection GradleDependency
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"

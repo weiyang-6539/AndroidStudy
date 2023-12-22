@@ -11,7 +11,7 @@ import net.sourceforge.pinyin4j.PinyinHelper
 fun String.chineseChar2EN(): String {
     return if (TextUtils.isEmpty(this)) "" else {
         val convert = StringBuilder()
-        for (i in 0 until length) {
+        for (i in indices) {
             val word = get(i)
             val array = PinyinHelper.toHanyuPinyinStringArray(word)
             if (array != null && array.isNotEmpty()) {

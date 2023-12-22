@@ -59,6 +59,11 @@ class DataProvider {
                         "Notification",
                         "通知栏的使用",
                         NotificationFragment::class.java
+                    ),
+                    Simple(
+                        "FlexboxLayout",
+                        "谷歌弹性盒子, 与css flex类似",
+                        FlexBoxFragment::class.java
                     )
                 )
                 3 -> mutableListOf(
@@ -198,7 +203,6 @@ class DataProvider {
             SectionItem(Channel("养生", true, false)),
             SectionItem(Channel("星座", true, false))
         )
-
 
         fun getDiscoverData() = mutableListOf(
             Discover("", "", "", getImageUrls(1)),

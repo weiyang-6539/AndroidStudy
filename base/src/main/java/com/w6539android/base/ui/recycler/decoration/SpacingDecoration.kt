@@ -1,6 +1,7 @@
 package com.w6539android.base.ui.recycler.decoration
 
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
@@ -135,32 +136,28 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
                 val second = pair.second
 
                 if (first is BaseAdapter<*>) {
-                    if (first.isFullSpanAdapter())
+                    if (first.getItemSpanCount(second) >= spanCount) {
                         return
-                    if (first.isFullSpanItem(second))
-                        return
+                    }
                 }
                 childPos = second
             }
-
             is BaseAdapter<*> -> {
-                if (adapter.isFullSpanAdapter())
-                    return
-                if (adapter.isFullSpanItem(childPos))
+                if (adapter.getItemSpanCount(childPos) >= spanCount)
                     return
             }
         }
-
+        val column = childPos % spanCount//垂直主轴的排列数
+        val row = childPos / spanCount// 第几列
         if (orientation == RecyclerView.VERTICAL) {
             val totalSpace = spacing * (spanCount - 1) + paddingStart + paddingEnd // 总间距
             val eachSpace = totalSpace / spanCount // 平均每个item的间距
-            val column = childPos % spanCount
-            val row = childPos / spanCount
 
             outRect.left = column * (eachSpace - paddingStart - paddingEnd) /
                     (spanCount - 1) + paddingStart
             outRect.right = eachSpace - outRect.left
-
+            outRect.top = spacing / 2
+            outRect.bottom = spacing / 2
             when {
                 childPos < spanCount -> {
                     outRect.top = paddingTop
@@ -178,8 +175,6 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
         } else {
             val totalSpace = spacing * (spanCount - 1) + paddingTop + paddingBottom // 总间距
             val eachSpace = totalSpace / spanCount // 平均每个item的间距
-            val column = childPos % spanCount
-            val row = childPos / spanCount
 
             outRect.top = column * (eachSpace - paddingTop - paddingBottom) /
                     (spanCount - 1) + paddingTop
@@ -210,8 +205,8 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
             val eachSpace = totalSpace / spanCount // 平均每个item的间距
             val row = childPos / spanCount
 
-            outRect.left =
-                spanIndex * (eachSpace - paddingStart - paddingEnd) / (spanCount - 1) + paddingStart
+            outRect.left = spanIndex * (eachSpace - paddingStart - paddingEnd) /
+                    (spanCount - 1) + paddingStart
             outRect.right = eachSpace - outRect.left
 
             when {
@@ -253,5 +248,4 @@ open class SpacingDecoration private constructor() : RecyclerView.ItemDecoration
             }
         }
     }
-
 }

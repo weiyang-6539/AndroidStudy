@@ -1,6 +1,7 @@
 package com.w6539android.base.ui.recycler
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.util.SparseIntArray
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ abstract class BaseAdapter<T>(
 
     init {
         mAdapterImpl.setNewData(emptyList())
-        addItemType(0, layoutId)
+        if (layoutId != 0) {
+            layoutIds.put(0, layoutId)
+        }
     }
 
     protected fun addItemType(type: Int, @LayoutRes layoutResId: Int) {

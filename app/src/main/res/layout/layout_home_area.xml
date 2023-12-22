@@ -2,11 +2,13 @@
 <com.wyang.study.ui.widget.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#1000">
+    android:background="#1000"
+    android:minHeight="50dp"
+    android:padding="15dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:text="Item1"/>
+        android:text="Item1"
+        android:textSize="15sp" />
 </com.wyang.study.ui.widget.FlexboxLayout>

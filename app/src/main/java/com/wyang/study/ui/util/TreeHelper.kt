@@ -1,7 +1,8 @@
 package com.wyang.study.ui.util
 
-import com.wyang.study.declare.NodeSeeker
-import com.wyang.study.declare.TreeNode
+import android.text.TextUtils
+import com.wyang.study.NodeSeeker
+import com.wyang.study.TreeNode
 
 class TreeHelper {
     private val rootNode by lazy {
@@ -12,7 +13,7 @@ class TreeHelper {
     }
 
     fun putAreaNode(node: TreeNode) {
-        areaMap[node.getAttribute("code")] = node
+        areaMap[node["code"] as String] = node
     }
 
     fun getAreaNode(code: String?): TreeNode? {
@@ -35,35 +36,43 @@ class TreeHelper {
         return areaSeeker().children()
     }
 
-    fun streetsSeeker(): NodeSeeker? {
+    fun streetsSeeker(): NodeSeeker {
         return citiesSeeker().children()
     }
 
-    fun getProvince(code: String?): TreeNode? {
+    fun getProvince(code: String?): TreeNode {
         return rootSeeker()
             .children()
-            .attribute("code", code)
+            .match {
+                return@match TextUtils.equals(it["code"] as String, code)
+            }
             .firstResult()
     }
 
-    fun getCity(code: String?): TreeNode? {
+    fun getCity(code: String?): TreeNode {
         return provincesSeeker()
             .children()
-            .attribute("code", code)
+            .match {
+                return@match TextUtils.equals(it["code"] as String, code)
+            }
             .firstResult()
     }
 
-    fun getArea(code: String?): TreeNode? {
+    fun getArea(code: String?): TreeNode {
         return citiesSeeker()
             .children()
-            .attribute("code", code)
+            .match {
+                return@match TextUtils.equals(it["code"] as String, code)
+            }
             .firstResult()
     }
 
-    fun getStreet(code: String?): TreeNode? {
+    fun getStreet(code: String?): TreeNode {
         return areaSeeker()
             .children()
-            .attribute("code", code)
+            .match {
+                return@match TextUtils.equals(it["code"] as String, code)
+            }
             .firstResult()
     }
 }

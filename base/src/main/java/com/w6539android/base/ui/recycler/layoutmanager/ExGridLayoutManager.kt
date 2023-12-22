@@ -2,10 +2,12 @@ package com.w6539android.base.ui.recycler.layoutmanager
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.w6539android.base.ui.recycler.BaseAdapter
+import kotlin.math.min
 
 /**
  * @author Yang
@@ -31,24 +33,17 @@ class ExGridLayoutManager : GridLayoutManager {
 
         override fun getSpanSize(position: Int): Int {
             val adapter = adapter ?: return originalSpanSizeLookup.getSpanSize(position)
-
-             if (adapter is ConcatAdapter) {
+            if (adapter is ConcatAdapter) {
                 val pair = adapter.getWrappedAdapterAndPosition(position)
                 val first = pair.first
                 val second = pair.second
                 if (first is BaseAdapter<*>) {
-                    if (first.isFullSpanAdapter())
-                        return spanCount
-                    if (first.isFullSpanItem(second))
-                        return spanCount
+                    return min(spanCount, first.getItemSpanCount(second))
                 }
                 return 1
             } else {
                 if (adapter is BaseAdapter<*>) {
-                    if (adapter.isFullSpanAdapter())
-                        return spanCount
-                    if (adapter.isFullSpanItem(position))
-                        return spanCount
+                    return min(spanCount, adapter.getItemSpanCount(position))
                 }
                 return 1
             }

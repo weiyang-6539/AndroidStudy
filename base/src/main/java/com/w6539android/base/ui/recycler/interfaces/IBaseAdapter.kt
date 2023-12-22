@@ -18,6 +18,5 @@ interface IBaseAdapter<T> : IListener<IBaseAdapter<T>> {
     fun move(fromPosition: Int, toPosition: Int)
     fun get(position: Int): T
 
-    fun isFullSpanAdapter() = false
-    fun isFullSpanItem(position: Int) = false
+    fun getItemSpanCount(position: Int) = 1
 }

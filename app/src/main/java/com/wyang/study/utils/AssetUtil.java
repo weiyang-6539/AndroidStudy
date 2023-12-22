@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.wyang.study.declare.TreeNode;
+import com.wyang.study.TreeNode;
 import com.wyang.study.ui.util.TreeHelper;
 
 import org.json.JSONArray;
@@ -53,9 +53,9 @@ public class AssetUtil {
 
             TreeNode parent = treeHelper.rootSeeker().firstResult();
             pNode = new TreeNode(parent);
-            pNode.setAttribute("code", pObj.getString("code"));
-            pNode.setAttribute("name", pObj.getString("name"));
-            pNode.setAttribute("level", 1);
+            pNode.put("code", pObj.getString("code"));
+            pNode.put("name", pObj.getString("name"));
+            pNode.put("level", 1);
         }
 
         String cJson = readAsset(context, "cities.json");
@@ -69,9 +69,9 @@ public class AssetUtil {
             String parentCode = cObj.getString("provinceCode");
             TreeNode parent = treeHelper.getProvince(parentCode);
             cNode = new TreeNode(parent);
-            cNode.setAttribute("code", cObj.getString("code"));
-            cNode.setAttribute("name", cObj.getString("name"));
-            cNode.setAttribute("level", 2);
+            cNode.put("code", cObj.getString("code"));
+            cNode.put("name", cObj.getString("name"));
+            cNode.put("level", 2);
         }
 
         String aJson = readAsset(context, "area.json");
@@ -85,9 +85,9 @@ public class AssetUtil {
             String parentCode = aObj.getString("cityCode");
             TreeNode parent = treeHelper.getCity(parentCode);
             aNode = new TreeNode(parent);
-            aNode.setAttribute("code", aObj.getString("code"));
-            aNode.setAttribute("name", aObj.getString("name"));
-            aNode.setAttribute("level", 3);
+            aNode.put("code", aObj.getString("code"));
+            aNode.put("name", aObj.getString("name"));
+            aNode.put("level", 3);
 
             treeHelper.putAreaNode(aNode);
         }
@@ -103,9 +103,9 @@ public class AssetUtil {
             String parentCode = sObj.get("areaCode").getAsString();
             TreeNode parent = treeHelper.getAreaNode(parentCode);
             sNode = new TreeNode(parent);
-            sNode.setAttribute("code", sObj.get("code").getAsString());
-            sNode.setAttribute("name", sObj.get("name").getAsString());
-            sNode.setAttribute("level", 4);
+            sNode.put("code", sObj.get("code").getAsString());
+            sNode.put("name", sObj.get("name").getAsString());
+            sNode.put("level", 4);
         }
         return treeHelper;
     }
