@@ -16,11 +16,13 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>() {
     override fun getViewBinding() = ActivityContainerBinding.inflate(layoutInflater)
 
     override fun initialize() {
-        val fragment = simple.clazz?.newInstance() as? Fragment ?: NullFragment()
+        val fragment = simple.clazz?.getDeclaredConstructor()?.newInstance()
+            as? Fragment ?: NullFragment()
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fl_container, fragment)
-        transaction.commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fl_container, fragment)
+            commitAllowingStateLoss()
+        }
 
         initToolBar(mBinding.toolbar, simple.title, true)
     }

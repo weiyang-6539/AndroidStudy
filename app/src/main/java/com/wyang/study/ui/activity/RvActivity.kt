@@ -2,9 +2,6 @@ package com.wyang.study.ui.activity
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.ConcatAdapter
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.w6539android.base.base.activity.BaseVBActivity
 import com.w6539android.base.ui.recycler.BaseAdapter
 import com.w6539android.base.ui.recycler.BaseDifferAdapter
@@ -14,7 +11,6 @@ import com.wyang.study.R
 import com.wyang.study.bean.Area
 import com.wyang.study.bean.Banner
 import com.wyang.study.databinding.ActivityRecyclerBinding
-
 
 /**
  * @author Yang

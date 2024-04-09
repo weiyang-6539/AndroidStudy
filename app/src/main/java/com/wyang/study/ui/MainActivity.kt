@@ -13,6 +13,7 @@ import com.wyang.study.bean.Simple
 import com.wyang.study.databinding.ActivityMainBinding
 import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.DataProvider
+import kotlin.reflect.KClass
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val mAdapter = SimpleAdapter()
@@ -29,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
+    @Suppress("UNCHECKED_CAST")
     override fun initialize() {
         mBinding.apply {
             mRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)

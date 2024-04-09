@@ -34,8 +34,7 @@ public class AssetUtil {
             }
             is.close();
             br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
         return sb.toString();
     }

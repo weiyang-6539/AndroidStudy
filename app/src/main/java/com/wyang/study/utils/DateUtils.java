@@ -23,8 +23,7 @@ public class DateUtils {
             SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.SIMPLIFIED_CHINESE);
             format.setTimeZone(timeZone);
             return format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException ignored) {
         }
         return new Date();
     }

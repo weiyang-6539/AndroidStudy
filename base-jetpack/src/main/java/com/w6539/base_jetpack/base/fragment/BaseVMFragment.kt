@@ -17,9 +17,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, T : ViewBinding> : BaseVBFragm
     protected open val mViewModel: VM by lazy { createViewModel() }
 
     //反射创建ViewModel, 子类也可以重写用其他方式实例化
-    protected open fun createViewModel(): VM = ViewModelProvider(this).get(
-        (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>
-    )
+    protected open fun createViewModel(): VM = ViewModelProvider(this)[(javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

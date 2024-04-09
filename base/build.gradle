@@ -67,15 +67,12 @@ dependencies {
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
     api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.2"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
-    api "androidx.core:core-ktx:1.9.0"
+    api "androidx.core:core-ktx:1.10.1"
     //noinspection GradleDependency
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    api "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.1.0"
     api "androidx.fragment:fragment-ktx:1.6.2" //Fragment与Activity的ViewModel扩展（Hilt必须）
-
 
     //图片加载Glide
     api 'com.github.bumptech.glide:glide:4.13.2'

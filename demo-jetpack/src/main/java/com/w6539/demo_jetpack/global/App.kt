@@ -1,6 +1,8 @@
 package com.w6539.demo_jetpack.global
 
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.w6539.demo_jetpack.R
@@ -31,5 +33,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

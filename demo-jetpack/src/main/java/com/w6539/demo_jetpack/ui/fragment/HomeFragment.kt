@@ -1,6 +1,5 @@
 package com.w6539.demo_jetpack.ui.fragment
 
-import com.gyf.immersionbar.ImmersionBar
 import com.w6539.base_jetpack.PagerFragmentAdapter
 import com.w6539.base_jetpack.base.fragment.BaseVBFragment
 import com.w6539.demo_jetpack.R
@@ -21,18 +20,6 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
     override fun onResume() {
         super.onResume()
         onHiddenChanged(false)
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        ImmersionBar.with(this)
-            .statusBarView(mBinding.mStatusBar)
-            .statusBarColor(R.color.transparent)
-            .statusBarDarkFont(true, 0.2f)
-            .navigationBarDarkIcon(true, 0.2f)
-            .autoStatusBarDarkModeEnable(true, 0.2f)
-            .autoNavigationBarDarkModeEnable(true, 0.2f)
-            .init()
     }
 
     override fun getViewBinding(): FragmentHomeBinding {
