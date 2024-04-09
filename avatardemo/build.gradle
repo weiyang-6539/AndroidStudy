@@ -29,12 +29,5 @@ android {
 }
 
 dependencies {
-    //noinspection GradleDependency 使用1.4.0 需要 sdk最小版本31
-    api 'androidx.appcompat:appcompat:1.3.0'
-    //noinspection GradleDependency
-    api 'androidx.annotation:annotation:1.2.0'
-    api 'androidx.recyclerview:recyclerview:1.3.2'
-    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-    //noinspection GradleDependency
-    api 'com.google.android.material:material:1.3.0'
+    implementation project(':base')
 }
