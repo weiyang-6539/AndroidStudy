@@ -16,7 +16,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, VB : ViewBinding> : BaseActivi
     protected open val mBinding by lazy { getViewBinding() }
 
     protected open fun createViewModel(): VM {
-        return ViewModelProvider(this).get(getVMCls(this))
+        return ViewModelProvider(this)[getVMCls(this)]
     }
 
     abstract fun getViewBinding(): VB

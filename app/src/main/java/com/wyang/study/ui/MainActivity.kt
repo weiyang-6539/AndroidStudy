@@ -2,6 +2,9 @@ package com.wyang.study.ui
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Messenger
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,7 +16,6 @@ import com.wyang.study.bean.Simple
 import com.wyang.study.databinding.ActivityMainBinding
 import com.wyang.study.ui.base.BaseActivity
 import com.wyang.study.ui.util.DataProvider
-import kotlin.reflect.KClass
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val mAdapter = SimpleAdapter()

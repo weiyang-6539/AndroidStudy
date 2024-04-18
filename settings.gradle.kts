@@ -1,0 +1,7 @@
+include(":app")
+include(":aidl")
+include(":base")
+include(":base-jetpack")
+include(":demo-jetpack")
+include(":avatardemo")
+include(":LeetCode")

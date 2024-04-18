@@ -45,15 +45,13 @@ public class DownLoadIntentService extends IntentService {
                 if (is != null) {
                     try {
                         is.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (IOException ignored) {
                     }
                 }
                 if (fos != null) {
                     try {
                         fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (IOException ignored) {
                     }
                 }
             }

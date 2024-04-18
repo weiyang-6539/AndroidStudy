@@ -1,0 +1,78 @@
+[versions]
+agp = "8.3.1"
+eventbus = "3.3.1"
+flexbox = "3.0.0"
+fragmentKtx = "1.6.2"
+glide = "4.13.2"
+glideTransformationsVersion = "4.1.0"
+gson = "2.9.0"
+kotlin = "1.9.22"
+hiltVersion = "2.51"
+coreKtx = "1.10.1"
+lifecycleKtx = "2.6.2"
+kotlinxCoroutinesAndroid = "1.6.4"
+appcompatVersion = "1.6.1"
+constraintlayoutVersion = "2.1.4"
+loggingInterceptorVersion = "5.0.0-alpha.7"
+material = "1.11.0"
+navigationUiKtx = "2.6.0"
+navigationFragmentKtx = "2.6.0"
+recyclerview = "1.3.2"
+pagingRuntimeKtx = "3.2.1"
+multidexVersion = "2.0.1"
+leakcanaryVersion = "2.12"
+retrofitVersion = "2.9.0"
+
+[libraries]
+gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+dagger-hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltVersion" }
+
+multidex = { module = "androidx.multidex:multidex", version.ref = "multidexVersion" }
+#android核心kotlin拓展库
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+#lifecycle kotlin拓展库
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleKtx" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleKtx" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleKtx" }
+#协程
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+#androidx
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-paging3 = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
+#goolge官方库
+material = { module = "com.google.android.material:material", version.ref = "material" }
+flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryVersion" }
+#网络请求
+retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofitVersion" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofitVersion" }
+converter-simplexml = { module = "com.squareup.retrofit2:converter-simplexml", version.ref = "retrofitVersion" }
+okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptorVersion" }
+#hilt依赖注入框架
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
+#其他
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+wasabeef-glide-transformations = { module = "jp.wasabeef:glide-transformations", version.ref = "glideTransformationsVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+[bundles]
+lifecycle-group-ktx = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx", "androidx-lifecycle-runtime-ktx"]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinAndroid = { id = "kotlin-android" }
+kotlinKapt = { id = "kotlin-kapt" }
+kotlinParcelize = { id = "kotlin-parcelize" }
+daggerHilt = { id = "dagger.hilt.android.plugin", version.ref = "hiltVersion" }
