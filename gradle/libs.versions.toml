@@ -22,6 +22,11 @@ pagingRuntimeKtx = "3.2.1"
 multidexVersion = "2.0.1"
 leakcanaryVersion = "2.12"
 retrofitVersion = "2.9.0"
+junit = "4.14-SNAPSHOT"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+activityCompose = "1.8.0"
+composeBom = "2023.08.00"
 
 [libraries]
 gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -64,6 +69,18 @@ eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 wasabeef-glide-transformations = { module = "jp.wasabeef:glide-transformations", version.ref = "glideTransformationsVersion" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 [bundles]
 lifecycle-group-ktx = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx", "androidx-lifecycle-runtime-ktx"]

@@ -18,7 +18,6 @@ import com.wyang.study.databinding.ActivityRecyclerBinding
  * @desc
  */
 class RvActivity : BaseVBActivity<ActivityRecyclerBinding>() {
-    override fun getViewBinding() = ActivityRecyclerBinding.inflate(layoutInflater)
 
     @SuppressLint("CheckResult")
     override fun initialize() {

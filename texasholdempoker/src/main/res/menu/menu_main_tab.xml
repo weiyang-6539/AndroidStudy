@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_record"
+        android:title="比赛记录" />
+    <item
+        android:id="@+id/navigation_player"
+        android:title="最佳玩家" />
+</menu>
