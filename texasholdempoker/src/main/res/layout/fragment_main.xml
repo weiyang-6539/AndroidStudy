@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/white"
+        app:itemPaddingTop="12dp"
+        app:itemIconSize="30dp"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_main_tab" />
 </LinearLayout>

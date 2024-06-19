@@ -13,5 +13,4 @@ class NavHostActivity : BaseVBActivity<ActivityNavHostBinding>() {
 
     override fun initialize() {
     }
-
 }

@@ -1,5 +1,6 @@
 package com.moonisland.texasholdempoker.ui.fragment
 
+import com.moonisland.texasholdempoker.databinding.FragmentRecordBinding
 import com.w6539android.base.base.fragment.BaseFragment
 
 /**
@@ -7,5 +8,5 @@ import com.w6539android.base.base.fragment.BaseFragment
  * @date 2024/6/18
  * @desc
  */
-class RecordFragment:BaseFragment<> {
+class RecordFragment: BaseFragment<FragmentRecordBinding>() {
 }

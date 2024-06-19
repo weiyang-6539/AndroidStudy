@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.1"
+baserecyclerviewadapterhelper4 = "4.1.4"
 eventbus = "3.3.1"
 flexbox = "3.0.0"
 fragmentKtx = "1.6.2"
@@ -29,6 +30,7 @@ activityCompose = "1.8.0"
 composeBom = "2023.08.00"
 
 [libraries]
+baserecyclerviewadapterhelper4 = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "baserecyclerviewadapterhelper4" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 dagger-hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltVersion" }

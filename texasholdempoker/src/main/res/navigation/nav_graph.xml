@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_main"
-        android:name="com.w6539.demo_jetpack.ui.fragment.MainFragment"
+        android:name="com.moonisland.texasholdempoker.ui.fragment.MainFragment"
         tools:layout="@layout/fragment_main">
 
     </fragment>

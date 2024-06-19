@@ -62,4 +62,5 @@ dependencies {
     api(libs.glide)
     api(libs.gson)
     api(libs.eventbus)
+    api(libs.baserecyclerviewadapterhelper4)
 }

@@ -14,8 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
     private val fragments = mutableListOf<Fragment>(
-        HomeFragment(),
-        SquareFragment(),
+        RecordFragment(),
+        RankFragment(),
     )
     private var currentPos = -1
     private var currentFragment: Fragment? = null

@@ -1,14 +1,27 @@
 package com.moonisland.texasholdempoker.bean
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.Index
+import androidx.room.PrimaryKey
+
 /**
  * @author WeiYang
  * @date 2024/6/18
  * @desc
  */
+@Entity(tableName = "player", indices = [Index(value = ["id", "md5"], unique = true)])
 data class Player(
-    val id: String,
-    val name: String,
-    val magnification: Float = .4f, // 倍率
-    val startScore: Int = -1000, // 初始比分
-    val endScore: Int, // 结束比分
-)
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0,
+    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT)
+    val name: String = "",
+    @ColumnInfo(name = "nickname", typeAffinity = ColumnInfo.TEXT)
+    val nickname: String = "",
+    @ColumnInfo(name = "md5", typeAffinity = ColumnInfo.TEXT)
+    val md5: String = "",
+) {
+    @Ignore
+    constructor() : this(0)
+}
