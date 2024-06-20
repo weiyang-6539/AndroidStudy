@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.moonisland.texasholdempoker.bean.Player
-import com.moonisland.texasholdempoker.bean.PlayerRecord
+import com.moonisland.texasholdempoker.db.entity.Player
+import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 import com.moonisland.texasholdempoker.db.dao.PlayerDao
 import com.moonisland.texasholdempoker.db.dao.PlayerRecordDao
 

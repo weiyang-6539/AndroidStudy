@@ -10,10 +10,6 @@ import com.w6539.demo_jetpack.databinding.FragmentLoginBinding
  */
 class LoginFragment : BaseVBFragment<FragmentLoginBinding>() {
 
-    override fun getViewBinding(): FragmentLoginBinding {
-        return FragmentLoginBinding.inflate(layoutInflater)
-    }
-
     override fun initialize() {
 
     }

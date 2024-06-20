@@ -17,10 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>() {
     private val mAdapter = DailyAdapter()
 
-    override fun getViewBinding(): FragmentRecommendBinding {
-        return FragmentRecommendBinding.inflate(layoutInflater)
-    }
-
     override fun initialize() {
         mBinding.mRecyclerView.setHasFixedSize(true)
         mBinding.mRecyclerView.adapter =

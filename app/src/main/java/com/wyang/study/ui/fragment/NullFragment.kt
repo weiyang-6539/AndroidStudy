@@ -5,5 +5,4 @@ import com.wyang.study.databinding.FragmentNullBinding
 
 class NullFragment : BaseFragment<FragmentNullBinding>() {
 
-    override fun getViewBinding() = FragmentNullBinding.inflate(layoutInflater)
 }

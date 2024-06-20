@@ -9,7 +9,4 @@ import com.w6539.demo_jetpack.databinding.FragmentSquareBinding
  * @desc 广场
  */
 class SquareFragment : BaseVBFragment<FragmentSquareBinding>() {
-    override fun getViewBinding(): FragmentSquareBinding {
-        return FragmentSquareBinding.inflate(layoutInflater)
-    }
 }

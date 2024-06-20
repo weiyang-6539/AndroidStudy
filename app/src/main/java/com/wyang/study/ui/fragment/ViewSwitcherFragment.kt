@@ -4,7 +4,6 @@ import com.w6539android.base.base.fragment.BaseFragment
 import com.wyang.study.databinding.FragmentViewSwitcherBinding
 
 class ViewSwitcherFragment : BaseFragment<FragmentViewSwitcherBinding>() {
-    override fun getViewBinding() = FragmentViewSwitcherBinding.inflate(layoutInflater)
 
     override fun initialize() {
 

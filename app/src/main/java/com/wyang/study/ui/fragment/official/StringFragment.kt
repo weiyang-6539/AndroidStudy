@@ -29,8 +29,6 @@ class StringFragment : BaseFragment<FragmentStringBinding>() {
     private val s8 = "交易规则"
     private val s9 = "。"
 
-    override fun getViewBinding() = FragmentStringBinding.inflate(layoutInflater)
-
     override fun initialize() {
         ssb.append(s1)
             .append(s2)

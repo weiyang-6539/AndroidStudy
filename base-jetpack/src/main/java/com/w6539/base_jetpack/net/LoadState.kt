@@ -10,7 +10,8 @@ import androidx.annotation.StringRes
 data class LoadState(
     val state: Int = NORMAL,
     @StringRes
-    val strId: Int = 0,
+    val strId: Int = 0,// 加载中, 请求成功的文本id
+    val exception: Exception? = null,
 ) {
     companion object {
         const val NORMAL = 0//默认

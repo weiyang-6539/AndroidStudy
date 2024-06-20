@@ -59,7 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(project(":base"))
+    implementation(project(":base-jetpack"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -70,8 +70,9 @@ dependencies {
     implementation(libs.multidex)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 }

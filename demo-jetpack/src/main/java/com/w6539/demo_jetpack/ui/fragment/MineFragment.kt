@@ -9,7 +9,4 @@ import com.w6539.demo_jetpack.databinding.FragmentMineBinding
  * @desc 我的
  */
 class MineFragment : BaseVBFragment<FragmentMineBinding>() {
-    override fun getViewBinding(): FragmentMineBinding {
-        return FragmentMineBinding.inflate(layoutInflater)
-    }
 }

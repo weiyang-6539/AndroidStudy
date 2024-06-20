@@ -9,7 +9,6 @@ import com.wyang.study.databinding.FragmentWeiboBinding
  * @desc 仿微博话题
  */
 class WeiBoFragment : BaseFragment<FragmentWeiboBinding>() {
-    override fun getViewBinding() = FragmentWeiboBinding.inflate(layoutInflater)
     override fun initialize() {
         mBinding.mWebView.loadUrl("https://kouyuxia.oss-cn-beijing.aliyuncs.com/adm_13/2022-08-05/94810862ecce67364c40.98742118.png")
     }

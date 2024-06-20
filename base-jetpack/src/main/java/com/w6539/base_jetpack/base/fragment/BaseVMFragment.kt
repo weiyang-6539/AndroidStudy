@@ -6,40 +6,51 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.w6539.base_jetpack.base.vm.BaseViewModel
 import com.w6539.base_jetpack.net.LoadState
-import java.lang.reflect.ParameterizedType
+import com.w6539.base_jetpack.ext.getVMCls
+import java.lang.Exception
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * @author Yang
  * @since 2022/12/6 11:37
  * @desc MVVM-Fragment基类
  */
-abstract class BaseVMFragment<VM : BaseViewModel, T : ViewBinding> : BaseVBFragment<T>() {
+abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewBinding> : BaseVBFragment<VB>() {
     protected open val mViewModel: VM by lazy { createViewModel() }
 
     //反射创建ViewModel, 子类也可以重写用其他方式实例化
-    protected open fun createViewModel(): VM = ViewModelProvider(this)[(javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>]
+    protected open fun createViewModel(): VM =
+        ViewModelProvider(this)[getVMCls()]
+
+    // 仅初始化一次的标识
+    private val isObserver = AtomicBoolean(false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel.getLoadState().observe(viewLifecycleOwner) { loadState ->
-            if (loadState != null) {
-                when (loadState.state) {
-                    LoadState.NORMAL -> onStateNormal()
-                    LoadState.LOADING -> onStateLoading()
-                    LoadState.SUCCESS -> onStateSuccess(getString(loadState.strId))
-                    LoadState.EMPTY -> onStateEmpty()
-                    LoadState.FAILED -> onStateFailed(getString(loadState.strId))
+        if (isObserver.compareAndSet(false, true)) {
+            mViewModel.getLoadState().observe(viewLifecycleOwner) { loadState ->
+                if (loadState != null) {
+                    when (loadState.state) {
+                        LoadState.NORMAL -> onStateNormal()
+                        LoadState.LOADING -> onStateLoading(getMessage(loadState))
+                        LoadState.SUCCESS -> onStateSuccess(getMessage(loadState))
+                        LoadState.EMPTY -> onStateEmpty()
+                        LoadState.FAILED -> onStateFailed(loadState.exception)
+                    }
                 }
             }
+            startObserver()
         }
-        startObserver()
     }
 
-    abstract fun startObserver()
+    private fun getMessage(loadState: LoadState): String {
+        return if (loadState.strId != 0) getString(loadState.strId) else ""
+    }
 
+    protected open fun startObserver() {}
     protected open fun onStateNormal() {}
-    protected open fun onStateLoading() {}
+    protected open fun onStateLoading(message: String) {}
     protected open fun onStateSuccess(message: String) {}
     protected open fun onStateEmpty() {}
-    protected open fun onStateFailed(message: String) {}
+    protected open fun onStateFailed(exception: Exception?) {}
 }

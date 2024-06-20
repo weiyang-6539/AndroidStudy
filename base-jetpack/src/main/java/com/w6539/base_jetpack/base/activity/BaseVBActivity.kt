@@ -1,6 +1,7 @@
 package com.w6539.base_jetpack.base.activity
 
 import androidx.viewbinding.ViewBinding
+import com.w6539.base_jetpack.ext.inflateBindingWithGeneric
 
 /**
  * @author Yang
@@ -8,9 +9,7 @@ import androidx.viewbinding.ViewBinding
  * @desc 支持ViewBinding的Activity
  */
 abstract class BaseVBActivity<VB : ViewBinding> : BaseActivity() {
-    protected open val mBinding by lazy { getViewBinding() }
-
-    abstract fun getViewBinding(): VB
+    protected open val mBinding by lazy { inflateBindingWithGeneric<VB>(layoutInflater) }
 
     override fun setContentView() {
         setContentView(mBinding.root)

@@ -17,10 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecommendFragment : BaseVMFragment<HomeViewModel, FragmentRecommendBinding>() {
     private val mAdapter = RecommendAdapter()
 
-    override fun getViewBinding(): FragmentRecommendBinding {
-        return FragmentRecommendBinding.inflate(layoutInflater)
-    }
-
     override fun initialize() {
         mBinding.mRecyclerView.setHasFixedSize(true)
         mBinding.mRecyclerView.adapter =

@@ -15,8 +15,6 @@ import com.wyang.study.ext.openAsset
  */
 class ContactsFragment : BaseFragment<LayoutRecyclerBinding>() {
 
-    override fun getViewBinding() = LayoutRecyclerBinding.inflate(layoutInflater)
-
     override fun initialize() {
         mBinding.mRecyclerView.adapter = object : BaseDifferAdapter<String>(R.layout.item_contacts_recycler) {
                 override fun convert(holder: BaseViewHolder, item: String) {

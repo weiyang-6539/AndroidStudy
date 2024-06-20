@@ -1,4 +1,4 @@
-package com.moonisland.texasholdempoker.bean
+package com.moonisland.texasholdempoker.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

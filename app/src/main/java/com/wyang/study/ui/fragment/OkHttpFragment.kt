@@ -6,7 +6,6 @@ import okhttp3.*
 import java.io.IOException
 
 class OkHttpFragment : BaseFragment<FragmentExampleBinding>() {
-    override fun getViewBinding() = FragmentExampleBinding.inflate(layoutInflater)
     override fun initialize() {
         val client: OkHttpClient = OkHttpClient.Builder()
             .build()

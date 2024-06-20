@@ -18,8 +18,6 @@ class AddressLinkageFragment : BaseFragment<FragmentAddressLinkageBinding>() {
     private val data = SparseArray<List<TreeNode>>()
     private val selectPos = SparseIntArray()
 
-    override fun getViewBinding() = FragmentAddressLinkageBinding.inflate(layoutInflater)
-
     override fun initialize() {
         mBinding.mTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

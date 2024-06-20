@@ -8,8 +8,6 @@ import java.io.File
 class HandlerThreadFragment : BaseFragment<FragmentHandlerThreadBinding>() {
     private var mDownLoadTask = DownloadTask("download")
 
-    override fun getViewBinding() = FragmentHandlerThreadBinding.inflate(layoutInflater)
-
     override fun initialize() {
         val path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk"
         val filename = "wechat.apk"

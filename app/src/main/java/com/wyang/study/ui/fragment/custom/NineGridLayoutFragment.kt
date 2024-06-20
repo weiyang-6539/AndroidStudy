@@ -12,7 +12,6 @@ import com.wyang.study.ui.util.GlideImageLoader
 import com.wyang.study.ui.widget.NineGridLayout.ImageLoaderInterface
 
 class NineGridLayoutFragment : BaseFragment<FragmentNinegridlayoutBinding>() {
-    override fun getViewBinding() = FragmentNinegridlayoutBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.mSeekBar.max = 100

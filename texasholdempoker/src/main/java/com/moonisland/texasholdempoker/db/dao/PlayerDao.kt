@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.moonisland.texasholdempoker.bean.Player
+import com.moonisland.texasholdempoker.db.entity.Player
 
 /**
  * @author WeiYang

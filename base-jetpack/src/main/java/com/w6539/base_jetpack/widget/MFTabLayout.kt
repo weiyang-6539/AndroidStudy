@@ -12,8 +12,8 @@ import com.google.android.material.tabs.TabLayout
  * @desc 拦截某一个tab的选择
  */
 class MFTabLayout @JvmOverloads constructor(
-    @NonNull context: Context,
-    @Nullable attrs: AttributeSet? = null,
+    context: Context,
+    attrs: AttributeSet? = null,
 ) : TabLayout(context, attrs) {
 
     var funcInterceptTab: (tab: Tab?) -> Boolean = { false }

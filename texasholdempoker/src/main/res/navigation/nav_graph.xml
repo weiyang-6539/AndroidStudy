@@ -11,4 +11,13 @@
         tools:layout="@layout/fragment_main">
 
     </fragment>
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.moonisland.texasholdempoker.ui.fragment.RecordDetailFragment"
+        android:label="RecordDetailFragment"
+        tools:layout="@layout/fragment_record_detail" />
+
+    <action
+        android:id="@+id/action_navigation_to_fragment_record_detail"
+        app:destination="@id/recordDetailFragment" />
 </navigation>

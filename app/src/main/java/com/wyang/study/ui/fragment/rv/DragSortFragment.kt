@@ -18,8 +18,6 @@ class DragSortFragment : BaseFragment<FragmentDragSortBinding>() {
     }
     private lateinit var mAdapter: DragSortAdapter
 
-    override fun getViewBinding() = FragmentDragSortBinding.inflate(layoutInflater)
-
     override fun initialize() {
         mRecyclerBinding.mRecyclerView.layoutManager = ExGridLayoutManager(context, 4)
         mRecyclerBinding.mRecyclerView.addItemDecoration(

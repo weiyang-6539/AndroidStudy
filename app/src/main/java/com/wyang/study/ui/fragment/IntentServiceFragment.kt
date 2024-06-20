@@ -8,8 +8,6 @@ import com.wyang.study.ui.DownLoadIntentService
 class IntentServiceFragment : BaseFragment<FragmentIntentServiceBinding>() {
     private val path = "https://dldir1.qq.com/weixin/android/weixin8021android2120_arm64.apk"
 
-    override fun getViewBinding() = FragmentIntentServiceBinding.inflate(layoutInflater)
-
     override fun initialize() {
         startDownload()
     }

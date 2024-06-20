@@ -21,10 +21,6 @@ class AidlFragment : BaseFragment<FragmentAidlBinding>() {
     //通过aidl创建的接口类的对象
     private var ri: RemoteInterface? = null
 
-    override fun getViewBinding(): FragmentAidlBinding {
-        return FragmentAidlBinding.inflate(layoutInflater)
-    }
-
     override fun initialize() {
         mBinding.btnStart.setOnClickListener { start() }
         mBinding.btnStop.setOnClickListener { stop() }

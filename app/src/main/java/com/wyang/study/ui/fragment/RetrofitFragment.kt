@@ -16,8 +16,6 @@ class RetrofitFragment : BaseFragment<FragmentExampleBinding>() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    override fun getViewBinding() = FragmentExampleBinding.inflate(layoutInflater)
-
     override fun initialize() {
         retrofit.create(ApiService::class.java)
             .baidu

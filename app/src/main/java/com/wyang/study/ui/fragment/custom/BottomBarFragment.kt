@@ -9,6 +9,5 @@ import com.wyang.study.databinding.FragmentBottomBarBinding
  * @desc
  */
 class BottomBarFragment : BaseFragment<FragmentBottomBarBinding>() {
-    override fun getViewBinding() = FragmentBottomBarBinding.inflate(layoutInflater)
 
 }

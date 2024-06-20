@@ -3,7 +3,8 @@ package com.moonisland.texasholdempoker.ui.fragment
 import androidx.fragment.app.Fragment
 import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.databinding.FragmentMainBinding
-import com.w6539android.base.base.fragment.BaseFragment
+import com.moonisland.texasholdempoker.ext.navigate
+import com.w6539.base_jetpack.base.fragment.BaseVBFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -12,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * @desc 主页面fragment
  */
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>() {
+class MainFragment : BaseVBFragment<FragmentMainBinding>() {
     private val fragments = mutableListOf<Fragment>(
         RecordFragment(),
         RankFragment(),
@@ -22,16 +23,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
 
     override fun initialize() {
-        mBinding.navView.itemIconTintList = null
-        mBinding.navView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_record -> select(0)
-                R.id.navigation_player -> select(1)
+        with(mBinding) {
+            navView.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.navigation_record -> select(0)
+                    R.id.navigation_player -> select(1)
+                }
+                true
             }
-            true
+            navView.selectedItemId = R.id.navigation_record
         }
 
-        select(0)
+        navigate(R.id.action_navigation_to_fragment_record_detail)
     }
 
     private fun select(index: Int) {

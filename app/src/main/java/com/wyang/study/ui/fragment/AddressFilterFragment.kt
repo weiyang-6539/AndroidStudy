@@ -18,8 +18,6 @@ import java.util.concurrent.Executors
 class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
     private var mTreeHelper: TreeHelper? = null
 
-    override fun getViewBinding() = FragmentAddressFilterBinding.inflate(layoutInflater)
-
     override fun initialize() {
         Executors.newSingleThreadExecutor()
             .execute {

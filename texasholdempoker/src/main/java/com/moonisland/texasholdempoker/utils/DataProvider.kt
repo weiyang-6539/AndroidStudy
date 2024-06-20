@@ -1,7 +1,7 @@
 package com.moonisland.texasholdempoker.utils
 
-import com.moonisland.texasholdempoker.bean.Player
-import com.w6539android.base.utils.MD5Util
+import com.moonisland.texasholdempoker.db.entity.Player
+import com.w6539.base_jetpack.utils.MD5Util
 
 /**
  * @author WeiYang

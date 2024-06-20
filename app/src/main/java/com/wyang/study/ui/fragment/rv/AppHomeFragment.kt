@@ -14,8 +14,7 @@ import com.wyang.study.databinding.LayoutRecyclerBinding
  */
 class AppHomeFragment : BaseFragment<LayoutRecyclerBinding>() {
 
-    override fun getViewBinding() = LayoutRecyclerBinding.inflate(layoutInflater)
-    override fun initialize() {
+  override fun initialize() {
         val concatAdapter = ConcatAdapter(ConcatAdapter.Config.DEFAULT)
         concatAdapter.addAdapter(mBannerAdapter)
         concatAdapter.addAdapter(mAreaAdapter)

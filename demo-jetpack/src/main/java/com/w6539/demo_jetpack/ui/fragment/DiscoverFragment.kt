@@ -9,7 +9,4 @@ import com.w6539.demo_jetpack.databinding.FragmentDiscoverBinding
  * @desc 发现
  */
 class DiscoverFragment: BaseVBFragment<FragmentDiscoverBinding>() {
-    override fun getViewBinding(): FragmentDiscoverBinding {
-        return FragmentDiscoverBinding.inflate(layoutInflater)
-    }
 }

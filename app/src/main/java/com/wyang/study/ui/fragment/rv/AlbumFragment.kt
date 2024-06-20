@@ -56,8 +56,6 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         }
     }
 
-    override fun getViewBinding() = FragmentAlbumBinding.inflate(layoutInflater)
-
     @SuppressLint("ClickableViewAccessibility")
     override fun initialize() {
         mBinding.clDateParent.setOnTouchListener { _: View?, event: MotionEvent ->

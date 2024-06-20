@@ -6,7 +6,7 @@ import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
 import com.w6539.base_jetpack.base.activity.BaseVBActivity
 import com.w6539.demo_jetpack.databinding.ActivitySplashBinding
-import com.w6539.demo_jetpack.ext.navigate
+import com.moonisland.texasholdempoker.ext.navigate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors

@@ -12,8 +12,6 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding>() {
     }
     private val mAdapter = DiscoverAdapter()
 
-    override fun getViewBinding() = FragmentWechatBinding.inflate(layoutInflater)
-
     override fun initialize() {
         mRecyclerBinding.mRecyclerView.adapter = mAdapter
         mAdapter.submitList(DataProvider.getDiscoverData())

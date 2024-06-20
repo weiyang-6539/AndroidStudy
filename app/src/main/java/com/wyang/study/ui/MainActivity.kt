@@ -2,9 +2,6 @@ package com.wyang.study.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Messenger
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 this@MainActivity, drawerLayout, toolbar, 0, 0
             )
             drawerToggle.syncState()
+
 
             navigationView.setNavigationItemSelectedListener { item: MenuItem ->
                 drawerLayout.closeDrawer(navigationView)

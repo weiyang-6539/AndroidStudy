@@ -33,7 +33,6 @@ class FlexBoxFragment : BaseFragment<FragmentFlexboxBinding>() {
         "大萨达都是撒旦"
     )
 
-    override fun getViewBinding() = FragmentFlexboxBinding.inflate(layoutInflater)
     override fun initialize() {
         list.forEach {
             val child = AppCompatTextView(requireContext())

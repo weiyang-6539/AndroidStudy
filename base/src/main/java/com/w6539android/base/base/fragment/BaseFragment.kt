@@ -11,7 +11,7 @@ import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
-    protected open val mTag = javaClass.simpleName
+    protected open val mTag: String = javaClass.simpleName
     protected open val mBinding by lazy { inflateBindingWithGeneric<T>(layoutInflater) }
     protected open val isInitialize = AtomicBoolean(false)
 

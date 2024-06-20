@@ -7,7 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
 import com.moonisland.texasholdempoker.databinding.ActivitySplashBinding
-import com.w6539android.base.base.activity.BaseVBActivity
+import com.w6539.base_jetpack.base.activity.BaseVBActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
@@ -43,6 +43,7 @@ class SplashActivity : BaseVBActivity<ActivitySplashBinding>() {
         lifecycleScope.launch {
             delay(animDuration)
             startActivity(Intent(this@SplashActivity, NavHostActivity::class.java))
+            finish()
         }
     }
 }

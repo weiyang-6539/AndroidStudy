@@ -22,10 +22,6 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
         onHiddenChanged(false)
     }
 
-    override fun getViewBinding(): FragmentHomeBinding {
-        return FragmentHomeBinding.inflate(layoutInflater)
-    }
-
     override fun initialize() {
         mBinding.mViewPager.adapter = PagerFragmentAdapter(this)
             .apply {

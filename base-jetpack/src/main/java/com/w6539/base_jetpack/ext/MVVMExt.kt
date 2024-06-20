@@ -1,22 +1,25 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.w6539android.base.ext
-
-/**
- * @author WeiYang
- * @date 2024/6/18
- * @desc
- */
+package com.w6539.base_jetpack.ext
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
+/**
+ * @author Yang
+ * @since 2022/10/26 14:30
+ * @desc
+ */
+//获取泛型的实例
+fun <VM> Any.getVMCls(): VM {
+    return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as VM
+}
 
 @JvmName("inflateWithGeneric")
 fun <VB : ViewBinding> Any.inflateBindingWithGeneric(layoutInflater: LayoutInflater): VB =
-    withGenericBindingClass<VB> { clazz ->
+    withGenericBindingClass { clazz ->
         clazz.getMethod("inflate", LayoutInflater::class.java).invoke(null, layoutInflater) as VB
     }
 
@@ -25,7 +28,7 @@ fun <VB : ViewBinding> Any.inflateBindingWithGeneric(
     layoutInflater: LayoutInflater,
     parent: ViewGroup?,
     attachToParent: Boolean
-): VB = withGenericBindingClass<VB> { clazz ->
+): VB = withGenericBindingClass { clazz ->
     if (parent == null)
         clazz.getMethod(
             "inflate",

@@ -8,7 +8,6 @@ import com.wyang.study.utils.LogUtils
 import java.security.Security
 
 class AlgorithmFragment : BaseFragment<FragmentAlgorithmBinding>() {
-    override fun getViewBinding() = FragmentAlgorithmBinding.inflate(layoutInflater)
 
     override fun initialize() {
         mBinding.btnRc4.setOnClickListener { onClickTest() }
