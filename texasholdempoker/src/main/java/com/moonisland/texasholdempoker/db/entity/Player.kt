@@ -11,16 +11,18 @@ import androidx.room.PrimaryKey
  * @date 2024/6/18
  * @desc
  */
-@Entity(tableName = "player", indices = [Index(value = ["id", "md5"], unique = true)])
+@Entity(
+    tableName = "player",
+    indices = [
+        Index(value = ["id"], unique = true),
+        Index(value = ["md5"], unique = true)
+    ]
+)
 data class Player(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
-    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT)
-    val name: String = "",
-    @ColumnInfo(name = "nickname", typeAffinity = ColumnInfo.TEXT)
-    val nickname: String = "",
-    @ColumnInfo(name = "md5", typeAffinity = ColumnInfo.TEXT)
-    val md5: String = "",
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
+    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT) val name: String = "",
+    @ColumnInfo(name = "nickname", typeAffinity = ColumnInfo.TEXT) val nickname: String = "",
+    @ColumnInfo(name = "md5", typeAffinity = ColumnInfo.TEXT) val md5: String = "",
 ) {
     @Ignore
     constructor() : this(0)

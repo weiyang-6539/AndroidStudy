@@ -1,6 +1,7 @@
 package com.w6539.base_jetpack.base.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +40,14 @@ abstract class BaseVBFragment<VB : ViewBinding> : Fragment() {
         safeInit()
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.e(mTag, "onPause()")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        Log.e(mTag, "onDestroy()")
         if (isEventBusEnabled())
             EventBus.getDefault().unregister(this)
     }

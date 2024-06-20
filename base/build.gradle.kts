@@ -44,6 +44,7 @@ dependencies {
     api(libs.androidx.paging3)
     api(libs.material)
     api(libs.flexbox)
+    api(libs.androidx.datastore.preferences)
     api(libs.retrofit2.retrofit)
     api(libs.converter.gson)
     api(libs.converter.scalars)

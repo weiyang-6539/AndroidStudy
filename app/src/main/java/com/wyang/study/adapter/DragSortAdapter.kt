@@ -36,6 +36,7 @@ class DragSortAdapter(
 
     fun isEdit() = isEdit
 
+    @SuppressLint("NotifyDataSetChanged")
     fun enableEdit() {
         isEdit = !isEdit
         notifyDataSetChanged()

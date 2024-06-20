@@ -1,5 +1,6 @@
 package com.w6539.demo_jetpack.ui.activity
 
+import android.annotation.SuppressLint
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -16,6 +17,7 @@ import java.util.concurrent.Executors
  * @since 2022/12/7 8:51
  * @desc 引导页
  */
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseVBActivity<ActivitySplashBinding>() {
     private val animDuration = 3000L
     private val alphaAnimation by lazy {

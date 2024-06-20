@@ -19,5 +19,12 @@
         android:name="com.w6539.demo_jetpack.ui.fragment.MainFragment"
         tools:layout="@layout/fragment_main">
 
+        <action
+            android:id="@+id/action_fragment_main_to_fragment_second"
+            app:destination="@id/fragment_second" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_second"
+        android:name="com.w6539.demo_jetpack.ui.fragment.SecondFragment"
+        tools:layout="@layout/fragment_second" />
 </navigation>

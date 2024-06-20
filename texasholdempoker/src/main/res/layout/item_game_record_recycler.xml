@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/gray_a"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="对局：讲课费" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/gray_a"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="人数：6" />
+</androidx.constraintlayout.widget.ConstraintLayout>

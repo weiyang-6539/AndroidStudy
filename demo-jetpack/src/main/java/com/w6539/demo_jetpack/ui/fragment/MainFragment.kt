@@ -14,10 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : BaseVBFragment<FragmentMainBinding>() {
     private val fragments = mutableListOf<Fragment>(
-        HomeFragment(),
-        SquareFragment(),
-        DiscoverFragment(),
-        MineFragment()
+        HomeFragment(), SquareFragment(), DiscoverFragment(), MineFragment()
     )
     private var currentPos = -1
     private var currentFragment: Fragment? = null
@@ -58,5 +55,4 @@ class MainFragment : BaseVBFragment<FragmentMainBinding>() {
         }
         transaction.commitAllowingStateLoss()
     }
-
 }

@@ -1,7 +1,6 @@
 package com.w6539android.base.ui.recycler
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.util.SparseIntArray
 import android.view.View
 import android.view.ViewGroup

@@ -22,6 +22,13 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
         onHiddenChanged(false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        mBinding.mViewPager.apply {
+            adapter?.notifyItemChanged(currentItem)
+        }
+    }
+
     override fun initialize() {
         mBinding.mViewPager.adapter = PagerFragmentAdapter(this)
             .apply {
@@ -29,6 +36,7 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
                 fragments.add(SquareFragment())
                 fragments.add(DailyFragment())
             }
+        mBinding.mViewPager.isSaveEnabled = false
         mBinding.mTabLayout.bind(
             mBinding.mViewPager, mutableListOf(
                 getString(R.string.tab_recommend),

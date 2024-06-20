@@ -14,7 +14,7 @@ class DiscoverAdapter : BaseDifferAdapter<Discover>(
     R.layout.item_wechat_discovery
 ) {
 
-    private val imageLoader: ImageLoaderInterface = object : ImageLoaderInterface {
+    private val imageLoader = object : ImageLoaderInterface {
         override fun createImageView(
             context: Context,
             count: Int,

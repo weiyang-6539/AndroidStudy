@@ -1,34 +1,20 @@
+plugins {
+    id("com.android.application") version "8.3.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.0.0" apply false
+    id("com.android.library") version "8.3.1" apply false
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
+}
+
 buildscript {
-    repositories {
-        maven("https://maven.aliyun.com/nexus/content/groups/public/")
-        maven("https://maven.aliyun.com/repository/central")
-        maven("https://maven.aliyun.com/repository/public")
-        maven("https://maven.aliyun.com/repository/google")
-        maven("https://maven.aliyun.com/repository/gradle-plugin")
-        google()
-        mavenCentral()
-        maven("https://jitpack.io")
-    }
     dependencies {
         classpath(libs.gradle)
-        //noinspection GradleDependency
+        //kotlin插件
         classpath(libs.kotlin.gradle.plugin)
         //Hilt插件
         classpath(libs.dagger.hilt.android.gradle.plugin)
     }
 }
-allprojects {
-    repositories {
-        maven("https://maven.aliyun.com/nexus/content/groups/public/")
-        maven("https://maven.aliyun.com/repository/central")
-        maven("https://maven.aliyun.com/repository/public")
-        maven("https://maven.aliyun.com/repository/google")
-        maven("https://maven.aliyun.com/repository/gradle-plugin")
-        google()
-        mavenCentral()
-        maven("https://jitpack.io")
-    }
-}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }

@@ -92,7 +92,7 @@ class AddressFilterFragment : BaseFragment<FragmentAddressFilterBinding>() {
         return true
     }
 
-    private val mAdapter: BaseDifferAdapter<TreeNode> = object : BaseDifferAdapter<TreeNode>(
+    private val mAdapter = object : BaseDifferAdapter<TreeNode>(
         R.layout.item_address_filter_recycler
     ) {
         override fun convert(holder: BaseViewHolder, item: TreeNode) {

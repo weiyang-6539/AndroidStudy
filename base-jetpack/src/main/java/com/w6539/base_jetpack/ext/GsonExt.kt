@@ -22,13 +22,11 @@ inline fun <reified T> String.json2Bean(): T {
 inline fun <reified T> String.json2List(): MutableList<T> {
     val gson = Gson()
     val list = ArrayList<T>()
-    try {
+    runCatching {
         val array = JsonParser.parseString(this).asJsonArray
         for (elem in array) {
             list.add(gson.fromJson(elem, T::class.java))
         }
-    } catch (ignored: Exception) {
-        ignored.printStackTrace()
     }
     return list
 }

@@ -64,4 +64,5 @@ dependencies {
     api(libs.wasabeef.glide.transformations)
     api(libs.gson)
     api(libs.eventbus)
+    api(libs.baserecyclerviewadapterhelper4)
 }

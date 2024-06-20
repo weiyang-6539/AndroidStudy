@@ -20,6 +20,6 @@ interface PlayerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlayers(vararg player: Player)
 
-    @Query("select * from Player")
+    @Query("select * from player")
     fun queryAll(): List<Player>
 }

@@ -163,6 +163,5 @@ abstract class BaseDifferAdapter<T>(
         submitList(mAdapterImpl.items.toMutableList())
     }
 
-    final override fun get(position: Int) =
-        mAdapterImpl.get(position)
+    final override fun get(position: Int) = mAdapterImpl.get(position)
 }

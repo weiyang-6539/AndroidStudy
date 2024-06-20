@@ -9,6 +9,5 @@ import androidx.annotation.StringRes
  */
 class ApiException(
     val code: Int,
-    @StringRes
-    val strId: Int,
+    val msg: String
 ) : Exception()

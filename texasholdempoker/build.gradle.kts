@@ -1,17 +1,19 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-android")
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.moonisland.texasholdempoker"
-    compileSdk = 34
+    compileSdk = COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.moonisland.texasholdempoker"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = MIN_SDK
+        targetSdk = TARGET_SDK
         versionCode = 1
         versionName = "1.0"
 
@@ -36,12 +38,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += "-Xjvm-default=all"
     }
     buildFeatures {
         viewBinding = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
         resources {
@@ -71,8 +71,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 }

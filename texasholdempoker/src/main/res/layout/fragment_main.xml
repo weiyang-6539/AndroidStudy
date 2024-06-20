@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
@@ -18,8 +19,35 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/white"
-        app:itemPaddingTop="12dp"
         app:itemIconSize="30dp"
+        app:itemPaddingTop="12dp"
+
         app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_tab" />
-</LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_add"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:elevation="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent=".34">
+
+        <com.w6539.base_jetpack.widget.shape.ShapeFrameLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            app:shapeCornersRadius="40dp"
+            app:shapeSelectorNormalColor="#6200ee">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_add" />
+        </com.w6539.base_jetpack.widget.shape.ShapeFrameLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

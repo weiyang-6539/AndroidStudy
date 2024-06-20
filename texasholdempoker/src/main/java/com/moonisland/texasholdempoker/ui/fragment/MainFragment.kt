@@ -1,5 +1,6 @@
 package com.moonisland.texasholdempoker.ui.fragment
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.databinding.FragmentMainBinding
@@ -21,7 +22,6 @@ class MainFragment : BaseVBFragment<FragmentMainBinding>() {
     private var currentPos = -1
     private var currentFragment: Fragment? = null
 
-
     override fun initialize() {
         with(mBinding) {
             navView.setOnItemSelectedListener {
@@ -32,9 +32,12 @@ class MainFragment : BaseVBFragment<FragmentMainBinding>() {
                 true
             }
             navView.selectedItemId = R.id.navigation_record
+
+            flAdd.setOnClickListener {
+                navigate(R.id.action_navigation_to_fragment_create_record)
+            }
         }
 
-        navigate(R.id.action_navigation_to_fragment_record_detail)
     }
 
     private fun select(index: Int) {

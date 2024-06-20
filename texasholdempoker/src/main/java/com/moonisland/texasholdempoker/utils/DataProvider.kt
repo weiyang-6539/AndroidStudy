@@ -1,7 +1,7 @@
 package com.moonisland.texasholdempoker.utils
 
 import com.moonisland.texasholdempoker.db.entity.Player
-import com.w6539.base_jetpack.utils.MD5Util
+import com.w6539.base_jetpack.utils.MessageDigestUtils
 
 /**
  * @author WeiYang
@@ -34,7 +34,7 @@ object DataProvider {
                 0,
                 it,
                 it,
-                MD5Util.encode(it),
+                MessageDigestUtils.md5(it),
             )
         }
     }
