@@ -9,10 +9,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NavHostActivity : BaseVBActivity<ActivityNavHostBinding>() {
 
-    override fun getViewBinding(): ActivityNavHostBinding {
-        return ActivityNavHostBinding.inflate(layoutInflater)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment_container).navigateUp()
     }

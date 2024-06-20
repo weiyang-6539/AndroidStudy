@@ -9,7 +9,4 @@ import com.w6539.demo_jetpack.databinding.FragmentSecondBinding
  * @desc
  */
 class SecondFragment : BaseVBFragment<FragmentSecondBinding>() {
-    override fun getViewBinding(): FragmentSecondBinding {
-        return FragmentSecondBinding.inflate(layoutInflater)
-    }
 }
