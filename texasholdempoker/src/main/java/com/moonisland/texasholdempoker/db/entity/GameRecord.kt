@@ -1,8 +1,8 @@
 package com.moonisland.texasholdempoker.db.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 
 /**
  * @author WeiYang
@@ -10,12 +10,23 @@ import androidx.room.TypeConverters
  * @desc 对局记录
  */
 @Entity
-@TypeConverters()
 data class GameRecord(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-    val name: String,
+    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT)
+    var name: String,
+    @ColumnInfo(name = "playerIds", typeAffinity = ColumnInfo.TEXT)
     val playerIds: MutableList<Long>, // 对局玩家id
-    val startTime: String,
-    val endTime: String,
+    @ColumnInfo(name = "score", typeAffinity = ColumnInfo.INTEGER)
+    var score: Int,// 对局总分数
+    @ColumnInfo(name = "money", typeAffinity = ColumnInfo.REAL)
+    var money: Float = 0f,// 输赢的人民币
+    @ColumnInfo(name = "deductMoney", typeAffinity = ColumnInfo.REAL)
+    var deductMoney: Float = 0f, // 抽水
+    @ColumnInfo(name = "bonusMoney", typeAffinity = ColumnInfo.REAL)
+    var bonusMoney: Float = 0f, // 奖金
+    @ColumnInfo(name = "status", typeAffinity = ColumnInfo.INTEGER)
+    var status: Int = 0, // 0未开始1进行中2已结算(结束)
+    val startTime: Long = System.currentTimeMillis(),
+    var endTime: Long = 0,
 )

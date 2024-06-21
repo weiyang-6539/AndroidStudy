@@ -19,10 +19,14 @@ import androidx.room.PrimaryKey
     ]
 )
 data class Player(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT) val name: String = "",
-    @ColumnInfo(name = "nickname", typeAffinity = ColumnInfo.TEXT) val nickname: String = "",
-    @ColumnInfo(name = "md5", typeAffinity = ColumnInfo.TEXT) val md5: String = "",
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0,
+    @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT)
+    val name: String = "",
+    @ColumnInfo(name = "nickname", typeAffinity = ColumnInfo.TEXT)
+    val nickname: String = "",
+    @ColumnInfo(name = "md5", typeAffinity = ColumnInfo.TEXT)
+    val md5: String = "",
 ) {
     @Ignore
     constructor() : this(0)

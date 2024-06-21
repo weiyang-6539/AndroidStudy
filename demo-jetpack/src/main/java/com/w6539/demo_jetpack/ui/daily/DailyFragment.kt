@@ -42,12 +42,12 @@ class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>()
                 }
                 is LoadState.Loading -> {
                     if (mBinding.mRefreshLayout.state != RefreshState.Refreshing) {
-                        onStateLoading()
+                        onStateLoading("")
                     }
                 }
                 is LoadState.Error -> {
                     val state = it.refresh as LoadState.Error
-                    onStateFailed("报错")
+                    onStateFailed(Exception(state.error))
                 }
             }
         }
@@ -67,7 +67,7 @@ class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>()
                 }
                 is LoadState.Error -> {
                     val state = it.append as LoadState.Error
-
+                    onStateFailed(Exception(state.error))
                 }
             }
         }
@@ -79,8 +79,8 @@ class DailyFragment : BaseVMFragment<DailyViewModel, FragmentRecommendBinding>()
         mBinding.mRefreshLayout.finishRefresh()
     }
 
-    override fun onStateFailed(message: String) {
-        super.onStateFailed(message)
+    override fun onStateFailed(exception: Exception?) {
+        super.onStateFailed(exception)
         mBinding.mRefreshLayout.finishRefresh()
     }
 }

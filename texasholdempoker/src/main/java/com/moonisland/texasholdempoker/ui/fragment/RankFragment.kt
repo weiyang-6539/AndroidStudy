@@ -16,8 +16,6 @@ import kotlin.concurrent.thread
 class RankFragment : BaseVBFragment<FragmentRankBinding>() {
 
     override fun initialize() {
-        init()
-//        query()
     }
 
     private fun init() {

@@ -1,8 +1,12 @@
 package com.moonisland.texasholdempoker.mvvm
 
+import android.util.Log
 import com.moonisland.texasholdempoker.db.AppDatabase
 import com.moonisland.texasholdempoker.db.entity.GameRecord
+import com.moonisland.texasholdempoker.db.entity.Player
+import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 import com.moonisland.texasholdempoker.global.App
+import com.moonisland.texasholdempoker.utils.DataProvider
 import com.w6539.base_jetpack.base.vm.BaseRepository
 import com.w6539.base_jetpack.net.ApiResult
 import javax.inject.Inject
@@ -16,10 +20,30 @@ import javax.inject.Singleton
 @Singleton
 class DataRepository @Inject constructor() : BaseRepository() {
     private val mAppDatabase = AppDatabase.getInstance(App.instance)
+    private val playerMap = HashMap<Long, Player>()
 
     suspend fun queryAllPlayer() = handleApiCall {
         runCatching {
-            ApiResult.Success(mAppDatabase.playerDao().queryAll())
+            val players = mAppDatabase.playerDao().queryAll()
+            // 暂时写死
+            if (players.isEmpty())
+                ApiResult.Success(DataProvider.buildRankList().onEach {
+                    playerMap[it.id] = it
+                })
+            else
+                ApiResult.Success(players)
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
+    suspend fun queryUserById(id: Long) = handleApiCall {
+        runCatching {
+            val player = mAppDatabase.playerDao().queryUser(id)
+            if (player == null) {
+                ApiResult.Success(playerMap[id])
+            } else
+                ApiResult.Success(player)
         }.getOrElse {
             ApiResult.Failed(Exception(it))
         }
@@ -27,7 +51,19 @@ class DataRepository @Inject constructor() : BaseRepository() {
 
     suspend fun createGameRecord(gameRecord: GameRecord) = handleApiCall {
         runCatching {
-            ApiResult.Success(mAppDatabase.gameRecordDao().insertGameRecord(gameRecord))
+            val gid = mAppDatabase.gameRecordDao().insertGameRecord(gameRecord)
+            gameRecord.id = gid
+            // 循环插入个人对局信息
+            gameRecord.playerIds.forEach {
+                mAppDatabase.playerRecordDao().insert(
+                    PlayerRecord(
+                        0,
+                        it,
+                        gid,
+                    )
+                )
+            }
+            ApiResult.Success(gameRecord)
         }.getOrElse {
             ApiResult.Failed(Exception(it))
         }
@@ -44,6 +80,21 @@ class DataRepository @Inject constructor() : BaseRepository() {
     suspend fun queryGameRecordById(id: Long) = handleApiCall {
         runCatching {
             ApiResult.Success(mAppDatabase.gameRecordDao().queryGameRecordById(id))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
+    suspend fun queryPlayerRecordsByGid(gid: Long) = handleApiCall {
+        runCatching {
+            DataProvider.buildRankList().onEach {
+                playerMap[it.id] = it
+            }
+            // 暂不会联查
+            val list = mAppDatabase.playerRecordDao().queryPlayerRecordsByGid(gid).onEach {
+                it.player = playerMap[it.pid]
+            }
+            ApiResult.Success(list)
         }.getOrElse {
             ApiResult.Failed(Exception(it))
         }

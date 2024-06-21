@@ -18,24 +18,27 @@ object DataProvider {
         "胡毅超",
         "李哲",
         "严雷",
+        "高登",
+        "郭纳谏",
         "段海鹏",
         "石闯勋",
         "李望",
-        "高登",
-        "郭纳谏",
         "王璞",
         "邱云亮",
         "覃枫",
     )
 
     fun buildRankList(): List<Player> {
+        var id = 1L
         return playerNameList.map {
             Player(
-                0,
+                id++,
                 it,
                 it,
                 MessageDigestUtils.md5(it),
             )
         }
     }
+
+    fun getPlayerById() {}
 }

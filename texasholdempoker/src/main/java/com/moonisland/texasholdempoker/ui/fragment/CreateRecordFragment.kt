@@ -8,8 +8,8 @@ import com.moonisland.texasholdempoker.ext.emit
 import com.moonisland.texasholdempoker.ext.navigateUp
 import com.moonisland.texasholdempoker.ext.toast
 import com.moonisland.texasholdempoker.mvvm.vm.RecordViewModel
+import com.moonisland.texasholdempoker.ui.base.BaseTexasFragment
 import com.moonisland.texasholdempoker.ui.dialog.InputGameRecordNameDialog
-import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -18,8 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
  * @desc 创建对局
  */
 @AndroidEntryPoint
-class CreateRecordFragment : BaseVMFragment<RecordViewModel, FragmentCreateRecordBinding>() {
+class CreateRecordFragment : BaseTexasFragment<RecordViewModel, FragmentCreateRecordBinding>() {
     private val mAdapter by lazy { PlayerAdapter() }
+    private val initScore = 1000
     override fun initialize() {
         with(mBinding) {
             mRecyclerView.adapter = mAdapter
@@ -28,7 +29,6 @@ class CreateRecordFragment : BaseVMFragment<RecordViewModel, FragmentCreateRecor
                 navigateUp()
             }
             tvConfirm.click {
-
                 InputGameRecordNameDialog()
                     .apply {
                         call = {
@@ -37,9 +37,10 @@ class CreateRecordFragment : BaseVMFragment<RecordViewModel, FragmentCreateRecor
                                     0,
                                     it,
                                     mAdapter.getCheckIds(),
-                                    "",
-                                    ""
-                                )
+                                    initScore * mAdapter.getCheckIds().size,
+                                ).apply {
+                                    status = 1// 进行中
+                                }
                             )
                         }
                     }
@@ -61,7 +62,7 @@ class CreateRecordFragment : BaseVMFragment<RecordViewModel, FragmentCreateRecor
             mAdapter.submitList(it)
         }
         mViewModel.createGameRecordResult.observe(this) {
-            toast("对局创建成功")
+            toast("对局创建成功:${it.id}")
             emit("refresh_game_record_list", true)
             navigateUp()
         }

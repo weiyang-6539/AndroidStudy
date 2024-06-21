@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    android:background="@color/white"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    tools:ignore="HardcodedText">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="姓名：圆梦" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="欠分: 1000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_load"
+        tools:text="得分: 1000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_score"
+        tools:text="倍率" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_payoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rate"
+        tools:text="结现" />
+
+    <com.w6539.base_jetpack.widget.shape.SuperTextView
+        android:id="@+id/btn_loan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
+        android:text="借贷"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_payoff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeCornersRadius="4dp"
+        app:shapeSelectorNormalColor="@color/theme"
+        app:shapeTextNormalColor="@color/white" />
+
+    <com.w6539.base_jetpack.widget.shape.SuperTextView
+        android:id="@+id/btn_payoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
+        android:text="结算"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_loan"
+        app:shapeCornersRadius="4dp"
+        app:shapeSelectorNormalColor="@color/theme"
+        app:shapeTextNormalColor="@color/white" />
+</androidx.constraintlayout.widget.ConstraintLayout>

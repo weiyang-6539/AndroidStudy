@@ -7,7 +7,7 @@ import com.moonisland.texasholdempoker.databinding.FragmentRecordBinding
 import com.moonisland.texasholdempoker.ext.navigate
 import com.moonisland.texasholdempoker.ext.once
 import com.moonisland.texasholdempoker.mvvm.vm.RecordViewModel
-import com.w6539.base_jetpack.base.fragment.BaseVBFragment
+import com.moonisland.texasholdempoker.ui.widget.decoration.SpacingDecoration
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +26,7 @@ class RecordFragment : BaseVMFragment<RecordViewModel, FragmentRecordBinding>() 
             }
         }
         with(mBinding) {
+            mRecyclerView.addItemDecoration(SpacingDecoration.newDecoration())
             mRecyclerView.adapter = mAdapter
         }
         with(mAdapter) {

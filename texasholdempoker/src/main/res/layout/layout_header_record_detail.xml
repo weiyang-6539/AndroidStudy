@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.w6539.base_jetpack.widget.shape.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
     android:orientation="vertical"
     android:padding="16dp"
-    app:shapeCornersRadius="8dp"
-    app:shapeElevation="1dp"
-    app:shapeSelectorNormalColor="@color/white">
+    tools:ignore="HardcodedText">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name"
@@ -53,4 +49,12 @@
         android:textColor="@color/gray_a"
         android:textSize="15sp"
         tools:text="状态：未开始" />
-</com.w6539.base_jetpack.widget.shape.ShapeLinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="对局玩家"
+        android:textColor="#222"
+        android:textSize="15sp" />
+</LinearLayout>

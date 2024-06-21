@@ -20,6 +20,12 @@ interface PlayerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlayers(vararg player: Player)
 
+    @Query("SELECT * FROM player WHERE id = :id")
+    fun queryUser(id: Long): Player?
+
+    @Query("SELECT * FROM player WHERE id in (:ids)")
+    fun queryUser(ids: MutableList<Long>): List<Player>
+
     @Query("select * from player")
     fun queryAll(): List<Player>
 }

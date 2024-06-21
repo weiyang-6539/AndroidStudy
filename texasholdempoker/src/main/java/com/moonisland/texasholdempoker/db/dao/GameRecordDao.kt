@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.moonisland.texasholdempoker.db.entity.GameRecord
-import com.moonisland.texasholdempoker.db.entity.Player
 
 /**
  * @author yang
@@ -16,10 +15,10 @@ import com.moonisland.texasholdempoker.db.entity.Player
 interface GameRecordDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGameRecord(gameRecord: GameRecord)
+    fun insertGameRecord(gameRecord: GameRecord): Long
 
     @Query("SELECT * FROM gamerecord WHERE id = :id")
-    fun queryGameRecordById(id: Long):GameRecord
+    fun queryGameRecordById(id: Long): GameRecord
 
     @Query("select * from gamerecord")
     fun queryAll(): List<GameRecord>
