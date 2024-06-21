@@ -1,5 +1,7 @@
 package com.moonisland.texasholdempoker.ext
 
+import android.annotation.SuppressLint
+
 /**
  * @author Yang
  * @date 2024/6/21
@@ -12,3 +14,6 @@ fun formatRecordStatus(value: Int) = when (value) {
     2 -> "已结束"
     else -> ""
 }
+
+@SuppressLint("DefaultLocale")
+fun Float?.formatFloat() = String.format("%.2f", this?:0f)

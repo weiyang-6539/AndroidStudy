@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.moonisland.texasholdempoker.db.entity.GameRecord
 
 /**
@@ -16,6 +17,9 @@ interface GameRecordDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGameRecord(gameRecord: GameRecord): Long
+
+    @Update
+    fun updateGameRecord(gameRecord: GameRecord)
 
     @Query("SELECT * FROM gamerecord WHERE id = :id")
     fun queryGameRecordById(id: Long): GameRecord

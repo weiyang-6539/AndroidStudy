@@ -9,5 +9,5 @@ import com.moonisland.texasholdempoker.db.entity.PlayerRecord
  * @desc
  */
 interface IStrategy {
-    fun calculate(gr: GameRecord, prs: MutableList<PlayerRecord>)
+    fun calculate(gr: GameRecord, prs: List<PlayerRecord>)
 }

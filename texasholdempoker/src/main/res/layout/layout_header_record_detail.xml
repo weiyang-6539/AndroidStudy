@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/gray_a"
-        android:textSize="15sp"
+        android:textColor="@color/text"
+        android:textSize="17sp"
         tools:text="对局：讲课费" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -24,8 +24,8 @@
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/gray_a"
-        android:textSize="15sp"
+        android:textColor="@color/text"
+        android:textSize="17sp"
         tools:text="人数：6" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -35,9 +35,42 @@
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/gray_a"
-        android:textSize="15sp"
+        android:textColor="@color/text"
+        android:textSize="17sp"
         tools:text="积分：6000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/text"
+        android:textSize="17sp"
+        tools:text="结现：2000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_deduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/text"
+        android:textSize="17sp"
+        tools:text="抽水：400" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bonus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/text"
+        android:textSize="17sp"
+        tools:text="奖金：1600" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_status"
@@ -46,8 +79,8 @@
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/gray_a"
-        android:textSize="15sp"
+        android:textColor="@color/text"
+        android:textSize="17sp"
         tools:text="状态：未开始" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -56,5 +89,5 @@
         android:layout_marginTop="16dp"
         android:text="对局玩家"
         android:textColor="#222"
-        android:textSize="15sp" />
+        android:textSize="17sp" />
 </LinearLayout>

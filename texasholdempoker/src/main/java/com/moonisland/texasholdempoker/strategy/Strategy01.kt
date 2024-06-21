@@ -1,7 +1,9 @@
 package com.moonisland.texasholdempoker.strategy
 
+import android.util.Log
 import com.moonisland.texasholdempoker.db.entity.GameRecord
 import com.moonisland.texasholdempoker.db.entity.PlayerRecord
+import kotlin.math.abs
 import kotlin.math.max
 
 /**
@@ -13,19 +15,29 @@ class Strategy01 : IStrategy {
     private val minDeductMoney = 200f // 最低扣除
     private val deductRate = .2f // 抽水比率, 不足取最低值
 
-    override fun calculate(gr: GameRecord, prs: MutableList<PlayerRecord>) {
+    override fun calculate(gr: GameRecord, prs: List<PlayerRecord>) {
         var loseScore = 0 // 统计总输分
         var loserRateTotal = 0f
+        var virtualLoseMoney = 0f
         var winnerRateTotal = 0f
+        var virtualWinnerMoney = 0f
         val losers = prs.filter {
-            loserRateTotal += it.rate
-            // 贷款 - 得分 = 输分
-            loseScore += it.loan - it.score
-            it.score < it.loan
+            val result = it.score < it.loan
+            if (result) {
+                loserRateTotal += it.rate
+                // 贷款 - 得分 = 输分
+                loseScore += (it.loan - it.score)
+                virtualLoseMoney += it.rate * (it.loan - it.score) //计算正数
+            }
+            result
         }
         val winners = prs.filter {
-            winnerRateTotal += it.rate
-            it.score >= it.loan
+            val result = it.score >= it.loan
+            if (result) {
+                winnerRateTotal += it.rate
+                virtualWinnerMoney += it.rate * (it.score - it.loan)
+            }
+            result
         }
 
         val loserRate = loserRateTotal / losers.size
@@ -34,18 +46,17 @@ class Strategy01 : IStrategy {
         if (loserRate < winnerRate) {
             // 收钱
             losers.forEach {
-                it.money = (it.loan - it.score) * it.rate
+                // 输家计算负数
+                it.money = (it.score - it.loan) * it.rate
                 // 统计总金额
-                gr.money += it.money
+                gr.money += abs(it.money)
             }
             // 抽水
             gr.deductMoney = max(minDeductMoney, gr.money * deductRate)
             gr.bonusMoney = gr.money - gr.deductMoney
             // 分钱
             winners.forEach {
-                val scoreWeight = (it.score - it.loan) * 1f / loseScore // 比分权重
-                val rateWeight = it.rate / winnerRate // 倍率权重
-                it.money = scoreWeight * rateWeight * gr.bonusMoney
+                it.money = gr.bonusMoney * (it.rate * (it.score - it.loan)) / virtualWinnerMoney
             }
         } else {
             // 预收现金
@@ -55,16 +66,16 @@ class Strategy01 : IStrategy {
             gr.bonusMoney = gr.money - gr.deductMoney
             // 分钱
             winners.forEach {
-                val scoreWeight = (it.score - it.loan) * 1f / loseScore // 比分权重
-                val rateWeight = it.rate / winnerRate // 倍率权重
-                it.money = scoreWeight * rateWeight * gr.bonusMoney
+                it.money = gr.bonusMoney * (it.rate * (it.score - it.loan)) / virtualWinnerMoney
             }
             // 收钱
             losers.forEach {
-                val scoreWeight = (it.score - it.loan) * 1f / loseScore // 比分权重
-                val rateWeight = it.rate / winnerRate // 倍率权重
-                it.money = scoreWeight * rateWeight * gr.bonusMoney
+                // 输家计算负数
+                it.money = gr.money * (it.rate * (it.score - it.loan)) / virtualLoseMoney
             }
         }
+
+        // 修改状态为已结算
+        gr.status = 2
     }
 }

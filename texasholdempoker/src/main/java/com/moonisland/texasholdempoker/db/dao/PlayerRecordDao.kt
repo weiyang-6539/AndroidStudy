@@ -3,6 +3,7 @@ package com.moonisland.texasholdempoker.db.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 
 /**
@@ -14,6 +15,9 @@ import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 interface PlayerRecordDao {
     @Insert
     fun insert(playerRecord: PlayerRecord): Long
+
+    @Update
+    fun update(playerRecord: PlayerRecord)
 
     @Query(" SELECT * FROM playerrecord WHERE gid = :gid")
     fun queryPlayerRecordsByGid(gid: Long): List<PlayerRecord>

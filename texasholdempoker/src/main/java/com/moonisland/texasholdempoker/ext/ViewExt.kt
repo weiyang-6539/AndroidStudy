@@ -13,7 +13,7 @@ var viewLastClickTime = 0L
 var clickCount = 0
 
 fun View.click(
-    interval: Long = 800,
+    interval: Long = 150,
     action: () -> Unit,
 ) {
     this.setOnClickListener {

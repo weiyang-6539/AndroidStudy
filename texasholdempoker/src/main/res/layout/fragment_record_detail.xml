@@ -24,12 +24,14 @@
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginBottom="8dp"
+        android:enabled="false"
         android:text="新加玩家"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_calculate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent=".4"
         app:shapeCornersRadius="6dp"
+        app:shapeSelectorDisableColor="@color/gray_a"
         app:shapeSelectorNormalColor="@color/theme"
         app:shapeTextNormalColor="@color/white" />
 
@@ -39,6 +41,7 @@
         android:layout_height="44dp"
         android:layout_marginBottom="8dp"
         android:text="计算比分"
+        app:shapeSelectorDisableColor="@color/gray_a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_add_player"

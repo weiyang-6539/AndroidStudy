@@ -3,7 +3,7 @@ package com.moonisland.texasholdempoker.db.entity
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.moonisland.texasholdempoker.global.Config
+import com.moonisland.texasholdempoker.global.TexasConfig
 
 /**
  * @author WeiYang
@@ -17,8 +17,9 @@ data class PlayerRecord(
     val pid: Long = 0,
     val gid: Long = 0,
     var score: Int = 0, // 得分界面输入
-    var loan: Int = Config.INIT_SCORE, // 贷款积分
-    var rate: Float = Config.INIT_RATE, // 参赛倍率
+    var loan: Int = TexasConfig.INIT_SCORE, // 贷款积分
+    var rate: Float = TexasConfig.INIT_RATE, // 参赛倍率
+    var isLockRate: Boolean = false,
     var money: Float = 0f, // 结算现金
 ) {
     @Ignore

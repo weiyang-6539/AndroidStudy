@@ -16,10 +16,10 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="姓名：圆梦" />
-
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_load"
@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="欠分: 1000" />
@@ -37,9 +38,10 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_load"
-        tools:text="得分: 1000" />
+        tools:text="积分: 1000" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_rate"
@@ -47,6 +49,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_score"
         tools:text="倍率" />
@@ -57,9 +60,26 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_rate"
         tools:text="结现" />
+
+    <com.w6539.base_jetpack.widget.shape.SuperTextView
+        android:id="@+id/btn_loan_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
+        android:text="还贷"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_payoff"
+        app:layout_constraintEnd_toStartOf="@id/btn_loan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeCornersRadius="4dp"
+        app:shapeSelectorNormalColor="@color/theme"
+        app:shapeTextNormalColor="@color/white" />
 
     <com.w6539.base_jetpack.widget.shape.SuperTextView
         android:id="@+id/btn_loan"
@@ -72,6 +92,22 @@
         app:layout_constraintBottom_toTopOf="@id/btn_payoff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeCornersRadius="4dp"
+        app:shapeSelectorNormalColor="@color/theme"
+        app:shapeTextNormalColor="@color/white" />
+
+    <com.w6539.base_jetpack.widget.shape.SuperTextView
+        android:id="@+id/btn_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
+        android:text="倍率"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_payoff"
+        app:layout_constraintTop_toBottomOf="@id/btn_loan"
         app:shapeCornersRadius="4dp"
         app:shapeSelectorNormalColor="@color/theme"
         app:shapeTextNormalColor="@color/white" />

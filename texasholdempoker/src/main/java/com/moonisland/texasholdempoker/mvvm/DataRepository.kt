@@ -99,4 +99,20 @@ class DataRepository @Inject constructor() : BaseRepository() {
             ApiResult.Failed(Exception(it))
         }
     }
+
+    suspend fun updateGameRecord(gameRecord: GameRecord) = handleApiCall {
+        runCatching {
+            ApiResult.Success(mAppDatabase.gameRecordDao().updateGameRecord(gameRecord))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
+    suspend fun updatePlayerRecord(playerRecord: PlayerRecord) = handleApiCall {
+        runCatching {
+            ApiResult.Success(mAppDatabase.playerRecordDao().update(playerRecord))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
 }

@@ -25,6 +25,7 @@ class RecordViewModel @Inject constructor(
     val gameRecordListResult = MutableLiveData<List<GameRecord>>()
     val gameRecordDetailResult = MutableLiveData<GameRecord>()
     val playerRecordsResult = MutableLiveData<List<PlayerRecord>>()
+    val updateRecordResult = MutableLiveData<Any>()
 
     fun queryAllPlayer() {
         launchOnUI {
@@ -106,4 +107,74 @@ class RecordViewModel @Inject constructor(
         }
     }
 
+    /**
+     * 借贷还贷 flag为true为借， 反之为还
+     */
+    fun invokeLoan(playerRecord: PlayerRecord, flag: Boolean) {
+        launchOnUI {
+            val gameRecord = gameRecordDetailResult.value?.apply {
+                if (flag)
+                    score += 1000
+                else
+                    score -= 1000
+            }
+
+            val updateGameRecordRst = async {
+                launchOnIO {
+                    mRepository.updateGameRecord(gameRecord!!)
+                }
+            }
+
+            val updatePlayerRecordRst = async {
+                launchOnIO {
+                    mRepository.updatePlayerRecord(playerRecord)
+                }
+            }
+
+            val updateGameRecord = updateGameRecordRst.await()
+            val updatePlayerRecord = updatePlayerRecordRst.await()
+
+            if (updateGameRecord is ApiResult.Success && updatePlayerRecord is ApiResult.Success) {
+                updateGameRecord.checkSuccess {
+                    gameRecordDetailResult.postValue(gameRecord!!)
+                }
+                updatePlayerRecord.checkSuccess {
+                    updateRecordResult.postValue(it)
+                }
+            }
+            updateGameRecord.checkFailed {
+                loadError(it)
+            }
+            updatePlayerRecord.checkFailed {
+                loadError(it)
+            }
+        }
+    }
+
+    /**
+     * 更新玩家个人对局信息， 修改倍率， 修改得分
+     */
+    fun updatePlayerRecord(playerRecord: PlayerRecord) {
+        launchOnUI {
+            launchOnIO {
+                mRepository.updatePlayerRecord(playerRecord)
+            }.checkSuccess {
+                updateRecordResult.postValue(it)
+            }.checkFailed {
+                loadError(it)
+            }
+        }
+    }
+
+    fun updateGameRecord(gameRecord: GameRecord) {
+        launchOnUI {
+            launchOnIO {
+                mRepository.updateGameRecord(gameRecord)
+            }.checkSuccess {
+                gameRecordDetailResult.postValue(gameRecord)
+            }.checkFailed {
+                loadError(it)
+            }
+        }
+    }
 }
