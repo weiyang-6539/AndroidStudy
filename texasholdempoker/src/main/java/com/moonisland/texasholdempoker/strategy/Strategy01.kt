@@ -1,10 +1,10 @@
 package com.moonisland.texasholdempoker.strategy
 
-import android.util.Log
 import com.moonisland.texasholdempoker.db.entity.GameRecord
 import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * @author Yang
@@ -52,8 +52,8 @@ class Strategy01 : IStrategy {
                 gr.money += abs(it.money)
             }
             // 抽水
-            gr.deductMoney = max(minDeductMoney, gr.money * deductRate)
-            gr.bonusMoney = gr.money - gr.deductMoney
+            gr.deductMoney = max(min(minDeductMoney, gr.money), gr.money * deductRate)
+            gr.bonusMoney = max(gr.money - gr.deductMoney, 0f)
             // 分钱
             winners.forEach {
                 it.money = gr.bonusMoney * (it.rate * (it.score - it.loan)) / virtualWinnerMoney
@@ -62,8 +62,8 @@ class Strategy01 : IStrategy {
             // 预收现金
             gr.money = winnerRate * loseScore
             // 抽水
-            gr.deductMoney = max(minDeductMoney, gr.money * deductRate)
-            gr.bonusMoney = gr.money - gr.deductMoney
+            gr.deductMoney = max(min(minDeductMoney, gr.money), gr.money * deductRate)
+            gr.bonusMoney = max(gr.money - gr.deductMoney, 0f)
             // 分钱
             winners.forEach {
                 it.money = gr.bonusMoney * (it.rate * (it.score - it.loan)) / virtualWinnerMoney
@@ -77,5 +77,6 @@ class Strategy01 : IStrategy {
 
         // 修改状态为已结算
         gr.status = 2
+        gr.endTime = System.currentTimeMillis()
     }
 }

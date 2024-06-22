@@ -24,6 +24,6 @@ interface GameRecordDao {
     @Query("SELECT * FROM gamerecord WHERE id = :id")
     fun queryGameRecordById(id: Long): GameRecord
 
-    @Query("select * from gamerecord")
+    @Query("select * from gamerecord  ORDER BY startTime DESC")
     fun queryAll(): List<GameRecord>
 }
