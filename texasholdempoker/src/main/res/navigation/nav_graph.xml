@@ -21,10 +21,18 @@
         android:name="com.moonisland.texasholdempoker.ui.fragment.RecordDetailFragment"
         android:label="RecordDetailFragment"
         tools:layout="@layout/fragment_record_detail" />
+    <fragment
+        android:id="@+id/addPlayerFragment"
+        android:name="com.moonisland.texasholdempoker.ui.fragment.AddPlayerFragment"
+        android:label="AddPlayerFragment"
+        tools:layout="@layout/fragment_create_record" />
     <action
         android:id="@+id/action_navigation_to_fragment_create_record"
         app:destination="@id/createRecordFragment" />
     <action
         android:id="@+id/action_navigation_to_fragment_record_detail"
         app:destination="@id/recordDetailFragment" />
+    <action
+        android:id="@+id/action_navigation_to_fragment_add_player"
+        app:destination="@id/addPlayerFragment" />
 </navigation>

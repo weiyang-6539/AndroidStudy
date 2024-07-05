@@ -30,4 +30,10 @@ class PlayerRecordAdapter(
             .setGone(R.id.btn_rate, item.isLockRate || status == 2)
             .setGone(R.id.btn_payoff, status == 2)
     }
+
+    fun getUidList() = ArrayList<Long>().apply {
+        items.forEach {
+            add(it.pid)
+        }
+    }
 }

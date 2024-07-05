@@ -115,4 +115,12 @@ class DataRepository @Inject constructor() : BaseRepository() {
             ApiResult.Failed(Exception(it))
         }
     }
+
+    suspend fun inertPlayerRecord(playerRecord: PlayerRecord) = handleApiCall {
+        runCatching {
+            ApiResult.Success(mAppDatabase.playerRecordDao().insert(playerRecord))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
 }

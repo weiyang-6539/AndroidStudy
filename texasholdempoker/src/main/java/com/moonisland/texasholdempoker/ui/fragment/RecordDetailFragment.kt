@@ -2,6 +2,7 @@ package com.moonisland.texasholdempoker.ui.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ConcatAdapter
 import com.chad.library.adapter4.BaseSingleItemAdapter
@@ -10,10 +11,13 @@ import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.adapter.PlayerRecordAdapter
 import com.moonisland.texasholdempoker.databinding.FragmentRecordDetailBinding
 import com.moonisland.texasholdempoker.db.entity.GameRecord
+import com.moonisland.texasholdempoker.db.entity.PlayerRecord
 import com.moonisland.texasholdempoker.ext.click
 import com.moonisland.texasholdempoker.ext.emit
 import com.moonisland.texasholdempoker.ext.formatFloat
 import com.moonisland.texasholdempoker.ext.formatRecordStatus
+import com.moonisland.texasholdempoker.ext.navigate
+import com.moonisland.texasholdempoker.ext.once
 import com.moonisland.texasholdempoker.ext.toast
 import com.moonisland.texasholdempoker.mvvm.vm.RecordViewModel
 import com.moonisland.texasholdempoker.strategy.Strategy01
@@ -64,6 +68,28 @@ class RecordDetailFragment : BaseVMFragment<RecordViewModel, FragmentRecordDetai
     private val mAdapter = PlayerRecordAdapter()
     override fun initialize() {
         with(mBinding) {
+            btnAddPlayer.click {
+                once<ArrayList<Long>>("ids") { list ->
+                    mViewModel.gameRecordDetailResult.value?.apply {
+                        list.forEach {
+                            val playerRecord = PlayerRecord(
+                                0,
+                                it,
+                                this.id
+                            )
+                            mViewModel.insertPlayerRecord(playerRecord)
+                            this.playerIds.add(it)
+                            this.score += playerRecord.loan
+                        }
+                        mViewModel.updateGameRecord(this)
+
+                        mViewModel.queryGameRecordById(id)
+                    }
+                }
+                navigate(R.id.action_navigation_to_fragment_add_player, Bundle().apply {
+                    putSerializable("ids", mAdapter.getUidList())
+                })
+            }
             btnCalculate.click {
                 mViewModel.gameRecordDetailResult.value?.apply {
                     var total = 0
@@ -150,6 +176,7 @@ class RecordDetailFragment : BaseVMFragment<RecordViewModel, FragmentRecordDetai
         mViewModel.gameRecordDetailResult.observe(this) {
             mAdapter.status = it.status
             mHeaderAdapter.setItem(it, null)
+            mBinding.btnAddPlayer.isEnabled = it.status != 2
             mBinding.btnCalculate.isEnabled = it.status != 2
         }
         mViewModel.playerRecordsResult.observe(this) {

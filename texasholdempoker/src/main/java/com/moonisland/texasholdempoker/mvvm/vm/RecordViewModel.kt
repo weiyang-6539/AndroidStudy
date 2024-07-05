@@ -151,6 +151,18 @@ class RecordViewModel @Inject constructor(
         }
     }
 
+    fun insertPlayerRecord(playerRecord: PlayerRecord) {
+        launchOnUI {
+            launchOnIO {
+                mRepository.inertPlayerRecord(playerRecord)
+            }.checkSuccess {
+                updateRecordResult.postValue(it)
+            }.checkFailed {
+                loadError(it)
+            }
+        }
+    }
+
     /**
      * 更新玩家个人对局信息， 修改倍率， 修改得分
      */
