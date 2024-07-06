@@ -21,7 +21,6 @@
         android:background="@color/white"
         app:itemIconSize="30dp"
         app:itemPaddingTop="12dp"
-
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_tab" />
@@ -41,7 +40,7 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             app:shapeCornersRadius="40dp"
-            app:shapeSelectorNormalColor="#6200ee">
+            app:shapeSelectorNormalColor="@color/theme">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="40dp"

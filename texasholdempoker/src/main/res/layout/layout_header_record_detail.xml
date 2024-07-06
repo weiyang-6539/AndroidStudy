@@ -15,6 +15,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="对局：讲课费" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -26,6 +27,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="人数：6" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -37,6 +39,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="积分：6000" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -48,6 +51,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="结现：2000" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -59,6 +63,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="抽水：400" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -70,6 +75,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="奖金：1600" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -81,6 +87,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="状态：未开始" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -89,5 +96,6 @@
         android:layout_marginTop="16dp"
         android:text="对局玩家"
         android:textColor="#222"
-        android:textSize="17sp" />
+        android:textSize="19sp"
+        android:textStyle="bold" />
 </LinearLayout>

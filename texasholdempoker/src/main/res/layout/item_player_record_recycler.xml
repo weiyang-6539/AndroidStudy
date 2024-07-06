@@ -16,54 +16,110 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="@color/theme"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="姓名：圆梦" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_load"
+    <LinearLayout
+        android:id="@+id/ll_load"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="17sp"
+        android:layout_marginTop="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="欠分: 1000" />
+        app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="@color/theme"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="欠分: 1000" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="13.5dp"
+            android:layout_height="13.5dp"
+            android:layout_marginStart="5dp"
+            android:src="@mipmap/ic_unit_score"
+            app:layout_constraintBottom_toBottomOf="@id/tv_load"
+            app:layout_constraintStart_toEndOf="@id/tv_load"
+            app:layout_constraintTop_toTopOf="@id/tv_load" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="←"
+            android:textColor="@color/theme"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_center"
+            android:layout_width="13.5dp"
+            android:layout_height="13.5dp"
+            android:layout_marginStart="5dp"
+            android:src="@mipmap/ic_home_center" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="@color/theme"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_load"
-        tools:text="积分: 1000" />
+        app:layout_constraintTop_toBottomOf="@id/ll_load"
+        tools:text="结余: 1000" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="13.5dp"
+        android:layout_height="13.5dp"
+        android:layout_marginStart="5dp"
+        android:src="@mipmap/ic_unit_score"
+        app:layout_constraintBottom_toBottomOf="@id/tv_score"
+        app:layout_constraintStart_toEndOf="@id/tv_score"
+        app:layout_constraintTop_toTopOf="@id/tv_score" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="@color/theme"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_score"
-        tools:text="倍率" />
+        tools:text="倍率：0.4" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_payoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_rate"
-        tools:text="结现" />
+        tools:text="结现：156.55¥" />
 
     <com.w6539.base_jetpack.widget.shape.SuperTextView
         android:id="@+id/btn_loan_"

@@ -30,3 +30,7 @@ fun View.click(
 fun toast(message: String) {
     Toast.makeText(App.instance, message, Toast.LENGTH_SHORT).show()
 }
+
+fun View.applyGone(isGone: Boolean = true) {
+    visibility = if (isGone) View.GONE else View.VISIBLE
+}

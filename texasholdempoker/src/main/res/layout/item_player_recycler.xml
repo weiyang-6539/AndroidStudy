@@ -7,11 +7,11 @@
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp">
 
-    <CheckBox
-        android:id="@+id/mCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_check"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/selector_cb_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_marginStart="6dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mCheckBox"
+        app:layout_constraintStart_toEndOf="@id/iv_check"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -41,5 +41,5 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="@id/iv_avatar"
-        tools:text="姓名" />
+        tools:text="No.1 姓名" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,12 +21,16 @@ class ChangeRateDialog : BaseVBDialog<DialogChangeRateBinding>() {
             setTitleView()
 
             btnReduce.click {
-                rate -= .05f
-                setTitleView()
+                if (rate > .05f) {
+                    rate -= .05f
+                    setTitleView()
+                }
             }
             btnAdd.click {
-                rate += .05f
-                setTitleView()
+                if (rate < 1.0f) {
+                    rate += .05f
+                    setTitleView()
+                }
             }
             tvCancel.click {
                 dismissAllowingStateLoss()
