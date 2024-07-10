@@ -9,17 +9,15 @@ import com.moonisland.texasholdempoker.global.App
  * @date 2024/6/20
  * @desc
  */
-var viewLastClickTime = 0L
-var clickCount = 0
 
 fun View.click(
-    interval: Long = 150,
+    interval: Long = 800,
     action: () -> Unit,
 ) {
+    var viewLastClickTime = 0L
     this.setOnClickListener {
         val currentTime = System.currentTimeMillis()
         if (viewLastClickTime != 0L && (currentTime - viewLastClickTime < interval)) {
-            clickCount = 0
             return@setOnClickListener
         }
         viewLastClickTime = currentTime
