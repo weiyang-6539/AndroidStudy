@@ -19,9 +19,18 @@ interface PlayerRecordDao {
     @Update
     fun update(playerRecord: PlayerRecord)
 
-    @Query(" SELECT * FROM playerrecord WHERE gid = :gid")
+    @Query("select * from playerrecord where id in (:ids)")
+    fun queryByIds(ids: Array<Long>): List<PlayerRecord>
+
+    @Query("delete from playerrecord where id in (:ids)")
+    fun deleteByIds(ids: Array<Long>)
+
+    @Query("select * from playerrecord where gid = :gid")
     fun queryPlayerRecordsByGid(gid: Long): List<PlayerRecord>
 
     @Query("select * from playerrecord")
     fun queryPlayerRecords(): List<PlayerRecord>
+
+    @Query("delete from playerrecord where gid = :gid")
+    fun deletePlayerRecordsByGid(gid: Long)
 }

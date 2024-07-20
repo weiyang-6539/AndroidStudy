@@ -1,11 +1,12 @@
 package com.moonisland.texasholdempoker.ui.fragment
 
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.databinding.FragmentMainBinding
 import com.moonisland.texasholdempoker.ext.navigate
+import com.moonisland.texasholdempoker.mvvm.vm.RemoteViewModel
 import com.w6539.base_jetpack.base.fragment.BaseVBFragment
+import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * @desc 主页面fragment
  */
 @AndroidEntryPoint
-class MainFragment : BaseVBFragment<FragmentMainBinding>() {
+class MainFragment : BaseVMFragment<RemoteViewModel, FragmentMainBinding>() {
     private val fragments = mutableListOf<Fragment>(
         RecordFragment(),
         RankFragment(),
@@ -34,10 +35,8 @@ class MainFragment : BaseVBFragment<FragmentMainBinding>() {
             navView.selectedItemId = R.id.navigation_record
 
             flAdd.setOnClickListener {
-                navigate(R.id.action_navigation_to_fragment_create_record)
             }
         }
-
     }
 
     private fun select(index: Int) {

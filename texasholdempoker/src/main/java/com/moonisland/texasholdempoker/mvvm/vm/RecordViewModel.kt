@@ -26,6 +26,7 @@ class RecordViewModel @Inject constructor(
     val gameRecordDetailResult = MutableLiveData<GameRecord>()
     val playerRecordsResult = MutableLiveData<List<PlayerRecord>>()
     val updateRecordResult = MutableLiveData<Any>()
+    val deleteRecordResult = MutableLiveData<Any>()
 
     fun queryAllPlayer() {
         launchOnUI {
@@ -77,30 +78,30 @@ class RecordViewModel @Inject constructor(
 
     fun queryGameRecordById(id: Long) {
         launchOnUI {
-            val playerRecordsRst = async {
+            val async1 = async {
                 launchOnIO {
                     mRepository.queryPlayerRecordsByGid(id)
                 }
             }
-            val gameRecordRst = async {
+            val async2 = async {
                 launchOnIO {
                     mRepository.queryGameRecordById(id)
                 }
             }
-            val playerRecords = playerRecordsRst.await()
-            val gameRecord = gameRecordRst.await()
-            if (playerRecords is ApiResult.Success && gameRecord is ApiResult.Success) {
-                playerRecords.checkSuccess {
+            val await1 = async1.await()
+            val await2 = async2.await()
+            if (await1 is ApiResult.Success && await2 is ApiResult.Success) {
+                await1.checkSuccess {
                     playerRecordsResult.postValue(it)
                 }
-                gameRecord.checkSuccess {
+                await2.checkSuccess {
                     gameRecordDetailResult.postValue(it)
                 }
             } else {
-                playerRecords.checkFailed {
+                await1.checkFailed {
                     loadError(it)
                 }
-                gameRecord.checkFailed {
+                await2.checkFailed {
                     loadError(it)
                 }
             }
@@ -119,34 +120,35 @@ class RecordViewModel @Inject constructor(
                     score -= 1000
             }
 
-            val updateGameRecordRst = async {
+            val async1 = async {
                 launchOnIO {
                     mRepository.updateGameRecord(gameRecord!!)
                 }
             }
 
-            val updatePlayerRecordRst = async {
+            val async2 = async {
                 launchOnIO {
                     mRepository.updatePlayerRecord(playerRecord)
                 }
             }
 
-            val updateGameRecord = updateGameRecordRst.await()
-            val updatePlayerRecord = updatePlayerRecordRst.await()
+            val await1 = async1.await()
+            val await2 = async2.await()
 
-            if (updateGameRecord is ApiResult.Success && updatePlayerRecord is ApiResult.Success) {
-                updateGameRecord.checkSuccess {
+            if (await1 is ApiResult.Success && await2 is ApiResult.Success) {
+                await1.checkSuccess {
                     gameRecordDetailResult.postValue(gameRecord!!)
                 }
-                updatePlayerRecord.checkSuccess {
+                await2.checkSuccess {
                     updateRecordResult.postValue(it)
                 }
-            }
-            updateGameRecord.checkFailed {
-                loadError(it)
-            }
-            updatePlayerRecord.checkFailed {
-                loadError(it)
+            } else {
+                await1.checkFailed {
+                    loadError(it)
+                }
+                await2.checkFailed {
+                    loadError(it)
+                }
             }
         }
     }
@@ -178,12 +180,68 @@ class RecordViewModel @Inject constructor(
         }
     }
 
-    fun updateGameRecord(gameRecord: GameRecord) {
+    fun deletePlayerRecords(ids: ArrayList<Long>) {
         launchOnUI {
             launchOnIO {
-                mRepository.updateGameRecord(gameRecord)
+                mRepository.queryPlayerRecordByIds(ids)
+            }.checkSuccess { list ->
+                gameRecordDetailResult.value?.apply {
+
+                    list?.forEach {
+                        this.playerIds.remove(it.id)
+                        this.score -= it.loan
+                    }
+
+                    updateGameRecord(this)
+                }
+            }.checkFailed {
+                loadError(it)
+            }
+        }
+    }
+
+    fun updateGameRecord(gameRecord: GameRecord) {
+        launchOnUI {
+            val async1 = async {
+                launchOnIO {
+                    mRepository.updateGameRecord(gameRecord)
+                }
+            }
+
+            val await1 = async1.await()
+
+            val async2 = async {
+                launchOnIO {
+                    mRepository.queryPlayerRecordsByGid(gameRecord.id)
+                }
+            }
+
+            val await2 = async2.await()
+
+            if (await1 is ApiResult.Success && await2 is ApiResult.Success) {
+                await1.checkSuccess {
+                    gameRecordDetailResult.postValue(gameRecord)
+                }
+                await2.checkSuccess {
+                    playerRecordsResult.postValue(it)
+                }
+            } else {
+                await1.checkFailed {
+                    loadError(it)
+                }
+                await2.checkFailed {
+                    loadError(it)
+                }
+            }
+        }
+    }
+
+    fun deleteGameRecord(gameRecord: GameRecord) {
+        launchOnUI {
+            launchOnIO {
+                mRepository.deleteGameRecord(gameRecord)
             }.checkSuccess {
-                gameRecordDetailResult.postValue(gameRecord)
+                deleteRecordResult.postValue(gameRecord)
             }.checkFailed {
                 loadError(it)
             }

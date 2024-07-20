@@ -25,6 +25,29 @@ fun View.click(
     }
 }
 
+/**
+ * 连击的拓展函数
+ */
+fun View.clicks(num: Int, action: () -> Unit) {
+    var viewLastClickTime = 0L
+    var clickCount = 0
+    this.setOnClickListener {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - viewLastClickTime < 1000) {
+            clickCount++
+        } else {
+            clickCount = 0
+        }
+        viewLastClickTime = currentTime
+
+        // 当clickCount=1时实际已经连续点击2次了
+        if (clickCount + 1 >= num) {
+            action()
+            clickCount = 0
+        }
+    }
+}
+
 fun toast(message: String) {
     Toast.makeText(App.instance, message, Toast.LENGTH_SHORT).show()
 }

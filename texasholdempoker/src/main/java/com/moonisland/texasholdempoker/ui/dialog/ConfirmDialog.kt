@@ -1,7 +1,7 @@
 package com.moonisland.texasholdempoker.ui.dialog
 
 import android.os.Bundle
-import com.moonisland.texasholdempoker.databinding.DialogChangeLoanBinding
+import com.moonisland.texasholdempoker.databinding.DialogConfirmBinding
 import com.moonisland.texasholdempoker.ext.click
 import com.w6539.base_jetpack.base.dialog.BaseVBDialog
 
@@ -10,26 +10,26 @@ import com.w6539.base_jetpack.base.dialog.BaseVBDialog
  * @date 2024/6/21
  * @desc
  */
-class ChangeLoanDialog private constructor() : BaseVBDialog<DialogChangeLoanBinding>() {
+class ConfirmDialog private constructor() : BaseVBDialog<DialogConfirmBinding>() {
     companion object {
-        fun newInstance(title: String) = ChangeLoanDialog().apply {
+        fun newInstance(prompt: String) = ConfirmDialog().apply {
             arguments = Bundle().apply {
-                putString("title", title)
+                putString("prompt", prompt)
             }
         }
     }
 
-    private val title by lazy {
-        requireArguments().getString("title", "")
+    private val prompt by lazy {
+        requireArguments().getString("prompt", "")
     }
 
-    var call: (() -> Boolean)? = null
+    var confirmCall: (() -> Boolean)? = null
     override fun initialize() {
         with(mBinding) {
-            tvTitle.text = title
+            tvPrompt.text = prompt
             tvCancel.click { dismissAllowingStateLoss() }
             tvConfirm.click {
-                if (call?.invoke() == true) {
+                if (confirmCall?.invoke() == true) {
                     dismissAllowingStateLoss()
                 }
             }

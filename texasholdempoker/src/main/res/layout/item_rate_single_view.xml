@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.w6539.base_jetpack.widget.shape.SuperTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:textSize="14sp"
+    app:layout_flexBasisPercent="40%"
+    app:layout_flexGrow="1"
+    app:shapeCornersRadius="4dp"
+    app:shapeSelectorNormalColor="@color/white_ef"
+    app:shapeSelectorSelectedColor="@color/selected"
+    app:shapeTextNormalColor="@color/gray_6"
+    app:shapeTextSelectedColor="@color/theme"
+    tools:text="0.05" />

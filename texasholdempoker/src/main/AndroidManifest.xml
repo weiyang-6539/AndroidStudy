@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".global.App"
@@ -21,5 +22,4 @@
         </activity>
         <activity android:name="com.moonisland.texasholdempoker.ui.activity.NavHostActivity" />
     </application>
-
 </manifest>

@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_record_detail" />
     <fragment
         android:id="@+id/addPlayerFragment"
-        android:name="com.moonisland.texasholdempoker.ui.fragment.AddPlayerFragment"
+        android:name="com.moonisland.texasholdempoker.ui.fragment.AddOrRemovePlayerFragment"
         android:label="AddPlayerFragment"
         tools:layout="@layout/fragment_create_record" />
     <action

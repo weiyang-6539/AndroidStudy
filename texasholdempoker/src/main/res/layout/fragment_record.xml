@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/theme"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="比赛记录"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_add" />
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
         android:orientation="vertical"
         android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:paddingTop="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_game_record_recycler" />
 </androidx.constraintlayout.widget.ConstraintLayout>

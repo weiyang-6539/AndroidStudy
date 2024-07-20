@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.adapter.GameRecordAdapter
 import com.moonisland.texasholdempoker.databinding.FragmentRecordBinding
+import com.moonisland.texasholdempoker.ext.click
 import com.moonisland.texasholdempoker.ext.navigate
 import com.moonisland.texasholdempoker.ext.once
 import com.moonisland.texasholdempoker.mvvm.vm.RecordViewModel
@@ -26,7 +27,10 @@ class RecordFragment : BaseVMFragment<RecordViewModel, FragmentRecordBinding>() 
             }
         }
         with(mBinding) {
-            mRecyclerView.addItemDecoration(SpacingDecoration.newDecoration())
+            btnAdd.click {
+                navigate(R.id.action_navigation_to_fragment_create_record)
+            }
+//            mRecyclerView.addItemDecoration(SpacingDecoration.newDecoration())
             mRecyclerView.adapter = mAdapter
         }
         with(mAdapter) {

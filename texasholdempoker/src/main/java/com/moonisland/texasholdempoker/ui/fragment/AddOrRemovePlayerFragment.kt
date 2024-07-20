@@ -15,10 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
  * @desc
  */
 @AndroidEntryPoint
-class AddPlayerFragment : BaseTexasFragment<RecordViewModel, FragmentCreateRecordBinding>() {
+class AddOrRemovePlayerFragment :
+    BaseTexasFragment<RecordViewModel, FragmentCreateRecordBinding>() {
     private val mAdapter by lazy { PlayerAdapter() }
 
-    private val alreadyExistIds: ArrayList<Long> by lazy { requireArguments().getSerializable("ids") as ArrayList<Long> }
+    private val ids: ArrayList<Long> by lazy { requireArguments().getSerializable("ids") as ArrayList<Long> }
+    private val isRemove: Boolean by lazy { requireArguments().getBoolean("isRemove", false) }
     override fun initialize() {
         with(mBinding) {
             mRecyclerView.adapter = mAdapter
@@ -26,7 +28,10 @@ class AddPlayerFragment : BaseTexasFragment<RecordViewModel, FragmentCreateRecor
                 navigateUp()
             }
             tvConfirm.click {
-                emit("ids", mAdapter.getCheckIds())
+                if (isRemove)
+                    emit("removeIds", mAdapter.getCheckIds())
+                else
+                    emit("addIds", mAdapter.getCheckIds())
                 navigateUp()
             }
         }
@@ -44,7 +49,7 @@ class AddPlayerFragment : BaseTexasFragment<RecordViewModel, FragmentCreateRecor
     override fun startObserver() {
         mViewModel.playerListResult.observe(this) { list ->
             mAdapter.submitList(list.filter {
-                !alreadyExistIds.contains(it.id)
+                if (isRemove) ids.contains(it.id) else !ids.contains(it.id)
             })
         }
     }

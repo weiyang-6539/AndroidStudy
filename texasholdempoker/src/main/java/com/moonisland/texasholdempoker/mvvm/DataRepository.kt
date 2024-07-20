@@ -1,6 +1,5 @@
 package com.moonisland.texasholdempoker.mvvm
 
-import android.util.Log
 import com.moonisland.texasholdempoker.db.AppDatabase
 import com.moonisland.texasholdempoker.db.entity.GameRecord
 import com.moonisland.texasholdempoker.db.entity.Player
@@ -85,6 +84,32 @@ class DataRepository @Inject constructor() : BaseRepository() {
         }
     }
 
+    suspend fun updateGameRecord(gameRecord: GameRecord) = handleApiCall {
+        runCatching {
+            ApiResult.Success(mAppDatabase.gameRecordDao().updateGameRecord(gameRecord))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
+    suspend fun deleteGameRecord(gameRecord: GameRecord) = handleApiCall {
+        runCatching {
+            mAppDatabase.gameRecordDao().deleteGameRecord(gameRecord)
+            mAppDatabase.playerRecordDao().deletePlayerRecordsByGid(gameRecord.id)
+            ApiResult.Success(gameRecord.id)
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
+    suspend fun queryPlayerRecordByIds(ids: ArrayList<Long>) = handleApiCall {
+        runCatching {
+            ApiResult.Success(mAppDatabase.playerRecordDao().queryByIds(ids.toTypedArray()))
+        }.getOrElse {
+            ApiResult.Failed(Exception(it))
+        }
+    }
+
     suspend fun queryPlayerRecordsByGid(gid: Long) = handleApiCall {
         runCatching {
             DataProvider.buildRankList().onEach {
@@ -95,14 +120,6 @@ class DataRepository @Inject constructor() : BaseRepository() {
                 it.player = playerMap[it.pid]
             }
             ApiResult.Success(list)
-        }.getOrElse {
-            ApiResult.Failed(Exception(it))
-        }
-    }
-
-    suspend fun updateGameRecord(gameRecord: GameRecord) = handleApiCall {
-        runCatching {
-            ApiResult.Success(mAppDatabase.gameRecordDao().updateGameRecord(gameRecord))
         }.getOrElse {
             ApiResult.Failed(Exception(it))
         }

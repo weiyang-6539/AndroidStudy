@@ -4,72 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="150dp"
     app:shapeCornersRadius="8dp"
     app:shapeSelectorNormalColor="@color/white"
     app:shapeStrokeNormalColor="@color/gray_c"
     app:shapeStrokeWidth="1dp"
     tools:ignore="HardcodedText">
 
-    <com.w6539.base_jetpack.widget.shape.ShapeFrameLayout
-        android:id="@+id/fl_input"
-        android:layout_width="0dp"
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="48dp"
+        android:paddingVertical="12dp"
+        app:dividerDrawable="@drawable/divider_size_dp12"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".6">
+        app:showDivider="middle">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/gray_a"
-            android:textSize="15sp"
-            tools:text="当前倍率为0.4, 一旦确定不能修改" />
-    </com.w6539.base_jetpack.widget.shape.ShapeFrameLayout>
-
-    <com.w6539.base_jetpack.widget.shape.SuperTextView
-        android:id="@+id/btn_reduce"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="减"
-        app:layout_constraintBottom_toBottomOf="@id/fl_input"
-        app:layout_constraintEnd_toStartOf="@id/fl_input"
-        app:layout_constraintTop_toTopOf="@id/fl_input"
-        app:shapeCornersRadius="5dp"
-        app:shapeSelectorNormalColor="@color/theme"
-        app:shapeTextNormalColor="@color/white" />
-
-    <com.w6539.base_jetpack.widget.shape.SuperTextView
-        android:id="@+id/btn_add"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="加"
-        app:layout_constraintBottom_toBottomOf="@id/fl_input"
-        app:layout_constraintStart_toEndOf="@id/fl_input"
-        app:layout_constraintTop_toTopOf="@id/fl_input"
-        app:shapeCornersRadius="5dp"
-        app:shapeSelectorNormalColor="@color/theme"
-        app:shapeTextNormalColor="@color/white" />
+    </com.google.android.flexbox.FlexboxLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="28dp"
+        android:layout_marginBottom="48dp"
         app:dividerColor="@color/gray_c"
-        app:layout_constraintTop_toBottomOf="@id/fl_input" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="1dp"
         android:layout_height="48dp"
         android:layout_marginTop="29dp"
         app:dividerColor="@color/gray_c"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_input" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_cancel"

@@ -16,4 +16,4 @@ fun formatRecordStatus(value: Int) = when (value) {
 }
 
 @SuppressLint("DefaultLocale")
-fun Float?.formatFloat() = String.format("%.2f", this?:0f)
+fun Float?.formatFloat() = String.format("%.2f", this ?: 0f)
