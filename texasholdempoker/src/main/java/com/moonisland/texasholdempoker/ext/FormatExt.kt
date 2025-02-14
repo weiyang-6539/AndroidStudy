@@ -12,7 +12,7 @@ fun formatRecordStatus(value: Int) = when (value) {
     0 -> "未开始"
     1 -> "进行中"
     2 -> "已结束"
-    else -> ""
+    else -> " "
 }
 
 @SuppressLint("DefaultLocale")
