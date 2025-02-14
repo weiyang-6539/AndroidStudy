@@ -6,7 +6,6 @@ import android.content.res.TypedArray
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -189,15 +188,13 @@ class SuperTextView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         val topIcon = getDrawable(1)
         val endIcon = getDrawable(2)
         val bottomIcon = getDrawable(3)
-        val textPaint: Paint = paint
         var text: String = text.toString()
         if (transformationMethod != null) {
             text = transformationMethod.getTransformation(text, this).toString()
         }
-        val textWidth =
-            textPaint.measureText(text).toInt().coerceAtMost(layout.ellipsizedWidth)
+        val textWidth = paint.measureText(text).toInt().coerceAtMost(layout.ellipsizedWidth)
         val rect = Rect()
-        textPaint.getTextBounds(text, 0, text.length, rect)
+        paint.getTextBounds(text, 0, text.length, rect)
         val offsetX: Int = ((measuredWidth
             - textWidth
             - ViewCompat.getPaddingStart(this)

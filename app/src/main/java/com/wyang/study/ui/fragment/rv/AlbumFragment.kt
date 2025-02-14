@@ -94,7 +94,6 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>() {
         mBinding.tvDate.text = "01月03日"
 
         mBinding.tvDate.parent.requestDisallowInterceptTouchEvent(true)
-
     }
 
     private fun calculateMaxScrollY(height: Int, spanCount: Int) {

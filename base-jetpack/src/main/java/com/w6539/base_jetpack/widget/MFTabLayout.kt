@@ -2,8 +2,6 @@ package com.w6539.base_jetpack.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import com.google.android.material.tabs.TabLayout
 
 /**

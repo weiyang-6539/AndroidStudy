@@ -26,7 +26,8 @@ open class AvatarImageView : AppCompatImageView {
             -0x4488cd,
             -0x99ab,
             -0x44bc,
-            -0xbb5501)
+            -0xbb5501
+        )
 
         private val COLORS_NUMBER = COLORS.size
         private const val DEFAULT_TEXT_COLOR = -0x1
@@ -113,9 +114,11 @@ open class AvatarImageView : AppCompatImageView {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context,
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
         attrs,
-        defStyleAttr) {
+        defStyleAttr
+    ) {
 
         initAttr(context, attrs)
     }
@@ -130,24 +133,31 @@ open class AvatarImageView : AppCompatImageView {
                 R.styleable.AvatarImageView_aiv_isCircle -> {
                     isCircle = a.getBoolean(attr, isCircle)
                 }
+
                 R.styleable.AvatarImageView_aiv_TextSizeRatio -> {
                     mTextSizeRatio = a.getFloat(attr, DEFAULT_TEXT_SIZE_RATIO)
                 }
+
                 R.styleable.AvatarImageView_aiv_TextMaskRatio -> {
                     mTextMaskRatio = a.getFloat(attr, DEFAULT_TEXT_MASK_RATIO)
                 }
+
                 R.styleable.AvatarImageView_aiv_BoarderWidth -> {
                     mBoarderWidth = a.getDimensionPixelSize(attr, DEFAULT_BOARDER_WIDTH)
                 }
+
                 R.styleable.AvatarImageView_aiv_BoarderColor -> {
                     mBoarderColor = a.getColor(attr, DEFAULT_BOARDER_COLOR)
                 }
+
                 R.styleable.AvatarImageView_aiv_TextColor -> {
                     mTextColor = a.getColor(attr, DEFAULT_TEXT_COLOR)
                 }
+
                 R.styleable.AvatarImageView_aiv_ShowBoarder -> {
                     mShowBoarder = a.getBoolean(attr, DEFAULT_BOARDER_SHOW)
                 }
+
                 R.styleable.AvatarImageView_aiv_CornerRadius -> {
                     mRadius =
                         a.getDimensionPixelSize(R.styleable.AvatarImageView_aiv_CornerRadius, 0)
@@ -185,7 +195,7 @@ open class AvatarImageView : AppCompatImageView {
     }
 
     fun setTextAndColor(text: String?, bgColor: Int) {
-        if (mType != DEFAULT_TYPE_TEXT || !stringEqual(text, mText) || bgColor != mBgColor) {
+        if (mType != DEFAULT_TYPE_TEXT || !TextUtils.equals(text, mText) || bgColor != mBgColor) {
             mText = text
             mBgColor = bgColor
             mType = DEFAULT_TYPE_TEXT
@@ -229,13 +239,17 @@ open class AvatarImageView : AppCompatImageView {
             drawable.bitmap
         } else try {
             val bitmap: Bitmap = if (drawable is ColorDrawable) {
-                Bitmap.createBitmap(COLOR_DRAWABLE_DIMENSION,
+                Bitmap.createBitmap(
                     COLOR_DRAWABLE_DIMENSION,
-                    BITMAP_CONFIG_8888)
+                    COLOR_DRAWABLE_DIMENSION,
+                    BITMAP_CONFIG_8888
+                )
             } else {
-                Bitmap.createBitmap(drawable.intrinsicWidth,
+                Bitmap.createBitmap(
+                    drawable.intrinsicWidth,
                     drawable.intrinsicHeight,
-                    BITMAP_CONFIG_8888)
+                    BITMAP_CONFIG_8888
+                )
             }
             val canvas = Canvas(bitmap)
             drawable.setBounds(0, 0, canvas.width, canvas.height)
@@ -276,15 +290,20 @@ open class AvatarImageView : AppCompatImageView {
     private fun drawBitmap(canvas: Canvas, bitmap: Bitmap, adjustScale: Boolean) {
         refreshBitmapShaderConfig(bitmap, adjustScale)
         mPaintDraw.shader = mBitmapShader
-        if (isCircle) canvas.drawCircle(mCenterX.toFloat(), mCenterY.toFloat(), mRadius.toFloat(),
-            mPaintDraw) else {
+        if (isCircle) canvas.drawCircle(
+            mCenterX.toFloat(), mCenterY.toFloat(), mRadius.toFloat(),
+            mPaintDraw
+        ) else {
             val rectF = RectF(
                 paddingLeft.toFloat(),
                 paddingTop.toFloat(),
                 width.toFloat(),
-                height.toFloat())
-            if (mRadius != 0) canvas.drawRoundRect(rectF, mRadius.toFloat(), mRadius.toFloat(),
-                mPaintDraw) else canvas.drawRect(rectF, mPaintDraw)
+                height.toFloat()
+            )
+            if (mRadius != 0) canvas.drawRoundRect(
+                rectF, mRadius.toFloat(), mRadius.toFloat(),
+                mPaintDraw
+            ) else canvas.drawRect(rectF, mPaintDraw)
         }
     }
 
@@ -300,11 +319,15 @@ open class AvatarImageView : AppCompatImageView {
             val scaleY: Float = height * 1.0f / bitmapHeight
             mMatrix.setScale(scaleX, scaleY)
             if (bitmapWidth > bitmapHeight) {
-                mMatrix.postTranslate(-(bitmapWidth * scaleX / 2 - width / 2 - paddingLeft),
-                    paddingTop.toFloat())
+                mMatrix.postTranslate(
+                    -(bitmapWidth * scaleX / 2 - width / 2 - paddingLeft),
+                    paddingTop.toFloat()
+                )
             } else {
-                mMatrix.postTranslate(paddingLeft.toFloat(),
-                    -(bitmapHeight * scaleY / 2 - height / 2 - paddingTop))
+                mMatrix.postTranslate(
+                    paddingLeft.toFloat(),
+                    -(bitmapHeight * scaleY / 2 - height / 2 - paddingTop)
+                )
             }
         } else {
             val x: Float = -(bitmapWidth * 1.0f / 2 - mRadius - paddingLeft)
@@ -323,44 +346,60 @@ open class AvatarImageView : AppCompatImageView {
         paintClipText.style = Paint.Style.FILL
         paintClipText.isAntiAlias = true
         paintClipText.color = mBgColor
-        if (isCircle) canvasClipText.drawCircle(bitmapRadius.toFloat(),
+        if (isCircle) canvasClipText.drawCircle(
             bitmapRadius.toFloat(),
             bitmapRadius.toFloat(),
-            paintClipText)
-        else canvasClipText.drawRect(0f, 0f,
+            bitmapRadius.toFloat(),
+            paintClipText
+        )
+        else canvasClipText.drawRect(
+            0f, 0f,
             (bitmapRadius * 2).toFloat(),
             (bitmapRadius * 2).toFloat(),
-            paintClipText)
+            paintClipText
+        )
         paintClipText.textSize = mTextSizeRatio * mRadius * 2
         paintClipText.color = mTextColor
         paintClipText.textAlign = Paint.Align.CENTER
         val fontMetrics = paintClipText.fontMetrics
-        canvasClipText.drawText(mText!!, 0, mText!!.length, bitmapRadius.toFloat(),
-            bitmapRadius + abs(fontMetrics.top + fontMetrics.bottom) / 2, paintClipText)
+        canvasClipText.drawText(
+            mText!!, 0, mText!!.length, bitmapRadius.toFloat(),
+            bitmapRadius + abs(fontMetrics.top + fontMetrics.bottom) / 2, paintClipText
+        )
         return bitmapClipText
     }
 
     private fun drawText(canvas: Canvas) {
         refreshTextConfig()
-        if (isCircle) canvas.drawCircle(mCenterX.toFloat(), mCenterY.toFloat(), mRadius.toFloat(),
-            mPaintTextBackground) else {
+        if (isCircle) canvas.drawCircle(
+            mCenterX.toFloat(), mCenterY.toFloat(), mRadius.toFloat(),
+            mPaintTextBackground
+        ) else {
             val rectF = RectF(
                 paddingLeft.toFloat(),
                 paddingTop.toFloat(),
                 width.toFloat(),
-                height.toFloat())
-            if (mRadius != 0) canvas.drawRoundRect(rectF, mRadius.toFloat(), mRadius.toFloat(),
-                mPaintTextBackground) else canvas.drawRect(rectF, mPaintTextBackground)
+                height.toFloat()
+            )
+            if (mRadius != 0) canvas.drawRoundRect(
+                rectF, mRadius.toFloat(), mRadius.toFloat(),
+                mPaintTextBackground
+            ) else canvas.drawRect(rectF, mPaintTextBackground)
         }
-        canvas.drawText(mText!!, 0, mText!!.length, mCenterX.toFloat(), mCenterY + abs(
-            mFontMetrics!!.top + mFontMetrics!!.bottom) / 2, mPaintTextForeground)
+        canvas.drawText(
+            mText!!, 0, mText!!.length, mCenterX.toFloat(), mCenterY + abs(
+                mFontMetrics!!.top + mFontMetrics!!.bottom
+            ) / 2, mPaintTextForeground
+        )
     }
 
     private fun drawBoarder(canvas: Canvas) {
-        if (isCircle) canvas.drawCircle(mCenterX.toFloat(),
+        if (isCircle) canvas.drawCircle(
+            mCenterX.toFloat(),
             mCenterY.toFloat(),
             (mRadius - (mBoarderWidth shr 1)).toFloat(),
-            mPaintCircle)
+            mPaintCircle
+        )
     }
 
     private fun getColorBySeed(seed: String): Int {
@@ -375,15 +414,5 @@ open class AvatarImageView : AppCompatImageView {
 
     override fun setImageResource(resId: Int) {
         drawable = ResourcesCompat.getDrawable(resources, resId, null)
-    }
-
-    private fun stringEqual(a: String?, b: String?): Boolean {
-        return if (a == null) {
-            b == null
-        } else {
-            if (b == null) {
-                false
-            } else a == b
-        }
     }
 }

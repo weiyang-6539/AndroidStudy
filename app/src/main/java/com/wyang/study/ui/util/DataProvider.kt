@@ -1,11 +1,34 @@
 package com.wyang.study.ui.util
 
-import com.wyang.study.bean.*
+import com.wyang.study.bean.Album
+import com.wyang.study.bean.AlbumBase
+import com.wyang.study.bean.Channel
+import com.wyang.study.bean.Discover
+import com.wyang.study.bean.SectionItem
+import com.wyang.study.bean.Simple
 import com.wyang.study.ui.activity.RvActivity
-import com.wyang.study.ui.fragment.*
-import com.wyang.study.ui.fragment.custom.*
+import com.wyang.study.ui.fragment.AddressFilterFragment
+import com.wyang.study.ui.fragment.AddressLinkageFragment
+import com.wyang.study.ui.fragment.AidlFragment
+import com.wyang.study.ui.fragment.AlgorithmFragment
+import com.wyang.study.ui.fragment.FlexBoxFragment
+import com.wyang.study.ui.fragment.HandlerThreadFragment
+import com.wyang.study.ui.fragment.IntentServiceFragment
+import com.wyang.study.ui.fragment.NotificationFragment
+import com.wyang.study.ui.fragment.OkHttpFragment
+import com.wyang.study.ui.fragment.RetrofitFragment
+import com.wyang.study.ui.fragment.TestConstraintFragment
+import com.wyang.study.ui.fragment.custom.BottomBarFragment
+import com.wyang.study.ui.fragment.custom.CustomViewFragment
+import com.wyang.study.ui.fragment.custom.NineGridLayoutFragment
+import com.wyang.study.ui.fragment.custom.PrivacyFragment
+import com.wyang.study.ui.fragment.custom.WeiBoFragment
 import com.wyang.study.ui.fragment.official.StringFragment
-import com.wyang.study.ui.fragment.rv.*
+import com.wyang.study.ui.fragment.rv.AlbumFragment
+import com.wyang.study.ui.fragment.rv.ContactsFragment
+import com.wyang.study.ui.fragment.rv.DecorationFragment
+import com.wyang.study.ui.fragment.rv.DragSortFragment
+import com.wyang.study.ui.fragment.rv.WeChatFragment
 
 class DataProvider {
     companion object {
@@ -33,6 +56,7 @@ class DataProvider {
                         StringFragment::class.java
                     )
                 )
+
                 1 -> mutableListOf(
                     Simple(
                         "OkHttp的学习",
@@ -50,6 +74,7 @@ class DataProvider {
                         AlgorithmFragment::class.java
                     )
                 )
+
                 2 -> mutableListOf(
                     Simple(
                         "ViewSwitcher",
@@ -66,6 +91,7 @@ class DataProvider {
                         FlexBoxFragment::class.java
                     )
                 )
+
                 3 -> mutableListOf(
                     Simple(
                         "自定义控件练习",
@@ -91,8 +117,14 @@ class DataProvider {
                         "隐私协议自定义控件的实现",
                         "",
                         PrivacyFragment::class.java
+                    ),
+                    Simple(
+                        "测试约束布局子view拖动",
+                        "",
+                        TestConstraintFragment::class.java
                     )
                 )
+
                 4 -> mutableListOf(
                     Simple(
                         "App",
@@ -126,6 +158,7 @@ class DataProvider {
                         DecorationFragment::class.java
                     )
                 )
+
                 5 -> mutableListOf(
                     Simple(
                         "树结构之省市区镇四级联动",
@@ -138,6 +171,7 @@ class DataProvider {
                         AddressFilterFragment::class.java
                     )
                 )
+
                 else -> mutableListOf()
             }
         }

@@ -3,7 +3,6 @@ package com.w6539.base_jetpack.ext
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import java.lang.Exception
 import java.util.ArrayList
 
 /**

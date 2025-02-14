@@ -1,7 +1,5 @@
 package com.w6539.base_jetpack.net
 
-import androidx.annotation.StringRes
-
 /**
  * @author Yang
  * @since 2022/12/5 9:24
