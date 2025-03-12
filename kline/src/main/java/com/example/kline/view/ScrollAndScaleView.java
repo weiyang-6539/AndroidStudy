@@ -9,6 +9,7 @@ import android.view.ScaleGestureDetector;
 import android.view.ViewGroup;
 import android.widget.OverScroller;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 
 /**
@@ -26,7 +27,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements
 
     private OverScroller mScroller;
 
-    protected boolean touch = false;
+    protected boolean isTouch = false;
 
     protected float mScale = 1;
 
@@ -60,22 +61,22 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     }
 
     @Override
-    public boolean onDown(MotionEvent e) {
+    public boolean onDown(@NonNull MotionEvent e) {
         return false;
     }
 
     @Override
-    public void onShowPress(MotionEvent e) {
+    public void onShowPress(@NonNull MotionEvent e) {
 
     }
 
     @Override
-    public boolean onSingleTapUp(MotionEvent e) {
+    public boolean onSingleTapUp(@NonNull MotionEvent e) {
         return false;
     }
 
     @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+    public boolean onScroll(MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
         if (!isMultipleTouch()) {
             scrollBy(Math.round(distanceX), Math.round(distanceY));
             return true;
@@ -84,8 +85,8 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     }
 
     @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (!isTouch() && isScrollEnable()) {
+    public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+        if (!isTouch && isScrollEnable()) {
             mScroller.fling(mScrollX, mScrollY,
                     Math.round(velocityX / mScale), Math.round(velocityY / mScale),
                     Integer.MIN_VALUE, Integer.MAX_VALUE,
@@ -97,7 +98,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
-            if (!isTouch()) {
+            if (!isTouch) {
                 scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             } else {
                 mScroller.forceFinished(true);
@@ -144,7 +145,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     }
 
     @Override
-    public boolean onScale(ScaleGestureDetector detector) {
+    public boolean onScale(@NonNull ScaleGestureDetector detector) {
         if (!isScaleEnable()) {
             return false;
         }
@@ -167,17 +168,17 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     }
 
     @Override
-    public boolean onScaleBegin(ScaleGestureDetector detector) {
+    public boolean onScaleBegin(@NonNull ScaleGestureDetector detector) {
         return true;
     }
 
     @Override
-    public void onScaleEnd(ScaleGestureDetector detector) {
+    public void onScaleEnd(@NonNull ScaleGestureDetector detector) {
 
     }
 
     @Override
-    public void onLongPress(MotionEvent e) {
+    public void onLongPress(@NonNull MotionEvent e) {
 
     }
 
@@ -190,14 +191,14 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                touch = true;
+                isTouch = true;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                touch = false;
+                isTouch = false;
                 invalidate();
                 break;
             default:
@@ -207,16 +208,6 @@ abstract class ScrollAndScaleView extends ViewGroup implements
         this.mDetector.onTouchEvent(event);
         this.mScaleDetector.onTouchEvent(event);
         return true;
-    }
-
-
-    /**
-     * 是否在触摸中
-     *
-     * @return
-     */
-    public boolean isTouch() {
-        return touch;
     }
 
     /**

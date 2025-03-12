@@ -9,6 +9,17 @@ import java.util.ArrayList;
  */
 public class KData {
     public ArrayList<Double> y;
-    public ArrayList<ArrayList<Integer>> liq;
+    public ArrayList<ArrayList<Number>> liq;
     public ArrayList<ArrayList<String>> prices;
+    public double maxLiqValue;
+
+    public KData() {
+    }
+
+    public KData(ArrayList<Double> y, ArrayList<ArrayList<Number>> liq, ArrayList<ArrayList<String>> prices, double maxLiqValue) {
+        this.y = y;
+        this.liq = liq;
+        this.prices = prices;
+        this.maxLiqValue = maxLiqValue;
+    }
 }

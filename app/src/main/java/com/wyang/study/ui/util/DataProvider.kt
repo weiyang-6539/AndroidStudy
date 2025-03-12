@@ -18,6 +18,7 @@ import com.wyang.study.ui.fragment.NotificationFragment
 import com.wyang.study.ui.fragment.OkHttpFragment
 import com.wyang.study.ui.fragment.RetrofitFragment
 import com.wyang.study.ui.fragment.TestConstraintFragment
+import com.wyang.study.ui.fragment.TestNineFragment
 import com.wyang.study.ui.fragment.custom.BottomBarFragment
 import com.wyang.study.ui.fragment.custom.CustomViewFragment
 import com.wyang.study.ui.fragment.custom.NineGridLayoutFragment
@@ -122,6 +123,11 @@ class DataProvider {
                         "测试约束布局子view拖动",
                         "",
                         TestConstraintFragment::class.java
+                    ),
+                    Simple(
+                        "测试九个符号换行",
+                        "",
+                        TestNineFragment::class.java
                     )
                 )
 

@@ -23,6 +23,11 @@ public class KLineView extends ScrollAndScaleView {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
     public int getMinScrollX() {
         return 0;
     }
