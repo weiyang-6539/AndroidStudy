@@ -3,9 +3,7 @@ package com.moonisland.texasholdempoker.ui.fragment
 import androidx.fragment.app.Fragment
 import com.moonisland.texasholdempoker.R
 import com.moonisland.texasholdempoker.databinding.FragmentMainBinding
-import com.moonisland.texasholdempoker.ext.navigate
 import com.moonisland.texasholdempoker.mvvm.vm.RemoteViewModel
-import com.w6539.base_jetpack.base.fragment.BaseVBFragment
 import com.w6539.base_jetpack.base.fragment.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
 

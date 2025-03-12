@@ -16,7 +16,7 @@ class ShapeConstraintLayout(context: Context, attrs: AttributeSet?, defStyleAttr
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    private var shapeHelper = ShapeHelper(this)
+    var shapeHelper = ShapeHelper(this)
 
     init {
         shapeHelper.initAttrs(context, attrs).apply()

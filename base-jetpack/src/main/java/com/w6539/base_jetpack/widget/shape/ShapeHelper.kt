@@ -272,18 +272,25 @@ class ShapeHelper(var view: View) {
                 when (gradientAngle) {
                     0 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.LEFT_RIGHT
+
                     1 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.BL_TR
+
                     2 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.BOTTOM_TOP
+
                     3 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.BR_TL
+
                     4 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.RIGHT_LEFT
+
                     5 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.TR_BL
+
                     6 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.TOP_BOTTOM
+
                     7 -> gradientDrawable.orientation =
                         GradientDrawable.Orientation.TL_BR
                 }
@@ -298,6 +305,7 @@ class ShapeHelper(var view: View) {
             State.NONE, State.ENABLED ->
                 if (!isTransparent(selectorNormalColor))
                     gradientDrawable.setColor(selectorNormalColor)
+
             State.PRESSED -> gradientDrawable.setColor(selectorPressedColor)
             State.DISABLE -> gradientDrawable.setColor(selectorDisableColor)
             State.SELECTED -> gradientDrawable.setColor(selectorSelectedColor)
@@ -311,30 +319,35 @@ class ShapeHelper(var view: View) {
                 strokeDashWidth.toFloat(),
                 strokeDashGap.toFloat()
             )
+
             State.PRESSED -> gradientDrawable.setStroke(
                 strokeWidth,
                 strokePressedColor,
                 strokeDashWidth.toFloat(),
                 strokeDashGap.toFloat()
             )
+
             State.DISABLE -> gradientDrawable.setStroke(
                 strokeWidth,
                 strokeDisableColor,
                 strokeDashWidth.toFloat(),
                 strokeDashGap.toFloat()
             )
+
             State.SELECTED -> gradientDrawable.setStroke(
                 strokeWidth,
                 strokeSelectedColor,
                 strokeDashWidth.toFloat(),
                 strokeDashGap.toFloat()
             )
+
             State.FOCUSED -> gradientDrawable.setStroke(
                 strokeWidth,
                 strokeFocusedColor,
                 strokeDashWidth.toFloat(),
                 strokeDashGap.toFloat()
             )
+
             State.CHECKED -> gradientDrawable.setStroke(
                 strokeWidth,
                 strokeCheckedColor,
@@ -401,18 +414,18 @@ class ShapeHelper(var view: View) {
         return color == Color.TRANSPARENT
     }
 
+    private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        // 剪裁
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+        style = Paint.Style.FILL
+    }
     val mClipPath = Path()
-    private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     val rectF = RectF()
 
     fun onSizeChanged(w: Int, h: Int) {
         rectF[0f, 0f, w.toFloat()] = h.toFloat()
         mClipPath.reset()
         mClipPath.addRoundRect(rectF, radii, Path.Direction.CW)
-
-        // 剪裁
-        mPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-        mPaint.style = Paint.Style.FILL
     }
 
     /**
