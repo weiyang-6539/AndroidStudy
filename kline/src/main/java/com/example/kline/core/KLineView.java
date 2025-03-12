@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
+import android.graphics.Matrix;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
@@ -39,6 +39,8 @@ public class KLineView extends ScrollAndScaleView {
         }
     }
 
+    private final Matrix matrix = new Matrix(); // 图片的缩放矩阵
+
     public KLineView(Context context) {
         super(context);
     }
@@ -58,7 +60,7 @@ public class KLineView extends ScrollAndScaleView {
 
     @Override
     public int getMaxScrollX() {
-        return 0;
+        return (int) (getWidth() * mScale - getWidth());
     }
 
     @Override
@@ -68,33 +70,46 @@ public class KLineView extends ScrollAndScaleView {
 
     @Override
     public int getMaxScrollY() {
-        return 0;
+        return (int) (getHeight() * mScale - getHeight());
     }
 
     @Override
     public float getScaleMax() {
-        return 0;
+        return 20f;
     }
 
     @Override
     public float getScaleMin() {
-        return 0;
+        return 1;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = (int) (width / adapter.getRatio());
-        rect.set(0, 0, width, height);
+
+        // 设置图片缩放
+        IData data = adapter.getData();
+        float scale = 1f * width / data.getXSize();
+        matrix.setScale(scale, scale);
         setMeasuredDimension(width, height);
     }
-
-    private final Rect rect = new Rect();
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         canvas.drawColor(Color.parseColor("#3e0b50"));
 
-        canvas.drawBitmap(adapter.buildBitmap(), null, rect, null);
+        canvas.drawBitmap(adapter.buildBitmap(), matrix, null);
+
+    }
+
+    @Override
+    protected void onScaleChanged(float scale, float oldScale) {
+        // 设置图片缩放
+        IData data = adapter.getData();
+        float newScale = 1f * getWidth() / data.getXSize() * scale;
+        matrix.setScale(newScale, newScale);
+
+        invalidate();
     }
 }

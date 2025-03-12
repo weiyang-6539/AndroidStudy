@@ -3,6 +3,7 @@ package com.example.kline.core;
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 
 import com.example.kline.LiqColorInterpolatorUtils;
 

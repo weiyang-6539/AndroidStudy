@@ -152,7 +152,6 @@ abstract class ScrollAndScaleView extends ViewGroup implements
         float oldScale = mScale;
         mScale *= detector.getScaleFactor();
 
-        Log.e("Game", "scale=" + mScale + "_min=" + getScaleMin());
         if (mScale < getScaleMin()) {
             mScale = getScaleMin();
         } else if (mScale > getScaleMax()) {
@@ -164,7 +163,6 @@ abstract class ScrollAndScaleView extends ViewGroup implements
     }
 
     protected void onScaleChanged(float scale, float oldScale) {
-        invalidate();
     }
 
     @Override
