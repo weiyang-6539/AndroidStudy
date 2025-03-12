@@ -1,4 +1,4 @@
-package com.example.kline.view;
+package com.example.kline.core;
 
 import android.content.Context;
 import android.util.AttributeSet;

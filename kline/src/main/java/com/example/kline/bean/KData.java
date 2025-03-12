@@ -1,5 +1,7 @@
 package com.example.kline.bean;
 
+import com.example.kline.core.IData;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  * @date 2025/3/11
  * @desc
  */
-public class KData {
+public class KData implements IData {
     public ArrayList<Double> y;
     public ArrayList<ArrayList<Number>> liq;
     public ArrayList<ArrayList<String>> prices;
@@ -21,5 +23,25 @@ public class KData {
         this.liq = liq;
         this.prices = prices;
         this.maxLiqValue = maxLiqValue;
+    }
+
+    @Override
+    public int getXSize() {
+        return prices.size();
+    }
+
+    @Override
+    public int getYSize() {
+        return y.size();
+    }
+
+    @Override
+    public ArrayList<ArrayList<Number>> getLiqData() {
+        return liq;
+    }
+
+    @Override
+    public double getMaxLiq() {
+        return maxLiqValue;
     }
 }
