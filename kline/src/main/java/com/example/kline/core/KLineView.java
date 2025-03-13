@@ -99,8 +99,7 @@ public class KLineView extends ScrollAndScaleView {
     protected void onDraw(@NonNull Canvas canvas) {
         canvas.drawColor(Color.parseColor("#3e0b50"));
 
-        canvas.drawBitmap(adapter.buildBitmap(), matrix, null);
-
+        canvas.drawBitmap(adapter.getBitmap(), matrix, null);
     }
 
     @Override

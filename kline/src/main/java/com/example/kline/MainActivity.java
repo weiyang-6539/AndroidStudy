@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.kline.bean.KData;
 import com.example.kline.core.KLineAdapter;
 import com.example.kline.core.KLineView;
+import com.example.kline.core.LiqView;
 import com.example.kline.utils.JsonUtil;
 
 /**
@@ -16,7 +17,7 @@ import com.example.kline.utils.JsonUtil;
  * @desc
  */
 public class MainActivity extends AppCompatActivity {
-    private KLineView mKLineView;
+    private LiqView mKLineView;
     private final KLineAdapter adapter = new KLineAdapter();
 
     @Override

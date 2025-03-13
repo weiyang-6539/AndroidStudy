@@ -16,13 +16,19 @@ public class KLineAdapter {
     protected final DataSetObservable mDataSetObservable = new DataSetObservable();
 
     private IData data;
+    private Bitmap bitmap;
 
     public IData getData() {
         return data;
     }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
     public void setData(IData data) {
         this.data = data;
+        this.bitmap = buildBitmap();
         notifyDataSetChanged();
     }
 
@@ -30,7 +36,7 @@ public class KLineAdapter {
         return 1f * data.getXSize() / data.getYSize();
     }
 
-    public Bitmap buildBitmap() {
+    private Bitmap buildBitmap() {
         int width = data.getXSize();
         int height = data.getYSize();
         LiqColorInterpolatorUtils utils = new LiqColorInterpolatorUtils(0, data.getMaxLiq());
