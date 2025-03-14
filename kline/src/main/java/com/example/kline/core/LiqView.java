@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -28,14 +27,14 @@ import java.util.ArrayList;
  */
 public class LiqView extends View implements ScaleGestureDetector.OnScaleGestureListener, GestureDetector.OnGestureListener {
     private float scaleFactor = 1f;
-    private final float maxScale = 20f;
-    private final float minScale = 1f;
+    private final float maxScale = 1f;
+    private final float minScale = .05f;
+    float multiple = maxScale / minScale;
 
     private float translateX = 0f;
     private float translateY = 0f;
 
     private final Paint mCandlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final float mCandleWidth = .5f;
     private final RectF tempRect = new RectF();
     private final int colorIncrease = Color.parseColor("#d84532");
     private final int colorDecrease = Color.parseColor("#4a7c21");
@@ -43,7 +42,7 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
     private final ScaleGestureDetector scaleDetector;
     private final GestureDetector gestureDetector;
 
-    private final Matrix matrix = new Matrix(); // 图片的缩放矩阵
+    // 图形绘制区域
     private final Rect dstRect = new Rect();
     private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
@@ -90,12 +89,12 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = (int) (width / adapter.getRatio());
 
-        // 设置图片缩放
-        IData data = adapter.getData();
-        float scale = 1f * width / data.getXSize();
-        matrix.setScale(scale, scale);
+        // 确定绘制区域
+        dstRect.set(0, 0, (int) (width * multiple), (int) (height * multiple));
 
-        dstRect.set(0, 0, width, height);
+        translateX = -width * (maxScale / scaleFactor - 1) / 2;
+        translateY = -height * (maxScale / scaleFactor - 1) / 2;
+
         setMeasuredDimension(width, height);
     }
 
@@ -105,16 +104,14 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         canvas.drawColor(Color.parseColor("#3e0b50"));
 
         canvas.save();
-
         // 应用缩放
         canvas.scale(scaleFactor, scaleFactor, getWidth() / 2f, getHeight() / 2f);
 
         // 处理拖动
-        canvas.translate(translateX / scaleFactor, translateY / scaleFactor);
+        canvas.translate(translateX, translateY);
 
         // 绘制bitmap
         canvas.drawBitmap(adapter.getBitmap(), null, dstRect, null);
-
         // 绘制烛状图
         ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
         for (int i = 0; i < xData.size(); i++) {
@@ -143,7 +140,7 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
      * 绘制蜡烛矩形
      */
     public void drawCandle(Canvas canvas, float right, float top, float bottom, boolean isIncrease) {
-        tempRect.set(right - mCandleWidth * scaleFactor / 2, top, right, bottom);
+        tempRect.set(right - getCandleWidth(), top, right, bottom);
         mCandlePaint.setColor(isIncrease ? colorIncrease : colorDecrease);
         canvas.drawRect(tempRect, mCandlePaint);
     }
@@ -165,12 +162,13 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
 
     @Override
     public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
-        if (scaleFactor >= 1) { // 只有缩放大于1时才允许拖动
-            translateX -= distanceX;
-            translateY -= distanceY;
+        if (scaleFactor > minScale || scaleFactor < maxScale) {
+            logD("scaleFactor=" + scaleFactor + " minScale=" + minScale);
+            translateX -= distanceX / scaleFactor;
+            translateY -= distanceY / scaleFactor;
 
-            float maxTranslateX = getWidth() * (scaleFactor - 1) / 2;
-            float maxTranslateY = getHeight() * (scaleFactor - 1) / 2;
+            float maxTranslateX = getWidth() * (maxScale / scaleFactor - 1) / 2;
+            float maxTranslateY = getHeight() * (maxScale / scaleFactor - 1) / 2;
 
             translateX = Math.max(-maxTranslateX, Math.min(translateX, maxTranslateX));
             translateY = Math.max(-maxTranslateY, Math.min(translateY, maxTranslateY));
@@ -194,6 +192,8 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
     public boolean onScale(@NonNull ScaleGestureDetector detector) {
         float newScale = scaleFactor * detector.getScaleFactor();
         scaleFactor = Math.max(minScale, Math.min(newScale, maxScale));
+        translateX = -getWidth() * (maxScale / scaleFactor - 1) / 2;
+        translateY = -getHeight() * (maxScale / scaleFactor - 1) / 2;
         invalidate();
         return true;
     }
@@ -208,8 +208,15 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
 
     }
 
+    /**
+     * 获取单个柱子的宽
+     */
+    private int getCandleWidth() {
+        return (int) (multiple * getWidth() / adapter.getData().getXSize() / 2);
+    }
+
     private int getAxisX(int i) {
-        return (int) ((i + 1) * 1f * getWidth() / adapter.getData().getXSize());
+        return (int) ((i + 1) * (multiple * getWidth() / adapter.getData().getXSize()));
     }
 
     private int getAxisY(double value) {
@@ -217,9 +224,9 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         double minValue = yData.get(0);
         double maxValue = yData.get(yData.size() - 1);
 
-        float scaleY = (float) ((-getHeight()) / (maxValue - minValue));
+        float scaleY = (float) ((-getHeight() * multiple) / (maxValue - minValue));
 
-        return (int) ((maxValue - value) * scaleY + getHeight());
+        return (int) ((maxValue - value) * scaleY + getHeight() * multiple);
     }
 
     private void logD(String log) {

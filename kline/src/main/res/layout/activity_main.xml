@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.kline.core.KLineView
+    <com.example.kline.core.LiqView
         android:id="@+id/mKLineView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
