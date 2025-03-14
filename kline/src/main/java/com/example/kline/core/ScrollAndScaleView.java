@@ -17,8 +17,7 @@ import androidx.core.view.GestureDetectorCompat;
  * @date 2025/3/11
  * @desc
  */
-abstract class ScrollAndScaleView extends ViewGroup implements
-        GestureDetector.OnGestureListener,
+abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.OnGestureListener,
         ScaleGestureDetector.OnScaleGestureListener {
     protected int mScrollX = 0;
     protected int mScrollY = 0;
@@ -29,7 +28,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements
 
     protected boolean isTouch = false;
 
-    protected float mScale = 1;
+    protected float mScale = 1f;
 
     private boolean mMultipleTouch = false;
 
@@ -286,6 +285,11 @@ abstract class ScrollAndScaleView extends ViewGroup implements
 
     @Override
     public float getScaleX() {
+        return mScale;
+    }
+
+    @Override
+    public float getScaleY() {
         return mScale;
     }
 }

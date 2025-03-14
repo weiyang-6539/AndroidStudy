@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class KData implements IData {
     public ArrayList<Double> y;
     public ArrayList<ArrayList<Number>> liq;
-    public ArrayList<ArrayList<String>> prices;
+    public ArrayList<ArrayList<Number>> prices;
     public double maxLiqValue;
 
     public KData() {
     }
 
-    public KData(ArrayList<Double> y, ArrayList<ArrayList<Number>> liq, ArrayList<ArrayList<String>> prices, double maxLiqValue) {
+    public KData(ArrayList<Double> y, ArrayList<ArrayList<Number>> liq, ArrayList<ArrayList<Number>> prices, double maxLiqValue) {
         this.y = y;
         this.liq = liq;
         this.prices = prices;
@@ -38,6 +38,16 @@ public class KData implements IData {
     @Override
     public ArrayList<ArrayList<Number>> getLiqData() {
         return liq;
+    }
+
+    @Override
+    public ArrayList<ArrayList<Number>> getXData() {
+        return prices;
+    }
+
+    @Override
+    public ArrayList<Double> getYData() {
+        return y;
     }
 
     @Override

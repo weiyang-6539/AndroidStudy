@@ -37,6 +37,7 @@ public class KLineView extends ScrollAndScaleView {
         if (adapter != null && mDataSetObserver != null) {
             adapter.registerDataSetObserver(mDataSetObserver);
         }
+        this.mScale = getScaleMin();
     }
 
     private final Matrix matrix = new Matrix(); // 图片的缩放矩阵
@@ -60,7 +61,7 @@ public class KLineView extends ScrollAndScaleView {
 
     @Override
     public int getMaxScrollX() {
-        return (int) (getWidth() * mScale - getWidth());
+        return (int) (getWidth() / mScale - getWidth());
     }
 
     @Override
@@ -70,17 +71,17 @@ public class KLineView extends ScrollAndScaleView {
 
     @Override
     public int getMaxScrollY() {
-        return (int) (getHeight() * mScale - getHeight());
+        return (int) (getHeight() / mScale - getHeight());
     }
 
     @Override
     public float getScaleMax() {
-        return 20f;
+        return 1f;
     }
 
     @Override
     public float getScaleMin() {
-        return 1;
+        return .05f;
     }
 
     @Override
@@ -90,7 +91,7 @@ public class KLineView extends ScrollAndScaleView {
 
         // 设置图片缩放
         IData data = adapter.getData();
-        float scale = 1f * width / data.getXSize();
+        float scale = 20f * width / data.getXSize();
         matrix.setScale(scale, scale);
         setMeasuredDimension(width, height);
     }
@@ -106,7 +107,7 @@ public class KLineView extends ScrollAndScaleView {
     protected void onScaleChanged(float scale, float oldScale) {
         // 设置图片缩放
         IData data = adapter.getData();
-        float newScale = 1f * getWidth() / data.getXSize() * scale;
+        float newScale = 20f * getWidth() / data.getXSize() * scale;
         matrix.setScale(newScale, newScale);
 
         invalidate();

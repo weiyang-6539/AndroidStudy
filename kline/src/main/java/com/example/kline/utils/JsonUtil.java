@@ -20,7 +20,7 @@ public class JsonUtil {
 
             ArrayList<Double> y = new ArrayList<>();
             ArrayList<ArrayList<Number>> liq = new ArrayList<>();
-            ArrayList<ArrayList<String>> prices = new ArrayList<>();
+            ArrayList<ArrayList<Number>> prices = new ArrayList<>();
             jsonObject.getAsJsonArray("y").forEach((it) -> y.add(it.getAsDouble()));
             jsonObject.getAsJsonArray("liq").forEach((it) -> {
                 ArrayList<Number> ls = new ArrayList<>();
@@ -29,8 +29,8 @@ public class JsonUtil {
                 liq.add(ls);
             });
             jsonObject.getAsJsonArray("prices").forEach((it) -> {
-                ArrayList<String> ls = new ArrayList<>();
-                it.getAsJsonArray().forEach((v) -> ls.add(v.getAsString()));
+                ArrayList<Number> ls = new ArrayList<>();
+                it.getAsJsonArray().forEach((v) -> ls.add(v.getAsNumber()));
                 prices.add(ls);
             });
 

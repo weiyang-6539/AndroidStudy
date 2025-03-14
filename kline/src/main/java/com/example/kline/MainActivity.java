@@ -17,7 +17,7 @@ import com.example.kline.utils.JsonUtil;
  * @desc
  */
 public class MainActivity extends AppCompatActivity {
-    private LiqView mKLineView;
+    private KLineView mKLineView;
     private final KLineAdapter adapter = new KLineAdapter();
 
     @Override

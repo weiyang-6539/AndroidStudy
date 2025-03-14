@@ -15,6 +15,10 @@ public interface IData {
 
     ArrayList<ArrayList<Number>> getLiqData();
 
+    ArrayList<ArrayList<Number>> getXData();
+
+    ArrayList<Double> getYData();
+
     double getMaxLiq();
 
 }

@@ -3,9 +3,10 @@ package com.example.kline.core;
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 
 import com.example.kline.LiqColorInterpolatorUtils;
+
+import java.util.ArrayList;
 
 /**
  * @author Yang
@@ -39,7 +40,7 @@ public class KLineAdapter {
     private Bitmap buildBitmap() {
         int width = data.getXSize();
         int height = data.getYSize();
-        LiqColorInterpolatorUtils utils = new LiqColorInterpolatorUtils(0, data.getMaxLiq());
+        LiqColorInterpolatorUtils utils = new LiqColorInterpolatorUtils(0, data.getMaxLiq() * .9f);
         int[] intArr = new int[width * height];
         data.getLiqData().forEach((it) -> {
             int x = it.get(0).intValue();
