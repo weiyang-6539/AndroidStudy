@@ -96,8 +96,8 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         // 确定绘制区域
         dstRect.set(0, 0, (int) (width * multiple), (int) (height * multiple));
 
-        pf.x = width * multiple / 2f;
-        pf.y = height * multiple / 2f;
+        pf.x = dstRect.width() / 2f;
+        pf.y = dstRect.height() / 2f;
         updateValue();
         setMeasuredDimension(width, height);
     }
