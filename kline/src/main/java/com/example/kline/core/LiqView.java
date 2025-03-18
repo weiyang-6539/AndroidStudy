@@ -6,6 +6,7 @@ import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -26,16 +27,16 @@ import java.util.ArrayList;
  * @desc
  */
 public class LiqView extends View implements ScaleGestureDetector.OnScaleGestureListener, GestureDetector.OnGestureListener {
-    private float scaleFactor = 1f;
     private final float maxScale = 1f;
-    private final float minScale = .4f;
+    private final float minScale = .05f;
+    private float scaleFactor = minScale;
     float multiple = maxScale / minScale;
 
     private float translateX = 0f;
     private float translateY = 0f;
 
-    private float perX = 0f;
-    private float perY = 0f;
+    // 记录bitmap 当前显示区域中心点
+    private final PointF pf = new PointF();
 
     private final Paint mCandlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF tempRect = new RectF();
@@ -95,12 +96,9 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         // 确定绘制区域
         dstRect.set(0, 0, (int) (width * multiple), (int) (height * multiple));
 
-        translateX = (getMaxTranslateX() - getMinTranslateX()) / 2;
-        translateY = (getMaxTranslateY() - getMinTranslateY()) / 2;
-
-        perX = translateX - getMaxTranslateX() / (getMaxTranslateX() - getMinTranslateX());
-        perY = translateY - getMaxTranslateY() / (getMaxTranslateY() - getMinTranslateY());
-
+        pf.x = width * multiple / 2f;
+        pf.y = height * multiple / 2f;
+        updateValue();
         setMeasuredDimension(width, height);
     }
 
@@ -110,6 +108,7 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         canvas.drawColor(Color.parseColor("#3e0b50"));
 
         canvas.save();
+
         // 应用缩放
         canvas.scale(scaleFactor, scaleFactor, getWidth() / 2f, getHeight() / 2f);
 
@@ -169,22 +168,12 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
     @Override
     public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
         if (scaleFactor >= minScale || scaleFactor <= maxScale) {
-            float p = (scaleFactor - minScale) / (maxScale - minScale);
-            translateX += distanceX / p;
-            translateY += distanceY / p;
+            pf.x += distanceX * multiple * ((scaleFactor - minScale) / (maxScale - minScale));
+            pf.y += distanceY * multiple * ((scaleFactor - minScale) / (maxScale - minScale));
 
-            float minTranslateX = getMinTranslateX() * p;
-            float maxTranslateX = getMaxTranslateX() * p;
-            float minTranslateY = getMinTranslateY() * p;
-            float maxTranslateY = getMaxTranslateY() * p;
-
-            translateX = Math.max(minTranslateX, Math.min(translateX, maxTranslateX));
-            translateY = Math.max(minTranslateY, Math.min(translateY, maxTranslateY));
-
-            perX = (translateX - minTranslateX) / (maxTranslateX - minTranslateX);
-            perY = (translateY - minTranslateY) / (maxTranslateY - minTranslateX);
-            logD("perX=" + perX + " perY=" + perY);
-
+            pf.x = Math.max(getWidth() / 2f, Math.min(pf.x, dstRect.width() - getWidth() / 2f));
+            pf.y = Math.max(getWidth() / 2f, Math.min(pf.y, dstRect.height() - getHeight() / 2f));
+            updateValue();
             invalidate();
         }
         return true;
@@ -205,8 +194,9 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
         float newScale = scaleFactor * detector.getScaleFactor();
         scaleFactor = Math.max(minScale, Math.min(newScale, maxScale));
 
-        translateX = perX * (scaleFactor - minScale) * (getMaxTranslateX() - getMinTranslateX());
-        translateY = perY * (scaleFactor - minScale) * (getMaxTranslateY() - getMinTranslateY());
+        pf.x -= (pf.x - (multiple * getWidth()) / 2f) * scaleFactor;
+        pf.y -= (pf.y - (multiple * getHeight()) / 2f) * scaleFactor;
+        updateValue();
 
         invalidate();
         return true;
@@ -222,28 +212,9 @@ public class LiqView extends View implements ScaleGestureDetector.OnScaleGesture
 
     }
 
-    private float getMaxTranslateX() {
-        return getWidth() * (multiple - 1);
-    }
-
-    private float getMaxTranslateY() {
-        return getHeight() * (multiple - 1);
-    }
-
-    private float getMinTranslateX() {
-        return 0;
-    }
-
-    private float getMinTranslateY() {
-        return 0;
-    }
-
-    private void fixTranslate() {
-        translateX = Math.max(getMinTranslateX(), Math.min(translateX, getMaxTranslateX()));
-        translateY = Math.max(getMinTranslateY(), Math.min(translateY, getMaxTranslateY()));
-
-        perX = (translateX - getMinTranslateX()) / (getMaxTranslateX() - getMinTranslateX());
-        perY = (translateY - getMinTranslateY()) / (getMaxTranslateX() - getMinTranslateY());
+    private void updateValue() {
+        translateX = (dstRect.width() - getWidth()) * (pf.x / dstRect.width());
+        translateY = (dstRect.height() - getHeight()) * (pf.y / dstRect.height());
     }
 
     /**
