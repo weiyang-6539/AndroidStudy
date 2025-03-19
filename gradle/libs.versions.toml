@@ -92,12 +92,14 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 [bundles]
 lifecycle-group-ktx = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx", "androidx-lifecycle-runtime-ktx"]
+navigation-group-ktx = ["androidx-navigation-ui-ktx", "androidx-navigation-fragment-ktx"]
+retrofit2-group = ["retrofit2-retrofit", "converter-scalars", "converter-gson", "converter-moshi", "converter-simplexml", "okhttp3-logging-interceptor"]
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlinAndroid = { id = "kotlin-android" }
-kotlinKapt = { id = "kotlin-kapt" }
-kotlinParcelize = { id = "kotlin-parcelize" }
-daggerHilt = { id = "dagger.hilt.android.plugin", version.ref = "hiltVersion" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "kotlin-android" }
+kotlin-kapt = { id = "kotlin-kapt" }
+kotlin-parcelize = { id = "kotlin-parcelize" }
+dagger-hilt = { id = "dagger.hilt.android.plugin" }
