@@ -2,7 +2,6 @@ package com.example.kline.core;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -121,7 +120,6 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
         mScrollX = x;
         mScrollY = y;
 
-        Log.e("Game", "mScrollX=" + mScrollX + "--- min=" + getMinScrollX());
         //控件基准点为左上角，故只能往右下滑动
         if (mScrollX > getMaxScrollX()) {
             mScrollX = getMaxScrollX();

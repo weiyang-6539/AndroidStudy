@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kline.bean.KData;
 import com.example.kline.core.KLineAdapter;
-import com.example.kline.core.LiqView;
+import com.example.kline.core.HeatMapView;
 import com.example.kline.utils.JsonUtil;
 
 /**
@@ -16,7 +16,7 @@ import com.example.kline.utils.JsonUtil;
  * @desc
  */
 public class MainActivity extends AppCompatActivity {
-    private LiqView mKLineView;
+    private HeatMapView mapView;
     private final KLineAdapter adapter = new KLineAdapter();
 
     @Override
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         String dataJson = AssetUtil.readAsset(this, "kdata.json");
         KData kData = JsonUtil.parse(dataJson);
 
-        mKLineView = findViewById(R.id.mKLineView);
-        mKLineView.setAdapter(adapter);
+        mapView = findViewById(R.id.mHeatMapView);
+        mapView.setAdapter(adapter);
 
         adapter.setData(kData);
     }

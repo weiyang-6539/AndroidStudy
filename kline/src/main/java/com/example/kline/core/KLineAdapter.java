@@ -6,8 +6,6 @@ import android.graphics.Bitmap;
 
 import com.example.kline.LiqColorInterpolatorUtils;
 
-import java.util.ArrayList;
-
 /**
  * @author Yang
  * @date 2025/3/12
