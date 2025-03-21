@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.fxbandroid.basejetpack.widget.shape.SuperTextView
+        android:id="@+id/tv_key"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:paddingHorizontal="6dp"
+        android:textSize="12sp"
+        app:shapeCornersRadius="3dp"
+        app:shapeSelectorNormalColor="#f3f3f3"
+        app:shapeTextNormalColor="#000"
+        tools:text="AI绘画" />
+</FrameLayout>
