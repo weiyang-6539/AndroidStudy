@@ -86,7 +86,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
     public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
         if (!isTouch && isScrollEnable()) {
             mScroller.fling(mScrollX, mScrollY,
-                    Math.round(velocityX / mScale), Math.round(velocityY / mScale),
+                    Math.round(velocityX), Math.round(velocityY),
                     Integer.MIN_VALUE, Integer.MAX_VALUE,
                     Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
@@ -106,7 +106,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
 
     @Override
     public void scrollBy(int x, int y) {
-        scrollTo(mScrollX - Math.round(x / mScale), mScrollY - Math.round(y / mScale));
+        scrollTo(mScrollX - x, mScrollY - y);
     }
 
     @Override
@@ -149,10 +149,10 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
         float oldScale = mScale;
         mScale *= detector.getScaleFactor();
 
-        if (mScale < getScaleMin()) {
-            mScale = getScaleMin();
-        } else if (mScale > getScaleMax()) {
-            mScale = getScaleMax();
+        if (mScale < getMinScale()) {
+            mScale = getMinScale();
+        } else if (mScale > getMaxScale()) {
+            mScale = getMaxScale();
         } else {
             onScaleChanged(mScale, oldScale);
         }
@@ -255,9 +255,9 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
 
     public abstract int getMaxScrollY();
 
-    public abstract float getScaleMax();
+    public abstract float getMaxScale();
 
-    public abstract float getScaleMin();
+    public abstract float getMinScale();
 
     public boolean isScrollEnable() {
         return mScrollEnable;

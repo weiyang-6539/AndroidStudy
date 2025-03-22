@@ -6,8 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kline.bean.KData;
-import com.example.kline.core.KLineAdapter;
 import com.example.kline.core.HeatMapView;
+import com.example.kline.core.KLineAdapter;
 import com.example.kline.utils.JsonUtil;
 
 /**
