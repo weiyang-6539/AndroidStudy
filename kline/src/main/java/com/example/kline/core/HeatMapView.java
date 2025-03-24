@@ -56,6 +56,8 @@ public class HeatMapView extends ScrollAndScaleView {
     private final int colorIncrease = Color.parseColor("#d84532");
     private final int colorDecrease = Color.parseColor("#4a7c21");
     private final int colorMainBg = Color.parseColor("#3e0b50");
+    /* 烛状图单根柱子宽 */
+    private float mCandleWidth;
 
     /* 绘制主图的区域 */
     private final RectF mainRect = new RectF();
@@ -144,13 +146,24 @@ public class HeatMapView extends ScrollAndScaleView {
         bmpPoint.y = mainRect.height() / 2;
         matrix.setScale(bmpOriginScale, bmpOriginScale);
 
+        mCandleWidth = 1 * bmpOriginScale / 2;
+
         setMeasuredDimension(width, height);
+
+        ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
+        for (int i = 0; i < xData.size(); i++) {
+            String date = formatter.formatDate(xData.get(i).get(0).intValue() * 1000L);
+            Log.e(TAG, "index=" + i + " date=" + date);
+        }
     }
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         mPaint.setColor(colorMainBg);
         canvas.drawRect(mainRect, mPaint);
+        mPaint.setColor(Color.parseColor("#eeeeee"));
+        canvas.drawRect(axisYRect, mPaint);
+        canvas.drawRect(axisXRect, mPaint);
         // 将 Bitmap 绘制到固定矩形区域内
         canvas.save();
         canvas.clipRect(mainRect); // 限制绘制区域
@@ -162,8 +175,18 @@ public class HeatMapView extends ScrollAndScaleView {
         canvas.drawLine(mainRect.width() / 2, 0, mainRect.width() / 2, mainRect.height(), mPaint);
 
         // 绘制烛状图
+        drawKChart(canvas);
+        // 绘制x轴
+        drawAxisX(canvas);
+        // 绘制y轴
+        drawAxisY(canvas);
+    }
+
+    private void drawKChart(Canvas canvas) {
         ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
-        for (int i = 0; i < xData.size(); i++) {
+        int startIndex = indexOfX(drawX2X(0));
+        int endIndex = indexOfX(drawX2X(axisXRect.width()));
+        for (int i = startIndex; i < endIndex; i++) {
             int x = getAxisX(i);
             ArrayList<Number> candle = xData.get(i);
             int openY = getAxisY(candle.get(1).doubleValue());
@@ -173,26 +196,34 @@ public class HeatMapView extends ScrollAndScaleView {
 
             if (openY > closeY) {//涨(这里比较的y坐标值)
                 drawCandle(canvas, x, openY, closeY, true);
+//                drawCandleLine(canvas, x, highY, closeY);
+//                drawCandleLine(canvas, x, openY, lowY);
             } else if (openY < closeY) {
                 drawCandle(canvas, x, openY, closeY, false);
+//                drawCandleLine(canvas, x, highY, openY);
+//                drawCandleLine(canvas, x, closeY, lowY);
             } else {
                 drawCandle(canvas, x, closeY - 1, closeY, true);
             }
         }
-
-        // 绘制x轴
-        drawAxisX(canvas);
-        // 绘制y轴
-        drawAxisY(canvas);
     }
 
     /**
      * 绘制蜡烛矩形
      */
-    public void drawCandle(Canvas canvas, float right, float top, float bottom, boolean isIncrease) {
-        tempRect.set(right - mainRect.width() / adapter.getData().getXSize() / 2, top, right, bottom);
+    public void drawCandle(Canvas canvas, float x, float top, float bottom, boolean isIncrease) {
+        tempRect.set(x - mCandleWidth / 2f, top, x + mCandleWidth / 2f, bottom);
         mPaint.setColor(isIncrease ? colorIncrease : colorDecrease);
+        mPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(tempRect, mPaint);
+    }
+
+    /**
+     * 绘制蜡烛图上下影线
+     */
+    public void drawCandleLine(Canvas canvas, float x, float startY, float stopY) {
+        mPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawLine(x, startY, x, stopY, mPaint);
     }
 
     private void drawAxisX(Canvas canvas) {
@@ -200,13 +231,13 @@ public class HeatMapView extends ScrollAndScaleView {
         int numX = 5; // x轴显示日期数
         float quoteW = axisXRect.width() / (numX * 2);
         for (int i = 0; i < numX; i++) {
-            float dx = quoteW * (2 * i - 1);
+            float dx = quoteW * (2 * i + 1);
             int index = indexOfX(drawX2X(dx));
             tempP.x = axisXRect.left + dx;
             tempP.y = axisXRect.top;
             String ss = formatter.formatDate(data.get(index).get(0).intValue() * 1000L);
 
-            Log.e(TAG, "date=" + ss);
+            Log.e(TAG, "index=" + index + " date=" + ss);
             String[] arr = ss.split(" ");
 
             helper.drawPointBot(canvas, arr[0], tempP, mTextPaint);
@@ -220,12 +251,14 @@ public class HeatMapView extends ScrollAndScaleView {
 
         int numY = 10; // y轴显示价格数
         int startIndex = indexOfY(drawY2Y(0));
-        int endIndex = indexOfY(drawY2Y(getHeight()));
+        int endIndex = indexOfY(drawY2Y(axisYRect.height()));
         for (int i = startIndex; i < endIndex; i += Math.max(2, (endIndex - startIndex) / numY)) {
             tempP.x = axisYRect.left;
-            tempP.y = axisYRect.bottom - (getPx(i) - mScrollY - helper.getTextHeight(mTextPaint) / 2);
-            String ss = formatter.formatPrice(yData.get(i));
-            helper.drawPointRight(canvas, ss, tempP, mTextPaint);
+            tempP.y = axisYRect.bottom + mScrollY - getPx(i);
+            if (tempP.y < axisYRect.bottom) {
+                String ss = formatter.formatPrice(yData.get(i));
+                helper.drawPointRight(canvas, ss, tempP, mTextPaint);
+            }
         }
     }
 
@@ -246,17 +279,16 @@ public class HeatMapView extends ScrollAndScaleView {
         mScrollX = (int) (getMaxScrollX() * bmpPoint.x / mainRect.width());
         mScrollY = (int) (getMaxScrollY() * bmpPoint.y / mainRect.height());
 
-//        bmpPoint.x = Math.min(mainRect.width() / 2 / mScale, Math.max((getMaxScrollX() + mainRect.width() / 2) / mScale, bmpPoint.x));
-//        bmpPoint.y = Math.min(mainRect.height() / 2 / mScale, Math.max((getMaxScrollY() + mainRect.height() / 2) / mScale, bmpPoint.y));
-
         matrix.setScale(bmpOriginScale * scale, bmpOriginScale * scale);
         matrix.postTranslate(mScrollX - getMaxScrollX(), mScrollY - getMaxScrollY());
+
+        mCandleWidth = bmpOriginScale * mScale / 2;
 
         invalidate();
     }
 
     private int getAxisX(int i) {
-        return (int) ((i + 1) * mainRect.width() / adapter.getData().getXSize());
+        return (int) ((i - 1 / 2f) * bmpOriginScale * mScale - mScrollX - axisXRect.left);
     }
 
     private int getAxisY(double value) {
@@ -264,9 +296,8 @@ public class HeatMapView extends ScrollAndScaleView {
         double minValue = yData.get(0);
         double maxValue = yData.get(yData.size() - 1);
 
-        float scaleY = (float) ((-mainRect.height()) / (maxValue - minValue));
-
-        return (int) ((maxValue - value) * scaleY + mainRect.height());
+        float scaleY = (float) ((-bmpOriginScale * mScale * (yData.size() - 1)) / (maxValue - minValue));
+        return (int) ((maxValue - value) * scaleY + axisYRect.height()) - mScrollY;
     }
 
     private int getPx(int position) {
