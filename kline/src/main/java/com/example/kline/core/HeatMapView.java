@@ -139,21 +139,15 @@ public class HeatMapView extends ScrollAndScaleView {
 
         int height = (int) axisXRect.bottom;
 
-        // 设置图片缩放
+        // 设置图片缩放， 实际是初始单个像素点放大倍数
         bmpOriginScale = mainRect.width() / data.getXSize();
         bmpPoint.x = mainRect.width() / 2;
         bmpPoint.y = mainRect.height() / 2;
         matrix.setScale(bmpOriginScale, bmpOriginScale);
 
-        mCandleWidth = 1 * bmpOriginScale / 2;
+        mCandleWidth = bmpOriginScale / 2;
 
         setMeasuredDimension(width, height);
-
-        ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
-        for (int i = 0; i < xData.size(); i++) {
-            String date = formatter.formatDate(xData.get(i).get(0).intValue() * 1000L);
-            Log.e(TAG, "index=" + i + " date=" + date);
-        }
     }
 
     @Override
@@ -185,8 +179,7 @@ public class HeatMapView extends ScrollAndScaleView {
         ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
         int startIndex = indexOfX(drawX2X(axisXRect.left));
         int endIndex = indexOfX(drawX2X(axisXRect.right));
-        Log.e(TAG, "startIndex=" + startIndex + " endIndex=" + endIndex);
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             int x = getAxisX(i);
             ArrayList<Number> candle = xData.get(i);
             int openY = getAxisY(candle.get(1).doubleValue());
