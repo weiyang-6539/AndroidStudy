@@ -2,6 +2,7 @@ package com.example.kline.core;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -18,6 +19,7 @@ import androidx.core.view.GestureDetectorCompat;
  */
 abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.OnGestureListener,
         ScaleGestureDetector.OnScaleGestureListener {
+    protected final String TAG = this.getClass().getSimpleName();
     protected int mScrollX = 0;
     protected int mScrollY = 0;
     protected GestureDetectorCompat mDetector;

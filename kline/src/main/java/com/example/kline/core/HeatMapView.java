@@ -23,7 +23,6 @@ import java.util.ArrayList;
  * @desc
  */
 public class HeatMapView extends ScrollAndScaleView {
-    private final String TAG = HeatMapView.class.getSimpleName();
     private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onChanged() {
@@ -161,31 +160,32 @@ public class HeatMapView extends ScrollAndScaleView {
     protected void onDraw(@NonNull Canvas canvas) {
         mPaint.setColor(colorMainBg);
         canvas.drawRect(mainRect, mPaint);
+
         mPaint.setColor(Color.parseColor("#eeeeee"));
         canvas.drawRect(axisYRect, mPaint);
         canvas.drawRect(axisXRect, mPaint);
+
         // 将 Bitmap 绘制到固定矩形区域内
         canvas.save();
-        canvas.clipRect(mainRect); // 限制绘制区域
+        // 限制绘制区域
+        canvas.clipRect(mainRect);
+        // 绘制热力图
         canvas.drawBitmap(adapter.getBitmap(), matrix, null);
-        canvas.restore();
-
-        mPaint.setColor(Color.BLACK);
-        canvas.drawLine(0, mainRect.height() / 2, mainRect.width(), mainRect.height() / 2, mPaint);
-        canvas.drawLine(mainRect.width() / 2, 0, mainRect.width() / 2, mainRect.height(), mPaint);
-
         // 绘制烛状图
-        drawKChart(canvas);
+        drawKLine(canvas);
+        // restore
+        canvas.restore();
         // 绘制x轴
         drawAxisX(canvas);
         // 绘制y轴
         drawAxisY(canvas);
     }
 
-    private void drawKChart(Canvas canvas) {
+    private void drawKLine(Canvas canvas) {
         ArrayList<ArrayList<Number>> xData = adapter.getData().getXData();
-        int startIndex = indexOfX(drawX2X(0));
-        int endIndex = indexOfX(drawX2X(axisXRect.width()));
+        int startIndex = indexOfX(drawX2X(axisXRect.left));
+        int endIndex = indexOfX(drawX2X(axisXRect.right));
+        Log.e(TAG, "startIndex=" + startIndex + " endIndex=" + endIndex);
         for (int i = startIndex; i < endIndex; i++) {
             int x = getAxisX(i);
             ArrayList<Number> candle = xData.get(i);
@@ -196,16 +196,17 @@ public class HeatMapView extends ScrollAndScaleView {
 
             if (openY > closeY) {//涨(这里比较的y坐标值)
                 drawCandle(canvas, x, openY, closeY, true);
-//                drawCandleLine(canvas, x, highY, closeY);
-//                drawCandleLine(canvas, x, openY, lowY);
+                drawCandleLine(canvas, x, highY, closeY);
+                drawCandleLine(canvas, x, openY, lowY);
             } else if (openY < closeY) {
                 drawCandle(canvas, x, openY, closeY, false);
-//                drawCandleLine(canvas, x, highY, openY);
-//                drawCandleLine(canvas, x, closeY, lowY);
+                drawCandleLine(canvas, x, highY, openY);
+                drawCandleLine(canvas, x, closeY, lowY);
             } else {
                 drawCandle(canvas, x, closeY - 1, closeY, true);
             }
         }
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
     /**
@@ -288,7 +289,7 @@ public class HeatMapView extends ScrollAndScaleView {
     }
 
     private int getAxisX(int i) {
-        return (int) ((i - 1 / 2f) * bmpOriginScale * mScale - mScrollX - axisXRect.left);
+        return (int) (axisXRect.left + getPx(i) - (getMaxScrollX() - mScrollX) - mCandleWidth / 2f);
     }
 
     private int getAxisY(double value) {
@@ -297,7 +298,7 @@ public class HeatMapView extends ScrollAndScaleView {
         double maxValue = yData.get(yData.size() - 1);
 
         float scaleY = (float) ((-bmpOriginScale * mScale * (yData.size() - 1)) / (maxValue - minValue));
-        return (int) ((maxValue - value) * scaleY + axisYRect.height()) - mScrollY;
+        return (int) ((maxValue - value) * scaleY + axisYRect.height()) + mScrollY;
     }
 
     private int getPx(int position) {
@@ -305,7 +306,7 @@ public class HeatMapView extends ScrollAndScaleView {
     }
 
     public float drawX2X(float x) {
-        return mScrollX + x;
+        return (getMaxScrollX() - mScrollX) + x;
     }
 
     public float drawY2Y(float y) {
@@ -341,9 +342,5 @@ public class HeatMapView extends ScrollAndScaleView {
         } else {
             return mid;
         }
-    }
-
-    private void logD(String log) {
-        Log.d("LiqView", log);
     }
 }
