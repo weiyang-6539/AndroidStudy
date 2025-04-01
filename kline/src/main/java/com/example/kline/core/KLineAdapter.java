@@ -44,7 +44,7 @@ public class KLineAdapter {
             int x = it.get(0).intValue();
             int y = it.get(1).intValue();
             double value = it.get(2).doubleValue();
-            intArr[x + y * width] = utils.getColor(value);
+            intArr[x + (height - y - 1) * width] = utils.getColor(value);
         });
 
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
