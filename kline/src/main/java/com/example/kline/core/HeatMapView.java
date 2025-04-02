@@ -126,8 +126,8 @@ public class HeatMapView extends ScrollAndScaleView {
     public void onLongPress(@NonNull MotionEvent e) {
         isLongPress = true;
 
-        int indexX = indexOfPx(e.getX(), 0, adapter.getData().getXSize());
-        int indexY = indexOfPy(e.getY(), 0, adapter.getData().getYSize());
+        selectAxisXIndex = indexOfPx(e.getX(), 0, adapter.getData().getXSize());
+        selectAxisYIndex = indexOfPy(e.getY(), 0, adapter.getData().getYSize());
 
         invalidate();
     }
