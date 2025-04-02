@@ -16,7 +16,6 @@ import com.example.kline.utils.JsonUtil;
  * @desc
  */
 public class MainActivity extends AppCompatActivity {
-    private HeatMapView mapView;
     private final KLineAdapter adapter = new KLineAdapter();
 
     @Override
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         String dataJson = AssetUtil.readAsset(this, "kdata.json");
         KData kData = JsonUtil.parse(dataJson);
 
-        mapView = findViewById(R.id.mHeatMapView);
+        HeatMapView mapView = findViewById(R.id.mHeatMapView);
         mapView.setAdapter(adapter);
 
         adapter.setData(kData);

@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 
@@ -68,7 +68,8 @@ public class HeatMapView extends ScrollAndScaleView {
     private final Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final TextDrawHelper helper = new TextDrawHelper();
 
-    private float bmpOriginScale;
+    private float bmpScaleX;
+    private float bmpScaleY;
     private final PointF bmpPoint = new PointF(); // 图片当前显示中心点位置
 
     private final Formatter formatter = new Formatter();
@@ -119,6 +120,13 @@ public class HeatMapView extends ScrollAndScaleView {
     }
 
     @Override
+    public void onLongPress(@NonNull MotionEvent e) {
+        isLongPress = true;
+
+        indexOfPx(e.getX(), 0, adapter.getData().getYSize());
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
 
@@ -128,7 +136,7 @@ public class HeatMapView extends ScrollAndScaleView {
         int textWidth = (int) mTextPaint.measureText(formatter.formatPrice(v));
         int left = 0, top = 0;
         int right = width - textWidth - 5;
-        int bottom = (int) (right / adapter.getRatio());
+        int bottom = (int) (right * 5 / 3f); // 这里修改宽高比
         mainRect.set(left, top, right, bottom);
 
         float textHeight = helper.getTextHeight(mTextPaint);
@@ -140,12 +148,13 @@ public class HeatMapView extends ScrollAndScaleView {
         int height = (int) axisXRect.bottom;
 
         // 设置图片缩放， 实际是初始单个像素点放大倍数
-        bmpOriginScale = mainRect.width() / data.getXSize();
+        bmpScaleX = mainRect.width() / data.getXSize();
+        bmpScaleY = mainRect.height() / data.getYSize();
         bmpPoint.x = mainRect.width() / 2;
         bmpPoint.y = mainRect.height() / 2;
-        matrix.setScale(bmpOriginScale, bmpOriginScale);
+        matrix.setScale(bmpScaleX, bmpScaleY);
 
-        mCandleWidth = bmpOriginScale / 2;
+        mCandleWidth = bmpScaleX / 2;
 
         setMeasuredDimension(width, height);
     }
@@ -247,7 +256,7 @@ public class HeatMapView extends ScrollAndScaleView {
         int endIndex = indexOfY(drawY2Y(axisYRect.height()));
         for (int i = startIndex; i < endIndex; i += Math.max(2, (endIndex - startIndex) / numY)) {
             tempP.x = axisYRect.left;
-            tempP.y = axisYRect.bottom + mScrollY - getPx(i);
+            tempP.y = axisYRect.bottom + mScrollY - getPy(i);
             if (tempP.y < axisYRect.bottom) {
                 String ss = formatter.formatPrice(yData.get(i));
                 helper.drawPointRight(canvas, ss, tempP, mTextPaint);
@@ -261,7 +270,7 @@ public class HeatMapView extends ScrollAndScaleView {
         bmpPoint.x = mainRect.width() * mScrollX / getMaxScrollX();
         bmpPoint.y = mainRect.height() * mScrollY / getMaxScrollY();
 
-        matrix.setScale(bmpOriginScale * mScale, bmpOriginScale * mScale);
+        matrix.setScale(bmpScaleX * mScale, bmpScaleY * mScale);
         matrix.postTranslate(mScrollX - getMaxScrollX(), mScrollY - getMaxScrollY());
 
         invalidate();
@@ -272,10 +281,10 @@ public class HeatMapView extends ScrollAndScaleView {
         mScrollX = (int) (getMaxScrollX() * bmpPoint.x / mainRect.width());
         mScrollY = (int) (getMaxScrollY() * bmpPoint.y / mainRect.height());
 
-        matrix.setScale(bmpOriginScale * scale, bmpOriginScale * scale);
+        matrix.setScale(bmpScaleX * scale, bmpScaleY * scale);
         matrix.postTranslate(mScrollX - getMaxScrollX(), mScrollY - getMaxScrollY());
 
-        mCandleWidth = bmpOriginScale * mScale / 2;
+        mCandleWidth = bmpScaleX * mScale / 2;
 
         invalidate();
     }
@@ -289,12 +298,16 @@ public class HeatMapView extends ScrollAndScaleView {
         double minValue = yData.get(0);
         double maxValue = yData.get(yData.size() - 1);
 
-        float scaleY = (float) ((bmpOriginScale * mScale * (yData.size() - 1)) / (maxValue - minValue));
+        float scaleY = (float) ((bmpScaleY * mScale * (yData.size() - 1)) / (maxValue - minValue));
         return (int) ((minValue - value) * scaleY + axisYRect.height() + mScrollY);
     }
 
     private int getPx(int position) {
-        return (int) ((position + 1) * bmpOriginScale * mScale);
+        return (int) ((position + 1) * bmpScaleX * mScale);
+    }
+
+    private int getPy(int position) {
+        return (int) ((position + 1) * bmpScaleY * mScale);
     }
 
     public float drawX2X(float x) {
@@ -309,8 +322,8 @@ public class HeatMapView extends ScrollAndScaleView {
         return indexOfPx(x, 0, adapter.getData().getXSize() - 1);
     }
 
-    public int indexOfY(float x) {
-        return indexOfPx(x, 0, adapter.getData().getYSize() - 1);
+    public int indexOfY(float y) {
+        return indexOfPy(y, 0, adapter.getData().getYSize() - 1);
     }
 
     /**
@@ -331,6 +344,26 @@ public class HeatMapView extends ScrollAndScaleView {
             return indexOfPx(px, start, mid);
         } else if (px > midX) {
             return indexOfPx(px, mid, end);
+        } else {
+            return mid;
+        }
+    }
+
+    public int indexOfPy(float py, int start, int end) {
+        if (end == start) {
+            return start;
+        }
+        if (end - start == 1) {
+            float startY = getPy(start);
+            float endY = getPy(end);
+            return Math.abs(py - startY) < Math.abs(py - endY) ? start : end;
+        }
+        int mid = start + (end - start) / 2;
+        float midX = getPy(mid);
+        if (py < midX) {
+            return indexOfPy(py, start, mid);
+        } else if (py > midX) {
+            return indexOfPy(py, mid, end);
         } else {
             return mid;
         }

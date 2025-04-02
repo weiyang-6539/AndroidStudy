@@ -2,7 +2,6 @@ package com.example.kline.core;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -28,6 +27,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
     private OverScroller mScroller;
 
     protected boolean isTouch = false;
+    protected boolean isLongPress = false;//长按的标记
 
     protected float mScale = 1f;
 
@@ -86,7 +86,7 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
 
     @Override
     public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
-        if (!isTouch && isScrollEnable()) {
+        if (!isTouch && !isLongPress && isScrollEnable()) {
             mScroller.fling(mScrollX, mScrollY,
                     Math.round(velocityX), Math.round(velocityY),
                     Integer.MIN_VALUE, Integer.MAX_VALUE,
@@ -184,24 +184,40 @@ abstract class ScrollAndScaleView extends ViewGroup implements GestureDetector.O
 
     }
 
+    private float downX;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        mMultipleTouch = event.getPointerCount() > 1;
+        if (mMultipleTouch)
+            isLongPress = false;
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 isTouch = true;
+                downX = event.getX();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isLongPress)
+                    onLongPress(event);
                 break;
             case MotionEvent.ACTION_POINTER_UP:
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
+                if (downX == event.getX() && isLongPress) {
+                    isLongPress = false;
+                }
+                isTouch = false;
+                invalidate();
+                break;
             case MotionEvent.ACTION_CANCEL:
+                isLongPress = false;
                 isTouch = false;
                 invalidate();
                 break;
             default:
                 break;
         }
-        mMultipleTouch = event.getPointerCount() > 1;
         this.mDetector.onTouchEvent(event);
         this.mScaleDetector.onTouchEvent(event);
         return true;
