@@ -74,6 +74,9 @@ public class HeatMapView extends ScrollAndScaleView {
 
     private final Formatter formatter = new Formatter();
 
+    private int selectAxisXIndex = -1;
+    private int selectAxisYIndex = -1;
+
     public HeatMapView(Context context) {
         this(context, null);
     }
@@ -123,7 +126,10 @@ public class HeatMapView extends ScrollAndScaleView {
     public void onLongPress(@NonNull MotionEvent e) {
         isLongPress = true;
 
-        indexOfPx(e.getX(), 0, adapter.getData().getYSize());
+        int indexX = indexOfPx(e.getX(), 0, adapter.getData().getXSize());
+        int indexY = indexOfPy(e.getY(), 0, adapter.getData().getYSize());
+
+        invalidate();
     }
 
     @Override
@@ -136,7 +142,7 @@ public class HeatMapView extends ScrollAndScaleView {
         int textWidth = (int) mTextPaint.measureText(formatter.formatPrice(v));
         int left = 0, top = 0;
         int right = width - textWidth - 5;
-        int bottom = (int) (right * 5 / 3f); // 这里修改宽高比
+        int bottom = (int) (right * 5 / 3f); //TODO 这里修改宽高比
         mainRect.set(left, top, right, bottom);
 
         float textHeight = helper.getTextHeight(mTextPaint);
@@ -182,6 +188,8 @@ public class HeatMapView extends ScrollAndScaleView {
         drawAxisX(canvas);
         // 绘制y轴
         drawAxisY(canvas);
+        // 绘制长按点的信息
+        drawLongPressPoint(canvas);
     }
 
     private void drawKLine(Canvas canvas) {
@@ -261,6 +269,15 @@ public class HeatMapView extends ScrollAndScaleView {
                 String ss = formatter.formatPrice(yData.get(i));
                 helper.drawPointRight(canvas, ss, tempP, mTextPaint);
             }
+        }
+    }
+
+    private void drawLongPressPoint(Canvas canvas) {
+        if (isLongPress) {
+            ArrayList<Number> candle = adapter.getData().getXData().get(selectAxisXIndex);
+            Double price = adapter.getData().getYData().get(selectAxisYIndex);
+
+            // TODO 这里绘制选中点的面板
         }
     }
 
